@@ -262,3 +262,10 @@ For common cases, such as dispatching on the main thread, we have provided defau
 }];
 ```
 
+# Installation
+
+You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-iOS/releases).
+
+Bolts is also available through [CocoaPods](http://cocoapods.org). To install it simply add the following line to your Podfile:
+
+    pod "Bolts"
