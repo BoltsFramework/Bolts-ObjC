@@ -11,7 +11,7 @@ The first component in Bolts is "tasks", which make organization of complex
 asynchronous code more manageable. A task is kind of like a JavaScript Promise,
 but available for iOS and Android.
 
-For more information, see the [Bolts iOS API Reference](http://boltsframework.github.io/docs/android/).
+For more information, see the [Bolts iOS API Reference](http://boltsframework.github.io/docs/ios/).
 
 # Tasks
 
