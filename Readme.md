@@ -50,7 +50,7 @@ BFTasks use Objective-C blocks, so the syntax should be pretty straightforward. 
 /**
  * Gets an NSString asynchronously.
  */
-- (NSString *)getStringAsync {
+- (BFTask *)getStringAsync {
   // Let's suppose getNumberAsync returns a BFTask whose result is an NSNumber.
   return [[self getNumberAsync] continueWithBlock:^id(BFTask *task) {
     // This continuation block takes the NSNumber BFTask as input,
