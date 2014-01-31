@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.authors      = { "Bryan Klimt" => "bklimt@fb.com", "David Poll" => "depoll@fb.com" }
   s.source       = { :git => "https://github.com/BoltsFramework/Bolts-iOS.git", :tag => s.version.to_s }
   s.documentation_url = 'http://boltsframework.github.io/docs/ios/'
-
+  s.social_media_url = "https://twitter.com/ParseIt"
   s.requires_arc = true
 
   s.source_files = 'Bolts'
