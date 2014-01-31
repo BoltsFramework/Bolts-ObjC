@@ -38,7 +38,7 @@ Every `BFTask` has a method named `continueWithBlock` which takes a continuation
     // the save failed.
   } else {
     // the object was saved successfully.
-    PFObject *object = task.result();
+    PFObject *object = task.result;
   }
   return nil;
 }];
