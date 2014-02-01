@@ -103,7 +103,6 @@ By carefully choosing whether to call `continueWithBlock` or `continueWithSucces
 
 ```objective-c
 PFQuery *query = [PFQuery queryWithClassName:@"Student"];
-query.orderByDescending("gpa");
 [query orderByDescending:@"gpa"];
 [[[[[self findAsync:query] continueWithSuccessBlock:^id(BFTask *task) {
   NSArray *students = task.result;
