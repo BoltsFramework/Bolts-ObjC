@@ -36,6 +36,8 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 
 @implementation BFTask
 
+#pragma mark - Initializer
+
 - (id)init {
     if (self = [super init]) {
         self.lock = [[NSObject alloc] init];
@@ -44,6 +46,8 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     }
     return self;
 }
+
+#pragma mark - Task Class methods
 
 + (BFTask *)taskWithResult:(id)result {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
@@ -135,6 +139,8 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     });
     return tcs.task;
 }
+
+#pragma mark - Custom Setters/Getters
 
 - (id)result {
     @synchronized (self.lock) {
@@ -262,6 +268,8 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     }
 }
 
+#pragma mark - Chaining methods
+
 - (BFTask *)continueWithExecutor:(BFExecutor *)executor
                        withBlock:(BFContinuationBlock)block {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
@@ -327,6 +335,8 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 - (BFTask *)continueWithSuccessBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:[BFExecutor defaultExecutor] withSuccessBlock:block];
 }
+
+#pragma mark - Syncing Task (Avoid it)
 
 - (void)warnOperationOnMainThread {
     warnBlockingOperationOnMainThread();

@@ -16,6 +16,8 @@
 
 @implementation BFExecutor
 
+#pragma mark - Executor methods
+
 + (BFExecutor *)defaultExecutor {
     static BFExecutor *defaultExecutor = NULL;
     static dispatch_once_t onceToken;
@@ -90,12 +92,16 @@
     }];
 }
 
+#pragma mark - Initializer
+
 - (id)initWithBlock:(void(^)(void(^block)()))block {
     if (self = [super init]) {
         self.block = block;
     }
     return self;
 }
+
+#pragma mark - Execution
 
 - (void)execute:(void(^)())block {
     self.block(block);
