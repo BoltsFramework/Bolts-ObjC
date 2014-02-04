@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FA01DD018A0651600D20BDC /* BFTask+DotSyntax.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA01DCF18A0651600D20BDC /* BFTask+DotSyntax.m */; };
+		1FA01DD118A0651600D20BDC /* BFTask+DotSyntax.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA01DCF18A0651600D20BDC /* BFTask+DotSyntax.m */; };
+		1FA01DD218A0651600D20BDC /* BFTask+DotSyntax.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA01DCF18A0651600D20BDC /* BFTask+DotSyntax.m */; };
+		1FA01DD318A0651600D20BDC /* BFTask+DotSyntax.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA01DCF18A0651600D20BDC /* BFTask+DotSyntax.m */; };
+		1FA01DD718A06A5400D20BDC /* DotSyntaxedTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA01DD418A06A5400D20BDC /* DotSyntaxedTaskTests.m */; };
+		1FA01DD818A06A5400D20BDC /* DotSyntaxedTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA01DD418A06A5400D20BDC /* DotSyntaxedTaskTests.m */; };
 		8E0B5CD817E139660066379B /* BFTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E9C3D1E17DEA35700427E62 /* BFTask.h */; };
 		8E0B5CD917E1396C0066379B /* BFTaskCompletionSource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E9C3D2017DEA35700427E62 /* BFTaskCompletionSource.h */; };
 		8E17EC261805D0960049E862 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA6BF661805CED500337041 /* Bolts.m */; };
@@ -105,6 +111,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1FA01DCE18A0651600D20BDC /* BFTask+DotSyntax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BFTask+DotSyntax.h"; sourceTree = "<group>"; };
+		1FA01DCF18A0651600D20BDC /* BFTask+DotSyntax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BFTask+DotSyntax.m"; sourceTree = "<group>"; };
+		1FA01DD418A06A5400D20BDC /* DotSyntaxedTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DotSyntaxedTaskTests.m; sourceTree = "<group>"; };
 		8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoltsVersion.h; sourceTree = "<group>"; };
 		8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8E8C8ED917F23C3B00E3F1C7 /* BoltsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoltsTests-Info.plist"; sourceTree = "<group>"; };
@@ -173,6 +182,7 @@
 			children = (
 				8EA6BF681805CF5600337041 /* BoltsTests.m */,
 				8E9C3D1C17DE9F6500427E62 /* TaskTests.m */,
+				1FA01DD418A06A5400D20BDC /* DotSyntaxedTaskTests.m */,
 				8E8C8ED817F23C3B00E3F1C7 /* Supporting Files */,
 			);
 			path = BoltsTests;
@@ -229,6 +239,8 @@
 				8EB2CB411805DDDB00323385 /* BFExecutor.m */,
 				8E9C3D1E17DEA35700427E62 /* BFTask.h */,
 				8E9C3D1F17DEA35700427E62 /* BFTask.m */,
+				1FA01DCE18A0651600D20BDC /* BFTask+DotSyntax.h */,
+				1FA01DCF18A0651600D20BDC /* BFTask+DotSyntax.m */,
 				8E9C3D2017DEA35700427E62 /* BFTaskCompletionSource.h */,
 				8E9C3D2117DEA35700427E62 /* BFTaskCompletionSource.m */,
 				8E9C3CEF17DE9DE000427E62 /* Supporting Files */,
@@ -380,6 +392,8 @@
 			files = (
 				8EA6BF691805CF5600337041 /* BoltsTests.m in Sources */,
 				8E8C8EFB17F23E5F00E3F1C7 /* TaskTests.m in Sources */,
+				1FA01DD718A06A5400D20BDC /* DotSyntaxedTaskTests.m in Sources */,
+				1FA01DD218A0651600D20BDC /* BFTask+DotSyntax.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +403,8 @@
 			files = (
 				8E17EC271805D0A40049E862 /* BoltsTests.m in Sources */,
 				8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */,
+				1FA01DD818A06A5400D20BDC /* DotSyntaxedTaskTests.m in Sources */,
+				1FA01DD318A0651600D20BDC /* BFTask+DotSyntax.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +414,7 @@
 			files = (
 				8EA6BF671805CED500337041 /* Bolts.m in Sources */,
 				8E9C3D2217DEA35700427E62 /* BFTask.m in Sources */,
+				1FA01DD018A0651600D20BDC /* BFTask+DotSyntax.m in Sources */,
 				8EB2CB421805DDDB00323385 /* BFExecutor.m in Sources */,
 				8E9C3D2417DEA35700427E62 /* BFTaskCompletionSource.m in Sources */,
 			);
@@ -409,6 +426,7 @@
 			files = (
 				8E42701E1805E59A000B84ED /* BFExecutor.m in Sources */,
 				8E17EC261805D0960049E862 /* Bolts.m in Sources */,
+				1FA01DD118A0651600D20BDC /* BFTask+DotSyntax.m in Sources */,
 				8EDDA62D17E17DDC00655F8A /* BFTask.m in Sources */,
 				8EDDA62E17E17DDC00655F8A /* BFTaskCompletionSource.m in Sources */,
 			);

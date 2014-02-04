@@ -41,6 +41,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
         self.lock = [[NSObject alloc] init];
         self.condition = [[NSCondition alloc] init];
         self.callbacks = [NSMutableArray array];
+        self.executor = [BFExecutor defaultExecutor];
     }
     return self;
 }
@@ -264,11 +265,12 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 
 - (BFTask *)continueWithExecutor:(BFExecutor *)executor
                        withBlock:(BFContinuationBlock)block {
+    self.executor = executor;
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     
     // Capture all of the state that needs to used when the continuation is complete.
     void (^wrappedBlock)() = ^() {
-        [executor execute:^{
+        [self.executor execute:^{
             id result = nil;
             @try {
                 result = block(self);
