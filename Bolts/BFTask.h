@@ -14,7 +14,7 @@
 @class BFTask;
 
 /*!
- A block that can act as a contination for a task.
+ A block that can act as a continuation for a task.
  */
 typedef id(^BFContinuationBlock)(BFTask *task);
 

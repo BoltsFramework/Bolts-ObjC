@@ -29,6 +29,8 @@
 
 @implementation BFTaskCompletionSource
 
+#pragma mark - Initializer
+
 + (BFTaskCompletionSource *)taskCompletionSource {
     return [[BFTaskCompletionSource alloc] init];
 }
@@ -39,6 +41,8 @@
     }
     return self;
 }
+
+#pragma mark - Custom Setters/Getters
 
 - (void)setResult:(id)result {
     [self.task setResult:result];
