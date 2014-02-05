@@ -149,7 +149,7 @@ When you're getting started, you can just use the tasks returned from methods li
   return successful.task;
 }
 
-- (BFTask *)failAsync() {
+- (BFTask *)failAsync {
   BFTaskCompletionSource *failed = [BFTaskCompletionSource taskCompletionSource];
   [failed setError:[NSError errorWithDomain:@"example.com" code:-1 userInfo:nil]];
   return failed.task;
@@ -171,7 +171,7 @@ With these tools, it's easy to make your own asynchronous functions that return 
 ```objective-c
 - (BFTask *) fetchAsync:(PFObject *)object {
   BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
-  [object fetchInBackgroundWithBlock::^(PFObject *object, NSError *error) {
+  [object fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
     if (!error) {
       [task setResult:object];
     } else {
