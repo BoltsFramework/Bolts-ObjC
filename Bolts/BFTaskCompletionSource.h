@@ -22,7 +22,7 @@
 /*!
  Creates a new unfinished task.
  */
-+ (BFTaskCompletionSource *)taskCompletionSource;
++ (instancetype)taskCompletionSource;
 
 /*!
  The task associated with this TaskCompletionSource.
