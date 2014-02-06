@@ -19,32 +19,32 @@
  Returns a default executor, which runs continuations immediately until the call stack gets too
  deep, then dispatches to a new GCD queue.
  */
-+ (BFExecutor *)defaultExecutor;
++ (instancetype)defaultExecutor;
 
 /*!
  Returns an executor that runs continuations on the thread where the previous task was completed.
  */
-+ (BFExecutor *)immediateExecutor;
++ (instancetype)immediateExecutor;
 
 /*!
  Returns an executor that runs continuations on the main thread.
  */
-+ (BFExecutor *)mainThreadExecutor;
++ (instancetype)mainThreadExecutor;
 
 /*!
  Returns a new executor that uses the given block execute continations.
  */
-+ (BFExecutor *)executorWithBlock:(void(^)(void(^block)()))block;
++ (instancetype)executorWithBlock:(void(^)(void(^block)()))block;
 
 /*!
  Returns a new executor that runs continuations on the given queue.
  */
-+ (BFExecutor *)executorWithDispatchQueue:(dispatch_queue_t)queue;
++ (instancetype)executorWithDispatchQueue:(dispatch_queue_t)queue;
 
 /*!
  Returns a new executor that runs continuations on the given queue.
  */
-+ (BFExecutor *)executorWithOperationQueue:(NSOperationQueue *)queue;
++ (instancetype)executorWithOperationQueue:(NSOperationQueue *)queue;
 
 /*!
  Runs the given block using this executor's particular strategy.
