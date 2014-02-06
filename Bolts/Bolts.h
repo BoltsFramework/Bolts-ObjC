@@ -11,6 +11,7 @@
 #import "BoltsVersion.h"
 #import "BFExecutor.h"
 #import "BFTask.h"
+#import "BFTask+DotSyntax.h"
 #import "BFTaskCompletionSource.h"
 
 /*! @abstract 80175001: There were multiple errors. */

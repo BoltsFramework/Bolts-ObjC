@@ -58,6 +58,8 @@ typedef id(^BFContinuationBlock)(BFTask *task);
  */
 + (instancetype)taskWithDelay:(int)millis;
 
+@property (nonatomic) BFExecutor *executor;
+   
 // Properties that will be set on the task once it is completed.
 
 /*!
