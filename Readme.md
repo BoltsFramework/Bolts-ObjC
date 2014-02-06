@@ -38,7 +38,7 @@ Every `BFTask` has a method named `continueWithBlock` which takes a continuation
     // the save failed.
   } else {
     // the object was saved successfully.
-    PFObject *object = task.result();
+    PFObject *object = task.result;
   }
   return nil;
 }];
@@ -161,7 +161,7 @@ If you know the result of a task at the time it is created, there are some conve
 ```objective-c
 BFTask *successful = [BFTask taskWithResult:@"The good result."];
 
-BFTask *failed = [BFTask taskWithError:anError]; 
+BFTask *failed = [BFTask taskWithError:anError];
 ```
 
 ## Creating Async Methods
@@ -181,7 +181,7 @@ With these tools, it's easy to make your own asynchronous functions that return 
   return task.task;
 }
 ```
-   
+
 It's similarly easy to create `saveAsync`, `findAsync` or `deleteAsync`.
 
 ## Tasks in Series
