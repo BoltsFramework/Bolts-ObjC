@@ -24,11 +24,11 @@ To build a truly responsive iOS application, you must keep long-running operatio
 * `BFTasks` are fully composable, allowing you to perform branching, parallelism, and complex error handling, without the spaghetti code of having many named callbacks.
 * You can arrange task-based code in the order that it executes, rather than having to split your logic across scattered callback functions.
 
-For the examples in this doc, assume there are async versions of some common Parse methods, called `saveAsync` and `findAsync` which return a `Task`. In a later section, we'll show how to define these functions yourself.
+For the examples in this doc, assume there are async versions of some common Parse methods, called `saveAsync:` and `findAsync:` which return a `Task`. In a later section, we'll show how to define these functions yourself.
 
 ## The `continueWithBlock` Method
 
-Every `BFTask` has a method named `continueWithBlock` which takes a continuation block. A continuation is a block that will be executed when the task is complete. You can then inspect the task to check if it was successful and to get its result.
+Every `BFTask` has a method named `continueWithBlock:` which takes a continuation block. A continuation is a block that will be executed when the task is complete. You can then inspect the task to check if it was successful and to get its result.
 
 ```objective-c
 [[self saveAsync:obj] continueWithBlock:^id(BFTask *task) {
@@ -62,7 +62,7 @@ BFTasks use Objective-C blocks, so the syntax should be pretty straightforward. 
 }
 ```
 
-In many cases, you only want to do more work if the previous task was successful, and propagate any errors or cancellations to be dealt with later. To do this, use the `continueWithSuccessBlock` method instead of `continueWithBlock`.
+In many cases, you only want to do more work if the previous task was successful, and propagate any errors or cancellations to be dealt with later. To do this, use the `continueWithSuccessBlock:` method instead of `continueWithBlock:`.
 
 ```objective-c
 [[self saveAsync:obj] continueWithSuccessBlock:^id(BFTask *task) {
@@ -73,7 +73,7 @@ In many cases, you only want to do more work if the previous task was successful
 
 ## Chaining Tasks Together
 
-BFTasks are a little bit magical, in that they let you chain them without nesting. If you return a BFTask from `continueWithBlock`, then the task returned by `continueWithBlock` will not be considered finished until the new task returned from the new continuation block. This lets you perform multiple actions without incurring the pyramid code you would get with callbacks. Likewise, you can return a BFTask from `continueWithSuccessBlock`. So, return a BFTask to do more asynchronous work.
+BFTasks are a little bit magical, in that they let you chain them without nesting. If you return a BFTask from `continueWithBlock:`, then the task returned by `continueWithBlock:` will not be considered finished until the new task returned from the new continuation block. This lets you perform multiple actions without incurring the pyramid code you would get with callbacks. Likewise, you can return a BFTask from `continueWithSuccessBlock:`. So, return a BFTask to do more asynchronous work.
 
 ```objective-c
 PFQuery *query = [PFQuery queryWithClassName:@"Student"];
@@ -99,7 +99,7 @@ PFQuery *query = [PFQuery queryWithClassName:@"Student"];
 
 ## Error Handling
 
-By carefully choosing whether to call `continueWithBlock` or `continueWithSuccessBlock`, you can control how errors are propagated in your application. Using `continueWithBlock` lets you handle errors by transforming them or dealing with them. You can think of failed tasks kind of like throwing an exception. In fact, if you throw an exception inside a continuation, the resulting task will be faulted with that exception.
+By carefully choosing whether to call `continueWithBlock:` or `continueWithSuccessBlock:`, you can control how errors are propagated in your application. Using `continueWithBlock:` lets you handle errors by transforming them or dealing with them. You can think of failed tasks kind of like throwing an exception. In fact, if you throw an exception inside a continuation, the resulting task will be faulted with that exception.
 
 ```objective-c
 PFQuery *query = [PFQuery queryWithClassName:@"Student"];
@@ -140,7 +140,7 @@ It's often convenient to have a long chain of success callbacks with only one er
 
 ## Creating Tasks
 
-When you're getting started, you can just use the tasks returned from methods like `findAsync` or `saveAsync`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new BFTask, and control whether it gets marked as finished or cancelled. After you create a `BFTask`, you'll need to call `setResult`, `setError`, or `setCancelled` to trigger its continuations.
+When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new BFTask, and control whether it gets marked as finished or cancelled. After you create a `BFTask`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
 
 ```objective-c
 - (BFTask *)successAsync {
@@ -166,7 +166,7 @@ BFTask *failed = [BFTask taskWithError:anError];
 
 ## Creating Async Methods
 
-With these tools, it's easy to make your own asynchronous functions that return tasks. For example, you can make a task-based version of `fetchAsync` easily.
+With these tools, it's easy to make your own asynchronous functions that return tasks. For example, you can make a task-based version of `fetchAsync:` easily.
 
 ```objective-c
 - (BFTask *) fetchAsync:(PFObject *)object {
@@ -182,7 +182,7 @@ With these tools, it's easy to make your own asynchronous functions that return 
 }
 ```
 
-It's similarly easy to create `saveAsync`, `findAsync` or `deleteAsync`.
+It's similarly easy to create `saveAsync:`, `findAsync:` or `deleteAsync:`.
 
 ## Tasks in Series
 
@@ -237,7 +237,7 @@ PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
 
 ## Task Executors
 
-Both `continueWithBlock` and `continueWithSuccessBlock` methods have another form that takes an instance of `BFExecutor`. These are `continueWithExecutor:withBlock:` and `continueWithExecutor:withSuccessBlock`. These methods allow you to control how the continuation is executed. The default executor will dispatch to GCD, but you can provide your own executor to schedule work onto a different thread. For example, if you want to continue with work on the UI thread:
+Both `continueWithBlock:` and `continueWithSuccessBlock:` methods have another form that takes an instance of `BFExecutor`. These are `continueWithExecutor:withBlock:` and `continueWithExecutor:withSuccessBlock:`. These methods allow you to control how the continuation is executed. The default executor will dispatch to GCD, but you can provide your own executor to schedule work onto a different thread. For example, if you want to continue with work on the UI thread:
 
 ```objective-c
 // Create a BFExecutor that uses the main thread.
