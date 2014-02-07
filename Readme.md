@@ -73,7 +73,7 @@ In many cases, you only want to do more work if the previous task was successful
 
 ## Chaining Tasks Together
 
-BFTasks are a little bit magical, in that they let you chain them without nesting. If you return a BFTask from `continueWithBlock:`, then the task returned by `continueWithBlock:` will not be considered finished until the new task returned from the new continuation block. This lets you perform multiple actions without incurring the pyramid code you would get with callbacks. Likewise, you can return a BFTask from `continueWithSuccessBlock:`. So, return a BFTask to do more asynchronous work.
+BFTasks are a little bit magical, in that they let you chain them without nesting. If you return a BFTask from `continueWithBlock:`, then the task returned by `continueWithBlock:` will not be considered finished until the new task returned from the new continuation block. This lets you perform multiple actions without incurring the pyramid code you would get with callbacks. Likewise, you can return a `BFTask` from `continueWithSuccessBlock:`. So, return a `BFTask` to do more asynchronous work.
 
 ```objective-c
 PFQuery *query = [PFQuery queryWithClassName:@"Student"];
@@ -140,7 +140,7 @@ It's often convenient to have a long chain of success callbacks with only one er
 
 ## Creating Tasks
 
-When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new BFTask, and control whether it gets marked as finished or cancelled. After you create a `BFTask`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
+When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new `BFTask`, and control whether it gets marked as finished or cancelled. After you create a `BFTask`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
 
 ```objective-c
 - (BFTask *)successAsync {
@@ -252,7 +252,7 @@ BFExecutor *myExecutor = [BFExecutor executorWithBlock:^void(void(^block)()) {
 }];
 ```
 
-For common cases, such as dispatching on the main thread, we have provided default implementations of BFExecutor. These include `defaultExecutor`, `immediateExecutor`, `mainThreadExecutor`, `executorWithDispatchQueue:`, and `executorWithOperationQueue:`. For example:
+For common cases, such as dispatching on the main thread, we have provided default implementations of `BFExecutor`. These include `defaultExecutor`, `immediateExecutor`, `mainThreadExecutor`, `executorWithDispatchQueue:`, and `executorWithOperationQueue:`. For example:
 
 ```objective-c
 // Continue on the Main Thread, using a built-in executor.
