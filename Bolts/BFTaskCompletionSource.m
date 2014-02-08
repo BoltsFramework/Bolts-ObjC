@@ -17,10 +17,12 @@
 @end
 
 @interface BFTask (BFTaskCompletionSource)
+- (BOOL)setProgress:(id)progress;
 - (void)setResult:(id)result;
 - (void)setError:(NSError *)error;
 - (void)setException:(NSException *)exception;
 - (void)cancel;
+- (BOOL)trySetProgress:(id)progress;
 - (BOOL)trySetResult:(id)result;
 - (BOOL)trySetError:(NSError *)error;
 - (BOOL)trySetException:(NSException *)exception;
@@ -44,6 +46,10 @@
 
 #pragma mark - Custom Setters/Getters
 
+- (void)setProgress:(id)progress {
+    [self.task setProgress:progress];
+}
+
 - (void)setResult:(id)result {
     [self.task setResult:result];
 }
@@ -58,6 +64,10 @@
 
 - (void)cancel {
     [self.task cancel];
+}
+
+- (BOOL)trySetProgress:(id)progress {
+    return [self.task trySetProgress:progress];
 }
 
 - (BOOL)trySetResult:(id)result {
