@@ -261,6 +261,32 @@ For common cases, such as dispatching on the main thread, we have provided defau
 }];
 ```
 
+## Task Cancellation
+
+It's generally bad design to keep track of the `BFTaskCompletionSource` for cancellation. A better model is to create a "cancellation token" at the top level, and pass that to each async function that you want to be part of the same "cancelable operation". Then, in your continuation blocks, you can check whether the cancellation token has been cancelled and bail out early by returning a `[BFTask cancelledTask]`. For example:
+
+```objective-c
+- (void)doSomethingComplicatedAsync:(MYCancellationToken *)cancellationToken {
+    [[self doSomethingAsync:cancellationToken] continueWithBlock:^{
+        if (cancellationToken.isCancelled) {
+            return [BFTask cancelledTask];
+        }
+        // Do something that takes a while.
+        return result;
+    }];
+}
+
+// Somewhere else.
+MYCancellationToken *cancellationToken = [[MYCancellationToken alloc] init];
+[obj doSomethingComplicatedAsync:cancellationToken];
+
+// When you get bored...
+[cancellationToken cancel];
+```
+
+**Note:** The cancellation token implementation should be thread-safe.  
+We are likely to add some concept like this to Bolts at some point in the future.
+
 # Installation
 
 You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-iOS/releases).
