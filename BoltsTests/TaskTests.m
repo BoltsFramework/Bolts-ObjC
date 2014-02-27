@@ -443,6 +443,18 @@
     XCTAssertEqualObjects(@"foo", task.result);
 }
 
+- (void)testTaskFromExecutor {
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
+    BFExecutor *queueExecutor = [BFExecutor executorWithDispatchQueue:queue];
+
+    BFTask *task = [BFTask taskFromExecutor:queueExecutor withBlock:^id() {
+        XCTAssertEqual(queue, dispatch_get_current_queue());
+        return @"foo";
+    }];
+    [task waitUntilFinished];
+    XCTAssertEqual(@"foo", task.result);
+}
+
 - (void)testExecuteImmediately {
     XCTAssertTrue([NSThread isMainThread]);
     BFTask *task = [BFTask taskWithResult:nil];
