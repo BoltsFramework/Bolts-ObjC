@@ -43,6 +43,7 @@
 
 @property (nonatomic, copy) void (^didFinishLoad)(UIWebView *webView);
 @property (nonatomic, copy) void (^didFailLoadWithError)(UIWebView *webView, NSError *error);
+@property (nonatomic, assign) BOOL hasLoaded;
 
 @end
 
@@ -64,6 +65,10 @@
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    if (self.hasLoaded) {
+        return NO;
+    }
+    self.hasLoaded = YES;
     return YES;
 }
 
@@ -81,40 +86,89 @@
     return instance;
 }
 
-- (BFTask *)appLinkFromURLAsync:(NSURL *)url {
-    // Yep, it's a dirty hack to use a WebView to parse HTML for us, but it's safe and simple for now.
+- (BFTask *)followRedirects:(NSURL *)url {
+    // This task will be resolved with either the redirect NSURL
+    // or a dictionary with the response data to be returned.
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIWebView *webView = [[UIWebView alloc] init];
-        BFWebViewListener *listener = [[BFWebViewListener alloc] init];
-        __block BFWebViewListener *retainedListener = listener;
-        listener.didFinishLoad = ^(UIWebView *view) {
-            if (retainedListener) {
-                NSDictionary *ogData = [self getALDataFromLoadedPage:view];
-                [view removeFromSuperview];
-                view.delegate = nil;
-                retainedListener = nil;
-                [tcs setResult:[self appLinkFromALData:ogData destination:url]];
-            }
-        };
-        listener.didFailLoadWithError = ^(UIWebView* view, NSError *error) {
-            if (retainedListener) {
-                [view removeFromSuperview];
-                view.delegate = nil;
-                retainedListener = nil;
-                [tcs setError:error];
-            }
-        };
-        webView.delegate = listener;
-        webView.hidden = YES;
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        [request setValue:BFWEBVIEWAPPLINKRESOLVER_META_TAG_PREFIX forHTTPHeaderField:BFWEBVIEWAPPLINKRESOLVER_PREFER_HEADER];
-        [webView loadRequest:request];
-        UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
-        [window addSubview:webView];
-    });
-    
-    return tcs.task;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setValue:BFWEBVIEWAPPLINKRESOLVER_META_TAG_PREFIX
+   forHTTPHeaderField:BFWEBVIEWAPPLINKRESOLVER_PREFER_HEADER];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response,
+                                               NSData *data,
+                                               NSError *connectionError) {
+                               if (connectionError) {
+                                   [tcs setError:connectionError];
+                                   return;
+                               }
+                               
+                               if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                   NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                                   
+                                   // NSURLConnection usually follows redirects automatically, but the
+                                   // documentation is unclear what the default is. This helps it along.
+                                   if (httpResponse.statusCode >= 300 && httpResponse.statusCode < 400) {
+                                       NSString *redirectString = httpResponse.allHeaderFields[@"Location"];
+                                       NSURL *redirectURL = [NSURL URLWithString:redirectString];
+                                       [tcs setResult:redirectURL];
+                                       return;
+                                   }
+                               }
+                               
+                               [tcs setResult:@{
+                                                @"response" : response,
+                                                @"data" : data
+                                                }];
+                           }];
+    return [tcs.task continueWithSuccessBlock:^id(BFTask *task) {
+        // If we redirected, just keep recursing.
+        if ([task.result isKindOfClass:[NSURL class]]) {
+            return [self followRedirects:task.result];
+        }
+        return task;
+    }];
+}
+
+- (BFTask *)appLinkFromURLAsync:(NSURL *)url {
+    return [[self followRedirects:url] continueWithSuccessBlock:^id(BFTask *task) {
+        NSData *responseData = task.result[@"data"];
+        NSHTTPURLResponse *response = task.result[@"response"];
+        BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIWebView *webView = [[UIWebView alloc] init];
+            BFWebViewListener *listener = [[BFWebViewListener alloc] init];
+            __block BFWebViewListener *retainedListener = listener;
+            listener.didFinishLoad = ^(UIWebView *view) {
+                if (retainedListener) {
+                    NSDictionary *ogData = [self getALDataFromLoadedPage:view];
+                    [view removeFromSuperview];
+                    view.delegate = nil;
+                    retainedListener = nil;
+                    [tcs setResult:[self appLinkFromALData:ogData destination:url]];
+                }
+            };
+            listener.didFailLoadWithError = ^(UIWebView* view, NSError *error) {
+                if (retainedListener) {
+                    [view removeFromSuperview];
+                    view.delegate = nil;
+                    retainedListener = nil;
+                    [tcs setError:error];
+                }
+            };
+            webView.delegate = listener;
+            webView.hidden = YES;
+            [webView loadData:responseData
+                     MIMEType:response.MIMEType
+             textEncodingName:response.textEncodingName
+                      baseURL:response.URL];
+            UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
+            [window addSubview:webView];
+        });
+        
+        return tcs.task;
+    }];
 }
 
 
