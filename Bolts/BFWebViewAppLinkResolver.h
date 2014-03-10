@@ -10,6 +10,15 @@
 
 #import "BFAppLinkResolving.h"
 
+/*!
+ A reference implementation for an App Link resolver that uses a hidden UIWebView
+ to parse the HTML containing App Link metadata.
+ */
 @interface BFWebViewAppLinkResolver : NSObject<BFAppLinkResolving>
+
+/*!
+ Gets an instance of a BFWebViewAppLinkResolver.
+ */
++ (instancetype)resolver;
 
 @end

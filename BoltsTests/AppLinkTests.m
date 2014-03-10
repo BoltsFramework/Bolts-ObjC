@@ -12,6 +12,7 @@
 #import <objc/message.h>
 
 #import "Bolts.h"
+#import "BFWebViewAppLinkResolver.h"
 
 NSMutableArray *openedUrls = nil;
 
@@ -170,6 +171,272 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(@"b", openedURL.appLinkHeaders[@"a"]);
     XCTAssert(openedURL.appLinkHeaders[@"user_agent"]);
     XCTAssertEqualObjects(url.absoluteString, openedURL.baseURL.absoluteString);
+}
+
+#pragma mark WebView App Link resolution
+
+- (void)testWebViewSimpleAppLinkParsing {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios": [NSNull null],
+                                                  @"al:ios:url": @"bolts://",
+                                                  @"al:ios:app_name": @"Bolts",
+                                                  @"al:ios:app_store_id": @"12345"
+                                                  }
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(1u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts", target.appName);
+    XCTAssertEqualObjects(@"12345", target.appStoreId);
+    
+    XCTAssertEqualObjects(url, link.webURL);
+}
+
+- (void)testWebViewAppLinkParsingFailure {
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:[NSURL URLWithString:@"http://badurl"]];
+    [self waitForTaskOnMainThread:task];
+    
+    XCTAssertNotNil(task.error);
+}
+
+- (void)testWebViewSimpleAppLinkParsingNoneWebUrl {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios": [NSNull null],
+                                                  @"al:ios:url": @"bolts://",
+                                                  @"al:ios:app_name": @"Bolts",
+                                                  @"al:ios:app_store_id": @"12345",
+                                                  @"al:web:url": @"none"
+                                                  }
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(1u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts", target.appName);
+    XCTAssertEqualObjects(@"12345", target.appStoreId);
+    
+    XCTAssertNil(link.webURL);
+}
+
+- (void)testWebViewSimpleAppLinkParsingEmptyWebUrl {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios": [NSNull null],
+                                                  @"al:ios:url": @"bolts://",
+                                                  @"al:ios:app_name": @"Bolts",
+                                                  @"al:ios:app_store_id": @"12345",
+                                                  @"al:web:url": @""
+                                                  }
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(1u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts", target.appName);
+    XCTAssertEqualObjects(@"12345", target.appStoreId);
+    
+    XCTAssertNil(link.webURL);
+}
+
+- (void)testWebViewSimpleAppLinkParsingWithWebUrl {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios": [NSNull null],
+                                                  @"al:ios:url": @"bolts://",
+                                                  @"al:ios:app_name": @"Bolts",
+                                                  @"al:ios:app_store_id": @"12345",
+                                                  @"al:web:url": @"http://www.example.com"
+                                                  }
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(1u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts", target.appName);
+    XCTAssertEqualObjects(@"12345", target.appStoreId);
+    
+    XCTAssertEqualObjects([NSURL URLWithString:@"http://www.example.com"], link.webURL);
+}
+
+- (void)testWebViewVersionedAppLinkParsing {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios": [NSNull null],
+                                                  @"al:ios:url": @"bolts://",
+                                                  @"al:ios:app_name": @"Bolts",
+                                                  @"al:ios:app_store_id": @"12345"
+                                                  },
+                                              @{
+                                                  @"al:ios": [NSNull null],
+                                                  @"al:ios:url": @"bolts2://",
+                                                  @"al:ios:app_name": @"Bolts2",
+                                                  @"al:ios:app_store_id": @"67890"
+                                                  },
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(2u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts", target.appName);
+    XCTAssertEqualObjects(@"12345", target.appStoreId);
+    
+    target = link.targets[1];
+    XCTAssertEqualObjects(@"bolts2://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts2", target.appName);
+    XCTAssertEqualObjects(@"67890", target.appStoreId);
+    
+    XCTAssertEqualObjects(url, link.webURL);
+}
+
+- (void)testWebViewVersionedAppLinkParsingOnlyUrls {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios:url": @"bolts://"
+                                                  },
+                                              @{
+                                                  @"al:ios:url": @"bolts2://"
+                                                  },
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(2u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    
+    target = link.targets[1];
+    XCTAssertEqualObjects(@"bolts2://", target.url.absoluteString);
+    
+    XCTAssertEqualObjects(url, link.webURL);
+}
+
+- (void)testWebViewVersionedAppLinkParsingUrlsAndNames {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios:url": @"bolts://"
+                                                  },
+                                              @{
+                                                  @"al:ios:url": @"bolts2://"
+                                                  },
+                                              @{
+                                                  @"al:ios:app_name": @"Bolts"
+                                                  },
+                                              @{
+                                                  @"al:ios:app_name": @"Bolts2"
+                                                  },
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(2u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts", target.appName);
+    
+    target = link.targets[1];
+    XCTAssertEqualObjects(@"bolts2://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts2", target.appName);
+    
+    XCTAssertEqualObjects(url, link.webURL);
+}
+
+- (void)testWebViewPlatformFiltering {
+    NSString *html = [self htmlWithMetaTags:@[
+                                              @{
+                                                  @"al:ios": [NSNull null],
+                                                  @"al:ios:url": @"bolts://",
+                                                  @"al:ios:app_name": @"Bolts",
+                                                  @"al:ios:app_store_id": @"12345"
+                                                  },
+                                              @{
+                                                  @"al:iphone": [NSNull null],
+                                                  @"al:iphone:url": @"bolts2://iphone",
+                                                  @"al:iphone:app_name": @"Bolts2",
+                                                  @"al:iphone:app_store_id": @"67890"
+                                                  },
+                                              @{
+                                                  @"al:ipad": [NSNull null],
+                                                  @"al:ipad:url": @"bolts2://ipad",
+                                                  @"al:ipad:app_name": @"Bolts2",
+                                                  @"al:ipad:app_store_id": @"67890"
+                                                  },
+                                              @{
+                                                  @"al:android": [NSNull null],
+                                                  @"al:android:url": @"bolts2://ipad",
+                                                  @"al:android:package": @"com.bolts2",
+                                                  },
+                                              ]];
+    NSURL *url = [self dataUrlForHtml:html];
+    
+    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLAsync:url];
+    [self waitForTaskOnMainThread:task];
+    
+    BFAppLink *link = task.result;
+    XCTAssertEqual(2u, link.targets.count);
+    
+    BFAppLinkTarget *target = link.targets[0];
+    // Platform-specific links should be prioritized
+    switch (UI_USER_INTERFACE_IDIOM()) {
+        case UIUserInterfaceIdiomPhone:
+            XCTAssertEqualObjects(@"bolts2://iphone", target.url.absoluteString);
+            break;
+        case UIUserInterfaceIdiomPad:
+            XCTAssertEqualObjects(@"bolts2://ipad", target.url.absoluteString);
+            break;
+        default:
+            break;
+    }
+    XCTAssertEqualObjects(@"Bolts2", target.appName);
+    XCTAssertEqualObjects(@"67890", target.appStoreId);
+    
+    target = link.targets[1];
+    XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
+    XCTAssertEqualObjects(@"Bolts", target.appName);
+    XCTAssertEqualObjects(@"12345", target.appStoreId);
+    
+    
+    XCTAssertEqualObjects(url, link.webURL);
 }
 
 #pragma mark App link meta tag parsing
@@ -433,7 +700,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
     XCTAssertEqualObjects(@"Bolts", target.appName);
     XCTAssertEqualObjects(@"12345", target.appStoreId);
-
+    
     
     XCTAssertEqualObjects(url, link.webURL);
 }

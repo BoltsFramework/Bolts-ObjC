@@ -12,10 +12,18 @@
 
 @class BFTask;
 
+/*!
+ Implement this protocol to provide an alternate strategy for resolving
+ App Links that may include pre-fetching, caching, or querying for App Link
+ data from an index provided by a service provider.
+ */
 @protocol BFAppLinkResolving <NSObject>
 
 /*!
+ Asynchronously resolves App Link data for a given URL.
  
+ @param url The URL to resolve into an App Link.
+ @returns A BFTask that will return a BFAppLink for the given URL.
  */
 - (BFTask *)appLinkFromURLAsync:(NSURL *)url;
 

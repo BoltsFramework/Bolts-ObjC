@@ -19,10 +19,14 @@ typedef NS_ENUM(NSInteger, BFNavigationType) {
     BFNavigationTypeApp
 };
 
+@protocol BFAppLinkResolving;
+
 @interface BFNavigator : NSObject
 
 /*! Returns a BFAppLink for the given URL */
 + (BFTask *)resolveAppLink:(NSURL *)destination;
+/*! Returns a BFAppLink for the given URL using the given App Link resolution strategy */
++ (BFTask *)resolveAppLink:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver;
 
 /*! Navigates to a BFAppLink and returns whether it opened in-app or in-browser */
 + (BFNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error;
@@ -33,5 +37,17 @@ typedef NS_ENUM(NSInteger, BFNavigationType) {
 + (BFTask *)navigateToURL:(NSURL *)destination;
 /*! Navigates to a URL (an asynchronous action) with the given headers and returns a BFNavigationType */
 + (BFTask *)navigateToURL:(NSURL *)destination headers:(NSDictionary *)headers;
+/*!
+ Navigates to a URL (an asynchronous action) using the given App Link resolution
+ strategy and returns a BFNavigationType
+ */
++ (BFTask *)navigateToURL:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver;
+/*!
+ Navigates to a URL (an asynchronous action) with the given headers using the given App Link
+ resolution strategy and returns a BFNavigationType
+ */
++ (BFTask *)navigateToURL:(NSURL *)destination
+                  headers:(NSDictionary *)headers
+                 resolver:(id<BFAppLinkResolving>)resolver;
 
 @end
