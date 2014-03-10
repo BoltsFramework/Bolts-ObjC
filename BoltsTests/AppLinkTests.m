@@ -102,8 +102,8 @@ NSMutableArray *openedUrls = nil;
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
     XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.baseURL);
-    XCTAssertEqual(0u, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual(0u, openedUrl.baseQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.targetQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.baseQueryParameters.count);
 }
 
 - (void)testOpenedURLWithQueryParameters {
@@ -113,8 +113,8 @@ NSMutableArray *openedUrls = nil;
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
     XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.baseURL);
-    XCTAssertEqual(3u, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual(3u, openedUrl.baseQueryParameters.count);
+    XCTAssertEqual((NSUInteger)3, openedUrl.targetQueryParameters.count);
+    XCTAssertEqual((NSUInteger)3, openedUrl.baseQueryParameters.count);
     XCTAssertEqualObjects([NSNull null], openedUrl.targetQueryParameters[@"foo"]);
     XCTAssertEqualObjects(@"baz", openedUrl.targetQueryParameters[@"bar"]);
     XCTAssertEqualObjects(@" ", openedUrl.targetQueryParameters[@"space"]);
@@ -127,8 +127,8 @@ NSMutableArray *openedUrls = nil;
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
     XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.baseURL);
-    XCTAssertEqual(0u, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual(0u, openedUrl.baseQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.targetQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.baseQueryParameters.count);
 }
 
 - (void)testOpenedURLWithAppLink {
@@ -177,8 +177,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345"
@@ -190,7 +190,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -209,8 +209,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsingNoneWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
@@ -223,7 +223,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -235,8 +235,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsingEmptyWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
@@ -249,7 +249,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -261,8 +261,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsingWithWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
@@ -275,7 +275,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -287,14 +287,14 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewVersionedAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345"
                                                   },
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts2://",
                                                   @"al:ios:app_name": @"Bolts2",
                                                   @"al:ios:app_store_id": @"67890"
@@ -306,7 +306,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -336,7 +336,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -368,7 +368,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -383,27 +383,27 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewPlatformFiltering {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345"
                                                   },
+                                              @{ @"al:iphone": [NSNull null] },
                                               @{
-                                                  @"al:iphone": [NSNull null],
                                                   @"al:iphone:url": @"bolts2://iphone",
                                                   @"al:iphone:app_name": @"Bolts2",
                                                   @"al:iphone:app_store_id": @"67890"
                                                   },
+                                              @{ @"al:ipad": [NSNull null] },
                                               @{
-                                                  @"al:ipad": [NSNull null],
                                                   @"al:ipad:url": @"bolts2://ipad",
                                                   @"al:ipad:app_name": @"Bolts2",
                                                   @"al:ipad:app_store_id": @"67890"
                                                   },
+                                              @{ @"al:android": [NSNull null] },
                                               @{
-                                                  @"al:android": [NSNull null],
-                                                  @"al:android:url": @"bolts2://ipad",
+                                                  @"al:android:url": @"bolts2://android",
                                                   @"al:android:package": @"com.bolts2",
                                                   },
                                               ]];
@@ -413,7 +413,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     // Platform-specific links should be prioritized
@@ -443,8 +443,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345"
@@ -456,7 +456,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -475,8 +475,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsingNoneWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
@@ -489,7 +489,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -501,8 +501,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsingEmptyWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
@@ -515,7 +515,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -527,8 +527,8 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsingWithWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
@@ -541,7 +541,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(1u, link.targets.count);
+    XCTAssertEqual((NSUInteger)1, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -553,14 +553,14 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testVersionedAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345"
                                                   },
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts2://",
                                                   @"al:ios:app_name": @"Bolts2",
                                                   @"al:ios:app_store_id": @"67890"
@@ -572,7 +572,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -602,7 +602,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -634,7 +634,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     XCTAssertEqualObjects(@"bolts://", target.url.absoluteString);
@@ -649,26 +649,26 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testPlatformFiltering {
     NSString *html = [self htmlWithMetaTags:@[
+                                              @{ @"al:ios": [NSNull null] },
                                               @{
-                                                  @"al:ios": [NSNull null],
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345"
                                                   },
+                                              @{ @"al:iphone": [NSNull null] },
                                               @{
-                                                  @"al:iphone": [NSNull null],
                                                   @"al:iphone:url": @"bolts2://iphone",
                                                   @"al:iphone:app_name": @"Bolts2",
                                                   @"al:iphone:app_store_id": @"67890"
                                                   },
+                                              @{ @"al:ipad": [NSNull null] },
                                               @{
-                                                  @"al:ipad": [NSNull null],
                                                   @"al:ipad:url": @"bolts2://ipad",
                                                   @"al:ipad:app_name": @"Bolts2",
                                                   @"al:ipad:app_store_id": @"67890"
                                                   },
+                                              @{ @"al:android": [NSNull null] },
                                               @{
-                                                  @"al:android": [NSNull null],
                                                   @"al:android:url": @"bolts2://ipad",
                                                   @"al:android:package": @"com.bolts2",
                                                   },
@@ -679,7 +679,7 @@ NSMutableArray *openedUrls = nil;
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
-    XCTAssertEqual(2u, link.targets.count);
+    XCTAssertEqual((NSUInteger)2, link.targets.count);
     
     BFAppLinkTarget *target = link.targets[0];
     // Platform-specific links should be prioritized
@@ -717,7 +717,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [BFNavigator navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFNavigationTypeApp);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
@@ -736,7 +736,7 @@ NSMutableArray *openedUrls = nil;
                                                                error:nil];
     
     XCTAssertEqual(navigationType, BFNavigationTypeApp);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
@@ -757,7 +757,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [BFNavigator navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFNavigationTypeApp);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
@@ -778,7 +778,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [BFNavigator navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFNavigationTypeApp);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
@@ -793,7 +793,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [BFNavigator navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFNavigationTypeBrowser);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     XCTAssertEqualObjects(@"http://www.example.com/path", openedUrl.absoluteString);
@@ -806,7 +806,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [BFNavigator navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFNavigationTypeFailure);
-    XCTAssertEqual(0u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)0, openedUrls.count);
 }
 
 #pragma mark App link navigation integration tests
@@ -828,7 +828,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [task.result integerValue];
     
     XCTAssertEqual(navigationType, BFNavigationTypeApp);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
@@ -858,7 +858,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [task.result integerValue];
     
     XCTAssertEqual(navigationType, BFNavigationTypeApp);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
@@ -889,7 +889,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [task.result integerValue];
     
     XCTAssertEqual(navigationType, BFNavigationTypeApp);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
@@ -907,7 +907,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [task.result integerValue];
     
     XCTAssertEqual(navigationType, BFNavigationTypeBrowser);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     XCTAssertEqualObjects(url.absoluteString, openedUrl.absoluteString);
@@ -931,7 +931,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [task.result integerValue];
     
     XCTAssertEqual(navigationType, BFNavigationTypeBrowser);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     XCTAssertEqualObjects(@"http://www.example.com", openedUrl.absoluteString);
@@ -951,7 +951,7 @@ NSMutableArray *openedUrls = nil;
     BFNavigationType navigationType = [task.result integerValue];
     
     XCTAssertEqual(navigationType, BFNavigationTypeBrowser);
-    XCTAssertEqual(1u, openedUrls.count);
+    XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
     XCTAssertEqualObjects(@"http://www.example.com", openedUrl.absoluteString);
