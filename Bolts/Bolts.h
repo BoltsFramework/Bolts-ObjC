@@ -12,6 +12,10 @@
 #import "BFExecutor.h"
 #import "BFTask.h"
 #import "BFTaskCompletionSource.h"
+#import "BFNavigator.h"
+#import "BFAppLink.h"
+#import "BFAppLinkTarget.h"
+#import "BFOpenedURL.h"
 
 /*! @abstract 80175001: There were multiple errors. */
 extern NSInteger const kBFMultipleErrorsError;
