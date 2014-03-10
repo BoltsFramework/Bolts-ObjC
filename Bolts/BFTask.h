@@ -61,6 +61,11 @@ typedef id(^BFContinuationBlock)(BFTask *task);
 // Properties that will be set on the task once it is completed.
 
 /*!
+ The progress of a task.
+ */
+- (id)progress;
+
+/*!
  The result of a successful task.
  */
 - (id)result;

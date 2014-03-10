@@ -22,6 +22,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 }
 
 @interface BFTask () {
+    id _progress;
     id _result;
     NSError *_error;
     NSException *_exception;
@@ -142,6 +143,31 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 
 #pragma mark - Custom Setters/Getters
 
+- (id)progress {
+    @synchronized (self.lock) {
+        return _progress;
+    }
+}
+
+- (void)setProgress:(id)progress {
+    if (![self trySetProgress:progress]) {
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"Cannot set the progress on a task."];
+    }
+}
+
+- (BOOL)trySetProgress:(id)progress {
+    @synchronized (self.lock) {
+        if (self.completed) {
+            return NO;
+        }
+//        self.completed = YES;
+        _progress = progress;
+        [self runContinuations:NO];
+        return YES;
+    }
+}
+
 - (id)result {
     @synchronized (self.lock) {
         return _result;
@@ -162,7 +188,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
         }
         self.completed = YES;
         _result = result;
-        [self runContinuations];
+        [self runContinuations:YES];
         return YES;
     }
 }
@@ -187,7 +213,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
         }
         self.completed = YES;
         _error = error;
-        [self runContinuations];
+        [self runContinuations:YES];
         return YES;
     }
 }
@@ -212,7 +238,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
         }
         self.completed = YES;
         _exception = exception;
-        [self runContinuations];
+        [self runContinuations:YES];
         return YES;
     }
 }
@@ -239,7 +265,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
         }
         self.completed = YES;
         _cancelled = YES;
-        [self runContinuations];
+        [self runContinuations:YES];
         return YES;
     }
 }
@@ -250,13 +276,14 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     }
 }
 
-- (void)setCompleted {
+- (void)setCompleted:(BOOL)completed {
     @synchronized (self.lock) {
-        _completed = YES;
+        _progress = nil;
+        _completed = completed;
     }
 }
 
-- (void)runContinuations {
+- (void)runContinuations:(BOOL)removing {
     @synchronized (self.lock) {
         [self.condition lock];
         [self.condition broadcast];
@@ -264,7 +291,9 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
         for (void (^callback)() in self.callbacks) {
             callback();
         }
-        [self.callbacks removeAllObjects];
+        if (removing) {
+            [self.callbacks removeAllObjects];
+        }
     }
 }
 
@@ -284,6 +313,11 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                 tcs.exception = exception;
                 return;
             }
+            
+            if (self.progress) {
+                return;
+            }
+            
             if ([result isKindOfClass:[BFTask class]]) {
                 [(BFTask *)result continueWithBlock:^id(BFTask *task) {
                     if (task.isCancelled) {
@@ -324,7 +358,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 - (BFTask *)continueWithExecutor:(BFExecutor *)executor
                 withSuccessBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
-        if (task.error || task.exception || task.isCancelled) {
+        if (task.progress || task.error || task.exception || task.isCancelled) {
             return task;
         } else {
             return block(task);

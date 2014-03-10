@@ -30,6 +30,11 @@
 @property (nonatomic, retain, readonly) BFTask *task;
 
 /*!
+ Sets progress object to the task.
+ */
+- (void)setProgress:(id)progess;
+
+/*!
  Completes the task by setting the result.
  Attempting to set this for a completed task will raise an exception.
  */
