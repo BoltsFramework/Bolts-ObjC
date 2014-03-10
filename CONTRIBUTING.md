@@ -27,7 +27,7 @@ disclosure of security bugs. In those cases, please go through the process
 outlined on that page and do not file a public issue.
 
 ## Coding Style  
-* Most importantly, match the exiting code style as much as possible.
+* Most importantly, match the existing code style as much as possible.
 * Try to keep lines under 100 characters, if possible.
 
 ## License
