@@ -130,7 +130,7 @@
     }];
 }
 
-- (BFTask *)appLinkFromURLAsync:(NSURL *)url {
+- (BFTask *)appLinkFromURLInBackground:(NSURL *)url {
     return [[self followRedirects:url] continueWithSuccessBlock:^id(BFTask *task) {
         NSData *responseData = task.result[@"data"];
         NSHTTPURLResponse *response = task.result[@"response"];

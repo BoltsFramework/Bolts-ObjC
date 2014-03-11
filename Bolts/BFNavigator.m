@@ -22,36 +22,36 @@
 
 @implementation BFNavigator
 
-+ (BFTask *)resolveAppLink:(NSURL *)destination resolver:(id)resolver {
-    return [resolver appLinkFromURLAsync:destination];
++ (BFTask *)resolveAppLinkInBackground:(NSURL *)destination resolver:(id)resolver {
+    return [resolver appLinkFromURLInBackground:destination];
 }
 
-+ (BFTask *)resolveAppLink:(NSURL *)destination {
-    return [self resolveAppLink:destination resolver:[BFWebViewAppLinkResolver resolver]];
++ (BFTask *)resolveAppLinkInBackground:(NSURL *)destination {
+    return [self resolveAppLinkInBackground:destination resolver:[BFWebViewAppLinkResolver resolver]];
 }
 
-+ (BFTask *)navigateToURL:(NSURL *)destination {
-    return [self navigateToURL:destination
++ (BFTask *)navigateToURLInBackground:(NSURL *)destination {
+    return [self navigateToURLInBackground:destination
                        headers:nil
                       resolver:[BFWebViewAppLinkResolver resolver]];
 }
 
 + (BFTask *)navigateToURL:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver {
-    return [self navigateToURL:destination
+    return [self navigateToURLInBackground:destination
                        headers:nil
                       resolver:resolver];
 }
 
-+ (BFTask *)navigateToURL:(NSURL *)destination headers:(NSDictionary *)headers {
-    return [self navigateToURL:destination
++ (BFTask *)navigateToURLInBackground:(NSURL *)destination headers:(NSDictionary *)headers {
+    return [self navigateToURLInBackground:destination
                        headers:headers
                       resolver:[BFWebViewAppLinkResolver resolver]];
 }
 
-+ (BFTask *)navigateToURL:(NSURL *)destination
++ (BFTask *)navigateToURLInBackground:(NSURL *)destination
                   headers:(NSDictionary *)headers
                  resolver:(id<BFAppLinkResolving>)resolver {
-    return [[self resolveAppLink:destination
+    return [[self resolveAppLinkInBackground:destination
                         resolver:resolver] continueWithSuccessBlock:^id(BFTask *task) {
         BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -83,14 +83,14 @@
     // Find the first eligible/launchable target in the BFAppLink.
     BFAppLinkTarget *eligibleTarget = nil;
     for (BFAppLinkTarget *target in link.targets) {
-        if ([[UIApplication sharedApplication] canOpenURL:target.url]) {
+        if ([[UIApplication sharedApplication] canOpenURL:target.URL]) {
             eligibleTarget = target;
             break;
         }
     }
     
     if (eligibleTarget) {
-        NSURL *targetUrl = eligibleTarget.url;
+        NSURL *targetUrl = eligibleTarget.URL;
         NSMutableDictionary *augmentedHeaders = [NSMutableDictionary dictionaryWithDictionary:headers ?: @{}];
         
         // Add good browser headers

@@ -16,7 +16,7 @@
                           appStoreId:(NSString *)appStoreId
                              appName:(NSString *)appName {
     BFAppLinkTarget *target = [[self alloc] init];
-    target->_url = url;
+    target->_URL = url;
     target->_appStoreId = appStoreId;
     target->_appName = appName;
     return target;

@@ -18,7 +18,7 @@
                              appName:(NSString *)appName;
 
 /*! The URL prefix for this app link target */
-@property (readonly, copy) NSURL *url;
+@property (readonly, copy) NSURL *URL;
 
 /*! The app ID for the app store */
 @property (readonly, copy) NSString *appStoreId;

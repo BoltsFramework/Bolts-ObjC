@@ -25,6 +25,6 @@
  @param url The URL to resolve into an App Link.
  @returns A BFTask that will return a BFAppLink for the given URL.
  */
-- (BFTask *)appLinkFromURLAsync:(NSURL *)url;
+- (BFTask *)appLinkFromURLInBackground:(NSURL *)url;
 
 @end
