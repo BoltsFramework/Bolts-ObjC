@@ -30,10 +30,15 @@
 @property (readonly, strong) NSDictionary *targetQueryParameters;
 
 /*!
- If this link target is an AppLink, this is the set of headers included in the applink_data.
+ If this link target is an AppLink, this is the data found in al_applink_data.
  Otherwise, it is nil.
  */
-@property (readonly, strong) NSDictionary *appLinkHeaders;
+@property (readonly, strong) NSDictionary *appLinkNavigationData;
+
+/*!
+ If this link target is an AppLink, this is the data found in referer_data.
+ */
+@property (readonly, strong) NSDictionary *appLinkAppData;
 
 /*!
  The URL that was used to create this link target.

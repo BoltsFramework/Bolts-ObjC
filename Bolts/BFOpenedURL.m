@@ -32,10 +32,18 @@
                                                                         options:0
                                                                           error:&error];
             if (!error && [applinkData isKindOfClass:[NSDictionary class]]) {
-                NSString *target = applinkData[BFAPPLINK_TARGET_HEADER_NAME];
-                if (target) {
+                // If the version is not specified, assume it is 1.
+                NSNumber *version = applinkData[BFAPPLINK_VERSION_KEY_NAME] ?: @1;
+                NSString *target = applinkData[BFAPPLINK_TARGET_KEY_NAME];
+                if ([target isKindOfClass:[NSString class]] &&
+                    [version isKindOfClass:[NSNumber class]] &&
+                    [version integerValue] == BFAPPLINK_VERSION) {
                     // There's applink data!  The target should actually be the applink target.
-                    _appLinkHeaders = applinkData;
+                    _appLinkNavigationData = applinkData;
+                    NSDictionary *refererData = applinkData[BFAPPLINK_REFERER_DATA_KEY_NAME];
+                    if (refererData && [refererData isKindOfClass:[NSDictionary class]]) {
+                        _appLinkAppData = applinkData[BFAPPLINK_REFERER_DATA_KEY_NAME];
+                    }
                     _targetURL = [NSURL URLWithString:target];
                     _targetQueryParameters = [BFOpenedURL queryParametersForURL:_targetURL];
                 }

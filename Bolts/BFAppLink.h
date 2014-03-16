@@ -11,9 +11,11 @@
 #import <Foundation/Foundation.h>
 
 #define BFAPPLINK_DATA_PARAMETER_NAME @"al_applink_data"
-#define BFAPPLINK_TARGET_HEADER_NAME @"target_url"
-#define BFAPPLINK_USER_AGENT_HEADER_NAME @"user_agent"
-#define BFAPPLINK_REFERER_HEADER_NAME @"referer"
+#define BFAPPLINK_TARGET_KEY_NAME @"target_url"
+#define BFAPPLINK_USER_AGENT_KEY_NAME @"user_agent"
+#define BFAPPLINK_REFERER_DATA_KEY_NAME @"referer_data"
+#define BFAPPLINK_VERSION_KEY_NAME @"version"
+#define BFAPPLINK_VERSION 1
 
 @interface BFAppLink : NSObject
 

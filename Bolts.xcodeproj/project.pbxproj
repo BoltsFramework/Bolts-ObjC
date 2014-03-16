@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E11AB7918C561E300522739 /* BFNavigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7418C561E300522739 /* BFNavigator.m */; };
+		1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */; };
 		1E11AB7A18C561E300522739 /* BFAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7618C561E300522739 /* BFAppLink.m */; };
 		1E11AB7B18C561E300522739 /* BFOpenedURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7818C561E300522739 /* BFOpenedURL.m */; };
 		1E11AB7E18C7C50800522739 /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */; };
@@ -119,8 +119,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E11AB7318C561E300522739 /* BFNavigator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFNavigator.h; sourceTree = "<group>"; };
-		1E11AB7418C561E300522739 /* BFNavigator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFNavigator.m; sourceTree = "<group>"; };
+		1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkNavigation.h; sourceTree = "<group>"; };
+		1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLinkNavigation.m; sourceTree = "<group>"; };
 		1E11AB7518C561E300522739 /* BFAppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink.h; sourceTree = "<group>"; };
 		1E11AB7618C561E300522739 /* BFAppLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLink.m; sourceTree = "<group>"; };
 		1E11AB7718C561E300522739 /* BFOpenedURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFOpenedURL.h; sourceTree = "<group>"; };
@@ -303,8 +303,8 @@
 				1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */,
 				8EB2CB401805DDDB00323385 /* BFExecutor.h */,
 				8EB2CB411805DDDB00323385 /* BFExecutor.m */,
-				1E11AB7318C561E300522739 /* BFNavigator.h */,
-				1E11AB7418C561E300522739 /* BFNavigator.m */,
+				1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */,
+				1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */,
 				1E11AB7718C561E300522739 /* BFOpenedURL.h */,
 				1E11AB7818C561E300522739 /* BFOpenedURL.m */,
 				8E9C3D1E17DEA35700427E62 /* BFTask.h */,
@@ -526,7 +526,7 @@
 				8EB2CB421805DDDB00323385 /* BFExecutor.m in Sources */,
 				8E9C3D2417DEA35700427E62 /* BFTaskCompletionSource.m in Sources */,
 				1EC3019618CDD8A500D06D07 /* BFWebViewAppLinkResolver.m in Sources */,
-				1E11AB7918C561E300522739 /* BFNavigator.m in Sources */,
+				1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1160,6 +1160,7 @@
 				1EC3018918CDAA8400D06D07 /* Release64 */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E8C8EF817F23D1D00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests" */ = {
 			isa = XCConfigurationList;

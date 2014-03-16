@@ -14,7 +14,7 @@
 #import "BFTaskCompletionSource.h"
 
 #if TARGET_OS_IPHONE
-#import "BFNavigator.h"
+#import "BFAppLinkNavigation.h"
 #import "BFAppLink.h"
 #import "BFAppLinkTarget.h"
 #import "BFOpenedURL.h"
