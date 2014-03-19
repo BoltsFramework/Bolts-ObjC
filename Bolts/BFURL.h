@@ -20,7 +20,7 @@
  Creates a link target from a raw URL. Usually, this will be used to parse a URL passed into
  an app delegate's handleOpenURL: method.
  */
-+ (BFURL *)openedURLFromURL:(NSURL *)url;
++ (BFURL *)URLFromURL:(NSURL *)url;
 
 /*!
  Gets the target URL.  If the link is an AppLink, this is the target of the AppLink.

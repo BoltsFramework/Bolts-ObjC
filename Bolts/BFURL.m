@@ -53,7 +53,7 @@
     return self;
 }
 
-+ (BFURL *)openedURLFromURL:(NSURL *)url {
++ (BFURL *)URLFromURL:(NSURL *)url {
     return [[BFURL alloc] initWithURL:url];
 }
 
