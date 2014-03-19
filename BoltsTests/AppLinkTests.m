@@ -731,9 +731,9 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkRequest *navigation = [BFAppLinkRequest navigationWithAppLink:appLink
-                                                                         appData:nil
-                                                                  navigationData:@{@"foo": @"bar"}];
+    BFAppLinkRequest *navigation = [BFAppLinkRequest requestWithAppLink:appLink
+                                                                appData:nil
+                                                         navigationData:@{@"foo": @"bar"}];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
@@ -752,9 +752,9 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkRequest *navigation = [BFAppLinkRequest navigationWithAppLink:appLink
-                                                                         appData:@{@"foo": @"bar"}
-                                                                  navigationData:nil];
+    BFAppLinkRequest *navigation = [BFAppLinkRequest requestWithAppLink:appLink
+                                                                appData:@{@"foo": @"bar"}
+                                                         navigationData:nil];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
@@ -773,9 +773,9 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkRequest *navigation = [BFAppLinkRequest navigationWithAppLink:appLink
-                                                                         appData:@{@"foo": @"bar1"}
-                                                                  navigationData:@{@"foo": @"bar2"}];
+    BFAppLinkRequest *navigation = [BFAppLinkRequest requestWithAppLink:appLink
+                                                                appData:@{@"foo": @"bar1"}
+                                                         navigationData:@{@"foo": @"bar2"}];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);

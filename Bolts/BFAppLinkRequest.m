@@ -22,9 +22,9 @@
 
 @implementation BFAppLinkRequest
 
-+ (instancetype)navigationWithAppLink:(BFAppLink *)appLink
-                              appData:(NSDictionary *)appData
-                       navigationData:(NSDictionary *)navigationData {
++ (instancetype)requestWithAppLink:(BFAppLink *)appLink
+                           appData:(NSDictionary *)appData
+                    navigationData:(NSDictionary *)navigationData {
     BFAppLinkRequest *navigation = [[self alloc] init];
     navigation->_appLink = appLink;
     navigation->_appData = appData;
@@ -112,13 +112,13 @@
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination {
     return [self navigateToURLInBackground:destination
-                      resolver:[BFWebViewAppLinkResolver sharedInstance]];
+                                  resolver:[BFWebViewAppLinkResolver sharedInstance]];
 }
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination
-                 resolver:(id<BFAppLinkResolving>)resolver {
+                             resolver:(id<BFAppLinkResolving>)resolver {
     return [[self resolveAppLinkInBackground:destination
-                        resolver:resolver] continueWithSuccessBlock:^id(BFTask *task) {
+                                    resolver:resolver] continueWithSuccessBlock:^id(BFTask *task) {
         BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSError *error = nil;
@@ -134,9 +134,9 @@
 }
 
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error {
-    return [[BFAppLinkRequest navigationWithAppLink:link
-                                               appData:nil
-                                        navigationData:nil] navigate:error];;
+    return [[BFAppLinkRequest requestWithAppLink:link
+                                         appData:nil
+                                  navigationData:nil] navigate:error];;
 }
 
 @end
