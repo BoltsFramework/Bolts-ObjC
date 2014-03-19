@@ -98,23 +98,23 @@ NSMutableArray *openedUrls = nil;
 - (void)testSimpleOpenedURL {
     NSURL *url = [NSURL URLWithString:@"http://www.example.com"];
     
-    BFOpenedURL *openedUrl = [BFOpenedURL openedURLFromURL:url];
+    BFURL *openedUrl = [BFURL openedURLFromURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
-    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.baseURL);
+    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
     XCTAssertEqual((NSUInteger)0, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual((NSUInteger)0, openedUrl.baseQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.originalQueryParameters.count);
 }
 
 - (void)testOpenedURLWithQueryParameters {
     NSURL *url = [NSURL URLWithString:@"http://www.example.com?foo&bar=baz&space=%20"];
     
-    BFOpenedURL *openedUrl = [BFOpenedURL openedURLFromURL:url];
+    BFURL *openedUrl = [BFURL openedURLFromURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
-    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.baseURL);
+    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
     XCTAssertEqual((NSUInteger)3, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual((NSUInteger)3, openedUrl.baseQueryParameters.count);
+    XCTAssertEqual((NSUInteger)3, openedUrl.originalQueryParameters.count);
     XCTAssertEqualObjects([NSNull null], openedUrl.targetQueryParameters[@"foo"]);
     XCTAssertEqualObjects(@"baz", openedUrl.targetQueryParameters[@"bar"]);
     XCTAssertEqualObjects(@" ", openedUrl.targetQueryParameters[@"space"]);
@@ -123,54 +123,54 @@ NSMutableArray *openedUrls = nil;
 - (void)testOpenedURLWithBlankQuery {
     NSURL *url = [NSURL URLWithString:@"http://www.example.com?"];
     
-    BFOpenedURL *openedUrl = [BFOpenedURL openedURLFromURL:url];
+    BFURL *openedUrl = [BFURL openedURLFromURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
-    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.baseURL);
+    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
     XCTAssertEqual((NSUInteger)0, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual((NSUInteger)0, openedUrl.baseQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.originalQueryParameters.count);
 }
 
 - (void)testOpenedURLWithAppLink {
     NSURL *url = [NSURL URLWithString:@"bolts://?al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%22%7D"];
     
-    BFOpenedURL *openedURL = [BFOpenedURL openedURLFromURL:url];
+    BFURL *openedURL = [BFURL openedURLFromURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path", openedURL.targetURL.absoluteString);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.baseURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
 }
 
 - (void)testOpenedURLWithAppLinkTargetHasQueryParameters {
     NSURL *url = [NSURL URLWithString:@"bolts://?al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Ffoo%3Dbar%22%7D"];
     
-    BFOpenedURL *openedURL = [BFOpenedURL openedURLFromURL:url];
+    BFURL *openedURL = [BFURL openedURLFromURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?foo=bar", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar", openedURL.targetQueryParameters[@"foo"]);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.baseURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
 }
 
 - (void)testOpenedURLWithAppLinkTargetAndLinkURLHasQueryParameters {
     NSURL *url = [NSURL URLWithString:@"bolts://?foo=bar&al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Fbaz%3Dbat%22%7D"];
     
-    BFOpenedURL *openedURL = [BFOpenedURL openedURLFromURL:url];
+    BFURL *openedURL = [BFURL openedURLFromURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?baz=bat", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bat", openedURL.targetQueryParameters[@"baz"]);
-    XCTAssertEqualObjects(@"bar", openedURL.baseQueryParameters[@"foo"]);
+    XCTAssertEqualObjects(@"bar", openedURL.originalQueryParameters[@"foo"]);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.baseURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
 }
 
 - (void)testOpenedURLWithAppLinkWithCustomAppLinkData {
     NSURL *url = [NSURL URLWithString:@"bolts://?foo=bar&al_applink_data=%7B%22a%22%3A%22b%22%2C%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Fbaz%3Dbat%22%7D"];
     
-    BFOpenedURL *openedURL = [BFOpenedURL openedURLFromURL:url];
+    BFURL *openedURL = [BFURL openedURLFromURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?baz=bat", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bat", openedURL.targetQueryParameters[@"baz"]);
-    XCTAssertEqualObjects(@"bar", openedURL.baseQueryParameters[@"foo"]);
+    XCTAssertEqualObjects(@"bar", openedURL.originalQueryParameters[@"foo"]);
     XCTAssertEqualObjects(@"b", openedURL.appLinkNavigationData[@"a"]);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.baseURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
 }
 
 #pragma mark WebView App Link resolution
@@ -186,7 +186,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -201,7 +201,7 @@ NSMutableArray *openedUrls = nil;
 }
 
 - (void)testWebViewAppLinkParsingFailure {
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:[NSURL URLWithString:@"http://badurl"]];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:[NSURL URLWithString:@"http://badurl"]];
     [self waitForTaskOnMainThread:task];
     
     XCTAssertNotNil(task.error);
@@ -219,7 +219,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -245,7 +245,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -271,7 +271,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -302,7 +302,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -332,7 +332,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -364,7 +364,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -409,7 +409,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [[BFWebViewAppLinkResolver resolver] appLinkFromURLInBackground:url];
+    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -452,7 +452,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -467,7 +467,7 @@ NSMutableArray *openedUrls = nil;
 }
 
 - (void)testAppLinkParsingFailure {
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:[NSURL URLWithString:@"http://badurl"]];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:[NSURL URLWithString:@"http://badurl"]];
     [self waitForTaskOnMainThread:task];
     
     XCTAssertNotNil(task.error);
@@ -485,7 +485,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -511,7 +511,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -537,7 +537,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -568,7 +568,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -598,7 +598,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -630,7 +630,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -675,7 +675,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation resolveAppLinkInBackground:url];
+    BFTask *task = [BFAppLinkRequest resolveAppLinkInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLink *link = task.result;
@@ -714,13 +714,13 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
+    BFAppLinkNavigationType navigationType = [BFAppLinkRequest navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
 }
 
@@ -731,7 +731,7 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
+    BFAppLinkRequest *navigation = [BFAppLinkRequest navigationWithAppLink:appLink
                                                                          appData:nil
                                                                   navigationData:@{@"foo": @"bar"}];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
@@ -740,7 +740,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar", parsedLink.appLinkNavigationData[@"foo"]);
 }
@@ -752,7 +752,7 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
+    BFAppLinkRequest *navigation = [BFAppLinkRequest navigationWithAppLink:appLink
                                                                          appData:@{@"foo": @"bar"}
                                                                   navigationData:nil];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
@@ -761,7 +761,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar", parsedLink.appLinkAppData[@"foo"]);
 }
@@ -773,7 +773,7 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
+    BFAppLinkRequest *navigation = [BFAppLinkRequest navigationWithAppLink:appLink
                                                                          appData:@{@"foo": @"bar1"}
                                                                   navigationData:@{@"foo": @"bar2"}];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
@@ -782,7 +782,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar1", parsedLink.appLinkAppData[@"foo"]);
     XCTAssertEqualObjects(@"bar2", parsedLink.appLinkNavigationData[@"foo"]);
@@ -798,13 +798,13 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target, target2]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
+    BFAppLinkNavigationType navigationType = [BFAppLinkRequest navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts2://"]);
 }
@@ -819,13 +819,13 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[target, target2]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
+    BFAppLinkNavigationType navigationType = [BFAppLinkRequest navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts://"]);
 }
@@ -834,7 +834,7 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
-    BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
+    BFAppLinkNavigationType navigationType = [BFAppLinkRequest navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeBrowser);
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
@@ -847,7 +847,7 @@ NSMutableArray *openedUrls = nil;
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
                                                  targets:@[]
                                                   webURL:nil];
-    BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
+    BFAppLinkNavigationType navigationType = [BFAppLinkRequest navigateToAppLink:appLink error:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeFailure);
     XCTAssertEqual((NSUInteger)0, openedUrls.count);
@@ -866,7 +866,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
+    BFTask *task = [BFAppLinkRequest navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLinkNavigationType navigationType = [task.result integerValue];
@@ -875,7 +875,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(url.absoluteString, parsedLink.targetURL.absoluteString);
 }
 
@@ -896,7 +896,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
+    BFTask *task = [BFAppLinkRequest navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLinkNavigationType navigationType = [task.result integerValue];
@@ -905,7 +905,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(url.absoluteString, parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts2://"]);
 }
@@ -927,7 +927,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
+    BFTask *task = [BFAppLinkRequest navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLinkNavigationType navigationType = [task.result integerValue];
@@ -936,7 +936,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFOpenedURL *parsedLink = [BFOpenedURL openedURLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL openedURLFromURL:openedUrl];
     XCTAssertEqualObjects(url.absoluteString, parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts://"]);
 }
@@ -945,7 +945,7 @@ NSMutableArray *openedUrls = nil;
     NSString *html = [self htmlWithMetaTags:@[]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
+    BFTask *task = [BFAppLinkRequest navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLinkNavigationType navigationType = [task.result integerValue];
@@ -969,7 +969,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
+    BFTask *task = [BFAppLinkRequest navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLinkNavigationType navigationType = [task.result integerValue];
@@ -989,7 +989,7 @@ NSMutableArray *openedUrls = nil;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
     
-    BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
+    BFTask *task = [BFAppLinkRequest navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     BFAppLinkNavigationType navigationType = [task.result integerValue];
@@ -1004,7 +1004,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testAppLinkToBadUrl {
     NSURL *url = [NSURL URLWithString:@"http://badurl"];
     
-    BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
+    BFTask *task = [BFAppLinkRequest navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
     
     XCTAssertNotNil(task.error);

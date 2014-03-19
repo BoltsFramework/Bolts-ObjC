@@ -8,19 +8,19 @@
  *
  */
 
-#import "BFOpenedURL.h"
+#import "BFURL.h"
 #import "BFAppLink.h"
 
-@implementation BFOpenedURL
+@implementation BFURL
 
 - (id)initWithURL:(NSURL *)url {
     if (self = [super init]) {
-        _baseURL = url;
+        _originalURL = url;
         _targetURL = url;
         
         // Parse the query string parameters for the base URL
-        NSDictionary *baseQuery = [BFOpenedURL queryParametersForURL:url];
-        _baseQueryParameters = baseQuery;
+        NSDictionary *baseQuery = [BFURL queryParametersForURL:url];
+        _originalQueryParameters = baseQuery;
         _targetQueryParameters = baseQuery;
         
         // Check for applink_data
@@ -45,7 +45,7 @@
                         _appLinkAppData = applinkData[BFAPPLINK_REFERER_DATA_KEY_NAME];
                     }
                     _targetURL = [NSURL URLWithString:target];
-                    _targetQueryParameters = [BFOpenedURL queryParametersForURL:_targetURL];
+                    _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];
                 }
             }
         }
@@ -53,8 +53,8 @@
     return self;
 }
 
-+ (BFOpenedURL *)openedURLFromURL:(NSURL *)url {
-    return [[BFOpenedURL alloc] initWithURL:url];
++ (BFURL *)openedURLFromURL:(NSURL *)url {
+    return [[BFURL alloc] initWithURL:url];
 }
 
 + (NSString *)decodeURLString:(NSString *)string {

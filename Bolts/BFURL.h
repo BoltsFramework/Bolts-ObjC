@@ -10,13 +10,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BFOpenedURL : NSObject
+/*!
+ Provides a set of utilities for working with NSURLs, such as parsing of query parameters
+ and handling for App Link requests.
+ */
+@interface BFURL : NSObject
 
 /*!
  Creates a link target from a raw URL. Usually, this will be used to parse a URL passed into
  an app delegate's handleOpenURL: method.
  */
-+ (BFOpenedURL *)openedURLFromURL:(NSURL *)url;
++ (BFURL *)openedURLFromURL:(NSURL *)url;
 
 /*!
  Gets the target URL.  If the link is an AppLink, this is the target of the AppLink.
@@ -43,11 +47,11 @@
 /*!
  The URL that was used to create this link target.
  */
-@property (readonly, strong) NSURL *baseURL;
+@property (readonly, strong) NSURL *originalURL;
 
 /*!
  The query parameters of the base URL, parsed into an NSDictionary.
  */
-@property (readonly, strong) NSDictionary *baseQueryParameters;
+@property (readonly, strong) NSDictionary *originalQueryParameters;
 
 @end

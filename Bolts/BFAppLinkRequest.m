@@ -10,22 +10,22 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BFAppLinkNavigation.h"
+#import "BFAppLinkRequest.h"
 #import "BFTaskCompletionSource.h"
 #import "BFAppLinkTarget.h"
 #import "BoltsVersion.h"
 #import "BFWebViewAppLinkResolver.h"
 
-@interface BFAppLinkNavigation ()
+@interface BFAppLinkRequest ()
 
 @end
 
-@implementation BFAppLinkNavigation
+@implementation BFAppLinkRequest
 
 + (instancetype)navigationWithAppLink:(BFAppLink *)appLink
                               appData:(NSDictionary *)appData
                        navigationData:(NSDictionary *)navigationData {
-    BFAppLinkNavigation *navigation = [[self alloc] init];
+    BFAppLinkRequest *navigation = [[self alloc] init];
     navigation->_appLink = appLink;
     navigation->_appData = appData;
     navigation->_navigationData = navigationData;
@@ -107,17 +107,12 @@
 }
 
 + (BFTask *)resolveAppLinkInBackground:(NSURL *)destination {
-    return [self resolveAppLinkInBackground:destination resolver:[BFWebViewAppLinkResolver resolver]];
+    return [self resolveAppLinkInBackground:destination resolver:[BFWebViewAppLinkResolver sharedInstance]];
 }
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination {
     return [self navigateToURLInBackground:destination
-                      resolver:[BFWebViewAppLinkResolver resolver]];
-}
-
-+ (BFTask *)navigateToURL:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver {
-    return [self navigateToURLInBackground:destination
-                      resolver:resolver];
+                      resolver:[BFWebViewAppLinkResolver sharedInstance]];
 }
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination
@@ -139,7 +134,7 @@
 }
 
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error {
-    return [[BFAppLinkNavigation navigationWithAppLink:link
+    return [[BFAppLinkRequest navigationWithAppLink:link
                                                appData:nil
                                         navigationData:nil] navigate:error];;
 }

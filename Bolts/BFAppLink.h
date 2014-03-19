@@ -17,6 +17,10 @@
 #define BFAPPLINK_VERSION_KEY_NAME @"version"
 #define BFAPPLINK_VERSION 1
 
+/*!
+ Contains App Link metadata relevant for navigation on this device
+ derived from the HTML at a given URL.
+ */
 @interface BFAppLink : NSObject
 
 /*!

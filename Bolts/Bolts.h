@@ -14,10 +14,10 @@
 #import "BFTaskCompletionSource.h"
 
 #if TARGET_OS_IPHONE
-#import "BFAppLinkNavigation.h"
+#import "BFAppLinkRequest.h"
 #import "BFAppLink.h"
 #import "BFAppLinkTarget.h"
-#import "BFOpenedURL.h"
+#import "BFURL.h"
 #endif
 
 /*! @abstract 80175001: There were multiple errors. */

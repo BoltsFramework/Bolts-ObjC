@@ -13,24 +13,44 @@
 #import "BFTask.h"
 #import "BFAppLink.h"
 
+/*!
+ The result of calling navigate on a BFAppLinkRequest
+ */
 typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
+    /*! Indicates that the navigation failed and no app was opened */
     BFAppLinkNavigationTypeFailure,
+    /*! Indicates that the navigation succeeded by opening the URL in the browser */
     BFAppLinkNavigationTypeBrowser,
+    /*! Indicates that the navigation succeeded by opening the URL in an app on the device */
     BFAppLinkNavigationTypeApp
 };
 
 @protocol BFAppLinkResolving;
 
-@interface BFAppLinkNavigation : NSObject
+/*!
+ Represents a pending request to navigate to an App Link. Most developers will
+ simply use navigateToURLInBackground: to open a URL, but developers can build
+ custom requests with additional navigation and app data attached to them by
+ creating BFAppLinkRequests themselves.
+ */
+@interface BFAppLinkRequest : NSObject
 
-/*! The referer_data for the AppLinkNavigation */
+/*!
+ The referer_data for the AppLinkNavigation. This will generally contain application-specific
+ data that should be passed along with the request, such as advertiser or affiliate IDs or
+ other such metadata relevant on this device.
+ */
 @property (readonly, strong) NSDictionary *appData;
-/*! The al_applink_data for the AppLinkNavigation */
+/*!
+ The al_applink_data for the AppLinkNavigation. This will generally contain data common to
+ navigation attempts such as back-links, user agents, and other information that may be used
+ in routing and handling an App Link request.
+ */
 @property (readonly, strong) NSDictionary *navigationData;
 /*! The AppLink to navigate to */
 @property (readonly, strong) BFAppLink *appLink;
 
-/* Creates an AppLinkNavigation with the given link, app data, and navigation data. */
+/* Creates an AppLinkNavigation with the given link, app data, and navigation data */
 + (instancetype)navigationWithAppLink:(BFAppLink *)appLink
                               appData:(NSDictionary *)appData
                        navigationData:(NSDictionary *)navigationData;
@@ -50,6 +70,6 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
  Navigates to a URL (an asynchronous action) using the given App Link resolution
  strategy and returns a BFNavigationType
  */
-+ (BFTask *)navigateToURL:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver;
++ (BFTask *)navigateToURLInBackground:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver;
 
 @end
