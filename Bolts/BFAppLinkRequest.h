@@ -10,7 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BFTask.h"
 #import "BFAppLink.h"
 
 /*!
@@ -26,6 +25,7 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 };
 
 @protocol BFAppLinkResolving;
+@class BFTask;
 
 /*!
  Represents a pending request to navigate to an App Link. Most developers will

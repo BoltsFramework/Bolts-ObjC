@@ -16,6 +16,7 @@
 #import "BoltsVersion.h"
 #import "BFWebViewAppLinkResolver.h"
 #import "BFExecutor.h"
+#import "BFTask.h"
 
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
