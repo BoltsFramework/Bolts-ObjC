@@ -10,12 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define BFAPPLINK_DATA_PARAMETER_NAME @"al_applink_data"
-#define BFAPPLINK_TARGET_KEY_NAME @"target_url"
-#define BFAPPLINK_USER_AGENT_KEY_NAME @"user_agent"
-#define BFAPPLINK_REFERER_DATA_KEY_NAME @"referer_data"
-#define BFAPPLINK_VERSION_KEY_NAME @"version"
-#define BFAPPLINK_VERSION 1
+/*! The version of the App Link protocol that this library supports */
+FOUNDATION_EXPORT const NSUInteger BFAppLinkVersion;
 
 /*!
  Contains App Link metadata relevant for navigation on this device
@@ -25,6 +21,10 @@
 
 /*!
  Creates a BFAppLink with the given list of BFAppLinkTargets and target URL.
+ 
+ Generally, this will only be used by implementers of the BFAppLinkResolving protocol,
+ as these implementers will produce App Link metadata for a given URL.
+ 
  @param sourceURL the URL from which this App Link is derived
  @param targets an ordered list of BFAppLinkTargets for this platform derived
  from App Link metadata.

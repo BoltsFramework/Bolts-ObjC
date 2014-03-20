@@ -36,21 +36,23 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 @interface BFAppLinkRequest : NSObject
 
 /*!
- The referer_data for the AppLinkNavigation. This will generally contain application-specific
+ The referer_data for the AppLinkRequest. This will generally contain application-specific
  data that should be passed along with the request, such as advertiser or affiliate IDs or
  other such metadata relevant on this device.
  */
 @property (readonly, strong) NSDictionary *appData;
+
 /*!
- The al_applink_data for the AppLinkNavigation. This will generally contain data common to
+ The al_applink_data for the AppLinkRequest. This will generally contain data common to
  navigation attempts such as back-links, user agents, and other information that may be used
  in routing and handling an App Link request.
  */
 @property (readonly, strong) NSDictionary *navigationData;
+
 /*! The AppLink to navigate to */
 @property (readonly, strong) BFAppLink *appLink;
 
-/* Creates an AppLinkNavigation with the given link, app data, and navigation data */
+/* Creates an AppLinkRequest with the given link, app data, and navigation data */
 + (instancetype)requestWithAppLink:(BFAppLink *)appLink
                            appData:(NSDictionary *)appData
                     navigationData:(NSDictionary *)navigationData;
@@ -59,13 +61,16 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 
 /*! Returns a BFAppLink for the given URL */
 + (BFTask *)resolveAppLinkInBackground:(NSURL *)destination;
+
 /*! Returns a BFAppLink for the given URL using the given App Link resolution strategy */
 + (BFTask *)resolveAppLinkInBackground:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver;
 
 /*! Navigates to a BFAppLink and returns whether it opened in-app or in-browser */
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error;
+
 /*! Navigates to a URL (an asynchronous action) and returns a BFNavigationType */
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination;
+
 /*!
  Navigates to a URL (an asynchronous action) using the given App Link resolution
  strategy and returns a BFNavigationType

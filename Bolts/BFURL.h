@@ -20,10 +20,10 @@
  Creates a link target from a raw URL. Usually, this will be used to parse a URL passed into
  an app delegate's handleOpenURL: method.
  */
-+ (BFURL *)URLFromURL:(NSURL *)url;
++ (BFURL *)URLWithURL:(NSURL *)url;
 
 /*!
- Gets the target URL.  If the link is an AppLink, this is the target of the AppLink.
+ Gets the target URL.  If the link is an App Link, this is the target of the App Link.
  Otherwise, it is the url that created the target.
  */
 @property (readonly, strong) NSURL *targetURL;
@@ -34,13 +34,13 @@
 @property (readonly, strong) NSDictionary *targetQueryParameters;
 
 /*!
- If this link target is an AppLink, this is the data found in al_applink_data.
+ If this link target is an App Link, this is the data found in al_applink_data.
  Otherwise, it is nil.
  */
 @property (readonly, strong) NSDictionary *appLinkNavigationData;
 
 /*!
- If this link target is an AppLink, this is the data found in referer_data.
+ If this link target is an App Link, this is the data found in referer_data.
  */
 @property (readonly, strong) NSDictionary *appLinkAppData;
 

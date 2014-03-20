@@ -10,6 +10,13 @@
 
 #import "BFAppLink.h"
 
+NSString *const BFAppLinkDataParameterName = @"al_applink_data";
+NSString *const BFAppLinkTargetKeyName = @"target_url";
+NSString *const BFAppLinkUserAgentKeyName = @"user_agent";
+NSString *const BFAppLinkRefererDataKeyName = @"referer_data";
+NSString *const BFAppLinkVersionKeyName = @"version";
+const NSUInteger BFAppLinkVersion = 1;
+
 @implementation BFAppLink
 
 + (instancetype)appLinkWithSourceURL:(NSURL *)sourceURL

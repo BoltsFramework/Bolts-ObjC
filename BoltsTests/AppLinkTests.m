@@ -98,7 +98,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testSimpleOpenedURL {
     NSURL *url = [NSURL URLWithString:@"http://www.example.com"];
     
-    BFURL *openedUrl = [BFURL URLFromURL:url];
+    BFURL *openedUrl = [BFURL URLWithURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
     XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
@@ -109,7 +109,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testOpenedURLWithQueryParameters {
     NSURL *url = [NSURL URLWithString:@"http://www.example.com?foo&bar=baz&space=%20"];
     
-    BFURL *openedUrl = [BFURL URLFromURL:url];
+    BFURL *openedUrl = [BFURL URLWithURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
     XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
@@ -123,7 +123,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testOpenedURLWithBlankQuery {
     NSURL *url = [NSURL URLWithString:@"http://www.example.com?"];
     
-    BFURL *openedUrl = [BFURL URLFromURL:url];
+    BFURL *openedUrl = [BFURL URLWithURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
     XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
@@ -134,7 +134,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testOpenedURLWithAppLink {
     NSURL *url = [NSURL URLWithString:@"bolts://?al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%22%7D"];
     
-    BFURL *openedURL = [BFURL URLFromURL:url];
+    BFURL *openedURL = [BFURL URLWithURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path", openedURL.targetURL.absoluteString);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
     XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
@@ -143,7 +143,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testOpenedURLWithAppLinkTargetHasQueryParameters {
     NSURL *url = [NSURL URLWithString:@"bolts://?al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Ffoo%3Dbar%22%7D"];
     
-    BFURL *openedURL = [BFURL URLFromURL:url];
+    BFURL *openedURL = [BFURL URLWithURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?foo=bar", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar", openedURL.targetQueryParameters[@"foo"]);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
@@ -153,7 +153,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testOpenedURLWithAppLinkTargetAndLinkURLHasQueryParameters {
     NSURL *url = [NSURL URLWithString:@"bolts://?foo=bar&al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Fbaz%3Dbat%22%7D"];
     
-    BFURL *openedURL = [BFURL URLFromURL:url];
+    BFURL *openedURL = [BFURL URLWithURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?baz=bat", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bat", openedURL.targetQueryParameters[@"baz"]);
     XCTAssertEqualObjects(@"bar", openedURL.originalQueryParameters[@"foo"]);
@@ -164,7 +164,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testOpenedURLWithAppLinkWithCustomAppLinkData {
     NSURL *url = [NSURL URLWithString:@"bolts://?foo=bar&al_applink_data=%7B%22a%22%3A%22b%22%2C%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Fbaz%3Dbat%22%7D"];
     
-    BFURL *openedURL = [BFURL URLFromURL:url];
+    BFURL *openedURL = [BFURL URLWithURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?baz=bat", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bat", openedURL.targetQueryParameters[@"baz"]);
     XCTAssertEqualObjects(@"bar", openedURL.originalQueryParameters[@"foo"]);
@@ -720,7 +720,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
 }
 
@@ -740,7 +740,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar", parsedLink.appLinkNavigationData[@"foo"]);
 }
@@ -761,7 +761,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar", parsedLink.appLinkAppData[@"foo"]);
 }
@@ -782,7 +782,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar1", parsedLink.appLinkAppData[@"foo"]);
     XCTAssertEqualObjects(@"bar2", parsedLink.appLinkNavigationData[@"foo"]);
@@ -804,7 +804,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts2://"]);
 }
@@ -825,7 +825,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts://"]);
 }
@@ -875,7 +875,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(url.absoluteString, parsedLink.targetURL.absoluteString);
 }
 
@@ -905,7 +905,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(url.absoluteString, parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts2://"]);
 }
@@ -936,7 +936,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    BFURL *parsedLink = [BFURL URLFromURL:openedUrl];
+    BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(url.absoluteString, parsedLink.targetURL.absoluteString);
     XCTAssert([openedUrl.absoluteString hasPrefix:@"bolts://"]);
 }

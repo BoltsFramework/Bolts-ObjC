@@ -15,33 +15,33 @@
 #import "BFAppLinkTarget.h"
 #import "BFTask.h"
 #import "BFTaskCompletionSource.h"
+#import "BFExecutor.h"
 
 // Defines JavaScript to extract app link tags from HTML content
-#define BFWEBVIEWAPPLINKRESOLVER_TAG_EXTRACTION_JAVASCRIPT @"" \
-"(function() {" \
-"  var metaTags = document.getElementsByTagName('meta');" \
-"  var results = [];" \
-"  for (var i = 0; i < metaTags.length; i++) {" \
-"    var property = metaTags[i].getAttribute('property');" \
-"    if (property && property.substring(0, 'al:'.length) === 'al:') {" \
-"      var tag = { \"property\": metaTags[i].getAttribute('property') };" \
-"      if (metaTags[i].hasAttribute('content')) {" \
-"        tag['content'] = metaTags[i].getAttribute('content');" \
-"      }" \
-"      results.push(tag);" \
-"    }" \
-"  }" \
-"  return JSON.stringify(results);" \
-"})()"
+static NSString *const BFWebViewAppLinkResolverTagExtractionJavaScript = @""
+"(function() {"
+"  var metaTags = document.getElementsByTagName('meta');"
+"  var results = [];"
+"  for (var i = 0; i < metaTags.length; i++) {"
+"    var property = metaTags[i].getAttribute('property');"
+"    if (property && property.substring(0, 'al:'.length) === 'al:') {"
+"      var tag = { \"property\": metaTags[i].getAttribute('property') };"
+"      if (metaTags[i].hasAttribute('content')) {"
+"        tag['content'] = metaTags[i].getAttribute('content');"
+"      }"
+"      results.push(tag);"
+"    }"
+"  }"
+"  return JSON.stringify(results);"
+"})()";
+static NSString *const BFWebViewAppLinkResolverIOSURLKey = @"url";
+static NSString *const BFWebViewAppLinkResolverIOSAppStoreIdKey = @"app_store_id";
+static NSString *const BFWebViewAppLinkResolverIOSAppNameKey = @"app_name";
+static NSString *const BFWebViewAppLinkResolverDictionaryValueKey = @"_value";
+static NSString *const BFWebViewAppLinkResolverPreferHeader = @"Prefer-Html-Meta-Tags";
+static NSString *const BFWebViewAppLinkResolverMetaTagPrefix = @"al";
 
-#define BFWEBVIEWAPPLINKRESOLVER_IOS_URL_KEY @"url"
-#define BFWEBVIEWAPPLINKRESOLVER_IOS_APP_STORE_ID_KEY @"app_store_id"
-#define BFWEBVIEWAPPLINKRESOLVER_IOS_APP_NAME_KEY @"app_name"
-#define BFWEBVIEWAPPLINKRESOLVER_DICTIONARY_VALUE_KEY @"_value"
-#define BFWEBVIEWAPPLINKRESOLVER_PREFER_HEADER @"Prefer-Html-Meta-Tags"
-#define BFWEBVIEWAPPLINKRESOLVER_META_TAG_PREFIX @"al"
-
-@interface BFWebViewListener : NSObject <UIWebViewDelegate>
+@interface BFWebViewAppLinkResolverWebViewDelegate : NSObject <UIWebViewDelegate>
 
 @property (nonatomic, copy) void (^didFinishLoad)(UIWebView *webView);
 @property (nonatomic, copy) void (^didFailLoadWithError)(UIWebView *webView, NSError *error);
@@ -49,7 +49,7 @@
 
 @end
 
-@implementation BFWebViewListener
+@implementation BFWebViewAppLinkResolverWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     if (self.didFinishLoad) {
@@ -93,8 +93,8 @@
     // or a dictionary with the response data to be returned.
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setValue:BFWEBVIEWAPPLINKRESOLVER_META_TAG_PREFIX
-   forHTTPHeaderField:BFWEBVIEWAPPLINKRESOLVER_PREFER_HEADER];
+    [request setValue:BFWebViewAppLinkResolverMetaTagPrefix
+   forHTTPHeaderField:BFWebViewAppLinkResolverPreferHeader];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response,
@@ -133,44 +133,43 @@
 }
 
 - (BFTask *)appLinkFromURLInBackground:(NSURL *)url {
-    return [[self followRedirects:url] continueWithSuccessBlock:^id(BFTask *task) {
-        NSData *responseData = task.result[@"data"];
-        NSHTTPURLResponse *response = task.result[@"response"];
-        BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIWebView *webView = [[UIWebView alloc] init];
-            BFWebViewListener *listener = [[BFWebViewListener alloc] init];
-            __block BFWebViewListener *retainedListener = listener;
-            listener.didFinishLoad = ^(UIWebView *view) {
-                if (retainedListener) {
-                    NSDictionary *ogData = [self getALDataFromLoadedPage:view];
-                    [view removeFromSuperview];
-                    view.delegate = nil;
-                    retainedListener = nil;
-                    [tcs setResult:[self appLinkFromALData:ogData destination:url]];
-                }
-            };
-            listener.didFailLoadWithError = ^(UIWebView* view, NSError *error) {
-                if (retainedListener) {
-                    [view removeFromSuperview];
-                    view.delegate = nil;
-                    retainedListener = nil;
-                    [tcs setError:error];
-                }
-            };
-            webView.delegate = listener;
-            webView.hidden = YES;
-            [webView loadData:responseData
-                     MIMEType:response.MIMEType
-             textEncodingName:response.textEncodingName
-                      baseURL:response.URL];
-            UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
-            [window addSubview:webView];
-        });
-        
-        return tcs.task;
-    }];
+    return [[self followRedirects:url] continueWithExecutor:[BFExecutor mainThreadExecutor]
+                                           withSuccessBlock:^id(BFTask *task) {
+                                               NSData *responseData = task.result[@"data"];
+                                               NSHTTPURLResponse *response = task.result[@"response"];
+                                               BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
+                                               
+                                               UIWebView *webView = [[UIWebView alloc] init];
+                                               BFWebViewAppLinkResolverWebViewDelegate *listener = [[BFWebViewAppLinkResolverWebViewDelegate alloc] init];
+                                               __block BFWebViewAppLinkResolverWebViewDelegate *retainedListener = listener;
+                                               listener.didFinishLoad = ^(UIWebView *view) {
+                                                   if (retainedListener) {
+                                                       NSDictionary *ogData = [self getALDataFromLoadedPage:view];
+                                                       [view removeFromSuperview];
+                                                       view.delegate = nil;
+                                                       retainedListener = nil;
+                                                       [tcs setResult:[self appLinkFromALData:ogData destination:url]];
+                                                   }
+                                               };
+                                               listener.didFailLoadWithError = ^(UIWebView* view, NSError *error) {
+                                                   if (retainedListener) {
+                                                       [view removeFromSuperview];
+                                                       view.delegate = nil;
+                                                       retainedListener = nil;
+                                                       [tcs setError:error];
+                                                   }
+                                               };
+                                               webView.delegate = listener;
+                                               webView.hidden = YES;
+                                               [webView loadData:responseData
+                                                        MIMEType:response.MIMEType
+                                                textEncodingName:response.textEncodingName
+                                                         baseURL:response.URL];
+                                               UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
+                                               [window addSubview:webView];
+                                               
+                                               return tcs.task;
+                                           }];
 }
 
 
@@ -183,9 +182,11 @@
     NSMutableDictionary *al = [NSMutableDictionary dictionary];
     for (NSDictionary *tag in dataArray) {
         NSString *name = tag[@"property"];
-        if (name == (id)[NSNull null]) continue;
+        if (![name isKindOfClass:[NSString class]]) {
+            continue;
+        }
         NSArray *nameComponents = [name componentsSeparatedByString:@":"];
-        if (![nameComponents[0] isEqualToString:BFWEBVIEWAPPLINKRESOLVER_META_TAG_PREFIX]) {
+        if (![nameComponents[0] isEqualToString:BFWebViewAppLinkResolverMetaTagPrefix]) {
             continue;
         }
         NSMutableDictionary *root = al;
@@ -203,7 +204,7 @@
             root = child;
         }
         if (tag[@"content"]) {
-            root[BFWEBVIEWAPPLINKRESOLVER_DICTIONARY_VALUE_KEY] = tag[@"content"];
+            root[BFWebViewAppLinkResolverDictionaryValueKey] = tag[@"content"];
         }
     }
     return al;
@@ -211,7 +212,7 @@
 
 - (NSDictionary *)getALDataFromLoadedPage:(UIWebView *)webView {
     // Run some JavaScript in the webview to fetch the meta tags.
-    NSString *jsonString = [webView stringByEvaluatingJavaScriptFromString:BFWEBVIEWAPPLINKRESOLVER_TAG_EXTRACTION_JAVASCRIPT];
+    NSString *jsonString = [webView stringByEvaluatingJavaScriptFromString:BFWebViewAppLinkResolverTagExtractionJavaScript];
     NSError *error = nil;
     NSArray *arr = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
                                                    options:0
@@ -244,17 +245,17 @@
             // The schema requires a single url/app store id/app name,
             // but we could find multiple of them. We'll make a best effort
             // to interpret this data.
-            NSArray *urls = platformDict[BFWEBVIEWAPPLINKRESOLVER_IOS_URL_KEY];
-            NSArray *appStoreIds = platformDict[BFWEBVIEWAPPLINKRESOLVER_IOS_APP_STORE_ID_KEY];
-            NSArray *appNames = platformDict[BFWEBVIEWAPPLINKRESOLVER_IOS_APP_NAME_KEY];
+            NSArray *urls = platformDict[BFWebViewAppLinkResolverIOSURLKey];
+            NSArray *appStoreIds = platformDict[BFWebViewAppLinkResolverIOSAppStoreIdKey];
+            NSArray *appNames = platformDict[BFWebViewAppLinkResolverIOSAppNameKey];
             
             NSUInteger maxCount = MAX(urls.count, MAX(appStoreIds.count, appNames.count));
             
             for (NSUInteger i = 0; i < maxCount; i++) {
-                NSString *urlString = urls[i][BFWEBVIEWAPPLINKRESOLVER_DICTIONARY_VALUE_KEY];
+                NSString *urlString = urls[i][BFWebViewAppLinkResolverDictionaryValueKey];
                 NSURL *url = urlString ? [NSURL URLWithString:urlString] : nil;
-                NSString *appStoreId = appStoreIds[i][BFWEBVIEWAPPLINKRESOLVER_DICTIONARY_VALUE_KEY];
-                NSString *appName = appNames[i][BFWEBVIEWAPPLINKRESOLVER_DICTIONARY_VALUE_KEY];
+                NSString *appStoreId = appStoreIds[i][BFWebViewAppLinkResolverDictionaryValueKey];
+                NSString *appName = appNames[i][BFWebViewAppLinkResolverDictionaryValueKey];
                 BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:url
                                                                      appStoreId:appStoreId
                                                                         appName:appName];
@@ -263,7 +264,7 @@
         }
     }
     
-    NSString *webUrlString = appLinkDict[@"web"][0][@"url"][0][BFWEBVIEWAPPLINKRESOLVER_DICTIONARY_VALUE_KEY];
+    NSString *webUrlString = appLinkDict[@"web"][0][@"url"][0][BFWebViewAppLinkResolverDictionaryValueKey];
     NSURL *webUrl;
     if (webUrlString) {
         if ([@[@"none", @""] containsObject:webUrlString]) {

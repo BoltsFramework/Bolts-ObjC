@@ -11,6 +11,12 @@
 #import "BFURL.h"
 #import "BFAppLink.h"
 
+FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
+FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererDataKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
+
 @implementation BFURL
 
 - (id)initWithURL:(NSURL *)url {
@@ -24,7 +30,7 @@
         _targetQueryParameters = baseQuery;
         
         // Check for applink_data
-        NSString *appLinkDataString = baseQuery[BFAPPLINK_DATA_PARAMETER_NAME];
+        NSString *appLinkDataString = baseQuery[BFAppLinkDataParameterName];
         if (appLinkDataString) {
             // Try to parse the JSON
             NSError *error = nil;
@@ -33,16 +39,16 @@
                                                                           error:&error];
             if (!error && [applinkData isKindOfClass:[NSDictionary class]]) {
                 // If the version is not specified, assume it is 1.
-                NSNumber *version = applinkData[BFAPPLINK_VERSION_KEY_NAME] ?: @1;
-                NSString *target = applinkData[BFAPPLINK_TARGET_KEY_NAME];
+                NSNumber *version = applinkData[BFAppLinkVersionKeyName] ?: @1;
+                NSString *target = applinkData[BFAppLinkTargetKeyName];
                 if ([target isKindOfClass:[NSString class]] &&
                     [version isKindOfClass:[NSNumber class]] &&
-                    [version integerValue] == BFAPPLINK_VERSION) {
+                    [version unsignedIntegerValue] == BFAppLinkVersion) {
                     // There's applink data!  The target should actually be the applink target.
                     _appLinkNavigationData = applinkData;
-                    NSDictionary *refererData = applinkData[BFAPPLINK_REFERER_DATA_KEY_NAME];
+                    NSDictionary *refererData = applinkData[BFAppLinkRefererDataKeyName];
                     if (refererData && [refererData isKindOfClass:[NSDictionary class]]) {
-                        _appLinkAppData = applinkData[BFAPPLINK_REFERER_DATA_KEY_NAME];
+                        _appLinkAppData = applinkData[BFAppLinkRefererDataKeyName];
                     }
                     _targetURL = [NSURL URLWithString:target];
                     _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];
@@ -53,7 +59,7 @@
     return self;
 }
 
-+ (BFURL *)URLFromURL:(NSURL *)url {
++ (BFURL *)URLWithURL:(NSURL *)url {
     return [[BFURL alloc] initWithURL:url];
 }
 

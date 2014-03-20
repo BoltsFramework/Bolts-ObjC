@@ -15,6 +15,13 @@
 #import "BFAppLinkTarget.h"
 #import "BoltsVersion.h"
 #import "BFWebViewAppLinkResolver.h"
+#import "BFExecutor.h"
+
+FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
+FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererDataKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 
 @interface BFAppLinkRequest ()
 
@@ -55,14 +62,14 @@
         NSMutableDictionary *appLinkData = [NSMutableDictionary dictionaryWithDictionary:self.navigationData ?: @{}];
         
         // Add applink protocol data
-        if (!appLinkData[BFAPPLINK_USER_AGENT_KEY_NAME]) {
-            appLinkData[BFAPPLINK_USER_AGENT_KEY_NAME] = [NSString stringWithFormat:@"Bolts iOS %@", BOLTS_VERSION];
+        if (!appLinkData[BFAppLinkUserAgentKeyName]) {
+            appLinkData[BFAppLinkUserAgentKeyName] = [NSString stringWithFormat:@"Bolts iOS %@", BOLTS_VERSION];
         }
-        if (!appLinkData[BFAPPLINK_VERSION_KEY_NAME]) {
-            appLinkData[BFAPPLINK_VERSION_KEY_NAME] = @(BFAPPLINK_VERSION);
+        if (!appLinkData[BFAppLinkVersionKeyName]) {
+            appLinkData[BFAppLinkVersionKeyName] = @(BFAppLinkVersion);
         }
-        appLinkData[BFAPPLINK_TARGET_KEY_NAME] = [self.appLink.sourceURL absoluteString];
-        appLinkData[BFAPPLINK_REFERER_DATA_KEY_NAME] = self.appData ?: @{};
+        appLinkData[BFAppLinkTargetKeyName] = [self.appLink.sourceURL absoluteString];
+        appLinkData[BFAppLinkRefererDataKeyName] = self.appData ?: @{};
         
         // JSON-ify the applink data
         NSError *jsonError = nil;
@@ -74,7 +81,7 @@
             NSString *endUrlString = [NSString stringWithFormat:@"%@%@%@=%@",
                                       [targetUrl absoluteString],
                                       targetUrl.query ? @"&" : @"?",
-                                      BFAPPLINK_DATA_PARAMETER_NAME,
+                                      BFAppLinkDataParameterName,
                                       encoded];
             // Attempt to navigate
             if ([[UIApplication sharedApplication] openURL:[NSURL URLWithString:endUrlString]]) {
@@ -117,20 +124,19 @@
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination
                              resolver:(id<BFAppLinkResolving>)resolver {
-    return [[self resolveAppLinkInBackground:destination
-                                    resolver:resolver] continueWithSuccessBlock:^id(BFTask *task) {
-        BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSError *error = nil;
-            BFAppLinkNavigationType result = [self navigateToAppLink:task.result error:&error];
-            if (error) {
-                [tcs setError:error];
-            } else {
-                [tcs setResult:@(result)];
-            }
-        });
-        return tcs.task;
-    }];
+    BFTask *resolutionTask =[self resolveAppLinkInBackground:destination
+                                                    resolver:resolver];
+    return [resolutionTask continueWithExecutor:[BFExecutor mainThreadExecutor]
+                               withSuccessBlock:^id(BFTask *task) {
+                                   NSError *error = nil;
+                                   BFAppLinkNavigationType result = [self navigateToAppLink:task.result
+                                                                                      error:&error];
+                                   if (error) {
+                                       return [BFTask taskWithError:error];
+                                   } else {
+                                       return @(result);
+                                   }
+                               }];
 }
 
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error {
