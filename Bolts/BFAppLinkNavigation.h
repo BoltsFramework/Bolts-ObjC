@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
  custom requests with additional navigation and app data attached to them by
  creating BFAppLinkRequests themselves.
  */
-@interface BFAppLinkRequest : NSObject
+@interface BFAppLinkNavigation : NSObject
 
 /*!
  The referer_data for the AppLinkRequest. This will generally contain application-specific
@@ -47,15 +47,15 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
  navigation attempts such as back-links, user agents, and other information that may be used
  in routing and handling an App Link request.
  */
-@property (readonly, strong) NSDictionary *navigationData;
+@property (readonly, strong) NSDictionary *appLinkData;
 
 /*! The AppLink to navigate to */
 @property (readonly, strong) BFAppLink *appLink;
 
-/*! Creates an AppLinkRequest with the given link, app data, and navigation data */
-+ (instancetype)requestWithAppLink:(BFAppLink *)appLink
-                           appData:(NSDictionary *)appData
-                    navigationData:(NSDictionary *)navigationData;
+/*! Creates an AppLinkRequest with the given link, app data, and app link data */
++ (instancetype)navigationWithAppLink:(BFAppLink *)appLink
+                              appData:(NSDictionary *)appData
+                          appLinkData:(NSDictionary *)appLinkData;
 
 /*! Performs the navigation */
 - (BFAppLinkNavigationType)navigate:(NSError **)error;

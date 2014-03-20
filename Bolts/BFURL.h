@@ -37,7 +37,7 @@
  If this link target is an App Link, this is the data found in al_applink_data.
  Otherwise, it is nil.
  */
-@property (readonly, strong) NSDictionary *appLinkNavigationData;
+@property (readonly, strong) NSDictionary *appLinkData;
 
 /*!
  If this link target is an App Link, this is the data found in referer_data.

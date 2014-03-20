@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "BFAppLinkRequest.h"
+#import "BFAppLinkNavigation.h"
 #import "BFTaskCompletionSource.h"
 #import "BFAppLinkTarget.h"
 #import "BoltsVersion.h"
@@ -26,19 +26,19 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 
 static id<BFAppLinkResolving> defaultResolver;
 
-@interface BFAppLinkRequest ()
+@interface BFAppLinkNavigation ()
 
 @end
 
-@implementation BFAppLinkRequest
+@implementation BFAppLinkNavigation
 
-+ (instancetype)requestWithAppLink:(BFAppLink *)appLink
-                           appData:(NSDictionary *)appData
-                    navigationData:(NSDictionary *)navigationData {
-    BFAppLinkRequest *navigation = [[self alloc] init];
++ (instancetype)navigationWithAppLink:(BFAppLink *)appLink
+                              appData:(NSDictionary *)appData
+                          appLinkData:(NSDictionary *)appLinkData {
+    BFAppLinkNavigation *navigation = [[self alloc] init];
     navigation->_appLink = appLink;
     navigation->_appData = appData;
-    navigation->_navigationData = navigationData;
+    navigation->_appLinkData = appLinkData;
     return navigation;
 }
 
@@ -62,7 +62,7 @@ static id<BFAppLinkResolving> defaultResolver;
     
     if (eligibleTarget) {
         NSURL *targetUrl = eligibleTarget.URL;
-        NSMutableDictionary *appLinkData = [NSMutableDictionary dictionaryWithDictionary:self.navigationData ?: @{}];
+        NSMutableDictionary *appLinkData = [NSMutableDictionary dictionaryWithDictionary:self.appLinkData ?: @{}];
         
         // Add applink protocol data
         if (!appLinkData[BFAppLinkUserAgentKeyName]) {
@@ -143,9 +143,9 @@ static id<BFAppLinkResolving> defaultResolver;
 }
 
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error {
-    return [[BFAppLinkRequest requestWithAppLink:link
-                                         appData:nil
-                                  navigationData:nil] navigate:error];;
+    return [[BFAppLinkNavigation navigationWithAppLink:link
+                                               appData:nil
+                                           appLinkData:nil] navigate:error];;
 }
 
 + (id<BFAppLinkResolving>)defaultResolver {

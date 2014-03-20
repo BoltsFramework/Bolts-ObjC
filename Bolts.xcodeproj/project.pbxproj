@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E11AB7918C561E300522739 /* BFAppLinkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7418C561E300522739 /* BFAppLinkRequest.m */; };
+		1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */; };
 		1E11AB7A18C561E300522739 /* BFAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7618C561E300522739 /* BFAppLink.m */; };
 		1E11AB7B18C561E300522739 /* BFURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7818C561E300522739 /* BFURL.m */; };
 		1E11AB7E18C7C50800522739 /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */; };
 		1E45E47318DA788800D23509 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016418CDAA8400D06D07 /* UIKit.framework */; };
 		1E45E47418DA7F0000D23509 /* BFAppLink.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7518C561E300522739 /* BFAppLink.h */; };
-		1E45E47518DA7F0000D23509 /* BFAppLinkRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7318C561E300522739 /* BFAppLinkRequest.h */; };
+		1E45E47518DA7F0000D23509 /* BFAppLinkNavigation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */; };
 		1E45E47618DA7F0000D23509 /* BFAppLinkResolving.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EC3019318CDD79F00D06D07 /* BFAppLinkResolving.h */; };
 		1E45E47718DA7F0000D23509 /* BFAppLinkTarget.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7C18C7C50800522739 /* BFAppLinkTarget.h */; };
 		1E45E47818DA7F0000D23509 /* BFURL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7718C561E300522739 /* BFURL.h */; };
@@ -91,7 +91,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				1E45E47418DA7F0000D23509 /* BFAppLink.h in CopyFiles */,
-				1E45E47518DA7F0000D23509 /* BFAppLinkRequest.h in CopyFiles */,
+				1E45E47518DA7F0000D23509 /* BFAppLinkNavigation.h in CopyFiles */,
 				1E45E47618DA7F0000D23509 /* BFAppLinkResolving.h in CopyFiles */,
 				1E45E47718DA7F0000D23509 /* BFAppLinkTarget.h in CopyFiles */,
 				1E45E47818DA7F0000D23509 /* BFURL.h in CopyFiles */,
@@ -139,8 +139,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E11AB7318C561E300522739 /* BFAppLinkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkRequest.h; sourceTree = "<group>"; };
-		1E11AB7418C561E300522739 /* BFAppLinkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLinkRequest.m; sourceTree = "<group>"; };
+		1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkNavigation.h; sourceTree = "<group>"; };
+		1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLinkNavigation.m; sourceTree = "<group>"; };
 		1E11AB7518C561E300522739 /* BFAppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink.h; sourceTree = "<group>"; };
 		1E11AB7618C561E300522739 /* BFAppLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLink.m; sourceTree = "<group>"; };
 		1E11AB7718C561E300522739 /* BFURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFURL.h; sourceTree = "<group>"; };
@@ -319,8 +319,8 @@
 			children = (
 				1E11AB7518C561E300522739 /* BFAppLink.h */,
 				1E11AB7618C561E300522739 /* BFAppLink.m */,
-				1E11AB7318C561E300522739 /* BFAppLinkRequest.h */,
-				1E11AB7418C561E300522739 /* BFAppLinkRequest.m */,
+				1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */,
+				1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */,
 				1EC3019318CDD79F00D06D07 /* BFAppLinkResolving.h */,
 				1E11AB7C18C7C50800522739 /* BFAppLinkTarget.h */,
 				1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */,
@@ -548,7 +548,7 @@
 				8EB2CB421805DDDB00323385 /* BFExecutor.m in Sources */,
 				8E9C3D2417DEA35700427E62 /* BFTaskCompletionSource.m in Sources */,
 				1EC3019618CDD8A500D06D07 /* BFWebViewAppLinkResolver.m in Sources */,
-				1E11AB7918C561E300522739 /* BFAppLinkRequest.m in Sources */,
+				1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
