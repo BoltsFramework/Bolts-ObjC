@@ -78,4 +78,16 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
  */
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver;
 
+/*!
+ Gets the default resolver to be used for App Link resolution. If the developer has not set one explicitly,
+ a basic, built-in resolver will be used.
+ */
++ (id<BFAppLinkResolving>)defaultResolver;
+
+/*!
+ Sets the default resolver to be used for App Link resolution. Setting this to nil will revert the
+ default resolver to the basic, built-in resolver provided by Bolts.
+ */
++ (void)setDefaultResolver:(id<BFAppLinkResolving>)resolver;
+
 @end

@@ -24,6 +24,8 @@ FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkRefererDataKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 
+static id<BFAppLinkResolving> defaultResolver;
+
 @interface BFAppLinkRequest ()
 
 @end
@@ -115,12 +117,12 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 }
 
 + (BFTask *)resolveAppLinkInBackground:(NSURL *)destination {
-    return [self resolveAppLinkInBackground:destination resolver:[BFWebViewAppLinkResolver sharedInstance]];
+    return [self resolveAppLinkInBackground:destination resolver:[self defaultResolver]];
 }
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination {
     return [self navigateToURLInBackground:destination
-                                  resolver:[BFWebViewAppLinkResolver sharedInstance]];
+                                  resolver:[self defaultResolver]];
 }
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination
@@ -144,6 +146,17 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
     return [[BFAppLinkRequest requestWithAppLink:link
                                          appData:nil
                                   navigationData:nil] navigate:error];;
+}
+
++ (id<BFAppLinkResolving>)defaultResolver {
+    if (defaultResolver) {
+        return defaultResolver;
+    }
+    return [BFWebViewAppLinkResolver sharedInstance];
+}
+
++ (void)setDefaultResolver:(id<BFAppLinkResolving>)resolver {
+    defaultResolver = resolver;
 }
 
 @end

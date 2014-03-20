@@ -45,13 +45,13 @@
 @property (readonly, strong) NSDictionary *appLinkAppData;
 
 /*!
- The URL that was used to create this link target.
+ The URL that was used to create this BFURL.
  */
-@property (readonly, strong) NSURL *originalURL;
+@property (readonly, strong) NSURL *inputURL;
 
 /*!
- The query parameters of the base URL, parsed into an NSDictionary.
+ The query parameters of the inputURL, parsed into an NSDictionary.
  */
-@property (readonly, strong) NSDictionary *originalQueryParameters;
+@property (readonly, strong) NSDictionary *inputQueryParameters;
 
 @end

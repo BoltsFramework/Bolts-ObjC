@@ -101,9 +101,9 @@ NSMutableArray *openedUrls = nil;
     BFURL *openedUrl = [BFURL URLWithURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
-    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
+    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.inputURL);
     XCTAssertEqual((NSUInteger)0, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual((NSUInteger)0, openedUrl.originalQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.inputQueryParameters.count);
 }
 
 - (void)testOpenedURLWithQueryParameters {
@@ -112,9 +112,9 @@ NSMutableArray *openedUrls = nil;
     BFURL *openedUrl = [BFURL URLWithURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
-    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
+    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.inputURL);
     XCTAssertEqual((NSUInteger)3, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual((NSUInteger)3, openedUrl.originalQueryParameters.count);
+    XCTAssertEqual((NSUInteger)3, openedUrl.inputQueryParameters.count);
     XCTAssertEqualObjects([NSNull null], openedUrl.targetQueryParameters[@"foo"]);
     XCTAssertEqualObjects(@"baz", openedUrl.targetQueryParameters[@"bar"]);
     XCTAssertEqualObjects(@" ", openedUrl.targetQueryParameters[@"space"]);
@@ -126,9 +126,9 @@ NSMutableArray *openedUrls = nil;
     BFURL *openedUrl = [BFURL URLWithURL:url];
     
     XCTAssertEqualObjects(url, openedUrl.targetURL);
-    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.originalURL);
+    XCTAssertEqualObjects(openedUrl.targetURL, openedUrl.inputURL);
     XCTAssertEqual((NSUInteger)0, openedUrl.targetQueryParameters.count);
-    XCTAssertEqual((NSUInteger)0, openedUrl.originalQueryParameters.count);
+    XCTAssertEqual((NSUInteger)0, openedUrl.inputQueryParameters.count);
 }
 
 - (void)testOpenedURLWithAppLink {
@@ -137,7 +137,7 @@ NSMutableArray *openedUrls = nil;
     BFURL *openedURL = [BFURL URLWithURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path", openedURL.targetURL.absoluteString);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.inputURL.absoluteString);
 }
 
 - (void)testOpenedURLWithAppLinkTargetHasQueryParameters {
@@ -147,7 +147,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(@"http://www.example.com/path?foo=bar", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bar", openedURL.targetQueryParameters[@"foo"]);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.inputURL.absoluteString);
 }
 
 - (void)testOpenedURLWithAppLinkTargetAndLinkURLHasQueryParameters {
@@ -156,9 +156,9 @@ NSMutableArray *openedUrls = nil;
     BFURL *openedURL = [BFURL URLWithURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?baz=bat", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bat", openedURL.targetQueryParameters[@"baz"]);
-    XCTAssertEqualObjects(@"bar", openedURL.originalQueryParameters[@"foo"]);
+    XCTAssertEqualObjects(@"bar", openedURL.inputQueryParameters[@"foo"]);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.inputURL.absoluteString);
 }
 
 - (void)testOpenedURLWithAppLinkWithCustomAppLinkData {
@@ -167,10 +167,10 @@ NSMutableArray *openedUrls = nil;
     BFURL *openedURL = [BFURL URLWithURL:url];
     XCTAssertEqualObjects(@"http://www.example.com/path?baz=bat", openedURL.targetURL.absoluteString);
     XCTAssertEqualObjects(@"bat", openedURL.targetQueryParameters[@"baz"]);
-    XCTAssertEqualObjects(@"bar", openedURL.originalQueryParameters[@"foo"]);
+    XCTAssertEqualObjects(@"bar", openedURL.inputQueryParameters[@"foo"]);
     XCTAssertEqualObjects(@"b", openedURL.appLinkNavigationData[@"a"]);
     XCTAssert(openedURL.appLinkNavigationData[@"user_agent"]);
-    XCTAssertEqualObjects(url.absoluteString, openedURL.originalURL.absoluteString);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.inputURL.absoluteString);
 }
 
 #pragma mark WebView App Link resolution

@@ -21,12 +21,12 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 
 - (id)initWithURL:(NSURL *)url {
     if (self = [super init]) {
-        _originalURL = url;
+        _inputURL = url;
         _targetURL = url;
         
         // Parse the query string parameters for the base URL
         NSDictionary *baseQuery = [BFURL queryParametersForURL:url];
-        _originalQueryParameters = baseQuery;
+        _inputQueryParameters = baseQuery;
         _targetQueryParameters = baseQuery;
         
         // Check for applink_data
