@@ -52,11 +52,12 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 /*! The AppLink to navigate to */
 @property (readonly, strong) BFAppLink *appLink;
 
-/* Creates an AppLinkRequest with the given link, app data, and navigation data */
+/*! Creates an AppLinkRequest with the given link, app data, and navigation data */
 + (instancetype)requestWithAppLink:(BFAppLink *)appLink
                            appData:(NSDictionary *)appData
                     navigationData:(NSDictionary *)navigationData;
-/* Performs the navigation */
+
+/*! Performs the navigation */
 - (BFAppLinkNavigationType)navigate:(NSError **)error;
 
 /*! Returns a BFAppLink for the given URL */

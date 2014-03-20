@@ -12,6 +12,12 @@
 		1E11AB7B18C561E300522739 /* BFURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7818C561E300522739 /* BFURL.m */; };
 		1E11AB7E18C7C50800522739 /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */; };
 		1E45E47318DA788800D23509 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016418CDAA8400D06D07 /* UIKit.framework */; };
+		1E45E47418DA7F0000D23509 /* BFAppLink.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7518C561E300522739 /* BFAppLink.h */; };
+		1E45E47518DA7F0000D23509 /* BFAppLinkRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7318C561E300522739 /* BFAppLinkRequest.h */; };
+		1E45E47618DA7F0000D23509 /* BFAppLinkResolving.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EC3019318CDD79F00D06D07 /* BFAppLinkResolving.h */; };
+		1E45E47718DA7F0000D23509 /* BFAppLinkTarget.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7C18C7C50800522739 /* BFAppLinkTarget.h */; };
+		1E45E47818DA7F0000D23509 /* BFURL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7718C561E300522739 /* BFURL.h */; };
+		1E45E47918DA7F0000D23509 /* BFWebViewAppLinkResolver.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EC3019418CDD8A500D06D07 /* BFWebViewAppLinkResolver.h */; };
 		1EC3016118CDAA8400D06D07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
 		1EC3016318CDAA8400D06D07 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
 		1EC3016518CDAA8400D06D07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016418CDAA8400D06D07 /* UIKit.framework */; };
@@ -84,6 +90,12 @@
 			dstPath = Bolts;
 			dstSubfolderSpec = 16;
 			files = (
+				1E45E47418DA7F0000D23509 /* BFAppLink.h in CopyFiles */,
+				1E45E47518DA7F0000D23509 /* BFAppLinkRequest.h in CopyFiles */,
+				1E45E47618DA7F0000D23509 /* BFAppLinkResolving.h in CopyFiles */,
+				1E45E47718DA7F0000D23509 /* BFAppLinkTarget.h in CopyFiles */,
+				1E45E47818DA7F0000D23509 /* BFURL.h in CopyFiles */,
+				1E45E47918DA7F0000D23509 /* BFWebViewAppLinkResolver.h in CopyFiles */,
 				8E42701F1805E5A1000B84ED /* BFExecutor.h in CopyFiles */,
 				8EE768A81803E5DA009A53B1 /* BoltsVersion.h in CopyFiles */,
 				8EE768A71803E5D5009A53B1 /* Bolts.h in CopyFiles */,
