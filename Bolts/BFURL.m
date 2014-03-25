@@ -14,7 +14,7 @@
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
-FOUNDATION_EXPORT NSString *const BFAppLinkRefererDataKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkExtrasKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 
 @implementation BFURL
@@ -46,9 +46,9 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
                     [version unsignedIntegerValue] == BFAppLinkVersion) {
                     // There's applink data!  The target should actually be the applink target.
                     _appLinkData = applinkData;
-                    NSDictionary *refererData = applinkData[BFAppLinkRefererDataKeyName];
+                    NSDictionary *refererData = applinkData[BFAppLinkExtrasKeyName];
                     if (refererData && [refererData isKindOfClass:[NSDictionary class]]) {
-                        _appLinkAppData = applinkData[BFAppLinkRefererDataKeyName];
+                        _appLinkExtras = applinkData[BFAppLinkExtrasKeyName];
                     }
                     _targetURL = [NSURL URLWithString:target];
                     _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];

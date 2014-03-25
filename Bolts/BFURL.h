@@ -40,9 +40,9 @@
 @property (readonly, strong) NSDictionary *appLinkData;
 
 /*!
- If this link target is an App Link, this is the data found in referer_data.
+ If this link target is an App Link, this is the data found in extras.
  */
-@property (readonly, strong) NSDictionary *appLinkAppData;
+@property (readonly, strong) NSDictionary *appLinkExtras;
 
 /*!
  The URL that was used to create this BFURL.

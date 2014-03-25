@@ -21,7 +21,7 @@
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
-FOUNDATION_EXPORT NSString *const BFAppLinkRefererDataKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkExtrasKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 
 static id<BFAppLinkResolving> defaultResolver;
@@ -33,11 +33,11 @@ static id<BFAppLinkResolving> defaultResolver;
 @implementation BFAppLinkNavigation
 
 + (instancetype)navigationWithAppLink:(BFAppLink *)appLink
-                              appData:(NSDictionary *)appData
+                               extras:(NSDictionary *)extras
                           appLinkData:(NSDictionary *)appLinkData {
     BFAppLinkNavigation *navigation = [[self alloc] init];
     navigation->_appLink = appLink;
-    navigation->_appData = appData;
+    navigation->_extras = extras;
     navigation->_appLinkData = appLinkData;
     return navigation;
 }
@@ -72,7 +72,7 @@ static id<BFAppLinkResolving> defaultResolver;
             appLinkData[BFAppLinkVersionKeyName] = @(BFAppLinkVersion);
         }
         appLinkData[BFAppLinkTargetKeyName] = [self.appLink.sourceURL absoluteString];
-        appLinkData[BFAppLinkRefererDataKeyName] = self.appData ?: @{};
+        appLinkData[BFAppLinkExtrasKeyName] = self.extras ?: @{};
         
         // JSON-ify the applink data
         NSError *jsonError = nil;
@@ -144,7 +144,7 @@ static id<BFAppLinkResolving> defaultResolver;
 
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error {
     return [[BFAppLinkNavigation navigationWithAppLink:link
-                                               appData:nil
+                                                extras:nil
                                            appLinkData:nil] navigate:error];;
 }
 

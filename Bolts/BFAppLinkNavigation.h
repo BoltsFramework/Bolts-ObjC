@@ -36,11 +36,11 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 @interface BFAppLinkNavigation : NSObject
 
 /*!
- The referer_data for the AppLinkRequest. This will generally contain application-specific
+ The extras for the AppLinkRequest. This will generally contain application-specific
  data that should be passed along with the request, such as advertiser or affiliate IDs or
  other such metadata relevant on this device.
  */
-@property (readonly, strong) NSDictionary *appData;
+@property (readonly, strong) NSDictionary *extras;
 
 /*!
  The al_applink_data for the AppLinkRequest. This will generally contain data common to
@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 
 /*! Creates an AppLinkRequest with the given link, app data, and app link data */
 + (instancetype)navigationWithAppLink:(BFAppLink *)appLink
-                              appData:(NSDictionary *)appData
+                               extras:(NSDictionary *)extras
                           appLinkData:(NSDictionary *)appLinkData;
 
 /*! Performs the navigation */

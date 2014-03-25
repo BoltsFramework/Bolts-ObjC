@@ -732,8 +732,8 @@ NSMutableArray *openedUrls = nil;
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
-                                                                appData:nil
-                                                         appLinkData:@{@"foo": @"bar"}];
+                                                                          extras:nil
+                                                                     appLinkData:@{@"foo": @"bar"}];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
@@ -745,7 +745,7 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(@"bar", parsedLink.appLinkData[@"foo"]);
 }
 
-- (void)testSimpleAppLinkNavigationWithAppData {
+- (void)testSimpleAppLinkNavigationWithExtras {
     BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:@"bolts://"]
                                                          appStoreId:@"12345"
                                                             appName:@"Bolts"];
@@ -753,8 +753,8 @@ NSMutableArray *openedUrls = nil;
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
-                                                                appData:@{@"foo": @"bar"}
-                                                         appLinkData:nil];
+                                                                          extras:@{@"foo": @"bar"}
+                                                                     appLinkData:nil];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
@@ -763,10 +763,10 @@ NSMutableArray *openedUrls = nil;
     NSURL *openedUrl = openedUrls.firstObject;
     BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
-    XCTAssertEqualObjects(@"bar", parsedLink.appLinkAppData[@"foo"]);
+    XCTAssertEqualObjects(@"bar", parsedLink.appLinkExtras[@"foo"]);
 }
 
-- (void)testSimpleAppLinkNavigationWithAppDataAndNavigationData {
+- (void)testSimpleAppLinkNavigationWithExtrasAndNavigationData {
     BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:@"bolts://"]
                                                          appStoreId:@"12345"
                                                             appName:@"Bolts"];
@@ -774,8 +774,8 @@ NSMutableArray *openedUrls = nil;
                                                  targets:@[target]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
-                                                                appData:@{@"foo": @"bar1"}
-                                                         appLinkData:@{@"foo": @"bar2"}];
+                                                                          extras:@{@"foo": @"bar1"}
+                                                                     appLinkData:@{@"foo": @"bar2"}];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
     
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
@@ -784,7 +784,7 @@ NSMutableArray *openedUrls = nil;
     NSURL *openedUrl = openedUrls.firstObject;
     BFURL *parsedLink = [BFURL URLWithURL:openedUrl];
     XCTAssertEqualObjects(@"http://www.example.com/path", parsedLink.targetURL.absoluteString);
-    XCTAssertEqualObjects(@"bar1", parsedLink.appLinkAppData[@"foo"]);
+    XCTAssertEqualObjects(@"bar1", parsedLink.appLinkExtras[@"foo"]);
     XCTAssertEqualObjects(@"bar2", parsedLink.appLinkData[@"foo"]);
 }
 
