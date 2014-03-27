@@ -57,7 +57,7 @@ test -x "$XCODEBUILD" || die 'Could not find xcodebuild in $PATH'
 test -x "$LIPO" || die 'Could not find lipo in $PATH'
 
 BOLTS_UNIVERSAL_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts
-BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/libBolts.a
+BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/libMacBolts.a
 
 # -----------------------------------------------------------------------------
 
@@ -82,7 +82,7 @@ cd $BOLTS_SRC
 function xcode_build_target() {
   echo "Compiling for platform: ${1}."
   $XCODEBUILD \
-    -target "Bolts" \
+    -target "${3}Bolts" \
     -sdk $1 \
     -configuration "${2}" \
     SYMROOT=$BOLTS_BUILD \
@@ -95,7 +95,7 @@ xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}"
 xcode_build_target "iphoneos" "${BUILDCONFIGURATION}"
 xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}64"
 xcode_build_target "iphoneos" "${BUILDCONFIGURATION}64"
-xcode_build_target "macosx" "${BUILDCONFIGURATION}"
+xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Mac"
 
 # -----------------------------------------------------------------------------
 # Merge lib files for different platforms into universal binary

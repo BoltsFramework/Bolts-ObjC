@@ -13,6 +13,13 @@
 #import "BFTask.h"
 #import "BFTaskCompletionSource.h"
 
+#if TARGET_OS_IPHONE
+#import "BFAppLinkNavigation.h"
+#import "BFAppLink.h"
+#import "BFAppLinkTarget.h"
+#import "BFURL.h"
+#endif
+
 /*! @abstract 80175001: There were multiple errors. */
 extern NSInteger const kBFMultipleErrorsError;
 

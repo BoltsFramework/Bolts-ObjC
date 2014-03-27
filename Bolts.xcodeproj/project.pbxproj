@@ -7,6 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */; };
+		1E11AB7A18C561E300522739 /* BFAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7618C561E300522739 /* BFAppLink.m */; };
+		1E11AB7B18C561E300522739 /* BFURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7818C561E300522739 /* BFURL.m */; };
+		1E11AB7E18C7C50800522739 /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */; };
+		1E45E47318DA788800D23509 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016418CDAA8400D06D07 /* UIKit.framework */; };
+		1E45E47418DA7F0000D23509 /* BFAppLink.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7518C561E300522739 /* BFAppLink.h */; };
+		1E45E47518DA7F0000D23509 /* BFAppLinkNavigation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */; };
+		1E45E47618DA7F0000D23509 /* BFAppLinkResolving.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EC3019318CDD79F00D06D07 /* BFAppLinkResolving.h */; };
+		1E45E47718DA7F0000D23509 /* BFAppLinkTarget.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7C18C7C50800522739 /* BFAppLinkTarget.h */; };
+		1E45E47818DA7F0000D23509 /* BFURL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1E11AB7718C561E300522739 /* BFURL.h */; };
+		1E45E47918DA7F0000D23509 /* BFWebViewAppLinkResolver.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1EC3019418CDD8A500D06D07 /* BFWebViewAppLinkResolver.h */; };
+		1EC3016118CDAA8400D06D07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
+		1EC3016318CDAA8400D06D07 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
+		1EC3016518CDAA8400D06D07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016418CDAA8400D06D07 /* UIKit.framework */; };
+		1EC3016B18CDAA8400D06D07 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1EC3016918CDAA8400D06D07 /* InfoPlist.strings */; };
+		1EC3016D18CDAA8400D06D07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3016C18CDAA8400D06D07 /* main.m */; };
+		1EC3017118CDAA8400D06D07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3017018CDAA8400D06D07 /* AppDelegate.m */; };
+		1EC3017318CDAA8400D06D07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EC3017218CDAA8400D06D07 /* Images.xcassets */; };
+		1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3019018CDABCE00D06D07 /* AppLinkTests.m */; };
+		1EC3019218CDB3CB00D06D07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016418CDAA8400D06D07 /* UIKit.framework */; };
+		1EC3019618CDD8A500D06D07 /* BFWebViewAppLinkResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3019518CDD8A500D06D07 /* BFWebViewAppLinkResolver.m */; };
 		8E0B5CD817E139660066379B /* BFTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E9C3D1E17DEA35700427E62 /* BFTask.h */; };
 		8E0B5CD917E1396C0066379B /* BFTaskCompletionSource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E9C3D2017DEA35700427E62 /* BFTaskCompletionSource.h */; };
 		8E17EC261805D0960049E862 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA6BF661805CED500337041 /* Bolts.m */; };
@@ -39,6 +60,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1E617A8918DA0CA90056A4E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E9C3CE117DE9DE000427E62 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EC3015F18CDAA8300D06D07;
+			remoteInfo = BoltsTestUI;
+		};
 		8E8C8EF617F23D1D00E3F1C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8E9C3CE117DE9DE000427E62 /* Project object */;
@@ -62,6 +90,12 @@
 			dstPath = Bolts;
 			dstSubfolderSpec = 16;
 			files = (
+				1E45E47418DA7F0000D23509 /* BFAppLink.h in CopyFiles */,
+				1E45E47518DA7F0000D23509 /* BFAppLinkNavigation.h in CopyFiles */,
+				1E45E47618DA7F0000D23509 /* BFAppLinkResolving.h in CopyFiles */,
+				1E45E47718DA7F0000D23509 /* BFAppLinkTarget.h in CopyFiles */,
+				1E45E47818DA7F0000D23509 /* BFURL.h in CopyFiles */,
+				1E45E47918DA7F0000D23509 /* BFWebViewAppLinkResolver.h in CopyFiles */,
 				8E42701F1805E5A1000B84ED /* BFExecutor.h in CopyFiles */,
 				8EE768A81803E5DA009A53B1 /* BoltsVersion.h in CopyFiles */,
 				8EE768A71803E5D5009A53B1 /* Bolts.h in CopyFiles */,
@@ -105,6 +139,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkNavigation.h; sourceTree = "<group>"; };
+		1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLinkNavigation.m; sourceTree = "<group>"; };
+		1E11AB7518C561E300522739 /* BFAppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink.h; sourceTree = "<group>"; };
+		1E11AB7618C561E300522739 /* BFAppLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLink.m; sourceTree = "<group>"; };
+		1E11AB7718C561E300522739 /* BFURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFURL.h; sourceTree = "<group>"; };
+		1E11AB7818C561E300522739 /* BFURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFURL.m; sourceTree = "<group>"; };
+		1E11AB7C18C7C50800522739 /* BFAppLinkTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkTarget.h; sourceTree = "<group>"; };
+		1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLinkTarget.m; sourceTree = "<group>"; };
+		1EC3016018CDAA8400D06D07 /* BoltsTestUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoltsTestUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1EC3016418CDAA8400D06D07 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1EC3016818CDAA8400D06D07 /* BoltsTestUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoltsTestUI-Info.plist"; sourceTree = "<group>"; };
+		1EC3016A18CDAA8400D06D07 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1EC3016C18CDAA8400D06D07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1EC3016E18CDAA8400D06D07 /* BoltsTestUI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BoltsTestUI-Prefix.pch"; sourceTree = "<group>"; };
+		1EC3016F18CDAA8400D06D07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1EC3017018CDAA8400D06D07 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1EC3017218CDAA8400D06D07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1EC3019018CDABCE00D06D07 /* AppLinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
+		1EC3019318CDD79F00D06D07 /* BFAppLinkResolving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFAppLinkResolving.h; sourceTree = "<group>"; };
+		1EC3019418CDD8A500D06D07 /* BFWebViewAppLinkResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWebViewAppLinkResolver.h; sourceTree = "<group>"; };
+		1EC3019518CDD8A500D06D07 /* BFWebViewAppLinkResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWebViewAppLinkResolver.m; sourceTree = "<group>"; };
 		8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoltsVersion.h; sourceTree = "<group>"; };
 		8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8E8C8ED917F23C3B00E3F1C7 /* BoltsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoltsTests-Info.plist"; sourceTree = "<group>"; };
@@ -130,10 +186,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1EC3015D18CDAA8300D06D07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EC3016318CDAA8400D06D07 /* CoreGraphics.framework in Frameworks */,
+				1EC3016518CDAA8400D06D07 /* UIKit.framework in Frameworks */,
+				1EC3016118CDAA8400D06D07 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E8C8EE617F23D1D00E3F1C7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EC3019218CDB3CB00D06D07 /* UIKit.framework in Frameworks */,
 				8E8C8EFC17F23E6E00E3F1C7 /* libBolts.a in Frameworks */,
 				8E8C8EEA17F23D1D00E3F1C7 /* XCTest.framework in Frameworks */,
 				8E8C8EEB17F23D1D00E3F1C7 /* Foundation.framework in Frameworks */,
@@ -153,6 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E45E47318DA788800D23509 /* UIKit.framework in Frameworks */,
 				8E9C3CED17DE9DE000427E62 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,12 +236,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EC3016618CDAA8400D06D07 /* BoltsTestUI */ = {
+			isa = PBXGroup;
+			children = (
+				1EC3016F18CDAA8400D06D07 /* AppDelegate.h */,
+				1EC3017018CDAA8400D06D07 /* AppDelegate.m */,
+				1EC3017218CDAA8400D06D07 /* Images.xcassets */,
+				1EC3016718CDAA8400D06D07 /* Supporting Files */,
+			);
+			path = BoltsTestUI;
+			sourceTree = "<group>";
+		};
+		1EC3016718CDAA8400D06D07 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1EC3016818CDAA8400D06D07 /* BoltsTestUI-Info.plist */,
+				1EC3016918CDAA8400D06D07 /* InfoPlist.strings */,
+				1EC3016C18CDAA8400D06D07 /* main.m */,
+				1EC3016E18CDAA8400D06D07 /* BoltsTestUI-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		8E8C8ED717F23C3B00E3F1C7 /* BoltsTests */ = {
 			isa = PBXGroup;
 			children = (
+				1EC3019018CDABCE00D06D07 /* AppLinkTests.m */,
 				8EA6BF681805CF5600337041 /* BoltsTests.m */,
-				8E9C3D1C17DE9F6500427E62 /* TaskTests.m */,
 				8E8C8ED817F23C3B00E3F1C7 /* Supporting Files */,
+				8E9C3D1C17DE9F6500427E62 /* TaskTests.m */,
 			);
 			path = BoltsTests;
 			sourceTree = "<group>";
@@ -193,6 +284,7 @@
 			children = (
 				8E9C3CEE17DE9DE000427E62 /* Bolts */,
 				8E8C8ED717F23C3B00E3F1C7 /* BoltsTests */,
+				1EC3016618CDAA8400D06D07 /* BoltsTestUI */,
 				8E9C3CEB17DE9DE000427E62 /* Frameworks */,
 				8E9C3CEA17DE9DE000427E62 /* Products */,
 			);
@@ -205,6 +297,7 @@
 				8EDDA63517E17DDD00655F8A /* libMacBolts.a */,
 				8E8C8EE917F23D1D00E3F1C7 /* BoltsTests.xctest */,
 				8E8C8F1917F241DA00E3F1C7 /* MacBoltsTests.xctest */,
+				1EC3016018CDAA8400D06D07 /* BoltsTestUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +308,8 @@
 				8E9C3CEC17DE9DE000427E62 /* Foundation.framework */,
 				8E9C3CFB17DE9DE000427E62 /* SenTestingKit.framework */,
 				8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */,
+				1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */,
+				1EC3016418CDAA8400D06D07 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,15 +317,26 @@
 		8E9C3CEE17DE9DE000427E62 /* Bolts */ = {
 			isa = PBXGroup;
 			children = (
-				8EE768A61803E32F009A53B1 /* Bolts.h */,
-				8EA6BF661805CED500337041 /* Bolts.m */,
-				8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */,
+				1E11AB7518C561E300522739 /* BFAppLink.h */,
+				1E11AB7618C561E300522739 /* BFAppLink.m */,
+				1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */,
+				1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */,
+				1EC3019318CDD79F00D06D07 /* BFAppLinkResolving.h */,
+				1E11AB7C18C7C50800522739 /* BFAppLinkTarget.h */,
+				1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */,
 				8EB2CB401805DDDB00323385 /* BFExecutor.h */,
 				8EB2CB411805DDDB00323385 /* BFExecutor.m */,
 				8E9C3D1E17DEA35700427E62 /* BFTask.h */,
 				8E9C3D1F17DEA35700427E62 /* BFTask.m */,
 				8E9C3D2017DEA35700427E62 /* BFTaskCompletionSource.h */,
 				8E9C3D2117DEA35700427E62 /* BFTaskCompletionSource.m */,
+				1E11AB7718C561E300522739 /* BFURL.h */,
+				1E11AB7818C561E300522739 /* BFURL.m */,
+				1EC3019418CDD8A500D06D07 /* BFWebViewAppLinkResolver.h */,
+				1EC3019518CDD8A500D06D07 /* BFWebViewAppLinkResolver.m */,
+				8EE768A61803E32F009A53B1 /* Bolts.h */,
+				8EA6BF661805CED500337041 /* Bolts.m */,
+				8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */,
 				8E9C3CEF17DE9DE000427E62 /* Supporting Files */,
 			);
 			path = Bolts;
@@ -247,6 +353,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1EC3015F18CDAA8300D06D07 /* BoltsTestUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EC3018E18CDAA8400D06D07 /* Build configuration list for PBXNativeTarget "BoltsTestUI" */;
+			buildPhases = (
+				1EC3015C18CDAA8300D06D07 /* Sources */,
+				1EC3015D18CDAA8300D06D07 /* Frameworks */,
+				1EC3015E18CDAA8300D06D07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BoltsTestUI;
+			productName = BoltsTestUI;
+			productReference = 1EC3016018CDAA8400D06D07 /* BoltsTestUI.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8E8C8EE817F23D1D00E3F1C7 /* BoltsTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8E8C8EF817F23D1D00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests" */;
@@ -258,6 +381,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1E617A8A18DA0CA90056A4E2 /* PBXTargetDependency */,
 				8E8C8EF717F23D1D00E3F1C7 /* PBXTargetDependency */,
 			);
 			name = BoltsTests;
@@ -329,7 +453,7 @@
 				ORGANIZATIONNAME = "Parse Inc.";
 				TargetAttributes = {
 					8E8C8EE817F23D1D00E3F1C7 = {
-						TestTargetID = 8E9C3CE817DE9DE000427E62;
+						TestTargetID = 1EC3015F18CDAA8300D06D07;
 					};
 					8E8C8F1817F241DA00E3F1C7 = {
 						TestTargetID = 8EDDA62817E17DDC00655F8A;
@@ -352,11 +476,21 @@
 				8EDDA62817E17DDC00655F8A /* MacBolts */,
 				8E8C8EE817F23D1D00E3F1C7 /* BoltsTests */,
 				8E8C8F1817F241DA00E3F1C7 /* MacBoltsTests */,
+				1EC3015F18CDAA8300D06D07 /* BoltsTestUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1EC3015E18CDAA8300D06D07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EC3016B18CDAA8400D06D07 /* InfoPlist.strings in Resources */,
+				1EC3017318CDAA8400D06D07 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E8C8EE717F23D1D00E3F1C7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -374,10 +508,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1EC3015C18CDAA8300D06D07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EC3017118CDAA8400D06D07 /* AppDelegate.m in Sources */,
+				1EC3016D18CDAA8400D06D07 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8E8C8EE517F23D1D00E3F1C7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */,
 				8EA6BF691805CF5600337041 /* BoltsTests.m in Sources */,
 				8E8C8EFB17F23E5F00E3F1C7 /* TaskTests.m in Sources */,
 			);
@@ -397,9 +541,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EA6BF671805CED500337041 /* Bolts.m in Sources */,
+				1E11AB7A18C561E300522739 /* BFAppLink.m in Sources */,
+				1E11AB7E18C7C50800522739 /* BFAppLinkTarget.m in Sources */,
 				8E9C3D2217DEA35700427E62 /* BFTask.m in Sources */,
+				1E11AB7B18C561E300522739 /* BFURL.m in Sources */,
 				8EB2CB421805DDDB00323385 /* BFExecutor.m in Sources */,
 				8E9C3D2417DEA35700427E62 /* BFTaskCompletionSource.m in Sources */,
+				1EC3019618CDD8A500D06D07 /* BFWebViewAppLinkResolver.m in Sources */,
+				1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +566,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E617A8A18DA0CA90056A4E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EC3015F18CDAA8300D06D07 /* BoltsTestUI */;
+			targetProxy = 1E617A8918DA0CA90056A4E2 /* PBXContainerItemProxy */;
+		};
 		8E8C8EF717F23D1D00E3F1C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8E9C3CE817DE9DE000427E62 /* Bolts */;
@@ -430,6 +584,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1EC3016918CDAA8400D06D07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1EC3016A18CDAA8400D06D07 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		8E8C8EDA17F23C3B00E3F1C7 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -441,10 +603,125 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1EC3018618CDAA8400D06D07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BoltsTestUI/BoltsTestUI-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1EC3018718CDAA8400D06D07 /* Debug64 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BoltsTestUI/BoltsTestUI-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug64;
+		};
+		1EC3018818CDAA8400D06D07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BoltsTestUI/BoltsTestUI-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1EC3018918CDAA8400D06D07 /* Release64 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BoltsTestUI/BoltsTestUI-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release64;
+		};
 		8E8C8EF917F23D1D00E3F1C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BoltsTestUI.app/BoltsTestUI";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -467,6 +744,7 @@
 				INFOPLIST_FILE = "BoltsTests/BoltsTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -475,6 +753,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BoltsTestUI.app/BoltsTestUI";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -494,6 +773,7 @@
 				INFOPLIST_FILE = "BoltsTests/BoltsTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -610,6 +890,11 @@
 		8E9C3D0F17DE9DE000427E62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7,
+					armv7s,
+					i386,
+				);
 				DSTROOT = /tmp/Bolts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
@@ -623,6 +908,11 @@
 		8E9C3D1017DE9DE000427E62 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7,
+					armv7s,
+					i386,
+				);
 				DSTROOT = /tmp/Bolts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
@@ -726,6 +1016,7 @@
 					arm64,
 					x86_64,
 				);
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BoltsTestUI.app/BoltsTestUI";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -748,6 +1039,7 @@
 				INFOPLIST_FILE = "BoltsTests/BoltsTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug64;
@@ -841,6 +1133,7 @@
 					arm64,
 					x86_64,
 				);
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BoltsTestUI.app/BoltsTestUI";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -860,6 +1153,7 @@
 				INFOPLIST_FILE = "BoltsTests/BoltsTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release64;
@@ -894,6 +1188,17 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1EC3018E18CDAA8400D06D07 /* Build configuration list for PBXNativeTarget "BoltsTestUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EC3018618CDAA8400D06D07 /* Debug */,
+				1EC3018718CDAA8400D06D07 /* Debug64 */,
+				1EC3018818CDAA8400D06D07 /* Release */,
+				1EC3018918CDAA8400D06D07 /* Release64 */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8E8C8EF817F23D1D00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
