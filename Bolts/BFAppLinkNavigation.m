@@ -50,6 +50,43 @@ static id<BFAppLinkResolving> defaultResolver;
                                                                                  kCFStringEncodingUTF8));
 }
 
+- (NSURL *)appLinkURLWithTargetURL:(NSURL *)targetUrl error:(NSError **)error {
+    NSMutableDictionary *appLinkData = [NSMutableDictionary dictionaryWithDictionary:self.appLinkData ?: @{}];
+    
+    // Add applink protocol data
+    if (!appLinkData[BFAppLinkUserAgentKeyName]) {
+        appLinkData[BFAppLinkUserAgentKeyName] = [NSString stringWithFormat:@"Bolts iOS %@", BOLTS_VERSION];
+    }
+    if (!appLinkData[BFAppLinkVersionKeyName]) {
+        appLinkData[BFAppLinkVersionKeyName] = @(BFAppLinkVersion);
+    }
+    appLinkData[BFAppLinkTargetKeyName] = [self.appLink.sourceURL absoluteString];
+    appLinkData[BFAppLinkExtrasKeyName] = self.extras ?: @{};
+    
+    // JSON-ify the applink data
+    NSError *jsonError = nil;
+    NSData *jsonBlob = [NSJSONSerialization dataWithJSONObject:appLinkData options:0 error:&jsonError];
+    if (!jsonError) {
+        NSString *jsonString = [[NSString alloc] initWithData:jsonBlob encoding:NSUTF8StringEncoding];
+        NSString *encoded = [self stringByEscapingQueryString:jsonString];
+        
+        NSString *endUrlString = [NSString stringWithFormat:@"%@%@%@=%@",
+                                  [targetUrl absoluteString],
+                                  targetUrl.query ? @"&" : @"?",
+                                  BFAppLinkDataParameterName,
+                                  encoded];
+        
+        return [NSURL URLWithString:endUrlString];
+    } else {
+        if (error) {
+            *error = jsonError;
+        }
+        
+        // If there was an error encoding the app link data, fail hard.
+        return nil;
+    }
+}
+
 - (BFAppLinkNavigationType)navigate:(NSError **)error {
     // Find the first eligible/launchable target in the BFAppLink.
     BFAppLinkTarget *eligibleTarget = nil;
@@ -61,48 +98,35 @@ static id<BFAppLinkResolving> defaultResolver;
     }
     
     if (eligibleTarget) {
-        NSURL *targetUrl = eligibleTarget.URL;
-        NSMutableDictionary *appLinkData = [NSMutableDictionary dictionaryWithDictionary:self.appLinkData ?: @{}];
-        
-        // Add applink protocol data
-        if (!appLinkData[BFAppLinkUserAgentKeyName]) {
-            appLinkData[BFAppLinkUserAgentKeyName] = [NSString stringWithFormat:@"Bolts iOS %@", BOLTS_VERSION];
-        }
-        if (!appLinkData[BFAppLinkVersionKeyName]) {
-            appLinkData[BFAppLinkVersionKeyName] = @(BFAppLinkVersion);
-        }
-        appLinkData[BFAppLinkTargetKeyName] = [self.appLink.sourceURL absoluteString];
-        appLinkData[BFAppLinkExtrasKeyName] = self.extras ?: @{};
-        
-        // JSON-ify the applink data
-        NSError *jsonError = nil;
-        NSData *jsonBlob = [NSJSONSerialization dataWithJSONObject:appLinkData options:0 error:&jsonError];
-        if (!jsonError) {
-            NSString *jsonString = [[NSString alloc] initWithData:jsonBlob encoding:NSUTF8StringEncoding];
-            NSString *encoded = [self stringByEscapingQueryString:jsonString];
-            
-            NSString *endUrlString = [NSString stringWithFormat:@"%@%@%@=%@",
-                                      [targetUrl absoluteString],
-                                      targetUrl.query ? @"&" : @"?",
-                                      BFAppLinkDataParameterName,
-                                      encoded];
-            // Attempt to navigate
-            if ([[UIApplication sharedApplication] openURL:[NSURL URLWithString:endUrlString]]) {
-                return BFAppLinkNavigationTypeApp;
-            }
-        } else {
-            if (error) {
-                *error = jsonError;
-            }
-            
+        NSError *encodingError = nil;
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:&encodingError];
+        if (encodingError || !appLinkURL) {
             // If there was an error encoding the app link data, fail hard.
+            if (error) {
+                *error = encodingError;
+            }
             return BFAppLinkNavigationTypeFailure;
+        }
+        // Attempt to navigate
+        if ([[UIApplication sharedApplication] openURL:appLinkURL]) {
+            return BFAppLinkNavigationTypeApp;
         }
     }
     
     // Fall back to opening the url in the browser if available.
     if (self.appLink.webURL) {
-        if ([[UIApplication sharedApplication] openURL:self.appLink.webURL]) {
+        NSError *encodingError = nil;
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:self.appLink.webURL error:&encodingError];
+        if (encodingError || !appLinkURL) {
+            // If there was an error encoding the app link data, fail hard.
+            if (error) {
+                *error = encodingError;
+            }
+            return BFAppLinkNavigationTypeFailure;
+        }
+        // Attempt to navigate
+        if ([[UIApplication sharedApplication] openURL:appLinkURL]) {
+            // This was a browser navigation.
             return BFAppLinkNavigationTypeBrowser;
         }
     }

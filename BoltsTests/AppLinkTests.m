@@ -61,7 +61,7 @@ NSMutableArray *openedUrls = nil;
         }
     }
     
-    [html appendString:@"</head><body>Hello, world!</body><html>"];
+    [html appendString:@"</head><body>Hello, world!</body></html>"];
     return html;
 }
 
@@ -840,7 +840,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(@"http://www.example.com/path", openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(@"http://www.example.com/path", parsedUrl.targetURL.absoluteString);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:@"http://www.example.com/path?"]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkNavigationFailure {
@@ -942,8 +945,7 @@ NSMutableArray *openedUrls = nil;
 }
 
 - (void)testAppLinkURLNavigationNoTargets {
-    NSString *html = [self htmlWithMetaTags:@[]];
-    NSURL *url = [self dataUrlForHtml:html];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"test" withExtension:@"html"];
     
     BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
@@ -954,7 +956,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(url.absoluteString, openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(url, parsedUrl.targetURL);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:url.absoluteString]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkURLNavigationFallbackToWeb {
@@ -978,7 +983,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(@"http://www.example.com", openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(url, parsedUrl.targetURL);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:@"http://www.example.com?"]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkURLNavigationWebLinkOnly {
@@ -998,7 +1006,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(@"http://www.example.com", openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(url, parsedUrl.targetURL);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:@"http://www.example.com?"]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkToBadUrl {
