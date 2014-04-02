@@ -40,6 +40,12 @@ static NSString *const BFWebViewAppLinkResolverIOSAppNameKey = @"app_name";
 static NSString *const BFWebViewAppLinkResolverDictionaryValueKey = @"_value";
 static NSString *const BFWebViewAppLinkResolverPreferHeader = @"Prefer-Html-Meta-Tags";
 static NSString *const BFWebViewAppLinkResolverMetaTagPrefix = @"al";
+static NSString *const BFWebViewAppLinkResolverWebKey = @"web";
+static NSString *const BFWebViewAppLinkResolverIOSKey = @"ios";
+static NSString *const BFWebViewAppLinkResolverIPhoneKey = @"iphone";
+static NSString *const BFWebViewAppLinkResolverIPadKey = @"ipad";
+static NSString *const BFWebViewAppLinkResolverWebURLKey = @"url";
+static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fallback";
 
 @interface BFWebViewAppLinkResolverWebViewDelegate : NSObject <UIWebViewDelegate>
 
@@ -229,14 +235,16 @@ static NSString *const BFWebViewAppLinkResolverMetaTagPrefix = @"al";
     NSArray *platformData = nil;
     switch (UI_USER_INTERFACE_IDIOM()) {
         case UIUserInterfaceIdiomPad:
-            platformData = @[appLinkDict[@"ipad"] ?: @{}, appLinkDict[@"ios"] ?: @{}];
+            platformData = @[appLinkDict[BFWebViewAppLinkResolverIPadKey] ?: @{},
+                             appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{}];
             break;
         case UIUserInterfaceIdiomPhone:
-            platformData = @[appLinkDict[@"iphone"] ?: @{}, appLinkDict[@"ios"] ?: @{}];
+            platformData = @[appLinkDict[BFWebViewAppLinkResolverIPhoneKey] ?: @{},
+                             appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{}];
             break;
         default:
             // Future-proofing. Other User Interface idioms should only hit ios.
-            platformData = @[appLinkDict[@"ios"] ?: @{}];
+            platformData = @[appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{}];
             break;
     }
     
@@ -264,16 +272,18 @@ static NSString *const BFWebViewAppLinkResolverMetaTagPrefix = @"al";
         }
     }
     
-    NSString *webUrlString = appLinkDict[@"web"][0][@"url"][0][BFWebViewAppLinkResolverDictionaryValueKey];
-    NSURL *webUrl;
-    if (webUrlString) {
-        if ([@[@"none", @""] containsObject:webUrlString]) {
-            webUrl = nil;
-        } else {
-            webUrl = [NSURL URLWithString:webUrlString];
-        }
-    } else {
-        webUrl = destination;
+    NSDictionary *webDict = appLinkDict[BFWebViewAppLinkResolverWebKey][0];
+    NSString *webUrlString = webDict[BFWebViewAppLinkResolverWebURLKey][0][BFWebViewAppLinkResolverDictionaryValueKey];
+    NSString *shouldFallbackString = webDict[BFWebViewAppLinkResolverShouldFallbackKey][0][BFWebViewAppLinkResolverDictionaryValueKey];
+    
+    NSURL *webUrl = destination;
+    
+    if (shouldFallbackString &&
+        [@[@"no", @"false", @"0"] containsObject:[shouldFallbackString lowercaseString]]) {
+        webUrl = nil;
+    }
+    if (webUrl && webUrlString) {
+        webUrl = [NSURL URLWithString:webUrlString];
     }
     
     return [BFAppLink appLinkWithSourceURL:destination

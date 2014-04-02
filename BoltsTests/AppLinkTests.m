@@ -207,14 +207,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNotNil(task.error);
 }
 
-- (void)testWebViewSimpleAppLinkParsingNoneWebUrl {
+- (void)testWebViewSimpleAppLinkParsingZeroShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @"none"
+                                                  @"al:web:should_fallback": @"0"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -233,14 +233,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNil(link.webURL);
 }
 
-- (void)testWebViewSimpleAppLinkParsingEmptyWebUrl {
+- (void)testWebViewSimpleAppLinkParsingFalseShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @""
+                                                  @"al:web:should_fallback": @"fAlse"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -473,14 +473,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNotNil(task.error);
 }
 
-- (void)testSimpleAppLinkParsingNoneWebUrl {
+- (void)testSimpleAppLinkParsingNoShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @"none"
+                                                  @"al:web:should_fallback": @"No"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -499,14 +499,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNil(link.webURL);
 }
 
-- (void)testSimpleAppLinkParsingEmptyWebUrl {
+- (void)testSimpleAppLinkParsingFalseShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @""
+                                                  @"al:web:should_fallback": @"false"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
