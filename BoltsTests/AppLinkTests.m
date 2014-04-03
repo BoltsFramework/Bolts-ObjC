@@ -240,7 +240,7 @@ NSMutableArray *openedUrls = nil;
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:should_fallback": @"fAlse"
+                                                  @"al:web:should_fallback": @"fAlse" // case insensitive
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -480,7 +480,7 @@ NSMutableArray *openedUrls = nil;
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:should_fallback": @"No"
+                                                  @"al:web:should_fallback": @"No" // case insensitive
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
