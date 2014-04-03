@@ -13,7 +13,7 @@
 #import "BFAppLink.h"
 
 /*!
- The result of calling navigate on a BFAppLinkRequest
+ The result of calling navigate on a BFAppLinkNavigation
  */
 typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
     /*! Indicates that the navigation failed and no app was opened */
@@ -31,19 +31,19 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
  Represents a pending request to navigate to an App Link. Most developers will
  simply use navigateToURLInBackground: to open a URL, but developers can build
  custom requests with additional navigation and app data attached to them by
- creating BFAppLinkRequests themselves.
+ creating BFAppLinkNavigations themselves.
  */
 @interface BFAppLinkNavigation : NSObject
 
 /*!
- The extras for the AppLinkRequest. This will generally contain application-specific
+ The extras for the AppLinkNavigation. This will generally contain application-specific
  data that should be passed along with the request, such as advertiser or affiliate IDs or
  other such metadata relevant on this device.
  */
 @property (readonly, strong) NSDictionary *extras;
 
 /*!
- The al_applink_data for the AppLinkRequest. This will generally contain data common to
+ The al_applink_data for the AppLinkNavigation. This will generally contain data common to
  navigation attempts such as back-links, user agents, and other information that may be used
  in routing and handling an App Link request.
  */
@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 /*! The AppLink to navigate to */
 @property (readonly, strong) BFAppLink *appLink;
 
-/*! Creates an AppLinkRequest with the given link, app data, and app link data */
+/*! Creates an AppLinkNavigation with the given link, extras, and App Link data */
 + (instancetype)navigationWithAppLink:(BFAppLink *)appLink
                                extras:(NSDictionary *)extras
                           appLinkData:(NSDictionary *)appLinkData;

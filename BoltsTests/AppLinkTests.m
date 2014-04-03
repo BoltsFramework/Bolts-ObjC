@@ -61,7 +61,7 @@ NSMutableArray *openedUrls = nil;
         }
     }
     
-    [html appendString:@"</head><body>Hello, world!</body><html>"];
+    [html appendString:@"</head><body>Hello, world!</body></html>"];
     return html;
 }
 
@@ -207,14 +207,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNotNil(task.error);
 }
 
-- (void)testWebViewSimpleAppLinkParsingNoneWebUrl {
+- (void)testWebViewSimpleAppLinkParsingZeroShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @"none"
+                                                  @"al:web:should_fallback": @"0"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -233,14 +233,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNil(link.webURL);
 }
 
-- (void)testWebViewSimpleAppLinkParsingEmptyWebUrl {
+- (void)testWebViewSimpleAppLinkParsingFalseShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @""
+                                                  @"al:web:should_fallback": @"fAlse" // case insensitive
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -473,14 +473,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNotNil(task.error);
 }
 
-- (void)testSimpleAppLinkParsingNoneWebUrl {
+- (void)testSimpleAppLinkParsingNoShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @"none"
+                                                  @"al:web:should_fallback": @"No" // case insensitive
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -499,14 +499,14 @@ NSMutableArray *openedUrls = nil;
     XCTAssertNil(link.webURL);
 }
 
-- (void)testSimpleAppLinkParsingEmptyWebUrl {
+- (void)testSimpleAppLinkParsingFalseShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios": [NSNull null] },
                                               @{
                                                   @"al:ios:url": @"bolts://",
                                                   @"al:ios:app_name": @"Bolts",
                                                   @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @""
+                                                  @"al:web:should_fallback": @"false"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -840,7 +840,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(@"http://www.example.com/path", openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(@"http://www.example.com/path", parsedUrl.targetURL.absoluteString);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:@"http://www.example.com/path?"]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkNavigationFailure {
@@ -942,8 +945,7 @@ NSMutableArray *openedUrls = nil;
 }
 
 - (void)testAppLinkURLNavigationNoTargets {
-    NSString *html = [self htmlWithMetaTags:@[]];
-    NSURL *url = [self dataUrlForHtml:html];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"test" withExtension:@"html"];
     
     BFTask *task = [BFAppLinkNavigation navigateToURLInBackground:url];
     [self waitForTaskOnMainThread:task];
@@ -954,7 +956,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(url.absoluteString, openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(url, parsedUrl.targetURL);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:url.absoluteString]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkURLNavigationFallbackToWeb {
@@ -978,7 +983,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(@"http://www.example.com", openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(url, parsedUrl.targetURL);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:@"http://www.example.com?"]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkURLNavigationWebLinkOnly {
@@ -998,7 +1006,10 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqual((NSUInteger)1, openedUrls.count);
     
     NSURL *openedUrl = openedUrls.firstObject;
-    XCTAssertEqualObjects(@"http://www.example.com", openedUrl.absoluteString);
+    BFURL *parsedUrl = [BFURL URLWithURL:openedUrl];
+    XCTAssertEqualObjects(url, parsedUrl.targetURL);
+    XCTAssertTrue([openedUrl.absoluteString hasPrefix:@"http://www.example.com?"]);
+    XCTAssertNotNil(parsedUrl.appLinkData);
 }
 
 - (void)testAppLinkToBadUrl {
