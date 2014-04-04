@@ -74,6 +74,9 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if (self.hasLoaded) {
+        // Consider loading a second resource to be "success", since it indicates an inner frame
+        // or redirect is happening. We can run the tag extraction script at this point.
+        self.didFinishLoad(webView);
         return NO;
     }
     self.hasLoaded = YES;
