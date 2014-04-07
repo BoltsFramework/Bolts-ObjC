@@ -46,8 +46,8 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
                     [version unsignedIntegerValue] == BFAppLinkVersion) {
                     // There's applink data!  The target should actually be the applink target.
                     _appLinkData = applinkData;
-                    NSDictionary *refererData = applinkData[BFAppLinkExtrasKeyName];
-                    if (refererData && [refererData isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *applinkExtras = applinkData[BFAppLinkExtrasKeyName];
+                    if (applinkExtras && [applinkExtras isKindOfClass:[NSDictionary class]]) {
                         _appLinkExtras = applinkData[BFAppLinkExtrasKeyName];
                     }
                     _targetURL = [NSURL URLWithString:target];
