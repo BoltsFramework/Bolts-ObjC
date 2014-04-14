@@ -33,51 +33,14 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
     [super tearDown];
 }
 
-- (void)testInitWithBFURLSetsURL {
-    NSURL *url = [NSURL URLWithString:@"http://www.example.com"];
-
-    BFURL *bfurl = [BFURL URLWithURL:url];
-
-    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] initWithBFURL:bfurl];
-
-    XCTAssertEqualObjects(bfurl, view.url);
-}
-
-- (void)testInitWithNSURLSetsURL {
-    NSURL *url = [NSURL URLWithString:@"http://www.example.com"];
-
-    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] initWithNSURL:url];
-
-    XCTAssertEqualObjects(url, view.url.inputURL);
-}
-
-- (void)testViewWithBFURLReturnsValidView {
-    NSURL *url = [NSURL URLWithString:@"http://www.example.com"];
-
-    BFURL *bfurl = [BFURL URLWithURL:url];
-
-    BFAppLinkReturnToRefererView *view = [BFAppLinkReturnToRefererView viewWithBFURL:bfurl];
+- (void)testInitReturnsValidView {
+    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
 
     XCTAssert(view);
-    XCTAssertEqualObjects(bfurl, view.url);
-}
-
-- (void)testViewWithNSURLReturnsValidView {
-    NSURL *url = [NSURL URLWithString:BFURLWithRefererData];
-
-    BFAppLinkReturnToRefererView *view = [BFAppLinkReturnToRefererView viewWithNSURL:url];
-
-    XCTAssert(view);
-    XCTAssertEqualObjects(url, view.url.inputURL);
-    XCTAssert(view.refererName);
-    XCTAssertEqualObjects(@"Facebook", view.refererName);
-    XCTAssert(view.refererURL);
-    XCTAssertEqualObjects(view.refererURL, [NSURL URLWithString:@"fb://something/"]);
 }
 
 - (void)testNoRefererDataResultsInZeroHeight {
-    NSURL *url = [NSURL URLWithString:@"http://www.example.com"];
-    BFAppLinkReturnToRefererView *view = [BFAppLinkReturnToRefererView viewWithNSURL:url];
+    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
 
     CGSize sizeThatFits = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 
@@ -86,7 +49,10 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testNoRefererNameResultsInZeroHeight {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererUrlNoName];
-    BFAppLinkReturnToRefererView *view = [BFAppLinkReturnToRefererView viewWithNSURL:url];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+
+    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
+    view.refererAppLink = appLink;
 
     CGSize sizeThatFits = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 
@@ -95,7 +61,10 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testNoRefererUrlResultsInZeroHeight {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererNameNoUrl];
-    BFAppLinkReturnToRefererView *view = [BFAppLinkReturnToRefererView viewWithNSURL:url];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+
+    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
+    view.refererAppLink = appLink;
 
     CGSize sizeThatFits = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 
@@ -104,7 +73,10 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testValidRefererDataResultsInNonZeroSizeThatFits {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererData];
-    BFAppLinkReturnToRefererView *view = [BFAppLinkReturnToRefererView viewWithNSURL:url];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+
+    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
+    view.refererAppLink = appLink;
 
     CGSize sizeThatFits = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 
@@ -114,11 +86,14 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testNotIncludingStatusBarResultsInSmallerHeight {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererData];
-    BFAppLinkReturnToRefererView *view = [BFAppLinkReturnToRefererView viewWithNSURL:url];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+
+    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
+    view.refererAppLink = appLink;
 
     CGSize sizeThatFitsIncludingStatusBar = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 
-    view.includeStatusBarInSize = NO;
+    view.includeStatusBarInSize = BFIncludeStatusBarInSizeNever;
 
     CGSize sizeThatFitsNotIncludingStatusBar = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 

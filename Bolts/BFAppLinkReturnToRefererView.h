@@ -10,8 +10,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "BFAppLinkNavigation.h"
+
 @class BFAppLinkReturnToRefererView;
 @class BFURL;
+
+typedef enum BFIncludeStatusBarInSize {
+  BFIncludeStatusBarInSizeNever,
+  BFIncludeStatusBarInSizeIOS7AndLater,
+  BFIncludeStatusBarInSizeAlways,
+} BFIncludeStatusBarInSize;
 
 /*!
  Protocol that a class can implement in order to be notified when the user has navigated back
@@ -19,17 +27,16 @@
  */
 @protocol BFAppLinkReturnToRefererViewDelegate <NSObject>
 
-@optional
+/*!
+ Called when the user has tapped inside the close button.
+ */
+- (void)returnToRefererViewDidTapInsideCloseButton:(BFAppLinkReturnToRefererView *)view;
 
-/*! Called when the user has tapped to navigate, but before the navigation has been performed. */
-- (void)returnToRefererView:(BFAppLinkReturnToRefererView *)view
-                willOpenURL:(NSURL *)url;
-
-/*! Called after the navigation has been attempted, with an indication of whether the referer
- URL was successfully opened. */
-- (void)returnToRefererView:(BFAppLinkReturnToRefererView *)view
-                 didOpenURL:(NSURL *)url
-                    success:(BOOL)success;
+/*!
+ Called when the user has tapped inside the App Link portion of the view.
+ */
+- (void)returnToRefererViewDidTapInsideLink:(BFAppLinkReturnToRefererView *)view
+                                       link:(BFAppLink *)link;
 
 @end
 
@@ -52,51 +59,19 @@
  */
 @property (readwrite, strong, nonatomic) UIColor *textColor;
 
-/*!
- The URL representing the App Link whose referer data is currently being displayed.
- If nil, or if the App Link does not contain any referer data, no UI will be displayed.
- If the App Link does contain referer data, the view will be resized to display it.
- */
-@property (readwrite, strong, nonatomic) BFURL* url;
+@property (readwrite, strong, nonatomic) BFAppLink *refererAppLink;
 
 /*!
- The name of the referer currently being displayed.
- */
-@property (readonly) NSString *refererName;
-
-/*!
- The URL that will be used to navigate back to the referer if the user taps on the button.
- */
-@property (readonly) NSURL *refererURL;
-
-/*! 
  Indicates whether to extend the size of the view to include the current status bar
  size, for use in scenarios where the view might extend under the status bar on iOS 7 and
  above; this property has no effect on earlier versions of iOS. 
  */
-@property (readwrite, assign, nonatomic) BOOL includeStatusBarInSize;
+@property (readwrite, assign, nonatomic) BFIncludeStatusBarInSize includeStatusBarInSize;
 
 /*!
  Indicates whether the user has closed the view by clicking the close button.
  */
-@property (readonly, assign, nonatomic) BOOL closed;
-
-/*!
- Initializes a BFAppLinkReturnToRefererView and extracts referer data from the App Link
- represented by an NSURL.
- */
-- (instancetype)initWithNSURL:(NSURL *)url;
-
-/*!
- Initializes a BFAppLinkReturnToRefererView and extracts referer data from the App Link
- represented by an BFURL.
- */
-- (instancetype)initWithBFURL:(BFURL *)url;
-
-/*!
- Closes the view, as if the user had clicked the close button.
- */
-- (void)closeAnimated:(BOOL)animated;
+@property (readwrite, assign, nonatomic) BOOL closed;
 
 /*!
  For apps that use a navigation controller, this method allows for displaying the view as
@@ -105,23 +80,11 @@
  If this method is called from, e.g., viewDidAppear, its counterpart, detachFromMainWindow should
  be called from, e.g., viewWillDisappear.
  */
-- (void)attachToMainWindowAboveNavigationController:(UINavigationController *)navigationController view:(UIView *)view;
+//- (void)attachToMainWindowAboveNavigationController:(UINavigationController *)navigationController view:(UIView *)view;
 
 /*!
  Indicates that the view should no longer position itself above a navigation bar.
  */
-- (void)detachFromMainWindow;
-
-/*!
- Creates a BFAppLinkReturnToRefererView and extracts referer data from the App Link
- represented by an NSURL.
- */
-+ (instancetype)viewWithNSURL:(NSURL *)url;
-
-/*!
- Creates a BFAppLinkReturnToRefererView and extracts referer data from the App Link
- represented by an BFURL.
- */
-+ (instancetype)viewWithBFURL:(BFURL *)url;
+//- (void)detachFromMainWindow;
 
 @end

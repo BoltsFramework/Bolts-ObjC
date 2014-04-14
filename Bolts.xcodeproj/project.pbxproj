@@ -32,6 +32,8 @@
 		8550FD2218ECCF1600976B4B /* BFAppLinkReturnToRefererView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85D5138618E4E27700D19D87 /* BFAppLinkReturnToRefererView.h */; };
 		85D5138818E4E27700D19D87 /* BFAppLinkReturnToRefererView.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D5138718E4E27700D19D87 /* BFAppLinkReturnToRefererView.m */; };
 		85D5138A18E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */; };
+		85EEE11B18FCAB370007510B /* BFAppLinkReturnToRefererController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85EEE11A18FCAB370007510B /* BFAppLinkReturnToRefererController.m */; };
+		85EEE11D18FCC8180007510B /* BFAppLinkReturnToRefererController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85EEE11918FCAB370007510B /* BFAppLinkReturnToRefererController.h */; };
 		8E0B5CD817E139660066379B /* BFTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E9C3D1E17DEA35700427E62 /* BFTask.h */; };
 		8E0B5CD917E1396C0066379B /* BFTaskCompletionSource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E9C3D2017DEA35700427E62 /* BFTaskCompletionSource.h */; };
 		8E17EC261805D0960049E862 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA6BF661805CED500337041 /* Bolts.m */; };
@@ -94,6 +96,7 @@
 			dstPath = Bolts;
 			dstSubfolderSpec = 16;
 			files = (
+				85EEE11D18FCC8180007510B /* BFAppLinkReturnToRefererController.h in CopyFiles */,
 				8550FD2218ECCF1600976B4B /* BFAppLinkReturnToRefererView.h in CopyFiles */,
 				1E45E47418DA7F0000D23509 /* BFAppLink.h in CopyFiles */,
 				1E45E47518DA7F0000D23509 /* BFAppLinkNavigation.h in CopyFiles */,
@@ -171,6 +174,9 @@
 		85D5138618E4E27700D19D87 /* BFAppLinkReturnToRefererView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkReturnToRefererView.h; sourceTree = "<group>"; };
 		85D5138718E4E27700D19D87 /* BFAppLinkReturnToRefererView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLinkReturnToRefererView.m; sourceTree = "<group>"; tabWidth = 4; wrapsLines = 1; };
 		85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkReturnToRefererViewTests.m; sourceTree = "<group>"; };
+		85EEE11918FCAB370007510B /* BFAppLinkReturnToRefererController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkReturnToRefererController.h; sourceTree = "<group>"; };
+		85EEE11A18FCAB370007510B /* BFAppLinkReturnToRefererController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLinkReturnToRefererController.m; sourceTree = "<group>"; };
+		85EEE11C18FCC2AF0007510B /* BFAppLinkReturnToRefererView_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFAppLinkReturnToRefererView_Internal.h; sourceTree = "<group>"; };
 		8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoltsVersion.h; sourceTree = "<group>"; };
 		8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8E8C8ED917F23C3B00E3F1C7 /* BoltsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoltsTests-Info.plist"; sourceTree = "<group>"; };
@@ -336,8 +342,11 @@
 				1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */,
 				1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */,
 				1EC3019318CDD79F00D06D07 /* BFAppLinkResolving.h */,
+				85EEE11918FCAB370007510B /* BFAppLinkReturnToRefererController.h */,
+				85EEE11A18FCAB370007510B /* BFAppLinkReturnToRefererController.m */,
 				85D5138618E4E27700D19D87 /* BFAppLinkReturnToRefererView.h */,
 				85D5138718E4E27700D19D87 /* BFAppLinkReturnToRefererView.m */,
+				85EEE11C18FCC2AF0007510B /* BFAppLinkReturnToRefererView_Internal.h */,
 				1E11AB7C18C7C50800522739 /* BFAppLinkTarget.h */,
 				1E11AB7D18C7C50800522739 /* BFAppLinkTarget.m */,
 				8EB2CB401805DDDB00323385 /* BFExecutor.h */,
@@ -566,6 +575,7 @@
 				1E11AB7B18C561E300522739 /* BFURL.m in Sources */,
 				8EB2CB421805DDDB00323385 /* BFExecutor.m in Sources */,
 				8E9C3D2417DEA35700427E62 /* BFTaskCompletionSource.m in Sources */,
+				85EEE11B18FCAB370007510B /* BFAppLinkReturnToRefererController.m in Sources */,
 				1EC3019618CDD8A500D06D07 /* BFWebViewAppLinkResolver.m in Sources */,
 				1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */,
 				85D5138818E4E27700D19D87 /* BFAppLinkReturnToRefererView.m in Sources */,
