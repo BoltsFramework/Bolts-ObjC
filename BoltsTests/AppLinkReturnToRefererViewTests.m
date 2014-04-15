@@ -49,7 +49,7 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testNoRefererNameResultsInZeroHeight {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererUrlNoName];
-    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] appLinkReferer];
 
     BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
     view.refererAppLink = appLink;
@@ -61,7 +61,7 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testNoRefererUrlResultsInZeroHeight {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererNameNoUrl];
-    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] appLinkReferer];
 
     BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
     view.refererAppLink = appLink;
@@ -73,7 +73,7 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testValidRefererDataResultsInNonZeroSizeThatFits {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererData];
-    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] appLinkReferer];
 
     BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
     view.refererAppLink = appLink;
@@ -86,7 +86,7 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 
 - (void)testNotIncludingStatusBarResultsInSmallerHeight {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererData];
-    BFAppLink *appLink = [[BFURL URLWithURL:url] refererAppLink];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] appLinkReferer];
 
     BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
     view.refererAppLink = appLink;

@@ -113,7 +113,7 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 
 - (void)showViewForRefererURL:(NSURL *)url {
     BFURL *bfurl = [BFURL URLWithURL:url];
-    [self showViewForRefererAppLink:bfurl.refererAppLink];
+    [self showViewForRefererAppLink:bfurl.appLinkReferer];
 }
 
 - (void)removeFromNavController {
