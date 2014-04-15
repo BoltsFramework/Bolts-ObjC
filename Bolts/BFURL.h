@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class BFAppLink;
+
 /*!
  Provides a set of utilities for working with NSURLs, such as parsing of query parameters
  and handling for App Link requests.
@@ -53,5 +55,10 @@
  The query parameters of the inputURL, parsed into an NSDictionary.
  */
 @property (readonly, strong) NSDictionary *inputQueryParameters;
+
+/*!
+ The App Link indicating how to navigate back to the referer app, if any.
+ */
+@property (readonly, strong) BFAppLink *refererAppLink;
 
 @end

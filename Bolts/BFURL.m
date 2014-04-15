@@ -10,12 +10,16 @@
 
 #import "BFURL.h"
 #import "BFAppLink.h"
+#import "BFAppLinkTarget.h"
 
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkExtrasKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppLink;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
 
 @implementation BFURL
 
@@ -45,12 +49,25 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
                     [version isEqual:BFAppLinkVersion]) {
                     // There's applink data!  The target should actually be the applink target.
                     _appLinkData = applinkData;
-                    NSDictionary *refererData = applinkData[BFAppLinkExtrasKeyName];
-                    if (refererData && [refererData isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *applinkExtras = applinkData[BFAppLinkExtrasKeyName];
+                    if (applinkExtras && [applinkExtras isKindOfClass:[NSDictionary class]]) {
                         _appLinkExtras = applinkData[BFAppLinkExtrasKeyName];
                     }
                     _targetURL = target ? [NSURL URLWithString:target] : url;
                     _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];
+
+                    NSDictionary *refererAppLink = _appLinkData[BFAppLinkRefererAppLink];
+                    NSString *refererURLString = refererAppLink[BFAppLinkRefererUrl];
+                    NSString *refererAppName = refererAppLink[BFAppLinkRefererAppName];
+
+                    if (refererURLString && refererAppName) {
+                        BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:refererURLString]
+                                                                             appStoreId:nil
+                                                                                appName:refererAppName];
+                        _refererAppLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
+                                                                  targets:@[target]
+                                                                   webURL:nil];
+                    }
                 }
             }
         }
