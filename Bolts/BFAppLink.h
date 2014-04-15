@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 
 /*! The version of the App Link protocol that this library supports */
-FOUNDATION_EXPORT const NSUInteger BFAppLinkVersion;
+FOUNDATION_EXPORT NSString *const BFAppLinkVersion;
 
 /*!
  Contains App Link metadata relevant for navigation on this device

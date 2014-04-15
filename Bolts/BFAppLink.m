@@ -15,7 +15,7 @@ NSString *const BFAppLinkTargetKeyName = @"target_url";
 NSString *const BFAppLinkUserAgentKeyName = @"user_agent";
 NSString *const BFAppLinkExtrasKeyName = @"extras";
 NSString *const BFAppLinkVersionKeyName = @"version";
-const NSUInteger BFAppLinkVersion = 1;
+NSString *const BFAppLinkVersion = @"1.0";
 
 @implementation BFAppLink
 

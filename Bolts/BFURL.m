@@ -39,18 +39,17 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
                                                                           error:&error];
             if (!error && [applinkData isKindOfClass:[NSDictionary class]]) {
                 // If the version is not specified, assume it is 1.
-                NSNumber *version = applinkData[BFAppLinkVersionKeyName] ?: @1;
+                NSString *version = applinkData[BFAppLinkVersionKeyName] ?: @"1.0";
                 NSString *target = applinkData[BFAppLinkTargetKeyName];
-                if ([target isKindOfClass:[NSString class]] &&
-                    [version isKindOfClass:[NSNumber class]] &&
-                    [version unsignedIntegerValue] == BFAppLinkVersion) {
+                if ([version isKindOfClass:[NSString class]] &&
+                    [version isEqual:BFAppLinkVersion]) {
                     // There's applink data!  The target should actually be the applink target.
                     _appLinkData = applinkData;
                     NSDictionary *refererData = applinkData[BFAppLinkExtrasKeyName];
                     if (refererData && [refererData isKindOfClass:[NSDictionary class]]) {
                         _appLinkExtras = applinkData[BFAppLinkExtrasKeyName];
                     }
-                    _targetURL = [NSURL URLWithString:target];
+                    _targetURL = target ? [NSURL URLWithString:target] : url;
                     _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];
                 }
             }
