@@ -58,7 +58,7 @@ static id<BFAppLinkResolving> defaultResolver;
         appLinkData[BFAppLinkUserAgentKeyName] = [NSString stringWithFormat:@"Bolts iOS %@", BOLTS_VERSION];
     }
     if (!appLinkData[BFAppLinkVersionKeyName]) {
-        appLinkData[BFAppLinkVersionKeyName] = @(BFAppLinkVersion);
+        appLinkData[BFAppLinkVersionKeyName] = BFAppLinkVersion;
     }
     appLinkData[BFAppLinkTargetKeyName] = [self.appLink.sourceURL absoluteString];
     appLinkData[BFAppLinkExtrasKeyName] = self.extras ?: @{};
