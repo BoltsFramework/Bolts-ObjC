@@ -312,7 +312,7 @@ Following an App Link allows your app to provide the best user experience (as de
 3. If an app is present, build a URL with the appropriate al_applink_data specified and navigate to that URL
 4. Otherwise, open the browser with the original URL specified
 
-In the simplest case, it takes just one line of code for developers to navigate to a URL that may have an App Link:
+In the simplest case, it takes just one line of code to navigate to a URL that may have an App Link:
 
 ```objective-c
 [BFAppLinkNavigation navigateToURLInBackground:url];
