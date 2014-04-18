@@ -64,7 +64,7 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
                         BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:refererURLString]
                                                                              appStoreId:nil
                                                                                 appName:refererAppName];
-                        _refererAppLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
+                        _appLinkReferer = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
                                                                   targets:@[target]
                                                                    webURL:nil];
                     }

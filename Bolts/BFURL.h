@@ -47,6 +47,11 @@
 @property (readonly, strong) NSDictionary *appLinkExtras;
 
 /*!
+ The App Link indicating how to navigate back to the referer app, if any.
+ */
+@property (readonly, strong) BFAppLink *appLinkReferer;
+
+/*!
  The URL that was used to create this BFURL.
  */
 @property (readonly, strong) NSURL *inputURL;
@@ -55,10 +60,5 @@
  The query parameters of the inputURL, parsed into an NSDictionary.
  */
 @property (readonly, strong) NSDictionary *inputQueryParameters;
-
-/*!
- The App Link indicating how to navigate back to the referer app, if any.
- */
-@property (readonly, strong) BFAppLink *refererAppLink;
 
 @end
