@@ -7,9 +7,10 @@ and we have decided to open source these libraries to make them available to
 others. Using these libraries does not require using any Parse services. Nor
 do they require having a Parse or Facebook developer account.
 
-The first component in Bolts is "tasks", which make organization of complex
-asynchronous code more manageable. A task is kind of like a JavaScript Promise,
-but available for iOS and Android.
+Bolts includes:
+
+* "Tasks", which make organization of complex asynchronous code more manageable. A task is kind of like a JavaScript Promise, but available for iOS and Android.
+* An implementation of the [App Links protocol](http://www.applinks.org), helping you link to content in other apps and handle incoming deep-links.
 
 For more information, see the [Bolts iOS API Reference](http://boltsframework.github.io/docs/ios/).
 
