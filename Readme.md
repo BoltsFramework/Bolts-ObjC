@@ -322,7 +322,7 @@ In the simplest case, it takes just one line of code to navigate to a URL that m
 
 Under most circumstances, the data that will need to be passed along to an app during a navigation will be contained in the URL itself, so that whether or not the app is actually installed on the device, users are taken to the correct content. Occasionally, however, apps will want to pass along data that is relevant for an app-to-app navigation, or will want to augment the App Link protocol with information that might be used by the app to adjust how the app should behave (e.g. showing a link back to the referring app).
 
-Developers wishing to take advantage of these features can break apart the navigation process. First, they must have an App Link to which they wish to navigate:
+If you want to take advantage of these features, you can break apart the navigation process. First, you must have an App Link to which you wish to navigate:
 
 ```objective-c
 [[BFAppLinkNavigation resolveAppLinkInBackground:url] continueWithSuccessBlock:^id(BFTask *task) {
@@ -330,7 +330,7 @@ Developers wishing to take advantage of these features can break apart the navig
 }];
 ```
 
-Then, they can build an App Link request with any additional data they would like and navigate:
+Then, you can build an App Link request with any additional data you would like and navigate:
 
 ```objective-c
 BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:link
