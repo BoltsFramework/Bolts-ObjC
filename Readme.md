@@ -268,7 +268,7 @@ For common cases, such as dispatching on the main thread, we have provided defau
 
 ## Handling an App Link
 
-The most common case will be making your app receive App Links. In-linking will allow your users to quickly access the richest, most native-feeling presentation of linked content on their devices.  Bolts makes it easy to handle an inbound App Link (as well as general inbound deep-links) by providing utilities for processing an incoming URL.
+The most common case will be making your app receive App Links. In-linking will allow your users to quickly access the richest, most native-feeling presentation of linked content on their devices. Bolts makes it easy to handle an inbound App Link (as well as general inbound deep-links) by providing utilities for processing an incoming URL.
 
 For example, you can use the `BFURL` utility class to parse an incoming URL in your `AppDelegate`:
 
@@ -279,25 +279,25 @@ For example, you can use the `BFURL` utility class to parse an incoming URL in y
          annotation:(id)annotation {
     BFURL *parsedUrl = [BFURL URLWithURL:url];
     
-    // Use the target URL from the App Link to locate content
+    // Use the target URL from the App Link to locate content.
     if ([parsedUrl.targetURL.pathComponents[1] isEqualToString:@"profiles"]) {
-        // Open a profile viewer
+        // Open a profile viewer.
     }
     
-    // You can also check the query string easily
+    // You can also check the query string easily.
     NSString *query = parsedUrl.targetQueryParameters[@"query"];
     
     // Apps that have existing deep-linking support and map their App Links to existing
-    // deep-linking functionality may instead want to perform these operations on the original URL
-    // Use the target URL from the App Link to locate content
+    // deep-linking functionality may instead want to perform these operations on the original URL.
+    // Use the target URL from the App Link to locate content.
     if ([parsedUrl.originalURL.pathComponents[1] isEqualToString:@"profiles"]) {
-        // Open a profile viewer
+        // Open a profile viewer.
     }
     
-    // You can also check the query string easily
+    // You can also check the query string easily.
     NSString *query = parsedUrl.originalQueryParameters[@"query"];
     
-    // Apps can easily check the Extras and App Link data from the App Link as well
+    // Apps can easily check the Extras and App Link data from the App Link as well.
     NSString *fbAccessToken = parsedUrl.appLinkExtras[@"fb_access_token"];
     NSDictionary *refererData = parsedUrl.appLinkExtras[@"referer"];
 }
@@ -307,10 +307,10 @@ For example, you can use the `BFURL` utility class to parse an incoming URL in y
 
 Following an App Link allows your app to provide the best user experience (as defined by the receiving app) when a user navigates to a link. Bolts makes this process simple, automating the steps required to follow a link:
 
-1. Resolve the App Link by getting the App Link metadata from the HTML at the URL specified
-2. Step through App Link targets relevant to the device being used, checking whether the app that can handle the target is present on the device
-3. If an app is present, build a URL with the appropriate al_applink_data specified and navigate to that URL
-4. Otherwise, open the browser with the original URL specified
+1. Resolve the App Link by getting the App Link metadata from the HTML at the URL specified.
+2. Step through App Link targets relevant to the device being used, checking whether the app that can handle the target is present on the device.
+3. If an app is present, build a URL with the appropriate al_applink_data specified and navigate to that URL.
+4. Otherwise, open the browser with the original URL specified.
 
 In the simplest case, it takes just one line of code to navigate to a URL that may have an App Link:
 
@@ -320,7 +320,7 @@ In the simplest case, it takes just one line of code to navigate to a URL that m
 
 ### Adding App and Navigation Data
 
-Under most circumstances, the data that will need to be passed along to an app during a navigation will be contained in the URL itself, so that whether or not the app is actually installed on the device, users are taken to the correct content. Occasionally, however, apps will want to pass along data that is relevant for an app-to-app navigation, or will want to augment the App Link protocol with information that might be used by the app to adjust how the app should behave (e.g. showing a link back to the referring app).
+Under most circumstances, the data that will need to be passed along to an app during a navigation will be contained in the URL itself, so that whether or not the app is actually installed on the device, users are taken to the correct content. Occasionally, however, apps will want to pass along data that is relevant for app-to-app navigation, or will want to augment the App Link protocol with information that might be used by the app to adjust how the app should behave (e.g. showing a link back to the referring app).
 
 If you want to take advantage of these features, you can break apart the navigation process. First, you must have an App Link to which you wish to navigate:
 
