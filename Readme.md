@@ -358,6 +358,37 @@ Alternatively, a you can swap out the default resolver to be used by the built-i
 [BFAppLinkNavigation navigateToURLInBackground:url];
 ```
 
+## App Link Return-to-Referer View
+
+When an application is opened via an App Link, a banner allowing the user to "Touch to return to <calling app>" should be displayed. The `BFAppLinkReturnToRefererView` provides this functionality. It will take an incoming App Link and parse the referer information to display the appropriate calling app name. You may initialize the view either by loading it from a NIB or programmatically:
+
+```objective-c
+- (void)viewDidLoad {
+  [super viewDidLoad];
+
+  // Perform other view initialization.
+
+  self.returnToRefererView = [[BFAppLinkReturnToRefererView alloc] initWithFrame:CGRectZero];
+  self.returnToRefererController = [[BFAppLinkReturnToRefererController] alloc] init];
+
+  // We could also have left .view unassigned and the controller will automatically
+  //  create a BFAppLinkReturnToRefererView when it needs one.
+  self.returnToRefererController.view = self.returnToRefererView;
+}
+```
+
+Note that we initialize the view with a zero size, because we will determine whether or not to display a banner based on the referer data in the incoming App Link using the associated `BFAppLinkReturnToRefererController`, typically in a view controller's `viewWillAppear` or similar method, depending on a particular app's view hierarchy, etc. The following code assumes that the view controller has an `openedAppLinkURL` `NSURL` property that has already been populated with the URL used to open the app:
+
+```objective-c
+- (void)viewWillAppear {
+  [super viewWillAppear];
+
+  [self.returnToRefererController showViewForRefererURL:self.openedAppLinkURL];
+}
+```
+
+In a navigaton-controller view hierarchy, the banner should be displayed above the navigation bar, and `BFAppLinkReturnToRefererController` provides an `initForDisplayAboveNavController` method to assist with this.
+
 # Installation
 
 You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-iOS/releases).
