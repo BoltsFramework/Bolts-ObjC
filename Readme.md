@@ -288,14 +288,14 @@ For example, you can use the `BFURL` utility class to parse an incoming URL in y
     NSString *query = parsedUrl.targetQueryParameters[@"query"];
     
     // Apps that have existing deep-linking support and map their App Links to existing
-    // deep-linking functionality may instead want to perform these operations on the original URL.
+    // deep-linking functionality may instead want to perform these operations on the input URL.
     // Use the target URL from the App Link to locate content.
-    if ([parsedUrl.originalURL.pathComponents[1] isEqualToString:@"profiles"]) {
+    if ([parsedUrl.inputURL.pathComponents[1] isEqualToString:@"profiles"]) {
         // Open a profile viewer.
     }
     
     // You can also check the query string easily.
-    NSString *query = parsedUrl.originalQueryParameters[@"query"];
+    NSString *query = parsedUrl.inputQueryParameters[@"query"];
     
     // Apps can easily check the Extras and App Link data from the App Link as well.
     NSString *fbAccessToken = parsedUrl.appLinkExtras[@"fb_access_token"];
