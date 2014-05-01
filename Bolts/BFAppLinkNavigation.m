@@ -23,6 +23,9 @@ FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkExtrasKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppLink;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
 
 static id<BFAppLinkResolving> defaultResolver;
 
@@ -40,6 +43,15 @@ static id<BFAppLinkResolving> defaultResolver;
     navigation->_extras = extras;
     navigation->_appLinkData = appLinkData;
     return navigation;
+}
+
++ (NSDictionary *)callbackAppLinkDataForAppWithName:(NSString *)appName url:(NSString *)url {
+    return @{
+             BFAppLinkRefererAppLink: @{
+                     BFAppLinkRefererAppName: appName,
+                     BFAppLinkRefererUrl: url
+                     }
+             };
 }
 
 - (NSString *)stringByEscapingQueryString:(NSString *)string {

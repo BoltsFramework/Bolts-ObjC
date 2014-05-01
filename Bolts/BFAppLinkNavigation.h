@@ -57,6 +57,13 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
                                extras:(NSDictionary *)extras
                           appLinkData:(NSDictionary *)appLinkData;
 
+/*!
+ Creates a NSDictionary with the correct format for iOS callback URLs, to be used
+ as argument 'appLinkData' argument in the call to
+ navigationWithAppLink:extras:appLinkData:
+ */
++ (NSDictionary *)callbackAppLinkDataForAppWithName:(NSString *)appName url:(NSString *)url;
+
 /*! Performs the navigation */
 - (BFAppLinkNavigationType)navigate:(NSError **)error;
 
