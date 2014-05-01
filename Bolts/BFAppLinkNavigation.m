@@ -172,6 +172,40 @@ static id<BFAppLinkResolving> defaultResolver;
                                            appLinkData:nil] navigate:error];;
 }
 
++ (BFAppLinkNavigationType)navigationTypeForLink:(BFAppLink *)link {
+    return [[self navigationWithAppLink:link extras:nil appLinkData:nil] navigationType];
+}
+
+- (BFAppLinkNavigationType)navigationType {
+    BFAppLinkTarget *eligibleTarget = nil;
+    for (BFAppLinkTarget *target in self.appLink.targets) {
+        if ([[UIApplication sharedApplication] canOpenURL:target.URL]) {
+            eligibleTarget = target;
+            break;
+        }
+    }
+
+    if (eligibleTarget != nil) {
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:nil];
+        if (appLinkURL) {
+            return BFAppLinkNavigationTypeApp;
+        } else {
+            return BFAppLinkNavigationTypeFailure;
+        }
+    }
+
+    if (self.appLink.webURL != nil) {
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:nil];
+        if (appLinkURL) {
+            return BFAppLinkNavigationTypeBrowser;
+        } else {
+            return BFAppLinkNavigationTypeFailure;
+        }
+    }
+
+    return BFAppLinkNavigationTypeFailure;
+}
+
 + (id<BFAppLinkResolving>)defaultResolver {
     if (defaultResolver) {
         return defaultResolver;

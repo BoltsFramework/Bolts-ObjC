@@ -69,6 +69,21 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 /*! Navigates to a BFAppLink and returns whether it opened in-app or in-browser */
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error;
 
+/*!
+ Returns a BFAppLinkNavigationType based on a BFAppLink.
+ It's essentially a no-side-effect version of navigateToAppLink:error:,
+ allowing apps to determine flow based on the link type (e.g. open an
+ internal web view instead of going straight to the browser for regular
+ links.)
+ */
++ (BFAppLinkNavigationType)navigationTypeForLink:(BFAppLink *)link;
+
+/*!
+ Return navigation type for current instance.
+ No-side-effect version of navigate:
+ */
+- (BFAppLinkNavigationType)navigationType;
+
 /*! Navigates to a URL (an asynchronous action) and returns a BFNavigationType */
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination;
 
