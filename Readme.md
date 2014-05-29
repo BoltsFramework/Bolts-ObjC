@@ -220,7 +220,7 @@ You can also perform several tasks in parallel, using the `taskForCompletionOfAl
 PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
 [query whereKey:@"post" equalTo:@123];
 
-[[[self.findAsync:query] continueWithBlock:^id(BFTask *results) {
+[[[self findAsync:query] continueWithBlock:^id(BFTask *results) {
   // Collect one task for each delete into an array.
   NSMutableArray *tasks = [NSMutableArray array];
   for (PFObject *result in results) {
