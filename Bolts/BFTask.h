@@ -58,6 +58,19 @@ typedef id(^BFContinuationBlock)(BFTask *task);
  */
 + (instancetype)taskWithDelay:(int)millis;
 
+/*!
+ Returns a task that will be completed after the given block completes with
+ the specified executor.
+ @param executor A BFExecutor responsible for determining how the
+ continuation block will be run.
+ @param block The block to immediately schedule to run with the given executor.
+ @returns A task that will be completed after block has run.
+ If block returns a BFTask, then the task returned from
+ this method will not be completed until that task is completed.
+ */
++ (instancetype)taskFromExecutor:(BFExecutor *)executor
+                       withBlock:(id (^)())block;
+
 // Properties that will be set on the task once it is completed.
 
 /*!
