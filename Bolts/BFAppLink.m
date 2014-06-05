@@ -8,7 +8,7 @@
  *
  */
 
-#import "BFAppLink.h"
+#import "BFAppLink_Internal.h"
 
 NSString *const BFAppLinkDataParameterName = @"al_applink_data";
 NSString *const BFAppLinkTargetKeyName = @"target_url";
@@ -20,16 +20,39 @@ NSString *const BFAppLinkRefererUrl = @"url";
 NSString *const BFAppLinkVersionKeyName = @"version";
 NSString *const BFAppLinkVersion = @"1.0";
 
-@implementation BFAppLink
+@implementation BFAppLink {
+    BOOL _isBackToReferrer;
+}
 
 + (instancetype)appLinkWithSourceURL:(NSURL *)sourceURL
                              targets:(NSArray *)targets
-                              webURL:(NSURL *)webURL {
-    BFAppLink *link = [[self alloc] init];
+                              webURL:(NSURL *)webURL
+                    isBackToReferrer:(BOOL)isBackToReferrer {
+    BFAppLink *link = [[self alloc] initWithIsBackToReferrer:isBackToReferrer];
     link->_sourceURL = sourceURL;
     link->_targets = [NSArray arrayWithArray:targets];
     link->_webURL = webURL;
     return link;
+}
+
++ (instancetype)appLinkWithSourceURL:(NSURL *)sourceURL
+                             targets:(NSArray *)targets
+                              webURL:(NSURL *)webURL {
+    return [self appLinkWithSourceURL:sourceURL
+                              targets:targets
+                               webURL:webURL
+                     isBackToReferrer:NO];
+}
+
+- (BOOL)isBackToReferrer {
+    return _isBackToReferrer;
+}
+
+- (BFAppLink *)initWithIsBackToReferrer:(BOOL)isBackToReferrer {
+    if ((self = [super init])) {
+      _isBackToReferrer = isBackToReferrer;
+    }
+    return self;
 }
 
 @end
