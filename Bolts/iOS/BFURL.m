@@ -8,9 +8,10 @@
  *
  */
 
-#import "BFURL.h"
-#import "BFAppLink.h"
+#import "BFURL_Internal.h"
+#import "BFAppLink_Internal.h"
 #import "BFAppLinkTarget.h"
+#import "BFMeasurementEvent_Internal.h"
 
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
@@ -23,7 +24,7 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
 
 @implementation BFURL
 
-- (instancetype)initWithURL:(NSURL *)url {
+- (instancetype)initWithURL:(NSURL *)url forOpenInboundURL:(BOOL)forOpenURLEvent sourceApplication:(NSString *)sourceApplication forRenderBackToReferrerBar:(BOOL)forRenderBackToReferrerBar {
     if (self = [super init]) {
         _inputURL = url;
         _targetURL = url;
@@ -66,7 +67,38 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
                                                                                 appName:refererAppName];
                         _appLinkReferer = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
                                                                   targets:@[target]
-                                                                   webURL:nil];
+                                                                   webURL:nil
+                                                         isBackToReferrer:YES];
+                    }
+
+                    // Raise Measurement Event
+                    NSString *const EVENT_YES_VAL = @"1";
+                    NSString *const EVENT_NO_VAL = @"0";
+                    NSMutableDictionary * logData = [[NSMutableDictionary alloc] init];
+                    logData[@"version"] = version;
+                    if (refererURLString) {
+                        logData[@"refererURL"] = refererURLString;
+                    }
+                    if (refererAppName) {
+                        logData[@"refererAppName"] = refererAppName;
+                    }
+                    if (sourceApplication) {
+                        logData[@"sourceApplication"] = sourceApplication;
+                    }
+                    if ([_targetURL absoluteString]) {
+                        logData[@"targetURL"] = [_targetURL absoluteString];
+                    }
+                    if ([_inputURL absoluteString]) {
+                        logData[@"inputURL"] = [_inputURL absoluteString];
+                    }
+                    if ([_inputURL scheme]) {
+                        logData[@"inputURLScheme"] = [_inputURL scheme];
+                    }
+                    logData[@"forRenderBackToReferrerBar"] = forRenderBackToReferrerBar ? EVENT_YES_VAL : EVENT_NO_VAL;
+                    logData[@"forOpenUrl"] = forOpenURLEvent ? EVENT_YES_VAL : EVENT_NO_VAL;
+                    [BFMeasurementEvent postNotificationForEventName:BFAppLinkParseEventName args:logData];
+                    if (forOpenURLEvent) {
+                        [BFMeasurementEvent postNotificationForEventName:BFAppLinkNavigateInEventName args:logData];
                     }
                 }
             }
@@ -76,7 +108,15 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
 }
 
 + (BFURL *)URLWithURL:(NSURL *)url {
-    return [[BFURL alloc] initWithURL:url];
+    return [[BFURL alloc] initWithURL:url forOpenInboundURL:NO sourceApplication:nil forRenderBackToReferrerBar:NO];
+}
+
++ (BFURL *)URLWithInboundURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication {
+    return [[BFURL alloc] initWithURL:url forOpenInboundURL:YES sourceApplication:sourceApplication forRenderBackToReferrerBar:NO];
+}
+
++ (BFURL *)URLForRenderBackToReferrerBarURL:(NSURL *)url {
+    return [[BFURL alloc] initWithURL:url forOpenInboundURL:NO sourceApplication:nil forRenderBackToReferrerBar:YES];
 }
 
 + (NSString *)decodeURLString:(NSString *)string {

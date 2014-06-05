@@ -173,6 +173,29 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(url.absoluteString, openedURL.inputURL.absoluteString);
 }
 
+- (void)testOpenedIncomingURLWithAppLinkWillPostEvent {
+    NSURL *url = [NSURL URLWithString:@"bolts://?foo=bar&al_applink_data=%7B%22a%22%3A%22b%22%2C%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Fbaz%3Dbat%22%7D"];
+    NSString *sourceApplication = @"com.example.referer";
+    __block bool notificationSent = false;
+    [[NSNotificationCenter defaultCenter] addObserverForName:BFMeasurementEventNotificationName object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSDictionary *event = note.userInfo;
+        NSDictionary *eventData = event[BFMeasurementEventArgsKey];
+        if ([@"al_link_parse" isEqualToString:event[BFMeasurementEventNameKey]]) {
+          XCTAssertEqualObjects(@"0", eventData[@"forRenderBackToReferrerBar"]);
+          return;
+        }
+        notificationSent = true;
+        XCTAssertEqualObjects(@"al_nav_in", event[BFMeasurementEventNameKey]);
+
+        XCTAssertEqualObjects(@"com.example.referer", eventData[@"sourceApplication"]);
+        XCTAssertEqualObjects([url absoluteString], eventData[@"inputURL"]);
+        XCTAssertEqualObjects([url scheme], eventData[@"inputURLScheme"]);
+    }];
+
+    [BFURL URLWithInboundURL:url sourceApplication:sourceApplication];
+    XCTAssertTrue(notificationSent, @"URLWithInboundURL didn't sent notification.");
+}
+
 #pragma mark WebView App Link resolution
 
 - (void)testWebViewSimpleAppLinkParsing {
