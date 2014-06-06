@@ -32,6 +32,7 @@ For the examples in this doc, assume there are async versions of some common Par
 Every `BFTask` has a method named `continueWithBlock:` which takes a continuation block. A continuation is a block that will be executed when the task is complete. You can then inspect the task to check if it was successful and to get its result.
 
 ```objective-c
+// Objective-C
 [[self saveAsync:obj] continueWithBlock:^id(BFTask *task) {
   if (task.isCancelled) {
     // the save was cancelled.
@@ -45,9 +46,25 @@ Every `BFTask` has a method named `continueWithBlock:` which takes a continuatio
 }];
 ```
 
+```swift
+// Swift
+self.saveAsync(obj).continueWithBlock {
+  (task: BFTask!) -> BFTask in
+  if task.isCancelled() {
+    // the save was cancelled.
+  } else if task.error() {
+    // the save failed.
+  } else {
+    // the object was saved successfully.
+    var object = task.result() as PFObject
+  }
+}
+```
+
 BFTasks use Objective-C blocks, so the syntax should be pretty straightforward. Let's look closer at the types involved with an example.
 
 ```objective-c
+// Objective-C
 /**
  * Gets an NSString asynchronously.
  */
@@ -63,13 +80,40 @@ BFTasks use Objective-C blocks, so the syntax should be pretty straightforward. 
 }
 ```
 
+```swift
+// Swift
+/**
+ * Gets an NSString asynchronously.
+ */
+func getStringAsync() -> BFTask {
+  //Let's suppose getNumberAsync returns a BFTask whose result is an NSNumber.
+  return self.getNumberAsync().continueWithBlock {
+    (task: BFTask!) -> NSString in
+    // This continuation block takes the NSNumber BFTask as input,
+    // and provides an NSString as output.
+
+    let number = task.result() as NSNumber
+    return NSString(format:"%@", number)
+  }
+}
+
 In many cases, you only want to do more work if the previous task was successful, and propagate any errors or cancellations to be dealt with later. To do this, use the `continueWithSuccessBlock:` method instead of `continueWithBlock:`.
 
 ```objective-c
+// Objective-C
 [[self saveAsync:obj] continueWithSuccessBlock:^id(BFTask *task) {
   // the object was saved successfully.
   return nil;
 }];
+```
+
+```swift
+// Swift
+self.saveAsync(obj).continueWithSuccessBlock {
+  (task: BFTask!) -> AnyObject! in
+  // the object was saved successfully.
+  return nil
+}
 ```
 
 ## Chaining Tasks Together
@@ -77,6 +121,7 @@ In many cases, you only want to do more work if the previous task was successful
 BFTasks are a little bit magical, in that they let you chain them without nesting. If you return a BFTask from `continueWithBlock:`, then the task returned by `continueWithBlock:` will not be considered finished until the new task returned from the new continuation block. This lets you perform multiple actions without incurring the pyramid code you would get with callbacks. Likewise, you can return a `BFTask` from `continueWithSuccessBlock:`. So, return a `BFTask` to do more asynchronous work.
 
 ```objective-c
+// Objective-C
 PFQuery *query = [PFQuery queryWithClassName:@"Student"];
 [query orderByDescending:@"gpa"];
 [[[[[self findAsync:query] continueWithSuccessBlock:^id(BFTask *task) {
@@ -98,11 +143,39 @@ PFQuery *query = [PFQuery queryWithClassName:@"Student"];
 }];
 ```
 
+```swift
+// Swift
+var query = PFQuery(className:"Student")
+query.orderByDescending("gpa")
+findAsync(query).continueWithSuccessBlock {
+  (task: BFTask!) -> BFTask in
+  let students = task.result() as NSArray
+  var valedictorian = students.objectAtIndex(0) as PFObject
+  valedictorian["valedictorian"] = true
+  return self.saveAsync(valedictorian)
+}.continueWithSuccessBlock {
+  (task: BFTask!) -> BFTask in
+  var valedictorian = task.result() as PFObject
+  return self.findAsync(query)
+}.continueWithSuccessBlock {
+  (task: BFTask!) -> BFTask in
+  let students = task.result() as NSArray
+  var salutatorian = students.objectAtIndex(1) as PFObject
+  salutatorian["salutatorian"] = true
+  return self.saveAsync(salutatorian)
+}.continueWithSuccessBlock {
+  (task: BFTask!) -> AnyObject! in
+  // Everything is done!
+  return nil
+}
+```
+
 ## Error Handling
 
 By carefully choosing whether to call `continueWithBlock:` or `continueWithSuccessBlock:`, you can control how errors are propagated in your application. Using `continueWithBlock:` lets you handle errors by transforming them or dealing with them. You can think of failed tasks kind of like throwing an exception. In fact, if you throw an exception inside a continuation, the resulting task will be faulted with that exception.
 
 ```objective-c
+// Objective-C
 PFQuery *query = [PFQuery queryWithClassName:@"Student"];
 [query orderByDescending:@"gpa"];
 [[[[[self findAsync:query] continueWithSuccessBlock:^id(BFTask *task) {
@@ -137,6 +210,45 @@ PFQuery *query = [PFQuery queryWithClassName:@"Student"];
 }];
 ```
 
+```swift
+// Swift
+var query = PFQuery(className:"Student")
+query.orderByDescending("gpa")
+findAsync(query).continueWithSuccessBlock {
+  (task: BFTask!) -> BFTask in
+  let students = task.result() as NSArray
+  var valedictorian = students.objectAtIndex(0) as PFObject
+  valedictorian["valedictorian"] = true
+  //Force this callback to fail.
+  return BFTask(error:NSError(domain:"example.com",
+                              code:-1, userInfo: nil))
+}.continueWithSuccessBlock {
+  (task: BFTask!) -> AnyObject! in
+  //Now this continuation will be skipped.
+  var valedictorian = task.result() as PFObject
+  return self.findAsync(query)
+}.continueWithBlock {
+  (task: BFTask!) -> AnyObject! in
+  if task.error() {
+    // This error handler WILL be called.
+    // The error will be the NSError returned above.
+    // Let's handle the error by returning a new value.
+    // The task will be completed with nil as its value.
+    return nil
+  }
+  // This will also be skipped.
+  let students = task.result() as NSArray
+  var salutatorian = students.objectAtIndex(1) as PFObject
+  salutatorian["salutatorian"] = true
+  return self.saveAsync(salutatorian)
+}.continueWithSuccessBlock {
+  (task: BFTask!) -> AnyObject! in
+  // Everything is done! This gets called.
+  // The tasks result is nil.
+  return nil
+}
+```
+
 It's often convenient to have a long chain of success callbacks with only one error handler at the end.
 
 ## Creating Tasks
@@ -144,6 +256,7 @@ It's often convenient to have a long chain of success callbacks with only one er
 When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new `BFTask`, and control whether it gets marked as finished or cancelled. After you create a `BFTask`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
 
 ```objective-c
+// Objective-C
 - (BFTask *)successAsync {
   BFTaskCompletionSource *successful = [BFTaskCompletionSource taskCompletionSource];
   [successful setResult:@"The good result."];
@@ -157,12 +270,35 @@ When you're getting started, you can just use the tasks returned from methods li
 }
 ```
 
+```swift
+// Swift
+func successAsync() -> BFTask {
+  var successful = BFTaskCompletionSource()
+  successful.setResult("The good result.")
+  return successful.task
+}
+
+func failAsync() -> BFTask {
+  var failed = BFTaskCompletionSource()
+  failed.setError(NSError(domain:"example.com", code:-1, userInfo:nil))
+  return failed.task
+}
+```
+
 If you know the result of a task at the time it is created, there are some convenience methods you can use.
 
 ```objective-c
+// Objective-C
 BFTask *successful = [BFTask taskWithResult:@"The good result."];
 
 BFTask *failed = [BFTask taskWithError:anError];
+```
+
+```swift
+// Swift
+let successful = BFTask(result:"The good result")
+
+let failed = BFTask(error:anError)
 ```
 
 ## Creating Async Methods
@@ -170,6 +306,7 @@ BFTask *failed = [BFTask taskWithError:anError];
 With these tools, it's easy to make your own asynchronous functions that return tasks. For example, you can make a task-based version of `fetchAsync:` easily.
 
 ```objective-c
+// Objective-C
 - (BFTask *) fetchAsync:(PFObject *)object {
   BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
   [object fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -183,6 +320,23 @@ With these tools, it's easy to make your own asynchronous functions that return 
 }
 ```
 
+```swift
+// Swift
+func fetchAsync(object: PFObject) -> BFTask {
+  var task = BFTaskCompletionSource()
+  object.fetchInBackgroundWithBlock {
+    (object: PFObject!, error: NSError!) -> Void in
+    if !error {
+      task.setResult(object)
+    } else {
+      task.setError(error)
+    }
+  }
+  return task.task
+}
+
+```
+
 It's similarly easy to create `saveAsync:`, `findAsync:` or `deleteAsync:`.
 
 ## Tasks in Series
@@ -190,6 +344,7 @@ It's similarly easy to create `saveAsync:`, `findAsync:` or `deleteAsync:`.
 `BFTasks` are convenient when you want to do a series of tasks in a row, each one waiting for the previous to finish. For example, imagine you want to delete all of the comments on your blog.
 
 ```objective-c
+// Objective-C
 PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
 [query whereKey:@"post" equalTo:@123];
 
@@ -212,11 +367,37 @@ PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
 }];
 ```
 
+```swift
+// Swift
+var query = PFQuery(className:"Comments")
+query.whereKey("post", equalTo:123)
+findAsync(query).continueWithBlock {
+  (task: BFTask!) -> BFTask in
+  let results = task.result() as NSArray
+
+  // Create a trivial completed task as a base case.
+  let task = BFTask(result:nil)
+  for result : PFObject in results {
+    // For each item, extend the task with a function to delete the item.
+    task = task.continueWithBlock {
+      (task: BFTask!) -> BFTask in
+      return self.deleteAsync(result)
+    }
+  }
+  return task
+}.continueWithBlock {
+  (task: BFTask!) -> AnyObject! in
+  // Every comment was deleted.
+  return nil
+}
+```
+
 ## Tasks in Parallel
 
 You can also perform several tasks in parallel, using the `taskForCompletionOfAllTasks:` method. You can start multiple operations at once, and use `taskForCompletionOfAllTasks:` to create a new task that will be marked as completed when all of its input tasks are completed. The new task will be successful only if all of the passed-in tasks succeed. Performing operations in parallel will be faster than doing them serially, but may consume more system resources and bandwidth.
 
 ```objective-c
+// Objective-C
 PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
 [query whereKey:@"post" equalTo:@123];
 
@@ -234,6 +415,30 @@ PFQuery *query = [PFQuery queryWithClassName:@"Comments"];
   // Every comment was deleted.
   return nil;
 }];
+```
+
+```swift
+// Swift
+var query = PFQuery(className:"Comments")
+query.whereKey("post", equalTo:123)
+
+findAsync(query).continueWithBlock {
+  (task: BFTask!) -> BFTask in
+  // Collect one task for each delete into an array.
+  var tasks = NSMutableArray.array()
+  var results = task.result() as NSArray
+  for result : PFObject! in results {
+    // Start this delete immediately and add its task to the list.
+    tasks.addObject(self.deleteAsync(result))
+  }
+  // Return a new task that will be marked as completed when all of the deletes
+  // are finished.
+  return BFTask(forCompletionOfAllTasks:tasks)
+}.continueWithBlock {
+  (task: BFTask!) -> AnyObject! in
+  // Every comment was deleted.
+  return nil
+}
 ```
 
 ## Task Executors
