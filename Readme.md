@@ -96,6 +96,7 @@ func getStringAsync() -> BFTask {
     return NSString(format:"%@", number)
   }
 }
+```
 
 In many cases, you only want to do more work if the previous task was successful, and propagate any errors or cancellations to be dealt with later. To do this, use the `continueWithSuccessBlock:` method instead of `continueWithBlock:`.
 
