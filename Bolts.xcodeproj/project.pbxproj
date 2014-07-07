@@ -47,7 +47,7 @@
 		8E8C8EFC17F23E6E00E3F1C7 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CE917DE9DE000427E62 /* libBolts.a */; };
 		8E8C8F1A17F241DA00E3F1C7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */; };
 		8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
-		8E8C8F2A17F2420400E3F1C7 /* libMacBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDDA63517E17DDD00655F8A /* libMacBolts.a */; };
+		8E8C8F2A17F2420400E3F1C7 /* MacBolts.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDDA63517E17DDD00655F8A /* MacBolts.dylib */; };
 		8E9C3CED17DE9DE000427E62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
 		8E9C3D2217DEA35700427E62 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1F17DEA35700427E62 /* BFTask.m */; };
 		8E9C3D2417DEA35700427E62 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D2117DEA35700427E62 /* BFTaskCompletionSource.m */; };
@@ -197,7 +197,7 @@
 		8EA6BF681805CF5600337041 /* BoltsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoltsTests.m; sourceTree = "<group>"; };
 		8EB2CB401805DDDB00323385 /* BFExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExecutor.h; sourceTree = "<group>"; };
 		8EB2CB411805DDDB00323385 /* BFExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExecutor.m; sourceTree = "<group>"; };
-		8EDDA63517E17DDD00655F8A /* libMacBolts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMacBolts.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EDDA63517E17DDD00655F8A /* MacBolts.dylib */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = MacBolts.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE768A61803E32F009A53B1 /* Bolts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bolts.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,7 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E8C8F2A17F2420400E3F1C7 /* libMacBolts.a in Frameworks */,
+				8E8C8F2A17F2420400E3F1C7 /* MacBolts.dylib in Frameworks */,
 				8E8C8F1A17F241DA00E3F1C7 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,7 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				8E9C3CE917DE9DE000427E62 /* libBolts.a */,
-				8EDDA63517E17DDD00655F8A /* libMacBolts.a */,
+				8EDDA63517E17DDD00655F8A /* MacBolts.dylib */,
 				8E8C8EE917F23D1D00E3F1C7 /* BoltsTests.xctest */,
 				8E8C8F1917F241DA00E3F1C7 /* MacBoltsTests.xctest */,
 				1EC3016018CDAA8400D06D07 /* BoltsTestUI.app */,
@@ -466,7 +466,7 @@
 			);
 			name = MacBolts;
 			productName = Bolts;
-			productReference = 8EDDA63517E17DDD00655F8A /* libMacBolts.a */;
+			productReference = 8EDDA63517E17DDD00655F8A /* MacBolts.dylib */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -973,6 +973,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Bolts.dst;
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				MACH_O_TYPE = mh_dylib;
@@ -987,6 +989,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Bolts.dst;
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				MACH_O_TYPE = mh_dylib;
@@ -1048,6 +1052,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Bolts.dst;
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				MACH_O_TYPE = mh_dylib;
@@ -1166,6 +1172,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Bolts.dst;
+				EXECUTABLE_EXTENSION = dylib;
+				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				MACH_O_TYPE = mh_dylib;
