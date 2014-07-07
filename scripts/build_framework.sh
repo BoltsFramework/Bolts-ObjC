@@ -57,7 +57,7 @@ test -x "$XCODEBUILD" || die 'Could not find xcodebuild in $PATH'
 test -x "$LIPO" || die 'Could not find lipo in $PATH'
 
 BOLTS_UNIVERSAL_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts
-BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/libMacBolts.a
+BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/MacBolts.dylib
 
 # -----------------------------------------------------------------------------
 
