@@ -1,4 +1,4 @@
-Bolts
+Bolts [![Build Status](https://travis-ci.org/nlutsenko-fb/Bolts-iOS.svg)](https://travis-ci.org/nlutsenko-fb/Bolts-iOS)
 ============
 
 Bolts is a collection of low-level libraries designed to make developing mobile
