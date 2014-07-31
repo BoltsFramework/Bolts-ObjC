@@ -1,8 +1,6 @@
 language: objective-c
 xcode_project: Bolts.xcodeproj
-xcode_scheme: 
-  - Bolts
-  - MacBolts
-xcode_sdk: 
-  - iphonesimulator7.1
-  - macosx
+- xcode_scheme: Bolts
+xcode_sdk: iphonesimulator7.1 
+- xcode_scheme: MacBolts
+xcode_sdk: macosx
