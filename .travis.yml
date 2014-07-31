@@ -1,0 +1,4 @@
+language: objective-c
+xcode_project: Bolts.xcodeproj # path to your xcodeproj folder
+xcode_scheme: Bolts,MacBolts
+xcode_sdk: iphonesimulator7.1,macosx
