@@ -17,8 +17,6 @@
 #import "BFWebViewAppLinkResolver.h"
 #import "BFExecutor.h"
 #import "BFTask.h"
-#import "BFMeasurementEvent.h"
-#import "BFAppLink_Internal.h"
 
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
@@ -26,11 +24,11 @@ FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkExtrasKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
 
-/*! AppLink events raised in this class */
-NSString *const BFAppLinkNavigateOutEventName = @"al_nav_out";
-NSString *const BFAppLinkNavigateBackToReferrerEventName = @"al_ref_back_out";
-
 static id<BFAppLinkResolving> defaultResolver;
+
+@interface BFAppLinkNavigation ()
+
+@end
 
 @implementation BFAppLinkNavigation
 
@@ -99,105 +97,43 @@ static id<BFAppLinkResolving> defaultResolver;
         }
     }
     
-    NSURL *appLinkURLToOpen = nil;
-    NSError *encodingError = nil;
-    BFAppLinkNavigationType retType = BFAppLinkNavigationTypeFailure;
     if (eligibleTarget) {
-        NSURL *appLinkAppURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:&encodingError];
-        if (encodingError || !appLinkAppURL) {
-            if (error) {
-                *error = encodingError;
-            }
-        } else if ([[UIApplication sharedApplication] canOpenURL:appLinkAppURL]) {
-            retType = BFAppLinkNavigationTypeApp;
-            appLinkURLToOpen = appLinkAppURL;
-        }
-    }
-    
-    if (!appLinkURLToOpen && self.appLink.webURL) {
-        // Fall back to opening the url in the browser if available.
-        NSURL *appLinkBrowserURL = [self appLinkURLWithTargetURL:self.appLink.webURL error:&encodingError];
-        if (encodingError || !appLinkBrowserURL) {
+        NSError *encodingError = nil;
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:&encodingError];
+        if (encodingError || !appLinkURL) {
             // If there was an error encoding the app link data, fail hard.
             if (error) {
                 *error = encodingError;
             }
-        } else if ([[UIApplication sharedApplication] canOpenURL:appLinkBrowserURL]) {
-            // This was a browser navigation.
-            retType = BFAppLinkNavigationTypeBrowser;
-            appLinkURLToOpen = appLinkBrowserURL;
+            return BFAppLinkNavigationTypeFailure;
+        }
+        // Attempt to navigate
+        if ([[UIApplication sharedApplication] openURL:appLinkURL]) {
+            return BFAppLinkNavigationTypeApp;
         }
     }
-
-    [self postAppLinkNavigateEventNotificationWithTargetURL:appLinkURLToOpen
-                                                      error:error ? *error : nil
-                                                       type:retType];
-    if (appLinkURLToOpen) {
-        [[UIApplication sharedApplication] openURL:appLinkURLToOpen];
+    
+    // Fall back to opening the url in the browser if available.
+    if (self.appLink.webURL) {
+        NSError *encodingError = nil;
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:self.appLink.webURL error:&encodingError];
+        if (encodingError || !appLinkURL) {
+            // If there was an error encoding the app link data, fail hard.
+            if (error) {
+                *error = encodingError;
+            }
+            return BFAppLinkNavigationTypeFailure;
+        }
+        // Attempt to navigate
+        if ([[UIApplication sharedApplication] openURL:appLinkURL]) {
+            // This was a browser navigation.
+            return BFAppLinkNavigationTypeBrowser;
+        }
     }
+    
     // Otherwise, navigation fails.
-    return retType;
-}
-
-- (void) postAppLinkNavigateEventNotificationWithTargetURL:(NSURL *)outputURL error:(NSError *)error type:(BFAppLinkNavigationType)type{
-    NSString *const EVENT_YES_VAL = @"1";
-    NSString *const EVENT_NO_VAL = @"0";
-    NSMutableDictionary *logData = [[NSMutableDictionary alloc] init];
+    return BFAppLinkNavigationTypeFailure;
     
-    NSString *outputURLScheme = [outputURL scheme];
-    NSString *outputURLString = [outputURL absoluteString];
-    if (outputURLScheme) {
-        logData[@"outputURLScheme"] = outputURLScheme;
-    }
-    if (outputURLString) {
-        logData[@"outputURL"] = outputURLString;
-    }
-    
-    NSString *sourceURLString = [self.appLink.sourceURL absoluteString];
-    NSString *sourceURLHost = [self.appLink.sourceURL host];
-    NSString *sourceURLScheme = [self.appLink.sourceURL scheme];
-    if (sourceURLString) {
-        logData[@"sourceURL"] = sourceURLString;
-    }
-    if (sourceURLHost) {
-        logData[@"sourceHost"] = sourceURLHost;
-    }
-    if (sourceURLScheme) {
-        logData[@"sourceScheme"] = sourceURLScheme;
-    }
-    if ([error localizedDescription]) {
-        logData[@"error"] = [error localizedDescription];
-    }
-    NSString *success = nil; //no
-    NSString *linkType = nil; // unknown;
-    switch (type) {
-        case BFAppLinkNavigationTypeFailure:
-            success = EVENT_NO_VAL;
-            linkType = @"fail";
-            break;
-        case BFAppLinkNavigationTypeBrowser:
-            success = EVENT_YES_VAL;
-            linkType = @"web";
-            break;
-        case BFAppLinkNavigationTypeApp:
-            success = EVENT_YES_VAL;
-            linkType = @"app";
-            break;
-        default:
-            break;
-    }
-    if (success) {
-        logData[@"success"] = success;
-    }
-    if (linkType) {
-        logData[@"type"] = linkType;
-    }
-    
-    if ([self.appLink isBackToReferrer]) {
-        [BFMeasurementEvent postNotificationForEventName:BFAppLinkNavigateBackToReferrerEventName args:logData];
-    } else {
-        [BFMeasurementEvent postNotificationForEventName:BFAppLinkNavigateOutEventName args:logData];
-    }
 }
 
 + (BFTask *)resolveAppLinkInBackground:(NSURL *)destination resolver:(id)resolver {

@@ -63,8 +63,6 @@
 		8EE768A81803E5DA009A53B1 /* BoltsVersion.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */; };
 		8EE768A91803E5E0009A53B1 /* Bolts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8EE768A61803E32F009A53B1 /* Bolts.h */; };
 		8EE768AA1803E5E5009A53B1 /* BoltsVersion.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */; };
-		B24A9E26194FABF700603EBB /* BFMeasurementEvent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2DEBAF4194668D4005EBEAA /* BFMeasurementEvent.h */; };
-		B2DEBAF6194668D4005EBEAA /* BFMeasurementEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DEBAF5194668D4005EBEAA /* BFMeasurementEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +102,6 @@
 				1E45E47518DA7F0000D23509 /* BFAppLinkNavigation.h in CopyFiles */,
 				1E45E47618DA7F0000D23509 /* BFAppLinkResolving.h in CopyFiles */,
 				1E45E47718DA7F0000D23509 /* BFAppLinkTarget.h in CopyFiles */,
-				B24A9E26194FABF700603EBB /* BFMeasurementEvent.h in CopyFiles */,
 				1E45E47818DA7F0000D23509 /* BFURL.h in CopyFiles */,
 				1E45E47918DA7F0000D23509 /* BFWebViewAppLinkResolver.h in CopyFiles */,
 				8E42701F1805E5A1000B84ED /* BFExecutor.h in CopyFiles */,
@@ -202,10 +199,6 @@
 		8EB2CB411805DDDB00323385 /* BFExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExecutor.m; sourceTree = "<group>"; };
 		8EDDA63517E17DDD00655F8A /* MacBolts.dylib */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = MacBolts.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EE768A61803E32F009A53B1 /* Bolts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bolts.h; sourceTree = "<group>"; };
-		B2112471194FCEA10001FF7A /* BFURL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFURL_Internal.h; sourceTree = "<group>"; };
-		B28E0515194F818B00AC3740 /* BFAppLink_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFAppLink_Internal.h; sourceTree = "<group>"; };
-		B2DEBAF4194668D4005EBEAA /* BFMeasurementEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMeasurementEvent.h; sourceTree = "<group>"; };
-		B2DEBAF5194668D4005EBEAA /* BFMeasurementEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFMeasurementEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				1E11AB7518C561E300522739 /* BFAppLink.h */,
-				B28E0515194F818B00AC3740 /* BFAppLink_Internal.h */,
 				1E11AB7618C561E300522739 /* BFAppLink.m */,
 				1E11AB7318C561E300522739 /* BFAppLinkNavigation.h */,
 				1E11AB7418C561E300522739 /* BFAppLinkNavigation.m */,
@@ -364,12 +356,9 @@
 				8E9C3D2017DEA35700427E62 /* BFTaskCompletionSource.h */,
 				8E9C3D2117DEA35700427E62 /* BFTaskCompletionSource.m */,
 				1E11AB7718C561E300522739 /* BFURL.h */,
-				B2112471194FCEA10001FF7A /* BFURL_Internal.h */,
 				1E11AB7818C561E300522739 /* BFURL.m */,
 				1EC3019418CDD8A500D06D07 /* BFWebViewAppLinkResolver.h */,
 				1EC3019518CDD8A500D06D07 /* BFWebViewAppLinkResolver.m */,
-				B2DEBAF4194668D4005EBEAA /* BFMeasurementEvent.h */,
-				B2DEBAF5194668D4005EBEAA /* BFMeasurementEvent.m */,
 				8EE768A61803E32F009A53B1 /* Bolts.h */,
 				8EA6BF661805CED500337041 /* Bolts.m */,
 				8E0B5CDA17E13B4C0066379B /* BoltsVersion.h */,
@@ -590,7 +579,6 @@
 				1EC3019618CDD8A500D06D07 /* BFWebViewAppLinkResolver.m in Sources */,
 				1E11AB7918C561E300522739 /* BFAppLinkNavigation.m in Sources */,
 				85D5138818E4E27700D19D87 /* BFAppLinkReturnToRefererView.m in Sources */,
-				B2DEBAF6194668D4005EBEAA /* BFMeasurementEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

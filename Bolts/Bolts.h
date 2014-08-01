@@ -18,9 +18,6 @@
 #import "BFAppLink.h"
 #import "BFAppLinkTarget.h"
 #import "BFURL.h"
-#import "BFMeasurementEvent.h"
-#import "BFAppLinkReturnToRefererController.h"
-#import "BFAppLinkReturnToRefererView.h"
 #endif
 
 /*! @abstract 80175001: There were multiple errors. */

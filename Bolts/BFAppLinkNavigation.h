@@ -24,13 +24,6 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
     BFAppLinkNavigationTypeApp
 };
 
-/*! Bolts Events raised by BFMeasurementEvent for Applink */
-/* The event raised when the user navigates from your app to other apps */
-FOUNDATION_EXPORT NSString *const BFAppLinkNavigateOutEventName;
-/* The event raised when the user navigates out from your app and back to the referrer app.
- e.g when the user leaves your app after tapping the back-to-referrer navigation bar */
-FOUNDATION_EXPORT NSString *const BFAppLinkNavigateBackToReferrerEventName;
-
 @protocol BFAppLinkResolving;
 @class BFTask;
 
