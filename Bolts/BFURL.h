@@ -10,15 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-/* Defines names of BFMeasurementEvent events */
-/* The name of the event posted when [BFURL URLWithURL:] is called successfully. This represents the successful parsing of an app link URL.*/
-FOUNDATION_EXPORT NSString *const BFAppLinkParseEventName;
-
-/* The name of the event posted when [BFURL URLWithInboundURL:] is called successfully. This represents parsing an inbound app link URL 
- * from a different application
- */
-FOUNDATION_EXPORT NSString *const BFAppLinkNavigateInEventName;
-
 @class BFAppLink;
 
 /*!
@@ -28,19 +19,10 @@ FOUNDATION_EXPORT NSString *const BFAppLinkNavigateInEventName;
 @interface BFURL : NSObject
 
 /*!
- Creates a link target from a raw URL.
- On success, this posts the BFAppLinkParseEventName measurement event. If you are constructing the BFURL within your application delegate's
- application:openURL:sourceApplication:annotation:, you should instead use URLWithInboundURL:sourceApplication:
- to support better BFMeasurementEvent notifications
+ Creates a link target from a raw URL. Usually, this will be used to parse a URL passed into
+ an app delegate's handleOpenURL: method.
  */
 + (BFURL *)URLWithURL:(NSURL *)url;
-
-/*! 
- Creates a link target from a raw URL received from an external application. This is typically called from the app delegate's 
- application:openURL:sourceApplication:annotation: and will post the BFAppLinkNavigateInEventName measurement event.
- sourceApplication is the bundle ID of the app that is requesting your app to open the URL (url).
-*/
-+ (BFURL *)URLWithInboundURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication;
 
 /*!
  Gets the target URL.  If the link is an App Link, this is the target of the App Link.

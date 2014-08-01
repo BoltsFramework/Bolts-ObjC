@@ -12,7 +12,7 @@
 
 #import "BFAppLink.h"
 #import "BFAppLinkReturnToRefererView_Internal.h"
-#import "BFURL_Internal.h"
+#import "BFURL.h"
 
 static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 
@@ -22,10 +22,7 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 
 @end
 
-@implementation BFAppLinkReturnToRefererController {
-    BFURL *_lastShownBFUrl;
-    NSURL *_lastShownUrl;
-}
+@implementation BFAppLinkReturnToRefererController
 
 @synthesize view = _view;
 
@@ -115,11 +112,8 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 }
 
 - (void)showViewForRefererURL:(NSURL *)url {
-    if (![_lastShownUrl isEqual:url]) {
-        _lastShownUrl = [url copy];
-        _lastShownBFUrl = [BFURL URLForRenderBackToReferrerBarURL:url];
-    }
-    [self showViewForRefererAppLink:_lastShownBFUrl.appLinkReferer];
+    BFURL *bfurl = [BFURL URLWithURL:url];
+    [self showViewForRefererAppLink:bfurl.appLinkReferer];
 }
 
 - (void)removeFromNavController {
