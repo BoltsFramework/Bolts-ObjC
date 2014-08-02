@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.documentation_url = 'http://boltsframework.github.io/docs/ios/'
   s.social_media_url = "https://twitter.com/ParseIt"
   s.requires_arc = true
+  s.platform     = :ios, '5.0'
 
   s.source_files = 'Bolts'
 
