@@ -707,6 +707,19 @@ NSMutableArray *openedUrls = nil;
 
 #pragma mark App link navigation
 
+- (void)testSimpleAppLinkNavigationLookup {
+    BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:@"bolts://"]
+                                                         appStoreId:@"12345"
+                                                            appName:@"Bolts"];
+    BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
+                                                 targets:@[target]
+                                                  webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
+    BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigationTypeForLink:appLink];
+
+    XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
+    XCTAssertEqual((NSUInteger)0, openedUrls.count); // no side effects
+}
+
 - (void)testSimpleAppLinkNavigation {
     BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:@"bolts://"]
                                                          appStoreId:@"12345"
