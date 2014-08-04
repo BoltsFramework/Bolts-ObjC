@@ -1,0 +1,4 @@
+language: objective-c
+script:
+  - xctool -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug64 -destination 'name=iPhone Retina (4-inch 64-bit)' test
+  - xctool -project Bolts.xcodeproj -sdk macosx -scheme MacBolts test
