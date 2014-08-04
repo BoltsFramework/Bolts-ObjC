@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>33AFD6E3-D171-4482-B16B-FCADBB7D8BBA</string>
+	<string>76C1C527-08D6-44DC-A8CC-0003FD7B72C4</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Bolts</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>884C55CB-0254-40AB-86DF-DEBA8BC457B5</key>
-		<string>ssh://github.com/BoltsFramework/Bolts-iOS.git</string>
+		<key>A50054DB-5A63-4B7C-AFCE-0BFADE9BB5C5</key>
+		<string>ssh://github.com/nlutsenko-fb/Bolts-iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Bolts.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>884C55CB-0254-40AB-86DF-DEBA8BC457B5</key>
+		<key>A50054DB-5A63-4B7C-AFCE-0BFADE9BB5C5</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/BoltsFramework/Bolts-iOS.git</string>
+	<string>ssh://github.com/nlutsenko-fb/Bolts-iOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>884C55CB-0254-40AB-86DF-DEBA8BC457B5</string>
+	<string>A50054DB-5A63-4B7C-AFCE-0BFADE9BB5C5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>884C55CB-0254-40AB-86DF-DEBA8BC457B5</string>
+			<string>A50054DB-5A63-4B7C-AFCE-0BFADE9BB5C5</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Bolts-iOS</string>
+			<string>bolts</string>
 		</dict>
 	</array>
 </dict>

@@ -59,6 +59,9 @@ test -x "$LIPO" || die 'Could not find lipo in $PATH'
 BOLTS_UNIVERSAL_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts
 BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/MacBolts.dylib
 
+BOLTS_HEADERS_FOLDER_UNIVERSAL=$BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts
+BOLTS_HEADERS_FOLDER_OSX=$BOLTS_BUILD/${BUILDCONFIGURATION}/Bolts
+
 # -----------------------------------------------------------------------------
 
 progress_message Building Framework.
@@ -119,6 +122,7 @@ $LIPO \
 function build_framework() {
   FRAMEWORK=$1
   BINARY=$2
+  HEADERS_FOLDER=$3
  
   FRAMEWORK_NAME=`basename $FRAMEWORK`
   progress_message "Building $FRAMEWORK_NAME."
@@ -132,7 +136,7 @@ function build_framework() {
   mkdir $FRAMEWORK/Versions/A/DeprecatedHeaders
 
   \cp \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts/*.h \
+    $HEADERS_FOLDER/*.h \
     $FRAMEWORK/Versions/A/Headers \
     || die "Error building framework while copying SDK headers"
 
@@ -149,8 +153,8 @@ function build_framework() {
   ln -s ./A ./Current
 }
 
-build_framework "$BOLTS_IOS_FRAMEWORK" "$BOLTS_UNIVERSAL_BINARY"
-build_framework "$BOLTS_OSX_FRAMEWORK" "$BOLTS_OSX_BINARY"
+build_framework "$BOLTS_IOS_FRAMEWORK" "$BOLTS_UNIVERSAL_BINARY" "$BOLTS_HEADERS_FOLDER_UNIVERSAL"
+build_framework "$BOLTS_OSX_FRAMEWORK" "$BOLTS_OSX_BINARY" "$BOLTS_HEADERS_FOLDER_OSX"
 
 # -----------------------------------------------------------------------------
 # Run unit tests 
