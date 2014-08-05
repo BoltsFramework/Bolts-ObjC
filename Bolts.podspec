@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.ios.source_files = "Bolts/**/*.[hm]"
   s.ios.public_header_files = "Bolts/**/*.h"
   
-  s.osx.deployment_target = "10.8"
+  s.osx.deployment_target = "10.7"
   s.osx.source_files = "Bolts/Common/*.[hm]"
   s.osx.public_header_files = "Bolts/Common/*.h"
 end
