@@ -281,14 +281,14 @@
 			isa = PBXGroup;
 			children = (
 				8103FA5619900A84000BAE3F /* BoltsVersion.h */,
-				8103FA4E19900A84000BAE3F /* BFExecutor.h */,
-				8103FA4F19900A84000BAE3F /* BFExecutor.m */,
+				8103FA5419900A84000BAE3F /* Bolts.h */,
+				8103FA5519900A84000BAE3F /* Bolts.m */,
 				8103FA5019900A84000BAE3F /* BFTask.h */,
 				8103FA5119900A84000BAE3F /* BFTask.m */,
 				8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */,
 				8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */,
-				8103FA5419900A84000BAE3F /* Bolts.h */,
-				8103FA5519900A84000BAE3F /* Bolts.m */,
+				8103FA4E19900A84000BAE3F /* BFExecutor.h */,
+				8103FA4F19900A84000BAE3F /* BFExecutor.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";

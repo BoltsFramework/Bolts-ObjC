@@ -27,16 +27,19 @@ typedef id(^BFContinuationBlock)(BFTask *task);
 
 /*!
  Creates a task that is already completed with the given result.
+ @param result The result for the task.
  */
 + (instancetype)taskWithResult:(id)result;
 
 /*!
  Creates a task that is already completed with the given error.
+ @param error The error for the task.
  */
 + (instancetype)taskWithError:(NSError *)error;
 
 /*!
  Creates a task that is already completed with the given exception.
+ @param exception The exception for the task.
  */
 + (instancetype)taskWithException:(NSException *)exception;
 
@@ -48,6 +51,7 @@ typedef id(^BFContinuationBlock)(BFTask *task);
 /*!
  Returns a task that will be completed (with result == nil) once
  all of the input tasks have completed.
+ @param tasks An `NSArray` of the tasks to use as an input.
  */
 + (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks;
 

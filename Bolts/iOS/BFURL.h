@@ -21,6 +21,7 @@
 /*!
  Creates a link target from a raw URL. Usually, this will be used to parse a URL passed into
  an app delegate's handleOpenURL: method.
+ @param url The instance of `NSURL` to create BFURL from.
  */
 + (BFURL *)URLWithURL:(NSURL *)url;
 

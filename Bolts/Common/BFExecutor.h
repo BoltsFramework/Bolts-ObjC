@@ -32,22 +32,26 @@
 + (instancetype)mainThreadExecutor;
 
 /*!
- Returns a new executor that uses the given block execute continations.
+ Returns a new executor that uses the given block to execute continuations.
+ @param block The block to use.
  */
 + (instancetype)executorWithBlock:(void(^)(void(^block)()))block;
 
 /*!
  Returns a new executor that runs continuations on the given queue.
+ @param queue The instance of `dispatch_queue_t` to dispatch all continuations onto.
  */
 + (instancetype)executorWithDispatchQueue:(dispatch_queue_t)queue;
 
 /*!
  Returns a new executor that runs continuations on the given queue.
+ @param queue The instance of `NSOperationQueue` to run all continuations on.
  */
 + (instancetype)executorWithOperationQueue:(NSOperationQueue *)queue;
 
 /*!
  Runs the given block using this executor's particular strategy.
+ @param block The block to execute.
  */
 - (void)execute:(void(^)())block;
 

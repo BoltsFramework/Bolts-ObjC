@@ -27,6 +27,7 @@ extern NSInteger const kBFMultipleErrorsError;
 
 /*!
  Returns the version of the Bolts Framework as an NSString.
+ @returns The NSString representation of the current version.
  */
 + (NSString *)version;
 

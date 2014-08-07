@@ -58,7 +58,7 @@ if [ -z "$BOLTS_SCRIPT" ]; then
   BOLTS_OSX_FRAMEWORK=$BOLTS_OSX_BUILD/$BOLTS_FRAMEWORK_NAME
 
   # The name of the docset
-  BOLTS_DOCSET_NAME=bolts.docset
+  BOLTS_DOCSET_NAME=Bolts.docset
 
   # The path to the framework docs
   BOLTS_FRAMEWORK_DOCS=$BOLTS_BUILD/$BOLTS_DOCSET_NAME

@@ -168,5 +168,5 @@ fi
 # Done
 #
 
-progress_message "Framework version info:" `perl -pe "s/.*@//" < $BOLTS_SRC/Bolts/BoltsVersion.h`
+progress_message "Framework version info:" `perl -pe "s/.*@//" < $BOLTS_SRC/Bolts/Common/BoltsVersion.h`
 common_success

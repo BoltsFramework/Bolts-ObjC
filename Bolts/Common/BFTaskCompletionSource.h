@@ -32,18 +32,21 @@
 /*!
  Completes the task by setting the result.
  Attempting to set this for a completed task will raise an exception.
+ @param result The result of the task.
  */
 - (void)setResult:(id)result;
 
 /*!
  Completes the task by setting the error.
  Attempting to set this for a completed task will raise an exception.
+ @param error The error for the task.
  */
 - (void)setError:(NSError *)error;
 
 /*!
  Completes the task by setting an exception.
  Attempting to set this for a completed task will raise an exception.
+ @param exception The exception for the task.
  */
 - (void)setException:(NSException *)exception;
 
@@ -61,12 +64,14 @@
 
 /*!
  Sets the error of the task if it wasn't already completed.
+ @param error The error for the task.
  @returns whether the new value was set.
  */
 - (BOOL)trySetError:(NSError *)error;
 
 /*!
  Sets the exception of the task if it wasn't already completed.
+ @param exception The exception for the task.
  @returns whether the new value was set.
  */
 - (BOOL)trySetException:(NSException *)exception;
