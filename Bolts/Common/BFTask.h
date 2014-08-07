@@ -76,27 +76,28 @@ typedef id(^BFContinuationBlock)(BFTask *task);
 /*!
  The result of a successful task.
  */
-- (id)result;
+@property (nonatomic, strong, readonly) id result;
+
 
 /*!
  The error of a failed task.
  */
-- (NSError *)error;
+@property (nonatomic, strong, readonly) NSError *error;
 
 /*!
  The exception of a failed task.
  */
-- (NSException *)exception;
+@property (nonatomic, strong, readonly) NSException *exception;
 
 /*!
  Whether this task has been cancelled.
  */
-- (BOOL)isCancelled;
+@property (nonatomic, assign, readonly, getter = isCancelled) BOOL cancelled;
 
 /*!
  Whether this task has completed.
  */
-- (BOOL)isCompleted;
+@property (nonatomic, assign, readonly, getter = isCompleted) BOOL completed;
 
 /*!
  Enqueues the given block to be run once this task is complete.

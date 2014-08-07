@@ -35,7 +35,7 @@ static const CGFloat BFCloseButtonHeight = 12.0;
 
 #pragma mark - Initialization
 
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self commonInit];
@@ -44,8 +44,7 @@ static const CGFloat BFCloseButtonHeight = 12.0;
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self commonInit];

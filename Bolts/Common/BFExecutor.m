@@ -18,7 +18,7 @@
 
 #pragma mark - Executor methods
 
-+ (BFExecutor *)defaultExecutor {
++ (instancetype)defaultExecutor {
     static BFExecutor *defaultExecutor = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -50,7 +50,7 @@
     return defaultExecutor;
 }
 
-+ (BFExecutor *)immediateExecutor {
++ (instancetype)immediateExecutor {
     static BFExecutor *immediateExecutor = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -61,7 +61,7 @@
     return immediateExecutor;
 }
 
-+ (BFExecutor *)mainThreadExecutor {
++ (instancetype)mainThreadExecutor {
     static BFExecutor *mainThreadExecutor = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -76,17 +76,17 @@
     return mainThreadExecutor;
 }
 
-+ (BFExecutor *)executorWithBlock:(void(^)(void(^block)()))block {
++ (instancetype)executorWithBlock:(void(^)(void(^block)()))block {
     return [[BFExecutor alloc] initWithBlock:block];
 }
 
-+ (BFExecutor *)executorWithDispatchQueue:(dispatch_queue_t)queue {
++ (instancetype)executorWithDispatchQueue:(dispatch_queue_t)queue {
     return [BFExecutor executorWithBlock:^void(void(^block)()) {
         dispatch_async(queue, block);
     }];
 }
 
-+ (BFExecutor *)executorWithOperationQueue:(NSOperationQueue *)queue {
++ (instancetype)executorWithOperationQueue:(NSOperationQueue *)queue {
     return [BFExecutor executorWithBlock:^void(void(^block)()) {
         [queue addOperation:[NSBlockOperation blockOperationWithBlock:block]];
     }];
@@ -94,7 +94,7 @@
 
 #pragma mark - Initializer
 
-- (id)initWithBlock:(void(^)(void(^block)()))block {
+- (instancetype)initWithBlock:(void(^)(void(^block)()))block {
     if (self = [super init]) {
         self.block = block;
     }
