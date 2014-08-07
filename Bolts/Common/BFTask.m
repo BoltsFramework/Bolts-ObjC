@@ -12,8 +12,6 @@
 
 #import <libkern/OSAtomic.h>
 
-#import "BFExecutor.h"
-#import "BFTaskCompletionSource.h"
 #import "Bolts.h"
 
 __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
@@ -25,20 +23,22 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     id _result;
     NSError *_error;
     NSException *_exception;
-    BOOL _cancelled;
 }
+
+@property (atomic, assign, readwrite, getter = isCancelled) BOOL cancelled;
+@property (atomic, assign, readwrite, getter = isCompleted) BOOL completed;
 
 @property (nonatomic, retain, readwrite) NSObject *lock;
 @property (nonatomic, retain, readwrite) NSCondition *condition;
-@property (nonatomic, assign, readwrite) BOOL completed;
 @property (nonatomic, retain, readwrite) NSMutableArray *callbacks;
+
 @end
 
 @implementation BFTask
 
 #pragma mark - Initializer
 
-- (id)init {
+- (instancetype)init {
     if (self = [super init]) {
         self.lock = [[NSObject alloc] init];
         self.condition = [[NSCondition alloc] init];
@@ -49,36 +49,36 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 
 #pragma mark - Task Class methods
 
-+ (BFTask *)taskWithResult:(id)result {
++ (instancetype)taskWithResult:(id)result {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     tcs.result = result;
     return tcs.task;
 }
 
-+ (BFTask *)taskWithError:(NSError *)error {
++ (instancetype)taskWithError:(NSError *)error {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     tcs.error = error;
     return tcs.task;
 }
 
-+ (BFTask *)taskWithException:(NSException *)exception {
++ (instancetype)taskWithException:(NSException *)exception {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     tcs.exception = exception;
     return tcs.task;
 }
 
-+ (BFTask *)cancelledTask {
++ (instancetype)cancelledTask {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     [tcs cancel];
     return tcs.task;
 }
 
-+ (BFTask *)taskForCompletionOfAllTasks:(NSArray *)tasks {
++ (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks {
     __block int32_t total = (int32_t)tasks.count;
     if (total == 0) {
         return [BFTask taskWithResult:nil];
     }
-    
+
     __block int32_t cancelled = 0;
     NSObject *lock = [[NSObject alloc] init];
     NSMutableArray *errors = [NSMutableArray array];
@@ -87,7 +87,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
         [task continueWithBlock:^id(BFTask *task) {
-            if (task.isCancelled) {
+            if (task.cancelled) {
                 OSAtomicIncrement32(&cancelled);
             } else if (task.exception) {
                 @synchronized (lock) {
@@ -98,7 +98,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                     [errors addObject:task.error];
                 }
             }
-            
+
             if (OSAtomicDecrement32(&total) == 0) {
                 if (cancelled > 0) {
                     [tcs cancel];
@@ -107,9 +107,9 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                         tcs.exception = [exceptions objectAtIndex:0];
                     } else {
                         NSException *exception =
-                            [NSException exceptionWithName:@"BFMultipleExceptionsException"
-                                                    reason:@"There were multiple exceptions."
-                                                  userInfo:@{ @"exceptions": exceptions }];
+                        [NSException exceptionWithName:@"BFMultipleExceptionsException"
+                                                reason:@"There were multiple exceptions."
+                                              userInfo:@{ @"exceptions": exceptions }];
                         tcs.exception = exception;
                     }
                 } else if (errors.count > 0) {
@@ -131,7 +131,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     return tcs.task;
 }
 
-+ (BFTask *)taskWithDelay:(int)millis {
++ (instancetype)taskWithDelay:(int)millis {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, millis * NSEC_PER_MSEC);
     dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
@@ -140,8 +140,8 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     return tcs.task;
 }
 
-+ (BFTask *)taskFromExecutor:(BFExecutor *)executor
-                   withBlock:(id (^)())block {
++ (instancetype)taskFromExecutor:(BFExecutor *)executor
+                       withBlock:(id (^)())block {
     return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:block];
 }
 
@@ -243,7 +243,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
             return NO;
         }
         self.completed = YES;
-        _cancelled = YES;
+        self.cancelled = YES;
         [self runContinuations];
         return YES;
     }
@@ -275,10 +275,10 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 
 #pragma mark - Chaining methods
 
-- (BFTask *)continueWithExecutor:(BFExecutor *)executor
-                       withBlock:(BFContinuationBlock)block {
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+                           withBlock:(BFContinuationBlock)block {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-    
+
     // Capture all of the state that needs to used when the continuation is complete.
     void (^wrappedBlock)() = ^() {
         [executor execute:^{
@@ -291,7 +291,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
             }
             if ([result isKindOfClass:[BFTask class]]) {
                 [(BFTask *)result continueWithBlock:^id(BFTask *task) {
-                    if (task.isCancelled) {
+                    if (task.cancelled) {
                         [tcs cancel];
                     } else if (task.exception) {
                         tcs.exception = task.exception;
@@ -307,7 +307,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
             }
         }];
     };
-    
+
     BOOL completed;
     @synchronized (self.lock) {
         completed = self.completed;
@@ -318,18 +318,18 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     if (completed) {
         wrappedBlock();
     }
-    
+
     return tcs.task;
 }
 
-- (BFTask *)continueWithBlock:(BFContinuationBlock)block {
+- (instancetype)continueWithBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
 }
 
-- (BFTask *)continueWithExecutor:(BFExecutor *)executor
-                withSuccessBlock:(BFContinuationBlock)block {
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+                    withSuccessBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
-        if (task.error || task.exception || task.isCancelled) {
+        if (task.error || task.exception || task.cancelled) {
             return task;
         } else {
             return block(task);
@@ -337,7 +337,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     }];
 }
 
-- (BFTask *)continueWithSuccessBlock:(BFContinuationBlock)block {
+- (instancetype)continueWithSuccessBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:[BFExecutor defaultExecutor] withSuccessBlock:block];
 }
 
@@ -353,7 +353,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     }
 
     @synchronized (self.lock) {
-        if (self.isCompleted) {
+        if (self.completed) {
             return;
         }
         [self.condition lock];

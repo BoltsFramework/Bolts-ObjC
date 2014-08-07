@@ -23,7 +23,7 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
 
 @implementation BFURL
 
-- (id)initWithURL:(NSURL *)url {
+- (instancetype)initWithURL:(NSURL *)url {
     if (self = [super init]) {
         _inputURL = url;
         _targetURL = url;
