@@ -28,6 +28,10 @@ static id<BFAppLinkResolving> defaultResolver;
 
 @interface BFAppLinkNavigation ()
 
+@property (nonatomic, copy, readwrite) NSDictionary *extras;
+@property (nonatomic, copy, readwrite) NSDictionary *appLinkData;
+@property (nonatomic, strong, readwrite) BFAppLink *appLink;
+
 @end
 
 @implementation BFAppLinkNavigation
@@ -36,9 +40,9 @@ static id<BFAppLinkResolving> defaultResolver;
                                extras:(NSDictionary *)extras
                           appLinkData:(NSDictionary *)appLinkData {
     BFAppLinkNavigation *navigation = [[self alloc] init];
-    navigation->_appLink = appLink;
-    navigation->_extras = extras;
-    navigation->_appLinkData = appLinkData;
+    navigation.appLink = appLink;
+    navigation.extras = extras;
+    navigation.appLinkData = appLinkData;
     return navigation;
 }
 

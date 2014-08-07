@@ -40,17 +40,17 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
  data that should be passed along with the request, such as advertiser or affiliate IDs or
  other such metadata relevant on this device.
  */
-@property (readonly, strong) NSDictionary *extras;
+@property (nonatomic, copy, readonly) NSDictionary *extras;
 
 /*!
  The al_applink_data for the AppLinkNavigation. This will generally contain data common to
  navigation attempts such as back-links, user agents, and other information that may be used
  in routing and handling an App Link request.
  */
-@property (readonly, strong) NSDictionary *appLinkData;
+@property (nonatomic, copy, readonly) NSDictionary *appLinkData;
 
 /*! The AppLink to navigate to */
-@property (readonly, strong) BFAppLink *appLink;
+@property (nonatomic, strong, readonly) BFAppLink *appLink;
 
 /*! Creates an AppLinkNavigation with the given link, extras, and App Link data */
 + (instancetype)navigationWithAppLink:(BFAppLink *)appLink

@@ -22,12 +22,12 @@
                              appName:(NSString *)appName;
 
 /*! The URL prefix for this app link target */
-@property (readonly, copy) NSURL *URL;
+@property (nonatomic, strong, readonly) NSURL *URL;
 
 /*! The app ID for the app store */
-@property (readonly, copy) NSString *appStoreId;
+@property (nonatomic, copy, readonly) NSString *appStoreId;
 
 /*! The name of the app */
-@property (readonly, copy) NSString *appName;
+@property (nonatomic, copy, readonly) NSString *appName;
 
 @end

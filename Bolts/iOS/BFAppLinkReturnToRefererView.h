@@ -53,26 +53,26 @@ typedef enum BFIncludeStatusBarInSize {
 /*!
  The delegate that will be notified when the user navigates back to the referer.
  */
-@property (readwrite, weak, nonatomic) id<BFAppLinkReturnToRefererViewDelegate> delegate;
+@property (nonatomic, weak) id<BFAppLinkReturnToRefererViewDelegate> delegate;
 
 /*!
  The color of the text label and close button.
  */
-@property (readwrite, strong, nonatomic) UIColor *textColor;
+@property (nonatomic, strong) UIColor *textColor;
 
-@property (readwrite, strong, nonatomic) BFAppLink *refererAppLink;
+@property (nonatomic, strong) BFAppLink *refererAppLink;
 
 /*!
  Indicates whether to extend the size of the view to include the current status bar
  size, for use in scenarios where the view might extend under the status bar on iOS 7 and
  above; this property has no effect on earlier versions of iOS. 
  */
-@property (readwrite, assign, nonatomic) BFIncludeStatusBarInSize includeStatusBarInSize;
+@property (nonatomic, assign) BFIncludeStatusBarInSize includeStatusBarInSize;
 
 /*!
  Indicates whether the user has closed the view by clicking the close button.
  */
-@property (readwrite, assign, nonatomic) BOOL closed;
+@property (nonatomic, assign) BOOL closed;
 
 /*!
  For apps that use a navigation controller, this method allows for displaying the view as

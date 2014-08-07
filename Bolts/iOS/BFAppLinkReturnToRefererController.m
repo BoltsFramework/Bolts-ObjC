@@ -18,7 +18,7 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 
 @interface BFAppLinkReturnToRefererController ()
 
-@property (readwrite, strong, nonatomic) UINavigationController *attachedToNavController; // TODO rename
+@property (nonatomic, strong, readwrite) UINavigationController *attachedToNavController; // TODO rename
 
 @end
 
