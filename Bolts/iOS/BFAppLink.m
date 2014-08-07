@@ -20,15 +20,23 @@ NSString *const BFAppLinkRefererUrl = @"url";
 NSString *const BFAppLinkVersionKeyName = @"version";
 NSString *const BFAppLinkVersion = @"1.0";
 
+@interface BFAppLink ()
+
+@property (nonatomic, strong, readwrite) NSURL *sourceURL;
+@property (nonatomic, copy, readwrite) NSArray *targets;
+@property (nonatomic, strong, readwrite) NSURL *webURL;
+
+@end
+
 @implementation BFAppLink
 
 + (instancetype)appLinkWithSourceURL:(NSURL *)sourceURL
                              targets:(NSArray *)targets
                               webURL:(NSURL *)webURL {
     BFAppLink *link = [[self alloc] init];
-    link->_sourceURL = sourceURL;
-    link->_targets = [NSArray arrayWithArray:targets];
-    link->_webURL = webURL;
+    link.sourceURL = sourceURL;
+    link.targets = [targets copy];
+    link.webURL = webURL;
     return link;
 }
 

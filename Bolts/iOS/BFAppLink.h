@@ -35,15 +35,15 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersion;
                               webURL:(NSURL *)webURL;
 
 /*! The URL from which this BFAppLink was derived */
-@property (copy, readonly) NSURL *sourceURL;
+@property (nonatomic, strong, readonly) NSURL *sourceURL;
 
 /*!
  The ordered list of targets applicable to this platform that will be used
  for navigation.
  */
-@property (strong, readonly) NSArray *targets;
+@property (nonatomic, copy, readonly) NSArray *targets;
 
 /*! The fallback web URL to use if no targets are installed on this device. */
-@property (copy, readonly) NSURL *webURL;
+@property (nonatomic, strong, readonly) NSURL *webURL;
 
 @end

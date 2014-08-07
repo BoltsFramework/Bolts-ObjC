@@ -10,15 +10,23 @@
 
 #import "BFAppLinkTarget.h"
 
+@interface BFAppLinkTarget ()
+
+@property (nonatomic, strong, readwrite) NSURL *URL;
+@property (nonatomic, copy, readwrite) NSString *appStoreId;
+@property (nonatomic, copy, readwrite) NSString *appName;
+
+@end
+
 @implementation BFAppLinkTarget
 
 + (instancetype)appLinkTargetWithURL:(NSURL *)url
                           appStoreId:(NSString *)appStoreId
                              appName:(NSString *)appName {
     BFAppLinkTarget *target = [[self alloc] init];
-    target->_URL = url;
-    target->_appStoreId = appStoreId;
-    target->_appName = appName;
+    target.URL = url;
+    target.appStoreId = appStoreId;
+    target.appName = appName;
     return target;
 }
 
