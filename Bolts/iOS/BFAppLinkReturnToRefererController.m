@@ -37,18 +37,20 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
     if (self) {
         _attachedToNavController = navController;
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(statusBarFrameWillChange:)
-                                                     name:UIApplicationWillChangeStatusBarFrameNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(statusBarFrameDidChange:)
-                                                     name:UIApplicationDidChangeStatusBarFrameNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(orientationDidChange:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+        if (_attachedToNavController != nil) {
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(statusBarFrameWillChange:)
+                                                         name:UIApplicationWillChangeStatusBarFrameNotification
+                                                       object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(statusBarFrameDidChange:)
+                                                         name:UIApplicationDidChangeStatusBarFrameNotification
+                                                       object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(orientationDidChange:)
+                                                         name:UIDeviceOrientationDidChangeNotification
+                                                       object:nil];
+        }
     }
     return self;
 }
@@ -57,15 +59,7 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
     _view.delegate = nil;
 
     if (_attachedToNavController) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIApplicationWillChangeStatusBarFrameNotification
-                                                      object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIApplicationDidChangeStatusBarFrameNotification
-                                                      object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIDeviceOrientationDidChangeNotification
-                                                      object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }
 
