@@ -627,6 +627,48 @@ Note that we initialize the view with a zero size, because we will determine whe
 
 In a navigaton-controller view hierarchy, the banner should be displayed above the navigation bar, and `BFAppLinkReturnToRefererController` provides an `initForDisplayAboveNavController` method to assist with this.
 
+## Analytics
+
+Bolts introduces Measurement Event. App Links posts three different Measurement Event notifications to the application, which can be caught and integrated with existing analytics components in your application.
+
+*  `al_nav_out` — Raised when your app switches out to an App Links URL.
+*  `al_nav_in` — Raised when your app opens an incoming App Links URL.
+*  `al_ref_back_out` — Raised when your app returns back the referrer app using the built-in top navigation back bar view.
+
+### Listen for App Links Measurement Events
+
+There are other analytics tools that are integrated with Bolts' App Links events, but you can also listen for these events yourself:
+
+```objective-c
+[[NSNotificationCenter defaultCenter] addObserverForName:BFMeasurementEventNotificationName object:nil queue:nil usingBlock:^(NSNotification *note) {
+    NSDictionary *event = note.userInfo;
+    NSDictionary *eventData = event[BFMeasurementEventArgsKey];
+    // Integrate to your logging/analytics component.
+}];
+```
+
+### App Links Event Fields
+
+App Links Measurement Events sends additional information from App Links Intents in flattened string key value pairs. Here are some of the useful fields for the three events.
+
+* `al_nav_in`
+  * `inputURL`: the URL that opens the app.
+  * `inputURLScheme`: the scheme of `inputURL`.
+  * `refererURL`: the URL that the referrer app added into `al_applink_data`: `referer_app_link`.
+  * `refererAppName`: the app name that the referrer app added to `al_applink_data`: `referer_app_link`.
+  * `sourceApplication`: the bundle of referrer application.
+  * `targetURL`: the `target_url` field in `al_applink_data`.
+  * `version`: App Links API  version.
+
+* `al_nav_out` / `al_ref_back_out`
+  * `outputURL`: the URL used to open the other app (or browser). If there is an eligible app to open, this will be the custom scheme url/intent in `al_applink_data`.
+  * `outputURLScheme`: the scheme of `outputURL`.
+  * `sourceURL`: the URL of the page hosting App Links meta tags.
+  * `sourceURLHost`: the hostname of `sourceURL`.
+  * `success`: `“1”` to indicate success in opening the App Link in another app or browser; `“0”` to indicate failure to open the App Link.
+  * `type`: `“app”` for open in app, `“web”` for open in browser; `“fail”` when the success field is `“0”`.
+  * `version`: App Links API version.
+
 # Installation
 
 You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-iOS/releases).
