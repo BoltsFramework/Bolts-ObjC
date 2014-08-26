@@ -608,11 +608,11 @@ When an application is opened via an App Link, a banner allowing the user to "To
 
   self.returnToRefererController = [[BFAppLinkReturnToRefererController alloc] init];
 
-  // self.returnToRefererView is a BFAppLinkReturnToRefererView
-  // You may initialize the view either by loading it from a NIB or programmatically
+  // self.returnToRefererView is a BFAppLinkReturnToRefererView.
+  // You may initialize the view either by loading it from a NIB or programmatically.
   self.returnToRefererController.view = self.returnToRefererView;
   
-  // If you have a UINavigationController in the view, then the bar must be shown above it
+  // If you have a UINavigationController in the view, then the bar must be shown above it.
   [self.returnToRefererController]
 }
 ```
