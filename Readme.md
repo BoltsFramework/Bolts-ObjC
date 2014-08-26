@@ -623,7 +623,7 @@ The following code assumes that the view controller has an `openedAppLinkURL` `N
 - (void)viewWillAppear {
   [super viewWillAppear];
 
-  // Show only if you have a back AppLink
+  // Show only if you have a back AppLink.
   [self.returnToRefererController showViewForRefererURL:self.openedAppLinkURL];
 }
 ```
