@@ -515,7 +515,7 @@ For example, you can use the `BFURL` utility class to parse an incoming URL in y
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    BFURL *parsedUrl = [BFURL URLWithURL:url];
+    BFURL *parsedUrl = [BFURL URLWithInboundURL:url sourceApplication:sourceApplication];
     
     // Use the target URL from the App Link to locate content.
     if ([parsedUrl.targetURL.pathComponents[1] isEqualToString:@"profiles"]) {
@@ -598,7 +598,7 @@ Alternatively, a you can swap out the default resolver to be used by the built-i
 
 ## App Link Return-to-Referer View
 
-When an application is opened via an App Link, a banner allowing the user to "Touch to return to <calling app>" should be displayed. The `BFAppLinkReturnToRefererView` provides this functionality. It will take an incoming App Link and parse the referer information to display the appropriate calling app name. You may initialize the view either by loading it from a NIB or programmatically:
+When an application is opened via an App Link, a banner allowing the user to "Touch to return to <calling app>" should be displayed. The `BFAppLinkReturnToRefererView` provides this functionality. It will take an incoming App Link and parse the referer information to display the appropriate calling app name.
 
 ```objective-c
 - (void)viewDidLoad {
@@ -606,21 +606,24 @@ When an application is opened via an App Link, a banner allowing the user to "To
 
   // Perform other view initialization.
 
-  self.returnToRefererView = [[BFAppLinkReturnToRefererView alloc] initWithFrame:CGRectZero];
-  self.returnToRefererController = [[BFAppLinkReturnToRefererController] alloc] init];
+  self.returnToRefererController = [[BFAppLinkReturnToRefererController alloc] init];
 
-  // We could also have left .view unassigned and the controller will automatically
-  //  create a BFAppLinkReturnToRefererView when it needs one.
+  // self.returnToRefererView is a BFAppLinkReturnToRefererView
+  // You may initialize the view either by loading it from a NIB or programmatically
   self.returnToRefererController.view = self.returnToRefererView;
+  
+  // If you have a UINavigationController in the view, then the bar must be shown above it
+  [self.returnToRefererController]
 }
 ```
 
-Note that we initialize the view with a zero size, because we will determine whether or not to display a banner based on the referer data in the incoming App Link using the associated `BFAppLinkReturnToRefererController`, typically in a view controller's `viewWillAppear` or similar method, depending on a particular app's view hierarchy, etc. The following code assumes that the view controller has an `openedAppLinkURL` `NSURL` property that has already been populated with the URL used to open the app:
+The following code assumes that the view controller has an `openedAppLinkURL` `NSURL` property that has already been populated with the URL used to open the app. You can then do something like this to show the view:
 
 ```objective-c
 - (void)viewWillAppear {
   [super viewWillAppear];
 
+  // Show only if you have a back AppLink
   [self.returnToRefererController showViewForRefererURL:self.openedAppLinkURL];
 }
 ```
