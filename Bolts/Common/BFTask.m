@@ -290,7 +290,8 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                 return;
             }
             if ([result isKindOfClass:[BFTask class]]) {
-                [(BFTask *)result continueWithBlock:^id(BFTask *task) {
+                
+                id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
                     if (task.cancelled) {
                         [tcs cancel];
                     } else if (task.exception) {
@@ -301,7 +302,16 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                         tcs.result = task.result;
                     }
                     return nil;
-                }];
+                };
+                
+                BFTask *resultTask = (BFTask *)result;
+                
+                if (resultTask.isCompleted) {
+                    setupWithTask(resultTask);
+                } else {
+                    [resultTask continueWithBlock:setupWithTask];
+                }
+                
             } else {
                 tcs.result = result;
             }
