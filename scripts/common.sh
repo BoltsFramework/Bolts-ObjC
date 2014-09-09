@@ -62,6 +62,9 @@ if [ -z "$BOLTS_SCRIPT" ]; then
 
   # The path to the framework docs
   BOLTS_FRAMEWORK_DOCS=$BOLTS_BUILD/$BOLTS_DOCSET_NAME
+  
+  # Archive name for distribution
+  BOLTS_DISTRIBUTION_ARCHIVE=Bolts-iOS.zip
 
 fi
 

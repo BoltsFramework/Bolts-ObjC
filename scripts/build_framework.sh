@@ -93,8 +93,6 @@ function xcode_build_target() {
 
 xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}"
 xcode_build_target "iphoneos" "${BUILDCONFIGURATION}"
-xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}64"
-xcode_build_target "iphoneos" "${BUILDCONFIGURATION}64"
 xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Mac"
 
 # -----------------------------------------------------------------------------
@@ -108,8 +106,6 @@ $LIPO \
   -create \
     $BOLTS_BUILD/${BUILDCONFIGURATION}-iphonesimulator/libBolts.a \
     $BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/libBolts.a \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}64-iphonesimulator/libBolts.a \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}64-iphoneos/libBolts.a \
   -output $BOLTS_UNIVERSAL_BINARY \
   || die "lipo failed - could not create universal static library"
 
