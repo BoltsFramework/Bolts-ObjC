@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BFAppLink.h"
+#import <Bolts/BFAppLink.h>
 
 /*!
  The result of calling navigate on a BFAppLinkNavigation
