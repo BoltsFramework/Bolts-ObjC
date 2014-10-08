@@ -1,4 +1,6 @@
 language: objective-c
+before_install:
+  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 script:
-  - xctool -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug64 -destination 'name=iPhone Retina (4-inch 64-bit)' test
-  - xctool -project Bolts.xcodeproj -sdk macosx -scheme MacBolts test
+  - set -o pipefail && xcodebuild -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug test | xcpretty -c
+  - set -o pipefail && xcodebuild -project Bolts.xcodeproj -sdk macosx -scheme MacBolts test | xcpretty -c ; exit
