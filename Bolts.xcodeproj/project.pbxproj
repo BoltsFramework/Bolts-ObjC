@@ -918,6 +918,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
@@ -937,6 +938,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
