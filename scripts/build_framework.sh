@@ -57,7 +57,7 @@ test -x "$XCODEBUILD" || die 'Could not find xcodebuild in $PATH'
 test -x "$LIPO" || die 'Could not find lipo in $PATH'
 
 BOLTS_UNIVERSAL_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts
-BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/MacBolts.dylib
+BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/Bolts.framework
 
 # -----------------------------------------------------------------------------
 
@@ -145,8 +145,11 @@ function build_framework() {
   ln -s ./A ./Current
 }
 
+# Build iOS framework from all architectures together
 build_framework "$BOLTS_IOS_FRAMEWORK" "$BOLTS_UNIVERSAL_BINARY"
-build_framework "$BOLTS_OSX_FRAMEWORK" "$BOLTS_OSX_BINARY"
+
+# Copy/Paste OSX framework, as this is already built for us
+cp -r "$BOLTS_OSX_BINARY" "$BOLTS_OSX_FRAMEWORK"
 
 # -----------------------------------------------------------------------------
 # Run unit tests 

@@ -58,7 +58,7 @@
 		8E8C8EFC17F23E6E00E3F1C7 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CE917DE9DE000427E62 /* libBolts.a */; };
 		8E8C8F1A17F241DA00E3F1C7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */; };
 		8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
-		8E8C8F2A17F2420400E3F1C7 /* MacBolts.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDDA63517E17DDD00655F8A /* MacBolts.dylib */; };
+		8E8C8F2A17F2420400E3F1C7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDDA63517E17DDD00655F8A /* Bolts.framework */; };
 		8E9C3CED17DE9DE000427E62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
 		8EA6BF691805CF5600337041 /* BoltsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA6BF681805CF5600337041 /* BoltsTests.m */; };
 		8EDDA63017E17DDC00655F8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
@@ -127,6 +127,7 @@
 		8103FA6619900A84000BAE3F /* BFWebViewAppLinkResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWebViewAppLinkResolver.h; sourceTree = "<group>"; };
 		8103FA6719900A84000BAE3F /* BFWebViewAppLinkResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWebViewAppLinkResolver.m; sourceTree = "<group>"; };
 		81D0EE7C19AFA8260000AE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		81F0E88D19E5CB5A00812A88 /* Mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Mac-Info.plist"; path = "Resources/Mac-Info.plist"; sourceTree = "<group>"; };
 		8550FD2E18EE1B7A00976B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkReturnToRefererViewTests.m; sourceTree = "<group>"; };
 		8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -141,7 +142,7 @@
 		8E9C3CFB17DE9DE000427E62 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		8E9C3D1C17DE9F6500427E62 /* TaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTests.m; sourceTree = "<group>"; };
 		8EA6BF681805CF5600337041 /* BoltsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoltsTests.m; sourceTree = "<group>"; };
-		8EDDA63517E17DDD00655F8A /* MacBolts.dylib */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = MacBolts.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EDDA63517E17DDD00655F8A /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B242FAB719A567660097ECAE /* BFAppLink_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink_Internal.h; sourceTree = "<group>"; };
 		B242FAB819A567660097ECAE /* BFMeasurementEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMeasurementEvent.h; sourceTree = "<group>"; };
 		B242FAB919A567660097ECAE /* BFMeasurementEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFMeasurementEvent.m; sourceTree = "<group>"; };
@@ -174,7 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E8C8F2A17F2420400E3F1C7 /* MacBolts.dylib in Frameworks */,
+				8E8C8F2A17F2420400E3F1C7 /* Bolts.framework in Frameworks */,
 				8E8C8F1A17F241DA00E3F1C7 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,7 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				8E9C3CE917DE9DE000427E62 /* libBolts.a */,
-				8EDDA63517E17DDD00655F8A /* MacBolts.dylib */,
+				8EDDA63517E17DDD00655F8A /* Bolts.framework */,
 				8E8C8EE917F23D1D00E3F1C7 /* BoltsTests.xctest */,
 				8E8C8F1917F241DA00E3F1C7 /* MacBoltsTests.xctest */,
 				1EC3016018CDAA8400D06D07 /* BoltsTestUI.app */,
@@ -338,6 +339,7 @@
 		8E9C3CEF17DE9DE000427E62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				81F0E88D19E5CB5A00812A88 /* Mac-Info.plist */,
 				8E9C3CF017DE9DE000427E62 /* Bolts-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -467,8 +469,8 @@
 			);
 			name = MacBolts;
 			productName = Bolts;
-			productReference = 8EDDA63517E17DDD00655F8A /* MacBolts.dylib */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 8EDDA63517E17DDD00655F8A /* Bolts.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -476,7 +478,7 @@
 		8E9C3CE117DE9DE000427E62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Parse Inc.";
 				TargetAttributes = {
 					8E8C8EE817F23D1D00E3F1C7 = {
@@ -847,8 +849,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PUBLIC_HEADERS_FOLDER_PATH = "./$(PROJECT_NAME)";
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
@@ -869,8 +870,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PUBLIC_HEADERS_FOLDER_PATH = "./$(PROJECT_NAME)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -889,6 +888,7 @@
 				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "./$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -908,6 +908,7 @@
 				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "./$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -916,16 +917,17 @@
 		8EDDA63317E17DDC00655F8A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
+				INFOPLIST_FILE = "Bolts/Resources/Mac-Info.plist";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MacBolts;
+				PRODUCT_NAME = Bolts;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -934,16 +936,17 @@
 		8EDDA63417E17DDC00655F8A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/Bolts.framework/Bolts";
+				INFOPLIST_FILE = "Bolts/Resources/Mac-Info.plist";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MacBolts;
+				PRODUCT_NAME = Bolts;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
