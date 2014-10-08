@@ -664,6 +664,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -690,6 +691,8 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -723,6 +726,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "BoltsTests/BoltsTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -753,6 +757,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "BoltsTests/BoltsTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -873,6 +878,10 @@
 		8E9C3D0F17DE9DE000427E62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+				);
 				DSTROOT = /tmp/Bolts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
@@ -888,6 +897,10 @@
 		8E9C3D1017DE9DE000427E62 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					armv7s,
+				);
 				DSTROOT = /tmp/Bolts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
