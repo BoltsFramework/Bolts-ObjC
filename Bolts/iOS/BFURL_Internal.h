@@ -8,7 +8,7 @@
  *
  */
 
-#import "BFURL.h"
+#import <Bolts/BFURL.h>
 
 @interface BFURL (Internal)
 + (BFURL *)URLForRenderBackToReferrerBarURL:(NSURL *)url;
