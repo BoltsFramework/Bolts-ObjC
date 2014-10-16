@@ -362,4 +362,14 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     [self.condition unlock];
 }
 
+#pragma mark - debug tools
+-(NSString*)description; {
+    return [NSString stringWithFormat:@"%@ complete:%@ cancelled:%@ %@",
+            super.description,
+            self.isCompleted ? @"YES" : @"NO",
+            self.isCancelled ? @"YES" : @"NO",
+            self.isCompleted ? [NSString stringWithFormat:@"result:%@", _result] : @""];
+    
+}
+
 @end
