@@ -81,7 +81,7 @@ BFTasks use Objective-C blocks, so the syntax should be pretty straightforward. 
     // and provides an NSString as output.
 
     NSNumber *number = task.result;
-    return [NSString stringWithFormat:"%@", number];
+    return [NSString stringWithFormat:@"%@", number];
   )];
 }
 ```
