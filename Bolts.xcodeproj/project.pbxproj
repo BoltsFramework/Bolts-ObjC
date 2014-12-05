@@ -15,6 +15,10 @@
 		1EC3017118CDAA8400D06D07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3017018CDAA8400D06D07 /* AppDelegate.m */; };
 		1EC3017318CDAA8400D06D07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EC3017218CDAA8400D06D07 /* Images.xcassets */; };
 		1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3019018CDABCE00D06D07 /* AppLinkTests.m */; };
+		3D7366631A323398002E16AD /* BFTaskCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D7366611A323398002E16AD /* BFTaskCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D7366641A323398002E16AD /* BFTaskCancellationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7366621A323398002E16AD /* BFTaskCancellationToken.m */; };
+		3D7366651A32375F002E16AD /* BFTaskCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D7366611A323398002E16AD /* BFTaskCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D7366661A325686002E16AD /* BFTaskCancellationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D7366621A323398002E16AD /* BFTaskCancellationToken.m */; };
 		8103FA6819900A84000BAE3F /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
 		8103FA6919900A84000BAE3F /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
 		8103FA6A19900A84000BAE3F /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
@@ -101,6 +105,8 @@
 		1EC3017018CDAA8400D06D07 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1EC3017218CDAA8400D06D07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1EC3019018CDABCE00D06D07 /* AppLinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
+		3D7366611A323398002E16AD /* BFTaskCancellationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTaskCancellationToken.h; sourceTree = "<group>"; };
+		3D7366621A323398002E16AD /* BFTaskCancellationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTaskCancellationToken.m; sourceTree = "<group>"; };
 		8103FA4E19900A84000BAE3F /* BFExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExecutor.h; sourceTree = "<group>"; };
 		8103FA4F19900A84000BAE3F /* BFExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExecutor.m; sourceTree = "<group>"; };
 		8103FA5019900A84000BAE3F /* BFTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTask.h; sourceTree = "<group>"; };
@@ -231,6 +237,8 @@
 				8103FA5519900A84000BAE3F /* Bolts.m */,
 				8103FA5019900A84000BAE3F /* BFTask.h */,
 				8103FA5119900A84000BAE3F /* BFTask.m */,
+				3D7366611A323398002E16AD /* BFTaskCancellationToken.h */,
+				3D7366621A323398002E16AD /* BFTaskCancellationToken.m */,
 				8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */,
 				8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */,
 				8103FA4E19900A84000BAE3F /* BFExecutor.h */,
@@ -368,6 +376,7 @@
 				81D0EE9219AFAA6F0000AE75 /* BFMeasurementEvent.h in Headers */,
 				81D0EE9319AFAA6F0000AE75 /* BFURL.h in Headers */,
 				81D0EE8419AFAA100000AE75 /* Bolts.h in Headers */,
+				3D7366631A323398002E16AD /* BFTaskCancellationToken.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +386,7 @@
 			files = (
 				81D0EE8519AFAA190000AE75 /* BFTask.h in Headers */,
 				81D0EE8819AFAA240000AE75 /* BFExecutor.h in Headers */,
+				3D7366651A32375F002E16AD /* BFTaskCancellationToken.h in Headers */,
 				81D0EE8A19AFAA2C0000AE75 /* BFTaskCompletionSource.h in Headers */,
 				81D0EE8219AFAA060000AE75 /* BoltsVersion.h in Headers */,
 				81D0EE8319AFAA0E0000AE75 /* Bolts.h in Headers */,
@@ -573,6 +583,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D7366641A323398002E16AD /* BFTaskCancellationToken.m in Sources */,
 				8103FA7819900A84000BAE3F /* BFAppLinkTarget.m in Sources */,
 				8103FA6C19900A84000BAE3F /* BFTaskCompletionSource.m in Sources */,
 				8103FA7619900A84000BAE3F /* BFAppLinkReturnToRefererView.m in Sources */,
@@ -596,6 +607,7 @@
 				8103FA6B19900A84000BAE3F /* BFTask.m in Sources */,
 				8103FA6F19900A84000BAE3F /* Bolts.m in Sources */,
 				8103FA6919900A84000BAE3F /* BFExecutor.m in Sources */,
+				3D7366661A325686002E16AD /* BFTaskCancellationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
