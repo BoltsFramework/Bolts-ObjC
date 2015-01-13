@@ -122,7 +122,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                         tcs.error = error;
                     }
                 } else {
-                    tcs.result = nil;
+                    tcs.result = tasks;
                 }
             }
             return nil;
