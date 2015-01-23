@@ -333,7 +333,7 @@ func fetchAsync(object: PFObject) -> BFTask {
   var task = BFTaskCompletionSource()
   object.fetchInBackgroundWithBlock {
     (object: PFObject!, error: NSError!) -> Void in
-    if !error {
+    if error == nil {
       task.setResult(object)
     } else {
       task.setError(error)
