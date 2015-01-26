@@ -26,6 +26,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 }
 
 @property (atomic, assign, readwrite, getter = isCancelled) BOOL cancelled;
+@property (atomic, assign, readwrite, getter = isFaulted) BOOL faulted;
 @property (atomic, assign, readwrite, getter = isCompleted) BOOL completed;
 
 @property (nonatomic, retain, readwrite) NSObject *lock;
@@ -131,6 +132,12 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     return tcs.task;
 }
 
++ (instancetype)taskForCompletionOfAllTasksWithResults:(NSArray *)tasks {
+    return [[self taskForCompletionOfAllTasks:tasks] continueWithSuccessBlock:^id(BFTask *task) {
+        return [tasks valueForKey:@"result"];
+    }];
+}
+
 + (instancetype)taskWithDelay:(int)millis {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, millis * NSEC_PER_MSEC);
@@ -191,6 +198,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
             return NO;
         }
         self.completed = YES;
+        self.faulted = YES;
         _error = error;
         [self runContinuations];
         return YES;
@@ -216,6 +224,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
             return NO;
         }
         self.completed = YES;
+        self.faulted = YES;
         _exception = exception;
         [self runContinuations];
         return YES;
@@ -225,6 +234,12 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 - (BOOL)isCancelled {
     @synchronized (self.lock) {
         return _cancelled;
+    }
+}
+
+- (BOOL)isFaulted {
+    @synchronized (self.lock) {
+        return _faulted;
     }
 }
 
