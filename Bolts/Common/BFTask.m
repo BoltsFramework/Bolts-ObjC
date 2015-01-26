@@ -377,4 +377,29 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     [self.condition unlock];
 }
 
+#pragma mark - NSObject
+
+- (NSString *)description {
+    // Acquire the data from the locked properties
+    BOOL isCompleted;
+    BOOL isCancelled;
+    BOOL isFaulted;
+    
+    @synchronized (self.lock) {
+        isCompleted = self.completed;
+        isCancelled = self.cancelled;
+        isFaulted = self.faulted;
+    }
+    
+    // Description string includes status information and, if available, the
+    // result sisnce in some ways this is what a promise actually "is".
+    return [NSString stringWithFormat:@"<%@: %p; completed = %@; cancelled = %@; faulted = %@;%@>",
+        NSStringFromClass([self class]),
+        self,
+        isCompleted ? @"YES" : @"NO",
+        isCancelled ? @"YES" : @"NO",
+        isFaulted ? @"YES" : @"NO",
+        isCompleted ? [NSString stringWithFormat:@" result:%@", _result] : @""];
+}
+
 @end
