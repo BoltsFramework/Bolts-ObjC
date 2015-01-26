@@ -11,17 +11,17 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>61C4B9E3B61282127C102C87B46B8CDE985974AE</key>
-		<string>ssh://github.com/BoltsFramework/Bolts-iOS.git</string>
+		<string>github.com:rogernolan/Bolts-iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Bolts.xcodeproj/project.xcworkspace</string>
+	<string>Bolts.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>61C4B9E3B61282127C102C87B46B8CDE985974AE</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/BoltsFramework/Bolts-iOS.git</string>
+	<string>github.com:rogernolan/Bolts-iOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
