@@ -433,6 +433,50 @@
     }] waitUntilFinished];
 }
 
+- (void)testTaskForCompletionOfAllTasksNoTasksImmediateCompletion {
+    NSMutableArray *tasks = [NSMutableArray array];
+    
+    BFTask *task = [BFTask taskForCompletionOfAllTasks:tasks];
+    XCTAssertTrue(task.completed);
+    XCTAssertFalse(task.cancelled);
+    XCTAssertFalse(task.faulted);
+}
+
+- (void)testTaskForCompletionOfAllTasksWithResultsSuccess {
+    NSMutableArray *tasks = [NSMutableArray array];
+    
+    const int kTaskCount = 20;
+    for (int i = 0; i < kTaskCount; ++i) {
+        double sleepTimeInMs = i * 10;
+        int result = i + 1;
+        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+            return @(result);
+        }]];
+    }
+    
+    [[[BFTask taskForCompletionOfAllTasksWithResults:tasks] continueWithBlock:^id(BFTask *task) {
+        XCTAssertFalse(task.cancelled);
+        XCTAssertFalse(task.faulted);
+        
+        NSArray *results = task.result;
+        for (int i = 0; i < kTaskCount; ++i) {
+            NSNumber *individualResult = [results objectAtIndex:i];
+            XCTAssertEqual([individualResult intValue], [((BFTask *)[tasks objectAtIndex:i]).result intValue]);
+        }
+        return nil;
+    }] waitUntilFinished];
+}
+
+- (void)testTaskForCompletionOfAllTasksWithResultsNoTasksImmediateCompletion {
+    NSMutableArray *tasks = [NSMutableArray array];
+    
+    BFTask *task = [BFTask taskForCompletionOfAllTasksWithResults:tasks];
+    XCTAssertTrue(task.completed);
+    XCTAssertFalse(task.cancelled);
+    XCTAssertFalse(task.faulted);
+    XCTAssertTrue(task.result != nil);
+}
+
 - (void)testWaitUntilFinished {
     BFTask *task = [[BFTask taskWithDelay:50] continueWithBlock:^id(BFTask *task) {
         return @"foo";

@@ -56,6 +56,14 @@ typedef id(^BFContinuationBlock)(BFTask *task);
 + (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks;
 
 /*!
+ Returns a task that will be completed once all of the input tasks have completed. 
+ If all tasks complete successfully without being faulted or cancelled the result will be
+ an `NSArray` of all task results in the order they were provided.
+ @param tasks An `NSArray` of the tasks to use as an input.
+ */
++ (instancetype)taskForCompletionOfAllTasksWithResults:(NSArray *)tasks;
+
+/*!
  Returns a task that will be completed a certain amount of time in the future.
  @param millis The approximate number of milliseconds to wait before the
  task will be finished (with result == nil).
@@ -97,6 +105,11 @@ typedef id(^BFContinuationBlock)(BFTask *task);
  Whether this task has been cancelled.
  */
 @property (nonatomic, assign, readonly, getter = isCancelled) BOOL cancelled;
+
+/*!
+ Whether this task has completed due to an error or exception.
+ */
+@property (nonatomic, assign, readonly, getter = isFaulted) BOOL faulted;
 
 /*!
  Whether this task has completed.
