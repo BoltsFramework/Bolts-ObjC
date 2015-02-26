@@ -40,6 +40,8 @@ Pod::Spec.new do |s|
 
     ss.ios.source_files = 'Bolts/iOS/**/*.[hm]'
     ss.ios.public_header_files = 'Bolts/iOS/*.h'
+    ss.ios.libraries = 'xml2'
+    ss.ios.xcconfig  = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
     ss.osx.source_files = ''
     ss.watchos.source_files = ''
     ss.tvos.source_files = ''

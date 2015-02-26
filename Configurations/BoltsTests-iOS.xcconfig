@@ -21,4 +21,6 @@ TEST_HOST = $(BUNDLE_LOADER)
 
 INFOPLIST_FILE = BoltsTests/BoltsTests-Info.plist
 
+OTHER_LDFLAGS = $(inherited) -lxml2
+
 CLANG_ENABLE_MODULES = YES

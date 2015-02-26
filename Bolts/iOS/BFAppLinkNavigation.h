@@ -10,8 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFAppLink.h>
-
 /*!
  The result of calling navigate on a BFAppLinkNavigation
  */
@@ -25,6 +23,7 @@ typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
 };
 
 @protocol BFAppLinkResolving;
+@class BFAppLink;
 @class BFTask;
 
 /*!

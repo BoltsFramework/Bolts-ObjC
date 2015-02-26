@@ -19,7 +19,7 @@ MACH_O_TYPE = staticlib
 DEFINES_MODULE = YES
 MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
 
-OTHER_CFLAGS[sdk=iphoneos9.*] = $(inherited) -fembed-bitcode
+OTHER_CFLAGS = $(inherited) -fembed-bitcode -I$(SDKROOT)/usr/include/libxml2
 
 OTHER_LDFLAGS = $(inherited) -ObjC
 
