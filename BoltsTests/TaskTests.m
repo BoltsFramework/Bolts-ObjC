@@ -228,7 +228,7 @@
     BFTask *task = [[BFTask taskWithDelay:100] continueWithBlock:^id(BFTask *task) {
         return tcs.task;
     }];
-    
+
     [tcs cancel];
     [task waitUntilFinished];
 
@@ -237,7 +237,7 @@
 
 - (void)testTaskForCompletionOfAllTasksSuccess {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
@@ -245,12 +245,12 @@
             return @(i);
         }]];
     }
-    
+
     [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error);
         XCTAssertNil(task.exception);
         XCTAssertFalse(task.isCancelled);
-        
+
         for (int i = 0; i < kTaskCount; ++i) {
             XCTAssertEqual(i, [((BFTask *)[tasks objectAtIndex:i]).result intValue]);
         }
@@ -260,7 +260,7 @@
 
 - (void)testTaskForCompletionOfAllTasksOneException {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
@@ -271,14 +271,14 @@
             return @(i);
         }]];
     }
-    
+
     [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error);
         XCTAssertNotNil(task.exception);
         XCTAssertFalse(task.isCancelled);
-        
+
         XCTAssertEqualObjects(@"TestException", task.exception.name);
-        
+
         for (int i = 0; i < kTaskCount; ++i) {
             if (i == 10) {
                 XCTAssertNotNil(((BFTask *)[tasks objectAtIndex:i]).exception);
@@ -292,7 +292,7 @@
 
 - (void)testTaskForCompletionOfAllTasksTwoExceptions {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
@@ -303,19 +303,19 @@
             return @(i);
         }]];
     }
-    
+
     [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error);
         XCTAssertNotNil(task.exception);
         XCTAssertFalse(task.isCancelled);
-        
+
         XCTAssertEqualObjects(@"BFMultipleExceptionsException", task.exception.name);
-        
+
         NSArray *exceptions = [task.exception.userInfo objectForKey:@"exceptions"];
         XCTAssertEqual(2, (int)exceptions.count);
         XCTAssertEqualObjects(@"TestException", [[exceptions objectAtIndex:0] name]);
         XCTAssertEqualObjects(@"TestException", [[exceptions objectAtIndex:1] name]);
-        
+
         for (int i = 0; i < kTaskCount; ++i) {
             if (i == 10 || i == 11) {
                 XCTAssertNotNil(((BFTask *)[tasks objectAtIndex:i]).exception);
@@ -329,7 +329,7 @@
 
 - (void)testTaskForCompletionOfAllTasksOneError {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
@@ -342,15 +342,15 @@
             return @(i);
         }]];
     }
-    
+
     [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
         XCTAssertNotNil(task.error);
         XCTAssertNil(task.exception);
         XCTAssertFalse(task.isCancelled);
-        
+
         XCTAssertEqualObjects(@"BoltsTests", task.error.domain);
         XCTAssertEqual(35, (int)task.error.code);
-        
+
         for (int i = 0; i < kTaskCount; ++i) {
             if (i == 10) {
                 XCTAssertNotNil(((BFTask *)[tasks objectAtIndex:i]).error);
@@ -364,7 +364,7 @@
 
 - (void)testTaskForCompletionOfAllTasksTwoErrors {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
@@ -377,21 +377,21 @@
             return @(i);
         }]];
     }
-    
+
     [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
         XCTAssertNotNil(task.error);
         XCTAssertNil(task.exception);
         XCTAssertFalse(task.isCancelled);
-        
+
         XCTAssertEqualObjects(@"bolts", task.error.domain);
         XCTAssertEqual(kBFMultipleErrorsError, task.error.code);
-        
+
         NSArray *errors = [task.error.userInfo objectForKey:@"errors"];
         XCTAssertEqualObjects(@"BoltsTests", [[errors objectAtIndex:0] domain]);
         XCTAssertEqual(35, (int)[[errors objectAtIndex:0] code]);
         XCTAssertEqualObjects(@"BoltsTests", [[errors objectAtIndex:1] domain]);
         XCTAssertEqual(35, (int)[[errors objectAtIndex:1] code]);
-        
+
         for (int i = 0; i < kTaskCount; ++i) {
             if (i == 10 || i == 11) {
                 XCTAssertNotNil(((BFTask *)[tasks objectAtIndex:i]).error);
@@ -405,7 +405,7 @@
 
 - (void)testTaskForCompletionOfAllTasksCancelled {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
@@ -416,12 +416,12 @@
             return @(i);
         }]];
     }
-    
+
     [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error);
         XCTAssertNil(task.exception);
         XCTAssertTrue(task.isCancelled);
-        
+
         for (int i = 0; i < kTaskCount; ++i) {
             if (i == 10) {
                 XCTAssertTrue(((BFTask *)[tasks objectAtIndex:i]).isCancelled);
@@ -435,7 +435,7 @@
 
 - (void)testTaskForCompletionOfAllTasksNoTasksImmediateCompletion {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     BFTask *task = [BFTask taskForCompletionOfAllTasks:tasks];
     XCTAssertTrue(task.completed);
     XCTAssertFalse(task.cancelled);
@@ -444,7 +444,7 @@
 
 - (void)testTaskForCompletionOfAllTasksWithResultsSuccess {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = i * 10;
@@ -453,11 +453,11 @@
             return @(result);
         }]];
     }
-    
+
     [[[BFTask taskForCompletionOfAllTasksWithResults:tasks] continueWithBlock:^id(BFTask *task) {
         XCTAssertFalse(task.cancelled);
         XCTAssertFalse(task.faulted);
-        
+
         NSArray *results = task.result;
         for (int i = 0; i < kTaskCount; ++i) {
             NSNumber *individualResult = [results objectAtIndex:i];
@@ -469,7 +469,7 @@
 
 - (void)testTaskForCompletionOfAllTasksWithResultsNoTasksImmediateCompletion {
     NSMutableArray *tasks = [NSMutableArray array];
-    
+
     BFTask *task = [BFTask taskForCompletionOfAllTasksWithResults:tasks];
     XCTAssertTrue(task.completed);
     XCTAssertFalse(task.cancelled);
@@ -481,9 +481,9 @@
     BFTask *task = [[BFTask taskWithDelay:50] continueWithBlock:^id(BFTask *task) {
         return @"foo";
     }];
-    
+
     [task waitUntilFinished];
-    
+
     XCTAssertEqualObjects(@"foo", task.result);
 }
 
@@ -504,9 +504,9 @@
     BFTask *task = [BFTask taskWithResult:nil];
     task = [task continueWithExecutor:[BFExecutor immediateExecutor]
                             withBlock:^id(BFTask *task) {
-        XCTAssertTrue([NSThread isMainThread]);
-        return nil;
-    }];
+                                XCTAssertTrue([NSThread isMainThread]);
+                                return nil;
+                            }];
     XCTAssertTrue(task.isCompleted);
 }
 

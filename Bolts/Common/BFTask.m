@@ -384,22 +384,22 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     BOOL isCompleted;
     BOOL isCancelled;
     BOOL isFaulted;
-    
+
     @synchronized (self.lock) {
         isCompleted = self.completed;
         isCancelled = self.cancelled;
         isFaulted = self.faulted;
     }
-    
+
     // Description string includes status information and, if available, the
     // result sisnce in some ways this is what a promise actually "is".
     return [NSString stringWithFormat:@"<%@: %p; completed = %@; cancelled = %@; faulted = %@;%@>",
-        NSStringFromClass([self class]),
-        self,
-        isCompleted ? @"YES" : @"NO",
-        isCancelled ? @"YES" : @"NO",
-        isFaulted ? @"YES" : @"NO",
-        isCompleted ? [NSString stringWithFormat:@" result:%@", _result] : @""];
+            NSStringFromClass([self class]),
+            self,
+            isCompleted ? @"YES" : @"NO",
+            isCancelled ? @"YES" : @"NO",
+            isFaulted ? @"YES" : @"NO",
+            isCompleted ? [NSString stringWithFormat:@" result:%@", _result] : @""];
 }
 
 @end
