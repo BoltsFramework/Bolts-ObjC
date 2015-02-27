@@ -1,4 +1,11 @@
-build
-*.xcuserdatad
+# OS X
 .DS_Store
+
+# Xcode
+build
+DerivedData
+xcuserdata
+*.pbxuser
+*.xcuserdatad
+*.xccheckout
 *.swp
