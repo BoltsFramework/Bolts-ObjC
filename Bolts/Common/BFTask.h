@@ -10,6 +10,16 @@
 
 #import <Foundation/Foundation.h>
 
+/*!
+ Error domain used if there was multiple errors on <BFTask taskForCompletionOfAllTasks:>.
+ */
+extern NSString *const BFTaskErrorDomain;
+
+/*!
+ An exception that is thrown if there was multiple exceptions on <BFTask taskForCompletionOfAllTasks:>.
+ */
+extern NSString *const BFTaskMultipleExceptionsException;
+
 @class BFExecutor;
 @class BFTask;
 

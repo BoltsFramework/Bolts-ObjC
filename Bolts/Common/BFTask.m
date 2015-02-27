@@ -19,6 +19,9 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
           " Break on warnBlockingOperationOnMainThread() to debug.");
 }
 
+NSString *const BFTaskErrorDomain = @"bolts";
+NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
+
 @interface BFTask () {
     id _result;
     NSError *_error;
@@ -108,7 +111,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                         tcs.exception = [exceptions objectAtIndex:0];
                     } else {
                         NSException *exception =
-                        [NSException exceptionWithName:@"BFMultipleExceptionsException"
+                        [NSException exceptionWithName:BFTaskMultipleExceptionsException
                                                 reason:@"There were multiple exceptions."
                                               userInfo:@{ @"exceptions": exceptions }];
                         tcs.exception = exception;
@@ -117,7 +120,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                     if (errors.count == 1) {
                         tcs.error = [errors objectAtIndex:0];
                     } else {
-                        NSError *error = [NSError errorWithDomain:@"bolts"
+                        NSError *error = [NSError errorWithDomain:BFTaskErrorDomain
                                                              code:kBFMultipleErrorsError
                                                          userInfo:@{ @"errors": errors }];
                         tcs.error = error;
