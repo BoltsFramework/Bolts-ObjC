@@ -30,6 +30,7 @@
 		8103FA7819900A84000BAE3F /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6319900A84000BAE3F /* BFAppLinkTarget.m */; };
 		8103FA7A19900A84000BAE3F /* BFURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6519900A84000BAE3F /* BFURL.m */; };
 		8103FA7C19900A84000BAE3F /* BFWebViewAppLinkResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6719900A84000BAE3F /* BFWebViewAppLinkResolver.m */; };
+		8122B2871AA0C6890025C5AF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDDA63517E17DDD00655F8A /* Bolts.framework */; };
 		81D0EE7D19AFA8260000AE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D0EE7C19AFA8260000AE75 /* UIKit.framework */; };
 		81D0EE8019AFA9E20000AE75 /* BoltsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5619900A84000BAE3F /* BoltsVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE8219AFAA060000AE75 /* BoltsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5619900A84000BAE3F /* BoltsVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -55,7 +56,6 @@
 		8E8C8EEA17F23D1D00E3F1C7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */; };
 		8E8C8EEB17F23D1D00E3F1C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
 		8E8C8EFB17F23E5F00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
-		8E8C8EFC17F23E6E00E3F1C7 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CE917DE9DE000427E62 /* libBolts.a */; };
 		8E8C8F1A17F241DA00E3F1C7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */; };
 		8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
 		8E8C8F2A17F2420400E3F1C7 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EDDA63517E17DDD00655F8A /* Bolts.framework */; };
@@ -126,6 +126,7 @@
 		8103FA6519900A84000BAE3F /* BFURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFURL.m; sourceTree = "<group>"; };
 		8103FA6619900A84000BAE3F /* BFWebViewAppLinkResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWebViewAppLinkResolver.h; sourceTree = "<group>"; };
 		8103FA6719900A84000BAE3F /* BFWebViewAppLinkResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWebViewAppLinkResolver.m; sourceTree = "<group>"; };
+		8122B2881AA0E8220025C5AF /* iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "iOS-Info.plist"; path = "Resources/iOS-Info.plist"; sourceTree = "<group>"; };
 		81D0EE7C19AFA8260000AE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		81F0E88D19E5CB5A00812A88 /* Mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Mac-Info.plist"; path = "Resources/Mac-Info.plist"; sourceTree = "<group>"; };
 		8550FD2E18EE1B7A00976B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -165,7 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E8C8EFC17F23E6E00E3F1C7 /* libBolts.a in Frameworks */,
+				8122B2871AA0C6890025C5AF /* Bolts.framework in Frameworks */,
 				8E8C8EEA17F23D1D00E3F1C7 /* XCTest.framework in Frameworks */,
 				8E8C8EEB17F23D1D00E3F1C7 /* Foundation.framework in Frameworks */,
 			);
@@ -339,6 +340,7 @@
 		8E9C3CEF17DE9DE000427E62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8122B2881AA0E8220025C5AF /* iOS-Info.plist */,
 				81F0E88D19E5CB5A00812A88 /* Mac-Info.plist */,
 				8E9C3CF017DE9DE000427E62 /* Bolts-Prefix.pch */,
 			);
@@ -452,8 +454,8 @@
 			);
 			name = Bolts;
 			productName = Bolts;
-			productReference = 8E9C3CE917DE9DE000427E62 /* libBolts.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 8EDDA63517E17DDD00655F8A /* Bolts.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		8EDDA62817E17DDC00655F8A /* MacBolts */ = {
 			isa = PBXNativeTarget;
@@ -837,6 +839,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -865,6 +868,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -881,14 +885,16 @@
 					"$(ARCHS_STANDARD)",
 					armv7s,
 				);
+				DEFINES_MODULE = YES;
 				DSTROOT = /tmp/Bolts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
+				INFOPLIST_FILE = "Bolts/Resources/iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
+				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "./$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -904,11 +910,12 @@
 				DSTROOT = /tmp/Bolts.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
+				INFOPLIST_FILE = "Bolts/Resources/iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
+				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "./$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
