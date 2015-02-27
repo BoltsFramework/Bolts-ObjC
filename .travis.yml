@@ -1,6 +1,12 @@
 language: objective-c
 before_install:
-  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+  - brew update
+  - brew reinstall xctool
+  - gem install cocoapods --pre --quiet
+  - pod setup --silent
+  - pod repo update --silent
 script:
-  - set -o pipefail && xcodebuild -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug test | xcpretty -c
-  - set -o pipefail && xcodebuild -project Bolts.xcodeproj -sdk macosx -scheme MacBolts test | xcpretty -c ; exit
+  - pod lib lint Bolts.podspec
+  - pod lib lint --use-libraries Bolts.podspec
+  - xctool -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug test
+  - xctool -project Bolts.xcodeproj -sdk macosx -scheme MacBolts test
