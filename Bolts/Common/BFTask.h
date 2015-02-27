@@ -56,7 +56,7 @@ typedef id(^BFContinuationBlock)(BFTask *task);
 + (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks;
 
 /*!
- Returns a task that will be completed once all of the input tasks have completed. 
+ Returns a task that will be completed once all of the input tasks have completed.
  If all tasks complete successfully without being faulted or cancelled the result will be
  an `NSArray` of all task results in the order they were provided.
  @param tasks An `NSArray` of the tasks to use as an input.
@@ -139,7 +139,7 @@ typedef id(^BFContinuationBlock)(BFTask *task);
  this method will not be completed until that task is completed.
  */
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
-                       withBlock:(BFContinuationBlock)block;
+                           withBlock:(BFContinuationBlock)block;
 
 /*!
  Identical to continueWithBlock:, except that the block is only run
@@ -166,7 +166,7 @@ typedef id(^BFContinuationBlock)(BFTask *task);
  this method will not be completed until that task is completed.
  */
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
-                withSuccessBlock:(BFContinuationBlock)block;
+                    withSuccessBlock:(BFContinuationBlock)block;
 
 /*!
  Waits until this operation is completed.
