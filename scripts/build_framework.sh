@@ -56,7 +56,7 @@ done
 test -x "$XCODEBUILD" || die 'Could not find xcodebuild in $PATH'
 test -x "$LIPO" || die 'Could not find lipo in $PATH'
 
-BOLTS_UNIVERSAL_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts
+BOLTS_IOS_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts.framework/Bolts
 BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/Bolts.framework
 
 # -----------------------------------------------------------------------------
@@ -100,53 +100,24 @@ xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Mac"
 #
 progress_message "Building Bolts univeral library using lipo."
 
-mkdir -p $(dirname $BOLTS_UNIVERSAL_BINARY)
+mkdir -p $(dirname $BOLTS_IOS_BINARY)
 
+# Copy/Paste iOS Framework to get structure/resources/etc
+cp -av \
+  "$BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts.framework" \
+  "$BOLTS_BUILD/${BUILDCONFIGURATION}-universal"
+rm "$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts.framework/Bolts"
+
+# Combine iOS/Simulator binaries into a single universal binary.
 $LIPO \
   -create \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphonesimulator/libBolts.a \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/libBolts.a \
-  -output $BOLTS_UNIVERSAL_BINARY \
+    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphonesimulator/Bolts.framework/Bolts \
+    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts.framework/Bolts \
+  -output $BOLTS_IOS_BINARY \
   || die "lipo failed - could not create universal static library"
 
-# -----------------------------------------------------------------------------
-# Build .framework out of binaries
-#
-function build_framework() {
-  FRAMEWORK=$1
-  BINARY=$2
- 
-  FRAMEWORK_NAME=`basename $FRAMEWORK`
-  progress_message "Building $FRAMEWORK_NAME."
-
-  \rm -rf $FRAMEWORK
-  mkdir $FRAMEWORK \
-    || die "Could not create directory $FRAMEWORK"
-  mkdir $FRAMEWORK/Versions
-  mkdir $FRAMEWORK/Versions/A
-  mkdir $FRAMEWORK/Versions/A/Headers
-  mkdir $FRAMEWORK/Versions/A/DeprecatedHeaders
-
-  \cp \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts/*.h \
-    $FRAMEWORK/Versions/A/Headers \
-    || die "Error building framework while copying SDK headers"
-
-  \cp \
-    $BINARY \
-    $FRAMEWORK/Versions/A/Bolts \
-    || die "Error building framework while copying Bolts"
-
-  # Current directory matters to ln.
-  cd $FRAMEWORK
-  ln -s ./Versions/A/Headers ./Headers
-  ln -s ./Versions/A/Bolts ./Bolts
-  cd $FRAMEWORK/Versions
-  ln -s ./A ./Current
-}
-
-# Build iOS framework from all architectures together
-build_framework "$BOLTS_IOS_FRAMEWORK" "$BOLTS_UNIVERSAL_BINARY"
+# Copy/Paste created iOS Framework to final location
+cp -av "$(dirname $BOLTS_IOS_BINARY)" "$BOLTS_IOS_FRAMEWORK"
 
 # Copy/Paste OSX framework, as this is already built for us
 cp -av "$BOLTS_OSX_BINARY" "$BOLTS_OSX_FRAMEWORK"
