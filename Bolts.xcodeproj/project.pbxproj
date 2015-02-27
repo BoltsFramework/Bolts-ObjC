@@ -478,7 +478,7 @@
 		8E9C3CE117DE9DE000427E62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Parse Inc.";
 				TargetAttributes = {
 					8E8C8EE817F23D1D00E3F1C7 = {
