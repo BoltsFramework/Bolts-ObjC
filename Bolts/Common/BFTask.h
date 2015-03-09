@@ -227,7 +227,7 @@ typedef id(^BFContinuationBlock)(BFTask *task);
  the BFTask returned will have isCancelled true.
  */
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
-               withCancellationToken:(BFTaskCancellationToken *)token
+               withCancellationToken:(BFTaskCancellationToken *)cancellationToken
                     withSuccessBlock:(BFContinuationBlock)block;
 
 /*!
