@@ -16,11 +16,12 @@
 @class BFAppLinkReturnToRefererView;
 @class BFURL;
 
-typedef enum BFIncludeStatusBarInSize {
-  BFIncludeStatusBarInSizeNever,
-  BFIncludeStatusBarInSizeIOS7AndLater,
-  BFIncludeStatusBarInSizeAlways,
-} BFIncludeStatusBarInSize;
+typedef NS_ENUM(NSUInteger, BFIncludeStatusBarInSize)
+{
+    BFIncludeStatusBarInSizeNever,
+    BFIncludeStatusBarInSizeIOS7AndLater,
+    BFIncludeStatusBarInSizeAlways,
+};
 
 /*!
  Protocol that a class can implement in order to be notified when the user has navigated back
@@ -65,7 +66,7 @@ typedef enum BFIncludeStatusBarInSize {
 /*!
  Indicates whether to extend the size of the view to include the current status bar
  size, for use in scenarios where the view might extend under the status bar on iOS 7 and
- above; this property has no effect on earlier versions of iOS. 
+ above; this property has no effect on earlier versions of iOS.
  */
 @property (nonatomic, assign) BFIncludeStatusBarInSize includeStatusBarInSize;
 
@@ -73,19 +74,5 @@ typedef enum BFIncludeStatusBarInSize {
  Indicates whether the user has closed the view by clicking the close button.
  */
 @property (nonatomic, assign) BOOL closed;
-
-/*!
- For apps that use a navigation controller, this method allows for displaying the view as
- a banner above the navigation bar of the navigation controller. It will listen for orientation
- change and other events to ensure it stays properly positioned above the nevigation bar.
- If this method is called from, e.g., viewDidAppear, its counterpart, detachFromMainWindow should
- be called from, e.g., viewWillDisappear.
- */
-//- (void)attachToMainWindowAboveNavigationController:(UINavigationController *)navigationController view:(UIView *)view;
-
-/*!
- Indicates that the view should no longer position itself above a navigation bar.
- */
-//- (void)detachFromMainWindow;
 
 @end
