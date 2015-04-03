@@ -150,6 +150,24 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return tcs.task;
 }
 
++ (instancetype)taskWithDelay:(int)millis
+            cancellationToken:(BFCancellationToken *)token {
+    if (token.cancellationRequested) {
+        return [BFTask cancelledTask];
+    }
+    
+    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, millis * NSEC_PER_MSEC);
+    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        if (token.cancellationRequested) {
+            [tcs cancel];
+            return;
+        }
+        tcs.result = nil;
+    });
+    return tcs.task;
+}
+
 + (instancetype)taskFromExecutor:(BFExecutor *)executor
                        withBlock:(id (^)())block {
     return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:block];
@@ -295,11 +313,22 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
                            withBlock:(BFContinuationBlock)block {
+    return [self continueWithExecutor:executor block:block cancellationToken:nil];
+}
+
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+                               block:(BFContinuationBlock)block
+                   cancellationToken:(BFCancellationToken *)cancellationToken {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
 
     // Capture all of the state that needs to used when the continuation is complete.
     void (^wrappedBlock)() = ^() {
         [executor execute:^{
+            if (cancellationToken.cancellationRequested) {
+                [tcs cancel];
+                return;
+            }
+            
             id result = nil;
             @try {
                 result = block(self);
@@ -307,6 +336,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 tcs.exception = exception;
                 return;
             }
+            
             if ([result isKindOfClass:[BFTask class]]) {
                 
                 id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
@@ -327,7 +357,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 if (resultTask.completed) {
                     setupWithTask(resultTask);
                 } else {
-                    [resultTask continueWithBlock:setupWithTask];
+                    [resultTask continueWithBlock:setupWithTask cancellationToken:cancellationToken];
                 }
                 
             } else {
@@ -351,22 +381,42 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (instancetype)continueWithBlock:(BFContinuationBlock)block {
-    return [self continueWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
+    return [self continueWithExecutor:[BFExecutor defaultExecutor] block:block cancellationToken:nil];
+}
+
+- (instancetype)continueWithBlock:(BFContinuationBlock)block
+                cancellationToken:(BFCancellationToken *)cancellationToken {
+    return [self continueWithExecutor:[BFExecutor defaultExecutor] block:block cancellationToken:cancellationToken];
 }
 
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
                     withSuccessBlock:(BFContinuationBlock)block {
-    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+    return [self continueWithExecutor:executor successBlock:block cancellationToken:nil];
+}
+
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+                        successBlock:(BFContinuationBlock)block
+                   cancellationToken:(BFCancellationToken *)cancellationToken {
+    if (cancellationToken.cancellationRequested) {
+        return [BFTask cancelledTask];
+    }
+    
+    return [self continueWithExecutor:executor block:^id(BFTask *task) {
         if (task.faulted || task.cancelled) {
             return task;
         } else {
             return block(task);
         }
-    }];
+    } cancellationToken:cancellationToken];
 }
 
 - (instancetype)continueWithSuccessBlock:(BFContinuationBlock)block {
-    return [self continueWithExecutor:[BFExecutor defaultExecutor] withSuccessBlock:block];
+    return [self continueWithExecutor:[BFExecutor defaultExecutor] successBlock:block cancellationToken:nil];
+}
+
+- (instancetype)continueWithSuccessBlock:(BFContinuationBlock)block
+                       cancellationToken:(BFCancellationToken *)cancellationToken {
+    return [self continueWithExecutor:[BFExecutor defaultExecutor] successBlock:block cancellationToken:cancellationToken];
 }
 
 #pragma mark - Syncing Task (Avoid it)
