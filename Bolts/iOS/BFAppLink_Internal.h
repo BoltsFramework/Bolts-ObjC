@@ -18,7 +18,7 @@
                     isBackToReferrer:(BOOL)isBackToReferrer;
 
 /*! return if this AppLink is to go back to referrer. */
-- (BOOL)isBackToReferrer;
+@property (nonatomic, assign, readonly, getter=isBackToReferrer) BOOL backToReferrer;
 
 @end
 

@@ -25,7 +25,8 @@ NSString *const BFAppLinkVersion = @"1.0";
 @property (nonatomic, strong, readwrite) NSURL *sourceURL;
 @property (nonatomic, copy, readwrite) NSArray *targets;
 @property (nonatomic, strong, readwrite) NSURL *webURL;
-@property (nonatomic, assign, readwrite) BOOL isBackToReferrer;
+
+@property (nonatomic, assign, readwrite, getter=isBackToReferrer) BOOL backToReferrer;
 
 @end
 
@@ -51,9 +52,9 @@ NSString *const BFAppLinkVersion = @"1.0";
                      isBackToReferrer:NO];
 }
 
-- (BFAppLink *)initWithIsBackToReferrer:(BOOL)isBackToReferrer {
+- (BFAppLink *)initWithIsBackToReferrer:(BOOL)backToReferrer {
     if ((self = [super init])) {
-      self.isBackToReferrer = isBackToReferrer;
+      _backToReferrer = backToReferrer;
     }
     return self;
 }
