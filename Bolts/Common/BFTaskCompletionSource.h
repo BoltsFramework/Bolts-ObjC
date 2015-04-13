@@ -27,7 +27,7 @@
 /*!
  The task associated with this TaskCompletionSource.
  */
-@property (nonatomic, retain, readonly) BFTask *task;
+@property (nonatomic, strong, readonly) BFTask *task;
 
 /*!
  Completes the task by setting the result.
