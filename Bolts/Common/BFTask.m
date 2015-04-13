@@ -32,9 +32,9 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 @property (atomic, assign, readwrite, getter = isFaulted) BOOL faulted;
 @property (atomic, assign, readwrite, getter = isCompleted) BOOL completed;
 
-@property (nonatomic, retain, readwrite) NSObject *lock;
-@property (nonatomic, retain, readwrite) NSCondition *condition;
-@property (nonatomic, retain, readwrite) NSMutableArray *callbacks;
+@property (nonatomic, strong) NSObject *lock;
+@property (nonatomic, strong) NSCondition *condition;
+@property (nonatomic, strong) NSMutableArray *callbacks;
 
 @end
 
@@ -44,9 +44,9 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.lock = [[NSObject alloc] init];
-        self.condition = [[NSCondition alloc] init];
-        self.callbacks = [NSMutableArray array];
+        _lock = [[NSObject alloc] init];
+        _condition = [[NSCondition alloc] init];
+        _callbacks = [NSMutableArray array];
     }
     return self;
 }
@@ -80,7 +80,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 + (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks {
     __block int32_t total = (int32_t)tasks.count;
     if (total == 0) {
-        return [BFTask taskWithResult:nil];
+        return [self taskWithResult:nil];
     }
 
     __block int32_t cancelled = 0;
@@ -108,7 +108,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                     [tcs cancel];
                 } else if (exceptions.count > 0) {
                     if (exceptions.count == 1) {
-                        tcs.exception = [exceptions objectAtIndex:0];
+                        tcs.exception = [exceptions firstObject];
                     } else {
                         NSException *exception =
                         [NSException exceptionWithName:BFTaskMultipleExceptionsException
@@ -118,7 +118,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                     }
                 } else if (errors.count > 0) {
                     if (errors.count == 1) {
-                        tcs.error = [errors objectAtIndex:0];
+                        tcs.error = [errors firstObject];
                     } else {
                         NSError *error = [NSError errorWithDomain:BFTaskErrorDomain
                                                              code:kBFMultipleErrorsError
@@ -347,7 +347,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
                     withSuccessBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
-        if (task.error || task.exception || task.cancelled) {
+        if (task.faulted || task.cancelled) {
             return task;
         } else {
             return block(task);
@@ -384,14 +384,14 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 - (NSString *)description {
     // Acquire the data from the locked properties
-    BOOL isCompleted;
-    BOOL isCancelled;
-    BOOL isFaulted;
+    BOOL completed;
+    BOOL cancelled;
+    BOOL faulted;
 
     @synchronized (self.lock) {
-        isCompleted = self.completed;
-        isCancelled = self.cancelled;
-        isFaulted = self.faulted;
+        completed = self.completed;
+        cancelled = self.cancelled;
+        faulted = self.faulted;
     }
 
     // Description string includes status information and, if available, the
@@ -399,10 +399,10 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return [NSString stringWithFormat:@"<%@: %p; completed = %@; cancelled = %@; faulted = %@;%@>",
             NSStringFromClass([self class]),
             self,
-            isCompleted ? @"YES" : @"NO",
-            isCancelled ? @"YES" : @"NO",
-            isFaulted ? @"YES" : @"NO",
-            isCompleted ? [NSString stringWithFormat:@" result:%@", _result] : @""];
+            completed ? @"YES" : @"NO",
+            cancelled ? @"YES" : @"NO",
+            faulted ? @"YES" : @"NO",
+            completed ? [NSString stringWithFormat:@" result:%@", _result] : @""];
 }
 
 @end
