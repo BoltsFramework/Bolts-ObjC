@@ -82,7 +82,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     if (total == 0) {
         return [self taskWithResult:nil];
     }
-
+    
     __block int32_t cancelled = 0;
     NSObject *lock = [[NSObject alloc] init];
     NSMutableArray *errors = [NSMutableArray array];
@@ -91,9 +91,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
         [task continueWithBlock:^id(BFTask *task) {
-            if (task.cancelled) {
-                OSAtomicIncrement32(&cancelled);
-            } else if (task.exception) {
+            if (task.exception) {
                 @synchronized (lock) {
                     [exceptions addObject:task.exception];
                 }
@@ -101,12 +99,12 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 @synchronized (lock) {
                     [errors addObject:task.error];
                 }
+            } else if (task.cancelled) {
+                OSAtomicIncrement32(&cancelled);
             }
 
             if (OSAtomicDecrement32(&total) == 0) {
-                if (cancelled > 0) {
-                    [tcs cancel];
-                } else if (exceptions.count > 0) {
+                if (exceptions.count > 0) {
                     if (exceptions.count == 1) {
                         tcs.exception = [exceptions firstObject];
                     } else {
@@ -125,6 +123,8 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                                                          userInfo:@{ @"errors": errors }];
                         tcs.error = error;
                     }
+                } else if (cancelled > 0) {
+                    [tcs cancel];
                 } else {
                     tcs.result = nil;
                 }
