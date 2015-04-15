@@ -14,7 +14,7 @@
 
 @interface BFTaskCompletionSource ()
 
-@property (nonatomic, retain, readwrite) BFTask *task;
+@property (nonatomic, strong, readwrite) BFTask *task;
 
 @end
 
@@ -35,13 +35,13 @@
 
 #pragma mark - Initializer
 
-+ (BFTaskCompletionSource *)taskCompletionSource {
-    return [[BFTaskCompletionSource alloc] init];
++ (instancetype)taskCompletionSource {
+    return [[self alloc] init];
 }
 
-- (id)init {
+- (instancetype)init {
     if (self = [super init]) {
-        self.task = [[BFTask alloc] init];
+        _task = [[BFTask alloc] init];
     }
     return self;
 }

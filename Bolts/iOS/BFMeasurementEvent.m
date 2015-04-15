@@ -35,7 +35,7 @@ __attribute__ ((noinline)) void warnOnMissingEventName() {
     NSDictionary *_args;
 }
 
-- (void) postNotification{
+- (void)postNotification{
     if (!_name) {
         warnOnMissingEventName();
         return;
@@ -49,7 +49,7 @@ __attribute__ ((noinline)) void warnOnMissingEventName() {
                         userInfo:userInfo];
 }
 
-- (instancetype) initEventWithName:(NSString *)name args:(NSDictionary *)args {
+- (instancetype)initEventWithName:(NSString *)name args:(NSDictionary *)args {
     if ((self = [super init])) {;
         _name = name;
         _args = args ? args : @{};
@@ -57,8 +57,8 @@ __attribute__ ((noinline)) void warnOnMissingEventName() {
     return self;
 }
 
-+ (void) postNotificationForEventName:(NSString *)name args:(NSDictionary *)args {
-    [[[BFMeasurementEvent alloc] initEventWithName:name args:args] postNotification];
++ (void)postNotificationForEventName:(NSString *)name args:(NSDictionary *)args {
+    [[[self alloc] initEventWithName:name args:args] postNotification];
 }
 
 @end

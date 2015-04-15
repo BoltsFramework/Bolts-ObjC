@@ -24,27 +24,27 @@
     static BFExecutor *defaultExecutor = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        defaultExecutor = [BFExecutor executorWithBlock:^void(void(^block)()) {
-            static const NSString *kBFTaskDepthKey = @"BFTaskDepth";
-            static const int kBFTaskDefaultExecutorMaxDepth = 20;
+        defaultExecutor = [self executorWithBlock:^void(void(^block)()) {
+            static const NSString *BFTaskDepthKey = @"BFTaskDepth";
+            static const int BFTaskDefaultExecutorMaxDepth = 20;
 
             // We prefer to run everything possible immediately, so that there is callstack information
             // when debugging. However, we don't want the stack to get too deep, so if the number of
             // recursive calls to this method exceeds a certain depth, we dispatch to another GCD queue.
             NSMutableDictionary *threadLocal = [[NSThread currentThread] threadDictionary];
-            NSNumber *depth = [threadLocal objectForKey:kBFTaskDepthKey];
+            NSNumber *depth = threadLocal[BFTaskDepthKey];
             if (!depth) {
                 depth = @0;
             }
-            if (depth.intValue > kBFTaskDefaultExecutorMaxDepth) {
+            if (depth.intValue > BFTaskDefaultExecutorMaxDepth) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
             } else {
                 NSNumber *previousDepth = depth;
-                [threadLocal setObject:@(previousDepth.intValue + 1) forKey:kBFTaskDepthKey];
+                threadLocal[BFTaskDepthKey] = @(previousDepth.intValue + 1);
                 @try {
                     block();
                 } @finally {
-                    [threadLocal setObject:previousDepth forKey:kBFTaskDepthKey];
+                    threadLocal[BFTaskDepthKey] = previousDepth;
                 }
             }
         }];
@@ -56,7 +56,7 @@
     static BFExecutor *immediateExecutor = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        immediateExecutor = [BFExecutor executorWithBlock:^void(void(^block)()) {
+        immediateExecutor = [self executorWithBlock:^void(void(^block)()) {
             block();
         }];
     });
@@ -67,7 +67,7 @@
     static BFExecutor *mainThreadExecutor = NULL;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        mainThreadExecutor = [BFExecutor executorWithBlock:^void(void(^block)()) {
+        mainThreadExecutor = [self executorWithBlock:^void(void(^block)()) {
             if (![NSThread isMainThread]) {
                 dispatch_async(dispatch_get_main_queue(), block);
             } else {
@@ -79,17 +79,17 @@
 }
 
 + (instancetype)executorWithBlock:(void(^)(void(^block)()))block {
-    return [[BFExecutor alloc] initWithBlock:block];
+    return [[self alloc] initWithBlock:block];
 }
 
 + (instancetype)executorWithDispatchQueue:(dispatch_queue_t)queue {
-    return [BFExecutor executorWithBlock:^void(void(^block)()) {
+    return [self executorWithBlock:^void(void(^block)()) {
         dispatch_async(queue, block);
     }];
 }
 
 + (instancetype)executorWithOperationQueue:(NSOperationQueue *)queue {
-    return [BFExecutor executorWithBlock:^void(void(^block)()) {
+    return [self executorWithBlock:^void(void(^block)()) {
         [queue addOperation:[NSBlockOperation blockOperationWithBlock:block]];
     }];
 }
@@ -98,7 +98,7 @@
 
 - (instancetype)initWithBlock:(void(^)(void(^block)()))block {
     if (self = [super init]) {
-        self.block = block;
+        _block = block;
     }
     return self;
 }
