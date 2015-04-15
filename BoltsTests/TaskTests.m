@@ -467,6 +467,69 @@
     }] waitUntilFinished];
 }
 
+- (void)testTaskForCompletionOfAllTasksErrorCancelledSuccess {
+    BFTask *errorTask = [BFTask taskWithError:[NSError new]];
+    BFTask *cancelledTask = [BFTask cancelledTask];
+    BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
+    
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask, errorTask]];
+    
+    XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
+}
+
+- (void)testTaskForCompletionOfAllTasksExceptionCancelledSuccess {
+    NSException *exception = [NSException exceptionWithName:@"" reason:@"" userInfo:nil];
+    BFTask *exceptionTask = [BFTask taskWithException:exception];
+    BFTask *cancelledTask = [BFTask cancelledTask];
+    BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
+    
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask, exceptionTask]];
+    
+    XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
+    XCTAssertNil(allTasks.error, @"Task shoud not have error");
+    XCTAssertNotNil(allTasks.exception, @"Task should have exception");
+}
+
+- (void)testTaskForCompletionOfAllTasksExceptionErrorCancelledSuccess {
+    BFTask *errorTask = [BFTask taskWithError:[NSError new]];
+    BFTask *exceptionTask = [BFTask taskWithException:[NSException new]];
+    BFTask *cancelledTask = [BFTask cancelledTask];
+    BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
+    
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask, exceptionTask, errorTask]];
+    
+    XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
+    XCTAssertNotNil(allTasks.error, @"Task should have error");
+    XCTAssertNil(allTasks.exception, @"Task should not have exception");
+}
+
+- (void)testTaskForCompletionOfAllTasksErrorCancelled {
+    BFTask *errorTask = [BFTask taskWithError:[NSError new]];
+    BFTask *cancelledTask = [BFTask cancelledTask];
+    
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[cancelledTask, errorTask]];
+    
+    XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
+}
+
+- (void)testTaskForCompletionOfAllTasksSuccessCancelled {
+    BFTask *cancelledTask = [BFTask cancelledTask];
+    BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
+    
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask]];
+    
+    XCTAssertTrue(allTasks.cancelled, @"Task should be cancelled");
+}
+
+- (void)testTaskForCompletionOfAllTasksSuccessError {
+    BFTask *errorTask = [BFTask taskWithError:[NSError new]];
+    BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
+    
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, errorTask]];
+    
+    XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
+}
+
 - (void)testTaskForCompletionOfAllTasksWithResultsNoTasksImmediateCompletion {
     NSMutableArray *tasks = [NSMutableArray array];
 
