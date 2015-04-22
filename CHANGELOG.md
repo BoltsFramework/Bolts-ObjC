@@ -1,5 +1,12 @@
 # Bolts CHANGELOG
 
+## 1.1.5
+- Better subclassing support for `BFTask`, `BFTaskCompletionSource`, `BFExecutor`.
+- Improved `taskForCompletionOfAllTasks:` to check for `error`/`exception` before cancelling a task.
+- Fixed and improved layout of `BFAppLinkReturnToRefererController`.
+- Improve optional importing for AppLinks code in umbrella header.
+- Split Tasks and AppLinks in subspecs.
+
 ## 1.1.4
 - New: Bolts for iOS is easily importable from Swift code (via `import Bolts`).
 - New: Added `BFTask +taskForCompletionOfAllTaskResults`.

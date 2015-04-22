@@ -1,1 +1,1 @@
-#define BOLTS_VERSION @"1.1.4"
+#define BOLTS_VERSION @"1.1.5"
