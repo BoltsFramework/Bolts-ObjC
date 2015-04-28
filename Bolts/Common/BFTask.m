@@ -395,7 +395,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     }
 
     // Description string includes status information and, if available, the
-    // result sisnce in some ways this is what a promise actually "is".
+    // result since in some ways this is what a promise actually "is".
     return [NSString stringWithFormat:@"<%@: %p; completed = %@; cancelled = %@; faulted = %@;%@>",
             NSStringFromClass([self class]),
             self,
