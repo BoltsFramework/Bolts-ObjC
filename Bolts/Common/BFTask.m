@@ -308,7 +308,8 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 return;
             }
             if ([result isKindOfClass:[BFTask class]]) {
-                [(BFTask *)result continueWithBlock:^id(BFTask *task) {
+                
+                id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
                     if (task.cancelled) {
                         [tcs cancel];
                     } else if (task.exception) {
@@ -319,7 +320,16 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                         tcs.result = task.result;
                     }
                     return nil;
-                }];
+                };
+                
+                BFTask *resultTask = (BFTask *)result;
+                
+                if (resultTask.isCompleted) {
+                    setupWithTask(resultTask);
+                } else {
+                    [resultTask continueWithBlock:setupWithTask];
+                }
+                
             } else {
                 tcs.result = result;
             }
