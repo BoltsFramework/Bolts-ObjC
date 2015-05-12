@@ -306,7 +306,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
                 
                 BFTask *resultTask = (BFTask *)result;
                 
-                if (resultTask.isCompleted) {
+                if (resultTask.completed) {
                     setupWithTask(resultTask);
                 } else {
                     [resultTask continueWithBlock:setupWithTask];
