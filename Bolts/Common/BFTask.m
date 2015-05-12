@@ -324,7 +324,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 
                 BFTask *resultTask = (BFTask *)result;
                 
-                if (resultTask.isCompleted) {
+                if (resultTask.completed) {
                     setupWithTask(resultTask);
                 } else {
                     [resultTask continueWithBlock:setupWithTask];
