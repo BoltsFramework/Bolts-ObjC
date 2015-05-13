@@ -235,6 +235,80 @@
     XCTAssertTrue(task.isCancelled);
 }
 
+- (void)testCancellationToken {
+    BFTaskCancellationToken *token = [[BFTaskCancellationToken alloc] init];
+    [token cancel];
+    BFTask *task = [BFTask taskWithDelay:100];
+    task = [task continueWithExecutor:[BFExecutor defaultExecutor]
+                withCancellationToken:token
+                            withBlock:^id(BFTask *task) {
+                                XCTFail(@"This callback should be skipped");
+                                return nil;
+                            }];
+    [task waitUntilFinished];
+    XCTAssertTrue(task.cancelled);
+}
+
+- (void)testCancellationTokenNotCancelled {
+    BFTaskCancellationToken *token = [[BFTaskCancellationToken alloc] init];
+    BFTask *task = [BFTask taskWithResult:@"foo"];
+    __block BOOL blockExecuted = NO;
+    [[task continueWithExecutor:[BFExecutor defaultExecutor]
+          withCancellationToken:token
+                      withBlock:^id(BFTask *task) {
+                          XCTAssertEqualObjects(@"foo", task.result);
+                          blockExecuted = YES;
+                          return task;
+                      }] waitUntilFinished];
+    XCTAssertTrue(blockExecuted);
+}
+
+- (void)testCancellationTokenSuccessBlock {
+    BFTaskCancellationToken *token = [[BFTaskCancellationToken alloc] init];
+    [token cancel];
+    BFTask *task = [BFTask taskWithDelay:100];
+    task = [task continueWithExecutor:[BFExecutor defaultExecutor]
+                withCancellationToken:token
+                     withSuccessBlock:^id(BFTask *task) {
+                         XCTFail(@"This callback should be skipped");
+                         return nil;
+                     }];
+    [task waitUntilFinished];
+    XCTAssertTrue(task.cancelled);
+}
+
+- (void)testCancellationTokenSuccessBlockNotCancelled {
+    BFTaskCancellationToken *token = [[BFTaskCancellationToken alloc] init];
+    BFTask *task = [BFTask taskWithResult:@"foo"];
+    __block BOOL blockExecuted = NO;
+    [[task continueWithExecutor:[BFExecutor defaultExecutor]
+          withCancellationToken:token
+                      withBlock:^id(BFTask *task) {
+                          XCTAssertEqualObjects(@"foo", task.result);
+                          blockExecuted = YES;
+                          return task;
+                      }] waitUntilFinished];
+    XCTAssertTrue(blockExecuted);
+}
+
+- (void)testCancellationTokenSuccessBlockError {
+    BFTaskCancellationToken *token = [[BFTaskCancellationToken alloc] init];
+    [token cancel];
+    NSError *error = [NSError errorWithDomain:@"BoltsTests" code:35 userInfo:nil];
+    BFTask *task = [BFTask taskWithError:error];
+    task = [[task continueWithExecutor:[BFExecutor defaultExecutor]
+                withCancellationToken:token
+                     withSuccessBlock:^id(BFTask *task) {
+                         XCTFail(@"This callback should be skipped");
+                         return nil;
+                     }] continueWithBlock:^id(BFTask *task) {
+                         XCTAssertFalse(task.isCancelled);
+                         XCTAssertEqualObjects(error, task.error);
+                         return nil;
+                     }];
+    [task waitUntilFinished];
+}
+
 - (void)testTaskForCompletionOfAllTasksSuccess {
     NSMutableArray *tasks = [NSMutableArray array];
 

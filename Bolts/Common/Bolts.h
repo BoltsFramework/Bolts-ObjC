@@ -12,6 +12,7 @@
 #import <Bolts/BFExecutor.h>
 #import <Bolts/BFTask.h>
 #import <Bolts/BFTaskCompletionSource.h>
+#import <Bolts/BFTaskCancellationToken.h>
 
 #if __has_include(<Bolts/BFAppLink.h>) && TARGET_OS_IPHONE
 #import <Bolts/BFAppLinkNavigation.h>

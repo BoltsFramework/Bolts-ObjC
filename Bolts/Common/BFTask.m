@@ -369,6 +369,44 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return [self continueWithExecutor:[BFExecutor defaultExecutor] withSuccessBlock:block];
 }
 
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+               withCancellationToken:(BFTaskCancellationToken *)token
+                           withBlock:(BFContinuationBlock)block {
+    return [self continueWithExecutor:executor withBlock:^id(BFTask *task) {
+        if (token.isCancelled) {
+            return [BFTask cancelledTask];
+        } else {
+            return block(task);
+        }
+    }];
+}
+
+- (instancetype)continueWithCancellationToken:(BFTaskCancellationToken *)token
+                                    withBlock:(BFContinuationBlock)block {
+    return [self continueWithExecutor:[BFExecutor defaultExecutor]
+                withCancellationToken:token
+                            withBlock:block];
+}
+
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+               withCancellationToken:(BFTaskCancellationToken *)token
+                    withSuccessBlock:(BFContinuationBlock)block {
+    return [self continueWithExecutor:executor withSuccessBlock:^id(BFTask *task) {
+        if (token.isCancelled) {
+            return [BFTask cancelledTask];
+        } else {
+            return block(task);
+        }
+    }];
+}
+
+- (instancetype)continueWithCancellationToken:(BFTaskCancellationToken *)token
+                             withSuccessBlock:(BFContinuationBlock)block {
+    return [self continueWithExecutor:[BFExecutor defaultExecutor]
+                withCancellationToken:token
+                     withSuccessBlock:block];
+}
+
 #pragma mark - Syncing Task (Avoid it)
 
 - (void)warnOperationOnMainThread {

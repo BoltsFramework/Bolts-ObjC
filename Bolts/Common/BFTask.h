@@ -22,6 +22,7 @@ extern NSString *const BFTaskMultipleExceptionsException;
 
 @class BFExecutor;
 @class BFTask;
+@class BFTaskCancellationToken;
 
 /*!
  A block that can act as a continuation for a task.
@@ -177,6 +178,73 @@ typedef id(^BFContinuationBlock)(BFTask *task);
  */
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
                     withSuccessBlock:(BFContinuationBlock)block;
+
+/*!
+ Enques the given block to be run once the task is complete
+ @param executor A BFExecutor responsible for determining how the
+ continuation block will be run.
+ @param cancellationToken A BFTaskCancellationToken which allows 
+ the task to be cancelled before the continuation block is executed
+ @param block The block to be run once this task is complete.
+ @returns A task that will be completed after block has run.
+ If block returns a BFTask, then the task returned from
+ this method will not be completed until that task is completed. 
+ If the cancellationToken is cancelled before the block is executed
+ then the BFTask returned will have isCancelled true
+ */
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+               withCancellationToken:(BFTaskCancellationToken *)cancellationToken
+                           withBlock:(BFContinuationBlock)block;
+/*!
+ Identical to continueWithExecutor:withCancellationToken:withBlock:,
+ except that it uses the default execution strategy
+ @param cancellationToken A BFTaskCancellationToken which allows
+ the task to be cancelled before the continuation block is executed
+ @param block The block to be run once this task is complete.
+ @returns A task that will be completed after block has run.
+ If block returns a BFTask, then the task returned from
+ this method will not be completed until that task is completed.
+ If the cancellationToken is cancelled before the block is executed
+ then the BFTask returned will have isCancelled true
+ */
+- (instancetype)continueWithCancellationToken:(BFTaskCancellationToken *)cancellationToken
+                                    withBlock:(BFContinuationBlock)block;
+
+/*!
+ Identical to continueWithExecutor:withCancellationToken:withBlock:,
+ except that the cancellation token is checked and the block executed
+ only if this task did not produce a cancellation, error or exception.
+ @param executor A BFExecutor responsible for determining how the
+ continuation block will be run.
+ @param cancellationToken A BFTaskCancellationToken which allows
+ the task to be cancelled before the continuation block is executed
+ @param block The block to be run once this task is complete.
+ @returns A task that will be completed after block has run.
+ If block returns a BFTask, then the task returned from
+ this method will not be completed until that task is completed.
+ If the cancellationToken is cancelled before the block is executed
+ and this task has not produced a cancellation, error or exception then
+ the BFTask returned will have isCancelled true.
+ */
+- (instancetype)continueWithExecutor:(BFExecutor *)executor
+               withCancellationToken:(BFTaskCancellationToken *)cancellationToken
+                    withSuccessBlock:(BFContinuationBlock)block;
+
+/*!
+ Identical to continueWithExecutor:withCancellationToken:withSuccessBlock:,
+ except that it uses the default execution strategy
+ @param cancellationToken A BFTaskCancellationToken which allows
+ the task to be cancelled before the continuation block is executed
+ @param block The block to be run once this task is complete.
+ @returns A task that will be completed after block has run.
+ If block returns a BFTask, then the task returned from
+ this method will not be completed until that task is completed.
+ If the cancellationToken is cancelled before the block is executed
+ and this task has not produced a cancellation, error or exception then
+ the BFTask returned will have isCancelled true.
+ */
+- (instancetype)continueWithCancellationToken:(BFTaskCancellationToken *)cancellationToken
+                             withSuccessBlock:(BFContinuationBlock)block;
 
 /*!
  Waits until this operation is completed.
