@@ -54,7 +54,7 @@ NSString *const BFAppLinkVersion = @"1.0";
 
 - (BFAppLink *)initWithIsBackToReferrer:(BOOL)backToReferrer {
     if ((self = [super init])) {
-      _backToReferrer = backToReferrer;
+        _backToReferrer = backToReferrer;
     }
     return self;
 }

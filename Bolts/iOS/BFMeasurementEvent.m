@@ -15,7 +15,6 @@ NSString *const BFMeasurementEventNotificationName = @"com.parse.bolts.measureme
 NSString *const BFMeasurementEventNameKey = @"event_name";
 NSString *const BFMeasurementEventArgsKey = @"event_args";
 
-
 /* app Link Event raised by this BFURL */
 NSString *const BFAppLinkParseEventName = @"al_link_parse";
 NSString *const BFAppLinkNavigateInEventName = @"al_nav_in";
@@ -24,25 +23,24 @@ NSString *const BFAppLinkNavigateInEventName = @"al_nav_in";
 NSString *const BFAppLinkNavigateOutEventName = @"al_nav_out";
 NSString *const BFAppLinkNavigateBackToReferrerEventName = @"al_ref_back_out";
 
-__attribute__ ((noinline)) void warnOnMissingEventName() {
+__attribute__((noinline)) void warnOnMissingEventName() {
     NSLog(@"Warning: Missing event name when logging bolts measurement event. \n"
           " Ignoring this event in logging.");
 }
 
-@implementation BFMeasurementEvent
-{
+@implementation BFMeasurementEvent {
     NSString *_name;
     NSDictionary *_args;
 }
 
-- (void)postNotification{
+- (void)postNotification {
     if (!_name) {
         warnOnMissingEventName();
         return;
     }
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    NSDictionary *userInfo = @{BFMeasurementEventNameKey: _name,
-                               BFMeasurementEventArgsKey: _args};
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    NSDictionary *userInfo = @{BFMeasurementEventNameKey : _name,
+                               BFMeasurementEventArgsKey : _args};
 
     [center postNotificationName:BFMeasurementEventNotificationName
                           object:self
@@ -50,7 +48,7 @@ __attribute__ ((noinline)) void warnOnMissingEventName() {
 }
 
 - (instancetype)initEventWithName:(NSString *)name args:(NSDictionary *)args {
-    if ((self = [super init])) {;
+    if ((self = [super init])) {
         _name = name;
         _args = args ? args : @{};
     }

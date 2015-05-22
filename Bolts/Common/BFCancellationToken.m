@@ -13,7 +13,7 @@
 
 @interface BFCancellationToken ()
 
-@property (atomic, assign, getter = isCancellationRequested) BOOL cancellationRequested;
+@property (atomic, assign, getter=isCancellationRequested) BOOL cancellationRequested;
 @property (nonatomic, strong) NSMutableArray *registrations;
 @property (nonatomic, strong) NSObject *lock;
 @property (nonatomic) BOOL disposed;
@@ -60,7 +60,7 @@
         _cancellationRequested = YES;
         registrations = [self.registrations copy];
     }
-    
+
     [self notifyCancellation:registrations];
 }
 
@@ -74,7 +74,7 @@
     @synchronized(self.lock) {
         BFCancellationTokenRegistration *registration = [BFCancellationTokenRegistration registrationWithToken:self delegate:[block copy]];
         [self.registrations addObject:registration];
-        
+
         return registration;
     }
 }
@@ -95,21 +95,21 @@
 - (void)cancelAfterDelay:(int)millis {
     [self throwIfDisposed];
     NSAssert(millis >= -1, @"Delay must be >= -1");
-    
+
     if (millis == 0) {
         [self cancel];
         return;
     }
-    
+
     @synchronized(self.lock) {
         [self throwIfDisposed];
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(cancelPrivate) object:nil];
         if (self.cancellationRequested) {
             return;
         }
-        
+
         if (millis != -1) {
-            double delay = (double) millis / 1000;
+            double delay = (double)millis / 1000;
             [self performSelector:@selector(cancelPrivate) withObject:nil afterDelay:delay];
         }
     }

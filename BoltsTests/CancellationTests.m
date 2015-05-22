@@ -27,29 +27,29 @@
 
 - (void)testCancellation {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
-    
+
     XCTAssertFalse(cts.cancellationRequested, @"Source should not be cancelled");
     XCTAssertFalse(cts.token.cancellationRequested, @"Token should not be cancelled");
-    
+
     [cts cancel];
-    
+
     XCTAssertTrue(cts.cancellationRequested, @"Source should be cancelled");
     XCTAssertTrue(cts.token.cancellationRequested, @"Token should be cancelled");
 }
 
 - (void)testCancellationBlock {
     __block BOOL cancelled = NO;
-    
+
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     [cts.token registerCancellationObserverWithBlock:^{
         cancelled = YES;
     }];
-    
+
     XCTAssertFalse(cts.cancellationRequested, @"Source should not be cancelled");
     XCTAssertFalse(cts.token.cancellationRequested, @"Token should not be cancelled");
-    
+
     [cts cancel];
-    
+
     XCTAssertTrue(cancelled, @"Source should be cancelled");
 }
 

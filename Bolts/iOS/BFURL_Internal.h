@@ -13,4 +13,3 @@
 @interface BFURL (Internal)
 + (BFURL *)URLForRenderBackToReferrerBarURL:(NSURL *)url;
 @end
-

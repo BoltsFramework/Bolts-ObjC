@@ -28,12 +28,12 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
     if (self = [super init]) {
         _inputURL = url;
         _targetURL = url;
-        
+
         // Parse the query string parameters for the base URL
         NSDictionary *baseQuery = [BFURL queryParametersForURL:url];
         _inputQueryParameters = baseQuery;
         _targetQueryParameters = baseQuery;
-        
+
         // Check for applink_data
         NSString *appLinkDataString = baseQuery[BFAppLinkDataParameterName];
         if (appLinkDataString) {
@@ -66,7 +66,7 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
                                                                              appStoreId:nil
                                                                                 appName:refererAppName];
                         _appLinkReferer = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
-                                                                  targets:@[target]
+                                                                  targets:@[ target ]
                                                                    webURL:nil
                                                          isBackToReferrer:YES];
                     }
@@ -74,7 +74,7 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
                     // Raise Measurement Event
                     NSString *const EVENT_YES_VAL = @"1";
                     NSString *const EVENT_NO_VAL = @"0";
-                    NSMutableDictionary * logData = [[NSMutableDictionary alloc] init];
+                    NSMutableDictionary *logData = [[NSMutableDictionary alloc] init];
                     logData[@"version"] = version;
                     if (refererURLString) {
                         logData[@"refererURL"] = refererURLString;

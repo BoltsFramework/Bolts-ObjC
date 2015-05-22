@@ -17,8 +17,8 @@
 @interface BFCancellationTokenRegistration : NSObject
 
 /*!
- Removes the cancellation observer registered with the token and releases all resources associated
- with this registration.
+ Removes the cancellation observer registered with the token
+ and releases all resources associated with this registration.
  */
 - (void)dispose;
 

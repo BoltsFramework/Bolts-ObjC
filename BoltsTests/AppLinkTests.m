@@ -200,11 +200,11 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -232,12 +232,12 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsingZeroShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:should_fallback": @"0"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345",
+                                                  @"al:web:should_fallback" : @"0"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -258,12 +258,12 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsingFalseShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:should_fallback": @"fAlse" // case insensitive
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345",
+                                                  @"al:web:should_fallback" : @"fAlse" // case insensitive
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -284,12 +284,12 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewSimpleAppLinkParsingWithWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @"http://www.example.com"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345",
+                                                  @"al:web:url" : @"http://www.example.com"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -310,17 +310,17 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewVersionedAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   },
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts2://",
-                                                  @"al:ios:app_name": @"Bolts2",
-                                                  @"al:ios:app_store_id": @"67890"
+                                                  @"al:ios:url" : @"bolts2://",
+                                                  @"al:ios:app_name" : @"Bolts2",
+                                                  @"al:ios:app_store_id" : @"67890"
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -347,10 +347,10 @@ NSMutableArray *openedUrls = nil;
 - (void)testWebViewVersionedAppLinkParsingOnlyUrls {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios:url": @"bolts://"
+                                                  @"al:ios:url" : @"bolts://"
                                                   },
                                               @{
-                                                  @"al:ios:url": @"bolts2://"
+                                                  @"al:ios:url" : @"bolts2://"
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -373,16 +373,16 @@ NSMutableArray *openedUrls = nil;
 - (void)testWebViewVersionedAppLinkParsingUrlsAndNames {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios:url": @"bolts://"
+                                                  @"al:ios:url" : @"bolts://"
                                                   },
                                               @{
-                                                  @"al:ios:url": @"bolts2://"
+                                                  @"al:ios:url" : @"bolts2://"
                                                   },
                                               @{
-                                                  @"al:ios:app_name": @"Bolts"
+                                                  @"al:ios:app_name" : @"Bolts"
                                                   },
                                               @{
-                                                  @"al:ios:app_name": @"Bolts2"
+                                                  @"al:ios:app_name" : @"Bolts2"
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -406,28 +406,28 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testWebViewPlatformFiltering {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   },
-                                              @{ @"al:iphone": [NSNull null] },
+                                              @{ @"al:iphone" : [NSNull null] },
                                               @{
-                                                  @"al:iphone:url": @"bolts2://iphone",
-                                                  @"al:iphone:app_name": @"Bolts2",
-                                                  @"al:iphone:app_store_id": @"67890"
+                                                  @"al:iphone:url" : @"bolts2://iphone",
+                                                  @"al:iphone:app_name" : @"Bolts2",
+                                                  @"al:iphone:app_store_id" : @"67890"
                                                   },
-                                              @{ @"al:ipad": [NSNull null] },
+                                              @{ @"al:ipad" : [NSNull null] },
                                               @{
-                                                  @"al:ipad:url": @"bolts2://ipad",
-                                                  @"al:ipad:app_name": @"Bolts2",
-                                                  @"al:ipad:app_store_id": @"67890"
+                                                  @"al:ipad:url" : @"bolts2://ipad",
+                                                  @"al:ipad:app_name" : @"Bolts2",
+                                                  @"al:ipad:app_store_id" : @"67890"
                                                   },
-                                              @{ @"al:android": [NSNull null] },
+                                              @{ @"al:android" : [NSNull null] },
                                               @{
-                                                  @"al:android:url": @"bolts2://android",
-                                                  @"al:android:package": @"com.bolts2",
+                                                  @"al:android:url" : @"bolts2://android",
+                                                  @"al:android:package" : @"com.bolts2",
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -458,7 +458,6 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(@"Bolts", target.appName);
     XCTAssertEqualObjects(@"12345", target.appStoreId);
 
-
     XCTAssertEqualObjects(url, link.webURL);
 }
 
@@ -466,11 +465,11 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -498,12 +497,12 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsingNoShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:should_fallback": @"No" // case insensitive
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345",
+                                                  @"al:web:should_fallback" : @"No" // case insensitive
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -524,12 +523,12 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsingFalseShouldFallback {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:should_fallback": @"false"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345",
+                                                  @"al:web:should_fallback" : @"false"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -550,12 +549,12 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testSimpleAppLinkParsingWithWebUrl {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @"http://www.example.com"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345",
+                                                  @"al:web:url" : @"http://www.example.com"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -576,17 +575,17 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testVersionedAppLinkParsing {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   },
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts2://",
-                                                  @"al:ios:app_name": @"Bolts2",
-                                                  @"al:ios:app_store_id": @"67890"
+                                                  @"al:ios:url" : @"bolts2://",
+                                                  @"al:ios:app_name" : @"Bolts2",
+                                                  @"al:ios:app_store_id" : @"67890"
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -613,10 +612,10 @@ NSMutableArray *openedUrls = nil;
 - (void)testVersionedAppLinkParsingOnlyUrls {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios:url": @"bolts://"
+                                                  @"al:ios:url" : @"bolts://"
                                                   },
                                               @{
-                                                  @"al:ios:url": @"bolts2://"
+                                                  @"al:ios:url" : @"bolts2://"
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -639,16 +638,16 @@ NSMutableArray *openedUrls = nil;
 - (void)testVersionedAppLinkParsingUrlsAndNames {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios:url": @"bolts://"
+                                                  @"al:ios:url" : @"bolts://"
                                                   },
                                               @{
-                                                  @"al:ios:url": @"bolts2://"
+                                                  @"al:ios:url" : @"bolts2://"
                                                   },
                                               @{
-                                                  @"al:ios:app_name": @"Bolts"
+                                                  @"al:ios:app_name" : @"Bolts"
                                                   },
                                               @{
-                                                  @"al:ios:app_name": @"Bolts2"
+                                                  @"al:ios:app_name" : @"Bolts2"
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -672,28 +671,28 @@ NSMutableArray *openedUrls = nil;
 
 - (void)testPlatformFiltering {
     NSString *html = [self htmlWithMetaTags:@[
-                                              @{ @"al:ios": [NSNull null] },
+                                              @{ @"al:ios" : [NSNull null] },
                                               @{
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   },
-                                              @{ @"al:iphone": [NSNull null] },
+                                              @{ @"al:iphone" : [NSNull null] },
                                               @{
-                                                  @"al:iphone:url": @"bolts2://iphone",
-                                                  @"al:iphone:app_name": @"Bolts2",
-                                                  @"al:iphone:app_store_id": @"67890"
+                                                  @"al:iphone:url" : @"bolts2://iphone",
+                                                  @"al:iphone:app_name" : @"Bolts2",
+                                                  @"al:iphone:app_store_id" : @"67890"
                                                   },
-                                              @{ @"al:ipad": [NSNull null] },
+                                              @{ @"al:ipad" : [NSNull null] },
                                               @{
-                                                  @"al:ipad:url": @"bolts2://ipad",
-                                                  @"al:ipad:app_name": @"Bolts2",
-                                                  @"al:ipad:app_store_id": @"67890"
+                                                  @"al:ipad:url" : @"bolts2://ipad",
+                                                  @"al:ipad:app_name" : @"Bolts2",
+                                                  @"al:ipad:app_store_id" : @"67890"
                                                   },
-                                              @{ @"al:android": [NSNull null] },
+                                              @{ @"al:android" : [NSNull null] },
                                               @{
-                                                  @"al:android:url": @"bolts2://ipad",
-                                                  @"al:android:package": @"com.bolts2",
+                                                  @"al:android:url" : @"bolts2://ipad",
+                                                  @"al:android:package" : @"com.bolts2",
                                                   },
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -724,7 +723,6 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(@"Bolts", target.appName);
     XCTAssertEqualObjects(@"12345", target.appStoreId);
 
-
     XCTAssertEqualObjects(url, link.webURL);
 }
 
@@ -735,7 +733,7 @@ NSMutableArray *openedUrls = nil;
                                                          appStoreId:@"12345"
                                                             appName:@"Bolts"];
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
-                                                 targets:@[target]
+                                                 targets:@[ target ]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
 
@@ -752,11 +750,11 @@ NSMutableArray *openedUrls = nil;
                                                          appStoreId:@"12345"
                                                             appName:@"Bolts"];
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
-                                                 targets:@[target]
+                                                 targets:@[ target ]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
                                                                           extras:nil
-                                                                     appLinkData:@{@"foo": @"bar"}];
+                                                                     appLinkData:@{ @"foo" : @"bar" }];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
 
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
@@ -773,10 +771,10 @@ NSMutableArray *openedUrls = nil;
                                                          appStoreId:@"12345"
                                                             appName:@"Bolts"];
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
-                                                 targets:@[target]
+                                                 targets:@[ target ]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
-                                                                          extras:@{@"foo": @"bar"}
+                                                                          extras:@{ @"foo" : @"bar" }
                                                                      appLinkData:nil];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
 
@@ -794,11 +792,11 @@ NSMutableArray *openedUrls = nil;
                                                          appStoreId:@"12345"
                                                             appName:@"Bolts"];
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
-                                                 targets:@[target]
+                                                 targets:@[ target ]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigation *navigation = [BFAppLinkNavigation navigationWithAppLink:appLink
-                                                                          extras:@{@"foo": @"bar1"}
-                                                                     appLinkData:@{@"foo": @"bar2"}];
+                                                                          extras:@{ @"foo" : @"bar1" }
+                                                                     appLinkData:@{ @"foo" : @"bar2" }];
     BFAppLinkNavigationType navigationType = [navigation navigate:nil];
 
     XCTAssertEqual(navigationType, BFAppLinkNavigationTypeApp);
@@ -819,7 +817,7 @@ NSMutableArray *openedUrls = nil;
                                                           appStoreId:@"12345"
                                                              appName:@"Bolts"];
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
-                                                 targets:@[target, target2]
+                                                 targets:@[ target, target2 ]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
 
@@ -840,7 +838,7 @@ NSMutableArray *openedUrls = nil;
                                                           appStoreId:@"12345"
                                                              appName:@"Bolts"];
     BFAppLink *appLink = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:@"http://www.example.com/path"]
-                                                 targets:@[target, target2]
+                                                 targets:@[ target, target2 ]
                                                   webURL:[NSURL URLWithString:@"http://www.example.com/path"]];
     BFAppLinkNavigationType navigationType = [BFAppLinkNavigation navigateToAppLink:appLink error:nil];
 
@@ -884,10 +882,10 @@ NSMutableArray *openedUrls = nil;
 - (void)testSimpleAppLinkURLNavigation {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios": [NSNull null],
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios" : [NSNull null],
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -908,16 +906,16 @@ NSMutableArray *openedUrls = nil;
 - (void)testAppLinkURLNavigationMultipleTargetsNoFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios": [NSNull null],
-                                                  @"al:ios:url": @"bolts2://",
-                                                  @"al:ios:app_name": @"Bolts2",
-                                                  @"al:ios:app_store_id": @"67890"
+                                                  @"al:ios" : [NSNull null],
+                                                  @"al:ios:url" : @"bolts2://",
+                                                  @"al:ios:app_name" : @"Bolts2",
+                                                  @"al:ios:app_store_id" : @"67890"
                                                   },
                                               @{
-                                                  @"al:ios": [NSNull null],
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios" : [NSNull null],
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -939,16 +937,16 @@ NSMutableArray *openedUrls = nil;
 - (void)testAppLinkURLNavigationMultipleTargetsWithFallback {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios": [NSNull null],
-                                                  @"al:ios:url": @"bolts3://",
-                                                  @"al:ios:app_name": @"Bolts3",
-                                                  @"al:ios:app_store_id": @"67890"
+                                                  @"al:ios" : [NSNull null],
+                                                  @"al:ios:url" : @"bolts3://",
+                                                  @"al:ios:app_name" : @"Bolts3",
+                                                  @"al:ios:app_store_id" : @"67890"
                                                   },
                                               @{
-                                                  @"al:ios": [NSNull null],
-                                                  @"al:ios:url": @"bolts://",
-                                                  @"al:ios:app_name": @"Bolts",
-                                                  @"al:ios:app_store_id": @"12345"
+                                                  @"al:ios" : [NSNull null],
+                                                  @"al:ios:url" : @"bolts://",
+                                                  @"al:ios:app_name" : @"Bolts",
+                                                  @"al:ios:app_store_id" : @"12345"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -988,11 +986,11 @@ NSMutableArray *openedUrls = nil;
 - (void)testAppLinkURLNavigationFallbackToWeb {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:ios": [NSNull null],
-                                                  @"al:ios:url": @"bad://",
-                                                  @"al:ios:app_name": @"Bad",
-                                                  @"al:ios:app_store_id": @"12345",
-                                                  @"al:web:url": @"http://www.example.com"
+                                                  @"al:ios" : [NSNull null],
+                                                  @"al:ios:url" : @"bad://",
+                                                  @"al:ios:app_name" : @"Bad",
+                                                  @"al:ios:app_store_id" : @"12345",
+                                                  @"al:web:url" : @"http://www.example.com"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
@@ -1015,7 +1013,7 @@ NSMutableArray *openedUrls = nil;
 - (void)testAppLinkURLNavigationWebLinkOnly {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
-                                                  @"al:web:url": @"http://www.example.com"
+                                                  @"al:web:url" : @"http://www.example.com"
                                                   }
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
