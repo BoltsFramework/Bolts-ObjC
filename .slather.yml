@@ -1,0 +1,4 @@
+service: travis_ci
+coverage_service: coveralls
+xcodeproj: Bolts.xcodeproj
+source_directory: Bolts
