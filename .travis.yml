@@ -1,15 +1,19 @@
 language: objective-c
+osx_image: beta-xcode6.3
+cache: 
+  - bundler
+  - cocoapods
 before_install:
-  - gem install xcpretty -N
-  - gem install cocoapods --pre --quiet
-  - gem install slather
+  - gem install xcpretty -N --no-ri --no-rdoc
+  - gem install cocoapods --pre --quiet --no-ri --no-rdoc
+  - gem install slather --no-ri --no-rdoc
   - pod setup --silent
   - pod repo update --silent
 script:
   - pod lib lint Bolts.podspec
   - pod lib lint --use-libraries Bolts.podspec
   - set -o pipefail
-  - xcodebuild -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts test | xcpretty -c
-  - xcodebuild -project Bolts.xcodeproj -sdk macosx -scheme MacBolts test | xcpretty -c
+  - xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+  - xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
 after_success:
   - slather
