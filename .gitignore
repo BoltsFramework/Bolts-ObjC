@@ -9,3 +9,4 @@ xcuserdata
 *.xcuserdatad
 *.xccheckout
 *.swp
+*.gcov
