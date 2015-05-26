@@ -21,4 +21,3 @@
 @property (nonatomic, assign, readonly, getter=isBackToReferrer) BOOL backToReferrer;
 
 @end
-

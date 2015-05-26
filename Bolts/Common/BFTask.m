@@ -28,9 +28,9 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     NSException *_exception;
 }
 
-@property (atomic, assign, readwrite, getter = isCancelled) BOOL cancelled;
-@property (atomic, assign, readwrite, getter = isFaulted) BOOL faulted;
-@property (atomic, assign, readwrite, getter = isCompleted) BOOL completed;
+@property (atomic, assign, readwrite, getter=isCancelled) BOOL cancelled;
+@property (atomic, assign, readwrite, getter=isFaulted) BOOL faulted;
+@property (atomic, assign, readwrite, getter=isCompleted) BOOL completed;
 
 @property (nonatomic, strong) NSObject *lock;
 @property (nonatomic, strong) NSCondition *condition;
@@ -82,7 +82,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     if (total == 0) {
         return [self taskWithResult:nil];
     }
-    
+
     __block int32_t cancelled = 0;
     NSObject *lock = [[NSObject alloc] init];
     NSMutableArray *errors = [NSMutableArray array];
@@ -155,7 +155,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     if (token.cancellationRequested) {
         return [BFTask cancelledTask];
     }
-    
+
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, millis * NSEC_PER_MSEC);
     dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
@@ -176,7 +176,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 #pragma mark - Custom Setters/Getters
 
 - (id)result {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         return _result;
     }
 }
@@ -189,7 +189,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)trySetResult:(id)result {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         if (self.completed) {
             return NO;
         }
@@ -201,7 +201,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (NSError *)error {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         return _error;
     }
 }
@@ -214,7 +214,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)trySetError:(NSError *)error {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         if (self.completed) {
             return NO;
         }
@@ -227,7 +227,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (NSException *)exception {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         return _exception;
     }
 }
@@ -240,7 +240,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)trySetException:(NSException *)exception {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         if (self.completed) {
             return NO;
         }
@@ -253,19 +253,19 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)isCancelled {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         return _cancelled;
     }
 }
 
 - (BOOL)isFaulted {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         return _faulted;
     }
 }
 
 - (void)cancel {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         if (![self trySetCancelled]) {
             [NSException raise:NSInternalInconsistencyException
                         format:@"Cannot cancel a completed task."];
@@ -274,7 +274,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)trySetCancelled {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         if (self.completed) {
             return NO;
         }
@@ -286,19 +286,19 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)isCompleted {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         return _completed;
     }
 }
 
 - (void)setCompleted {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         _completed = YES;
     }
 }
 
 - (void)runContinuations {
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         [self.condition lock];
         [self.condition broadcast];
         [self.condition unlock];
@@ -328,7 +328,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 [tcs cancel];
                 return;
             }
-            
+
             id result = nil;
             @try {
                 result = block(self);
@@ -336,9 +336,9 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 tcs.exception = exception;
                 return;
             }
-            
+
             if ([result isKindOfClass:[BFTask class]]) {
-                
+
                 id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
                     if (task.cancelled) {
                         [tcs cancel];
@@ -351,15 +351,15 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                     }
                     return nil;
                 };
-                
+
                 BFTask *resultTask = (BFTask *)result;
-                
+
                 if (resultTask.completed) {
                     setupWithTask(resultTask);
                 } else {
                     [resultTask continueWithBlock:setupWithTask cancellationToken:cancellationToken];
                 }
-                
+
             } else {
                 tcs.result = result;
             }
@@ -367,7 +367,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     };
 
     BOOL completed;
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         completed = self.completed;
         if (!completed) {
             [self.callbacks addObject:[wrappedBlock copy]];
@@ -400,7 +400,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     if (cancellationToken.cancellationRequested) {
         return [BFTask cancelledTask];
     }
-    
+
     return [self continueWithExecutor:executor block:^id(BFTask *task) {
         if (task.faulted || task.cancelled) {
             return task;
@@ -430,7 +430,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
         [self warnOperationOnMainThread];
     }
 
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         if (self.completed) {
             return;
         }
@@ -448,7 +448,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     BOOL cancelled;
     BOOL faulted;
 
-    @synchronized (self.lock) {
+    @synchronized(self.lock) {
         completed = self.completed;
         cancelled = self.cancelled;
         faulted = self.faulted;

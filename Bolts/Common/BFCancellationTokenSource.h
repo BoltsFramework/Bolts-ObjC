@@ -13,10 +13,10 @@
 @class BFCancellationToken;
 
 /*!
- BFCancellationTokenSource represents the producer side of a CancellationToken. 
+ BFCancellationTokenSource represents the producer side of a CancellationToken.
  Signals to a CancellationToken that it should be canceled.
- It is a cancellation token that also has methods for changing the state of a token 
- by cancelling it.
+ It is a cancellation token that also has methods
+ for changing the state of a token by cancelling it.
  */
 @interface BFCancellationTokenSource : NSObject
 
@@ -33,7 +33,7 @@
 /*!
  Whether cancellation has been requested for this token source.
  */
-@property (nonatomic, assign, readonly, getter = isCancellationRequested) BOOL cancellationRequested;
+@property (nonatomic, assign, readonly, getter=isCancellationRequested) BOOL cancellationRequested;
 
 /*!
  Cancels the token if it has not already been cancelled.
@@ -43,13 +43,13 @@
 /*!
  Schedules a cancel operation on this CancellationTokenSource after the specified number of milliseconds.
  @param millis The number of milliseconds to wait before completing the returned task.
- If delay is 0 the cancel is executed immediately. If delay is -1 any scheduled cancellation is stopped.
+ If delay is `0` the cancel is executed immediately. If delay is `-1` any scheduled cancellation is stopped.
  */
 - (void)cancelAfterDelay:(int)millis;
 
 /*!
- Releases all resources associated with this token source, including disposing of all
- registrations.
+ Releases all resources associated with this token source,
+ including disposing of all registrations.
  */
 - (void)dispose;
 

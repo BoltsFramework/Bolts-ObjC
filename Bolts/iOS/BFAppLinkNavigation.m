@@ -52,13 +52,13 @@ static id<BFAppLinkResolving> defaultResolver;
     return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
                                                                                  (CFStringRef)string,
                                                                                  NULL,
-                                                                                 (CFStringRef)@":/?#[]@!$&'()*+,;=",
+                                                                                 (CFStringRef) @":/?#[]@!$&'()*+,;=",
                                                                                  kCFStringEncodingUTF8));
 }
 
 - (NSURL *)appLinkURLWithTargetURL:(NSURL *)targetUrl error:(NSError **)error {
     NSMutableDictionary *appLinkData = [NSMutableDictionary dictionaryWithDictionary:self.appLinkData ?: @{}];
-    
+
     // Add applink protocol data
     if (!appLinkData[BFAppLinkUserAgentKeyName]) {
         appLinkData[BFAppLinkUserAgentKeyName] = [NSString stringWithFormat:@"Bolts iOS %@", BOLTS_VERSION];
@@ -68,26 +68,26 @@ static id<BFAppLinkResolving> defaultResolver;
     }
     appLinkData[BFAppLinkTargetKeyName] = [self.appLink.sourceURL absoluteString];
     appLinkData[BFAppLinkExtrasKeyName] = self.extras ?: @{};
-    
+
     // JSON-ify the applink data
     NSError *jsonError = nil;
     NSData *jsonBlob = [NSJSONSerialization dataWithJSONObject:appLinkData options:0 error:&jsonError];
     if (!jsonError) {
         NSString *jsonString = [[NSString alloc] initWithData:jsonBlob encoding:NSUTF8StringEncoding];
         NSString *encoded = [self stringByEscapingQueryString:jsonString];
-        
+
         NSString *endUrlString = [NSString stringWithFormat:@"%@%@%@=%@",
                                   [targetUrl absoluteString],
                                   targetUrl.query ? @"&" : @"?",
                                   BFAppLinkDataParameterName,
                                   encoded];
-        
+
         return [NSURL URLWithString:endUrlString];
     } else {
         if (error) {
             *error = jsonError;
         }
-        
+
         // If there was an error encoding the app link data, fail hard.
         return nil;
     }
@@ -102,7 +102,7 @@ static id<BFAppLinkResolving> defaultResolver;
             break;
         }
     }
-    
+
     NSURL *appLinkURLToOpen = nil;
     NSError *encodingError = nil;
     BFAppLinkNavigationType retType = BFAppLinkNavigationTypeFailure;
@@ -117,7 +117,7 @@ static id<BFAppLinkResolving> defaultResolver;
             appLinkURLToOpen = appLinkAppURL;
         }
     }
-    
+
     if (!appLinkURLToOpen && self.appLink.webURL) {
         // Fall back to opening the url in the browser if available.
         NSURL *appLinkBrowserURL = [self appLinkURLWithTargetURL:self.appLink.webURL error:&encodingError];
@@ -143,11 +143,11 @@ static id<BFAppLinkResolving> defaultResolver;
     return retType;
 }
 
-- (void) postAppLinkNavigateEventNotificationWithTargetURL:(NSURL *)outputURL error:(NSError *)error type:(BFAppLinkNavigationType)type{
+- (void)postAppLinkNavigateEventNotificationWithTargetURL:(NSURL *)outputURL error:(NSError *)error type:(BFAppLinkNavigationType)type {
     NSString *const EVENT_YES_VAL = @"1";
     NSString *const EVENT_NO_VAL = @"0";
     NSMutableDictionary *logData = [[NSMutableDictionary alloc] init];
-    
+
     NSString *outputURLScheme = [outputURL scheme];
     NSString *outputURLString = [outputURL absoluteString];
     if (outputURLScheme) {
@@ -156,7 +156,7 @@ static id<BFAppLinkResolving> defaultResolver;
     if (outputURLString) {
         logData[@"outputURL"] = outputURLString;
     }
-    
+
     NSString *sourceURLString = [self.appLink.sourceURL absoluteString];
     NSString *sourceURLHost = [self.appLink.sourceURL host];
     NSString *sourceURLScheme = [self.appLink.sourceURL scheme];
@@ -196,7 +196,7 @@ static id<BFAppLinkResolving> defaultResolver;
     if (linkType) {
         logData[@"type"] = linkType;
     }
-    
+
     if ([self.appLink isBackToReferrer]) {
         [BFMeasurementEvent postNotificationForEventName:BFAppLinkNavigateBackToReferrerEventName args:logData];
     } else {
@@ -219,8 +219,8 @@ static id<BFAppLinkResolving> defaultResolver;
 
 + (BFTask *)navigateToURLInBackground:(NSURL *)destination
                              resolver:(id<BFAppLinkResolving>)resolver {
-    BFTask *resolutionTask =[self resolveAppLinkInBackground:destination
-                                                    resolver:resolver];
+    BFTask *resolutionTask = [self resolveAppLinkInBackground:destination
+                                                     resolver:resolver];
     return [resolutionTask continueWithExecutor:[BFExecutor mainThreadExecutor]
                                withSuccessBlock:^id(BFTask *task) {
                                    NSError *error = nil;
@@ -237,7 +237,7 @@ static id<BFAppLinkResolving> defaultResolver;
 + (BFAppLinkNavigationType)navigateToAppLink:(BFAppLink *)link error:(NSError **)error {
     return [[BFAppLinkNavigation navigationWithAppLink:link
                                                 extras:nil
-                                           appLinkData:nil] navigate:error];;
+                                           appLinkData:nil] navigate:error];
 }
 
 + (id<BFAppLinkResolving>)defaultResolver {

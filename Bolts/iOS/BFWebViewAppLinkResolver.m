@@ -85,7 +85,6 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
 
 @end
 
-
 @implementation BFWebViewAppLinkResolver
 
 + (instancetype)sharedInstance {
@@ -113,10 +112,10 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
                                    [tcs setError:connectionError];
                                    return;
                                }
-                               
+
                                if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-                                   
+
                                    // NSURLConnection usually follows redirects automatically, but the
                                    // documentation is unclear what the default is. This helps it along.
                                    if (httpResponse.statusCode >= 300 && httpResponse.statusCode < 400) {
@@ -126,7 +125,7 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
                                        return;
                                    }
                                }
-                               
+
                                [tcs setResult:@{
                                                 @"response" : response,
                                                 @"data" : data
@@ -147,7 +146,7 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
                                                NSData *responseData = task.result[@"data"];
                                                NSHTTPURLResponse *response = task.result[@"response"];
                                                BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-                                               
+
                                                UIWebView *webView = [[UIWebView alloc] init];
                                                BFWebViewAppLinkResolverWebViewDelegate *listener = [[BFWebViewAppLinkResolverWebViewDelegate alloc] init];
                                                __block BFWebViewAppLinkResolverWebViewDelegate *retainedListener = listener;
@@ -176,11 +175,10 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
                                                          baseURL:response.URL];
                                                UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
                                                [window addSubview:webView];
-                                               
+
                                                return tcs.task;
                                            }];
 }
-
 
 /*
  Builds up a data structure filled with the app link data from the meta tags on a page.
@@ -234,23 +232,23 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
  */
 - (BFAppLink *)appLinkFromALData:(NSDictionary *)appLinkDict destination:(NSURL *)destination {
     NSMutableArray *linkTargets = [NSMutableArray array];
-    
+
     NSArray *platformData = nil;
     switch (UI_USER_INTERFACE_IDIOM()) {
         case UIUserInterfaceIdiomPad:
-            platformData = @[appLinkDict[BFWebViewAppLinkResolverIPadKey] ?: @{},
-                             appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{}];
+            platformData = @[ appLinkDict[BFWebViewAppLinkResolverIPadKey] ?: @{},
+                              appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
             break;
         case UIUserInterfaceIdiomPhone:
-            platformData = @[appLinkDict[BFWebViewAppLinkResolverIPhoneKey] ?: @{},
-                             appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{}];
+            platformData = @[ appLinkDict[BFWebViewAppLinkResolverIPhoneKey] ?: @{},
+                              appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
             break;
         default:
             // Future-proofing. Other User Interface idioms should only hit ios.
-            platformData = @[appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{}];
+            platformData = @[ appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
             break;
     }
-    
+
     for (NSArray *platformObjects in platformData) {
         for (NSDictionary *platformDict in platformObjects) {
             // The schema requires a single url/app store id/app name,
@@ -259,9 +257,9 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
             NSArray *urls = platformDict[BFWebViewAppLinkResolverIOSURLKey];
             NSArray *appStoreIds = platformDict[BFWebViewAppLinkResolverIOSAppStoreIdKey];
             NSArray *appNames = platformDict[BFWebViewAppLinkResolverIOSAppNameKey];
-            
+
             NSUInteger maxCount = MAX(urls.count, MAX(appStoreIds.count, appNames.count));
-            
+
             for (NSUInteger i = 0; i < maxCount; i++) {
                 NSString *urlString = urls[i][BFWebViewAppLinkResolverDictionaryValueKey];
                 NSURL *url = urlString ? [NSURL URLWithString:urlString] : nil;
@@ -274,21 +272,21 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
             }
         }
     }
-    
+
     NSDictionary *webDict = appLinkDict[BFWebViewAppLinkResolverWebKey][0];
     NSString *webUrlString = webDict[BFWebViewAppLinkResolverWebURLKey][0][BFWebViewAppLinkResolverDictionaryValueKey];
     NSString *shouldFallbackString = webDict[BFWebViewAppLinkResolverShouldFallbackKey][0][BFWebViewAppLinkResolverDictionaryValueKey];
-    
+
     NSURL *webUrl = destination;
-    
+
     if (shouldFallbackString &&
-        [@[@"no", @"false", @"0"] containsObject:[shouldFallbackString lowercaseString]]) {
+        [@[ @"no", @"false", @"0" ] containsObject:[shouldFallbackString lowercaseString]]) {
         webUrl = nil;
     }
     if (webUrl && webUrlString) {
         webUrl = [NSURL URLWithString:webUrlString];
     }
-    
+
     return [BFAppLink appLinkWithSourceURL:destination
                                    targets:linkTargets
                                     webURL:webUrl];

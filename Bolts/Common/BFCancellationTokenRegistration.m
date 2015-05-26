@@ -27,7 +27,6 @@
 
 @end
 
-
 @implementation BFCancellationTokenRegistration
 
 + (instancetype)registrationWithToken:(BFCancellationToken *)token delegate:(BFCancellationBlock)delegate {
@@ -51,7 +50,7 @@
         }
         self.disposed = YES;
     }
-    
+
     BFCancellationToken *token = self.token;
     if (token != nil) {
         [token unregisterRegistration:self];

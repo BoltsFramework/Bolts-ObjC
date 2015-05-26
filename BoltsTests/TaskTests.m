@@ -35,31 +35,33 @@
 - (void)testBasicOnSuccessWithToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     BFTask *task = [BFTask taskWithDelay:100];
-    
+
     task = [task continueWithExecutor:[BFExecutor immediateExecutor]
-                     successBlock:^id(BFTask *task) {
-                         XCTFail(@"Success block should not be triggered");
-                         return nil;
-                     } cancellationToken:cts.token];
-    
+                         successBlock:^id(BFTask *task) {
+                             XCTFail(@"Success block should not be triggered");
+                             return nil;
+                         }
+                    cancellationToken:cts.token];
+
     [cts cancel];
     [task waitUntilFinished];
-    
+
     XCTAssertTrue(task.isCancelled);
 }
 
 - (void)testBasicOnSuccessWithCancelledToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     BFTask *task = [BFTask taskWithResult:nil];
-    
+
     [cts cancel];
-    
+
     task = [task continueWithExecutor:[BFExecutor immediateExecutor]
-                     successBlock:^id(BFTask *task) {
-                         XCTFail(@"Success block should not be triggered");
-                         return nil;
-                     } cancellationToken:cts.token];
-    
+                         successBlock:^id(BFTask *task) {
+                             XCTFail(@"Success block should not be triggered");
+                             return nil;
+                         }
+                    cancellationToken:cts.token];
+
     XCTAssertTrue(task.isCancelled);
 }
 
@@ -87,31 +89,33 @@
 - (void)testBasicContinueWithToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     BFTask *task = [BFTask taskWithDelay:100];
-    
+
     task = [task continueWithExecutor:[BFExecutor immediateExecutor]
-                            block:^id(BFTask *task) {
-                                XCTFail(@"Continuation block should not be triggered");
-                                return nil;
-                            } cancellationToken:cts.token];
-    
+                                block:^id(BFTask *task) {
+                                    XCTFail(@"Continuation block should not be triggered");
+                                    return nil;
+                                }
+                    cancellationToken:cts.token];
+
     [cts cancel];
     [task waitUntilFinished];
-    
+
     XCTAssertTrue(task.isCancelled);
 }
 
 - (void)testBasicContinueWithCancelledToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     BFTask *task = [BFTask taskWithResult:nil];
-    
+
     [cts cancel];
-    
+
     task = [task continueWithExecutor:[BFExecutor immediateExecutor]
-                            block:^id(BFTask *task) {
-                                XCTFail(@"Continuation block should not be triggered");
-                                return nil;
-                            } cancellationToken:cts.token];
-    
+                                block:^id(BFTask *task) {
+                                    XCTFail(@"Continuation block should not be triggered");
+                                    return nil;
+                                }
+                    cancellationToken:cts.token];
+
     XCTAssertTrue(task.isCancelled);
 }
 
@@ -533,9 +537,9 @@
     BFTask *errorTask = [BFTask taskWithError:[NSError new]];
     BFTask *cancelledTask = [BFTask cancelledTask];
     BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
-    
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask, errorTask]];
-    
+
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, cancelledTask, errorTask ]];
+
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
 }
 
@@ -544,9 +548,9 @@
     BFTask *exceptionTask = [BFTask taskWithException:exception];
     BFTask *cancelledTask = [BFTask cancelledTask];
     BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
-    
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask, exceptionTask]];
-    
+
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, cancelledTask, exceptionTask ]];
+
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
     XCTAssertNil(allTasks.error, @"Task shoud not have error");
     XCTAssertNotNil(allTasks.exception, @"Task should have exception");
@@ -557,9 +561,9 @@
     BFTask *exceptionTask = [BFTask taskWithException:[NSException new]];
     BFTask *cancelledTask = [BFTask cancelledTask];
     BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
-    
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask, exceptionTask, errorTask]];
-    
+
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, cancelledTask, exceptionTask, errorTask ]];
+
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
     XCTAssertNotNil(allTasks.error, @"Task should have error");
     XCTAssertNil(allTasks.exception, @"Task should not have exception");
@@ -568,27 +572,27 @@
 - (void)testTaskForCompletionOfAllTasksErrorCancelled {
     BFTask *errorTask = [BFTask taskWithError:[NSError new]];
     BFTask *cancelledTask = [BFTask cancelledTask];
-    
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[cancelledTask, errorTask]];
-    
+
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ cancelledTask, errorTask ]];
+
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
 }
 
 - (void)testTaskForCompletionOfAllTasksSuccessCancelled {
     BFTask *cancelledTask = [BFTask cancelledTask];
     BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
-    
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, cancelledTask]];
-    
+
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, cancelledTask ]];
+
     XCTAssertTrue(allTasks.cancelled, @"Task should be cancelled");
 }
 
 - (void)testTaskForCompletionOfAllTasksSuccessError {
     BFTask *errorTask = [BFTask taskWithError:[NSError new]];
     BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
-    
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[successfulTask, errorTask]];
-    
+
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, errorTask ]];
+
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
 }
 
@@ -614,21 +618,21 @@
 
 - (void)testDelayWithToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
-    
+
     BFTask *task = [BFTask taskWithDelay:100 cancellationToken:cts.token];
-    
+
     [cts cancel];
     [task waitUntilFinished];
-    
+
     XCTAssertTrue(task.cancelled, @"Task should be cancelled immediately");
 }
 
 - (void)testDelayWithCancelledToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     [cts cancel];
-    
+
     BFTask *task = [BFTask taskWithDelay:100 cancellationToken:cts.token];
-    
+
     XCTAssertTrue(task.cancelled, @"Task should be cancelled immediately");
 }
 
@@ -682,7 +686,7 @@
 - (void)testDescription {
     BFTask *task = [BFTask taskWithResult:nil];
     NSString *expected = [NSString stringWithFormat:@"<BFTask: %p; completed = YES; cancelled = NO; faulted = NO; result:(null)>", task];
-
+    
     NSString *description = task.description;
     
     XCTAssertTrue([expected isEqualToString:description]);
