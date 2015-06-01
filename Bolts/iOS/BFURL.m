@@ -50,9 +50,9 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
                     [version isEqual:BFAppLinkVersion]) {
                     // There's applink data!  The target should actually be the applink target.
                     _appLinkData = applinkData;
-                    NSDictionary *applinkExtras = applinkData[BFAppLinkExtrasKeyName];
+                    id applinkExtras = applinkData[BFAppLinkExtrasKeyName];
                     if (applinkExtras && [applinkExtras isKindOfClass:[NSDictionary class]]) {
-                        _appLinkExtras = applinkData[BFAppLinkExtrasKeyName];
+                        _appLinkExtras = applinkExtras;
                     }
                     _targetURL = target ? [NSURL URLWithString:target] : url;
                     _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];
