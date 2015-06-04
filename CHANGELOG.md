@@ -1,5 +1,10 @@
 # Bolts CHANGELOG
 
+## 1.2.0
+- Added: `BFCancellationToken`, `BFCancellationTokenSource`, `BFCancellationTokenRegistration`
+- Updated: `BFTask` APIs to have methods that accept `BFCancellationToken` as an argument.
+- Documentation updates and small bug fixes.
+
 ## 1.1.5
 - Better subclassing support for `BFTask`, `BFTaskCompletionSource`, `BFExecutor`.
 - Improved `taskForCompletionOfAllTasks:` to check for `error`/`exception` before cancelling a task.
