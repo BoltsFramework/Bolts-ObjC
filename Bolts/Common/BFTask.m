@@ -340,7 +340,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
             if ([result isKindOfClass:[BFTask class]]) {
 
                 id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
-                    if (task.cancelled) {
+                    if (cancellationToken.cancellationRequested || task.cancelled) {
                         [tcs cancel];
                     } else if (task.exception) {
                         tcs.exception = task.exception;
@@ -357,7 +357,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 if (resultTask.completed) {
                     setupWithTask(resultTask);
                 } else {
-                    [resultTask continueWithBlock:setupWithTask cancellationToken:cancellationToken];
+                    [resultTask continueWithBlock:setupWithTask];
                 }
 
             } else {
