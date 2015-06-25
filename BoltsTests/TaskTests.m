@@ -692,4 +692,19 @@
     XCTAssertTrue([expected isEqualToString:description]);
 }
 
+- (void)testReturnTaskFromContinuationWithCancellation {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"task"];
+    [[[BFTask taskWithDelay:1] continueWithBlock:^id(BFTask *task) {
+        [cts cancel];
+        return [BFTask taskWithDelay:10];
+    } cancellationToken:cts.token] continueWithBlock:^id(BFTask *task) {
+        XCTAssertTrue(task.cancelled);
+        [expectation fulfill];
+        return nil;
+    }];
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
+}
+
 @end
