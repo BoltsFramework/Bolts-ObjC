@@ -11,7 +11,7 @@
 #import "BFTask.h"
 
 #import <libkern/OSAtomic.h>
-
+#import <objc/runtime.h>
 #import "Bolts.h"
 
 __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
@@ -336,8 +336,10 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 tcs.exception = exception;
                 return;
             }
-
-            if ([result isKindOfClass:[BFTask class]]) {
+            NSString * classString = NSStringFromClass([(BFTask*)result class]);
+            Class resultClass = NSClassFromString(classString);
+            Class selfClass  = [self class];
+            if ([resultClass isSubclassOfClass:selfClass]) {
 
                 id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
                     if (cancellationToken.cancellationRequested || task.cancelled) {
