@@ -336,8 +336,10 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 tcs.exception = exception;
                 return;
             }
-
-            if ([result isKindOfClass:[BFTask class]]) {
+            NSString * classString = NSStringFromClass([(BFTask*)result class]);
+            Class resultClass = NSClassFromString(classString);
+            Class selfClass  = [BFTask class];
+            if ([resultClass isSubclassOfClass:selfClass]) {
 
                 id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
                     if (cancellationToken.cancellationRequested || task.cancelled) {
