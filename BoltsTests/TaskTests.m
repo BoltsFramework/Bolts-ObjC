@@ -17,14 +17,6 @@
 
 @implementation TaskTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
 - (void)testBasicOnSuccess {
     [[[BFTask taskWithResult:@"foo"] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertEqualObjects(@"foo", task.result);
@@ -648,41 +640,6 @@
     XCTAssertEqual(@"foo", task.result);
 }
 
-- (void)testExecuteImmediately {
-    XCTAssertTrue([NSThread isMainThread]);
-    BFTask *task = [BFTask taskWithResult:nil];
-    task = [task continueWithExecutor:[BFExecutor immediateExecutor]
-                            withBlock:^id(BFTask *task) {
-                                XCTAssertTrue([NSThread isMainThread]);
-                                return nil;
-                            }];
-    XCTAssertTrue(task.isCompleted);
-}
-
-- (void)testExecuteOnDispatchQueue {
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0L);
-    BFExecutor *queueExecutor = [BFExecutor executorWithDispatchQueue:queue];
-
-    BFTask *task = [BFTask taskWithResult:nil];
-    task = [task continueWithExecutor:queueExecutor withBlock:^id(BFTask *task) {
-        XCTAssertEqual(queue, dispatch_get_current_queue());
-        return nil;
-    }];
-    [task waitUntilFinished];
-}
-
-- (void)testExecuteOnOperationQueue {
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    BFExecutor *queueExecutor = [BFExecutor executorWithOperationQueue:queue];
-
-    BFTask *task = [BFTask taskWithResult:nil];
-    task = [task continueWithExecutor:queueExecutor withBlock:^id(BFTask *task) {
-        XCTAssertEqual(queue, [NSOperationQueue currentQueue]);
-        return nil;
-    }];
-    [task waitUntilFinished];
-}
-
 - (void)testDescription {
     BFTask *task = [BFTask taskWithResult:nil];
     NSString *expected = [NSString stringWithFormat:@"<BFTask: %p; completed = YES; cancelled = NO; faulted = NO; result:(null)>", task];
@@ -705,6 +662,91 @@
         return nil;
     }];
     [self waitForExpectationsWithTimeout:10.0 handler:nil];
+}
+
+- (void)testSetResult {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+    taskCompletionSource.result = @"a";
+    XCTAssertThrowsSpecificNamed([taskCompletionSource setResult:@"b"], NSException, NSInternalInconsistencyException);
+
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertEqualObjects(taskCompletionSource.task.result, @"a");
+}
+
+- (void)testTrySetResult {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+    [taskCompletionSource trySetResult:@"a"];
+    [taskCompletionSource trySetResult:@"b"];
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertEqualObjects(taskCompletionSource.task.result, @"a");
+}
+
+- (void)testSetError {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+
+    NSError *error = [NSError errorWithDomain:@"TestDomain" code:100500 userInfo:nil];
+    taskCompletionSource.error = error;
+    XCTAssertThrowsSpecificNamed([taskCompletionSource setError:error], NSException, NSInternalInconsistencyException);
+
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertTrue(taskCompletionSource.task.faulted);
+    XCTAssertEqualObjects(taskCompletionSource.task.error, error);
+}
+
+- (void)testTrySetError {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+
+    NSError *error = [NSError errorWithDomain:@"TestDomain" code:100500 userInfo:nil];
+    [taskCompletionSource trySetError:error];
+    [taskCompletionSource trySetError:error];
+
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertTrue(taskCompletionSource.task.faulted);
+    XCTAssertEqualObjects(taskCompletionSource.task.error, error);
+}
+
+- (void)testSetException {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+
+    NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException reason:@"test" userInfo:nil];
+    taskCompletionSource.exception = exception;
+    XCTAssertThrowsSpecificNamed([taskCompletionSource setException:exception], NSException, NSInternalInconsistencyException);
+
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertTrue(taskCompletionSource.task.faulted);
+    XCTAssertEqualObjects(taskCompletionSource.task.exception, exception);
+}
+
+- (void)testTrySetException {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+
+    NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException reason:@"test" userInfo:nil];
+    [taskCompletionSource trySetException:exception];
+    [taskCompletionSource trySetException:exception];
+
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertTrue(taskCompletionSource.task.faulted);
+    XCTAssertEqualObjects(taskCompletionSource.task.exception, exception);
+}
+
+- (void)testSetCancelled {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+
+    [taskCompletionSource cancel];
+    XCTAssertThrowsSpecificNamed([taskCompletionSource cancel], NSException, NSInternalInconsistencyException);
+
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertTrue(taskCompletionSource.task.cancelled);
+}
+
+- (void)testTrySetCancelled {
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+
+    [taskCompletionSource trySetCancelled];
+    [taskCompletionSource trySetCancelled];
+
+    XCTAssertTrue(taskCompletionSource.task.completed);
+    XCTAssertTrue(taskCompletionSource.task.cancelled);
 }
 
 @end

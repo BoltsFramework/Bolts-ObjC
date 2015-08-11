@@ -17,14 +17,6 @@
 
 @implementation CancellationTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
 - (void)testCancellation {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
 
@@ -51,6 +43,40 @@
     [cts cancel];
 
     XCTAssertTrue(cancelled, @"Source should be cancelled");
+}
+
+- (void)testCancellationAfterDelay {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+
+    XCTAssertFalse(cts.cancellationRequested, @"Source should not be cancelled");
+    XCTAssertFalse(cts.token.cancellationRequested, @"Token should not be cancelled");
+
+    [cts cancelAfterDelay:200];
+    XCTAssertFalse(cts.cancellationRequested, @"Source should be cancelled");
+    XCTAssertFalse(cts.token.cancellationRequested, @"Token should be cancelled");
+
+    // Spin the run loop for half a second, since `delay` is in milliseconds, not seconds.
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+
+    XCTAssertTrue(cts.cancellationRequested, @"Source should be cancelled");
+    XCTAssertTrue(cts.token.cancellationRequested, @"Token should be cancelled");
+}
+
+- (void)testDispose {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    [cts dispose];
+    XCTAssertThrowsSpecificNamed([cts cancel], NSException, NSInternalInconsistencyException);
+    XCTAssertThrowsSpecificNamed(cts.cancellationRequested, NSException, NSInternalInconsistencyException);
+    XCTAssertThrowsSpecificNamed(cts.token.cancellationRequested, NSException, NSInternalInconsistencyException);
+
+    cts = [BFCancellationTokenSource cancellationTokenSource];
+    [cts cancel];
+    XCTAssertTrue(cts.cancellationRequested, @"Source should be cancelled");
+    XCTAssertTrue(cts.token.cancellationRequested, @"Token should be cancelled");
+
+    [cts dispose];
+    XCTAssertThrowsSpecificNamed(cts.cancellationRequested, NSException, NSInternalInconsistencyException);
+    XCTAssertThrowsSpecificNamed(cts.token.cancellationRequested, NSException, NSInternalInconsistencyException);
 }
 
 @end

@@ -65,6 +65,8 @@
 		81D0EE9219AFAA6F0000AE75 /* BFMeasurementEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B242FAB819A567660097ECAE /* BFMeasurementEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE9319AFAA6F0000AE75 /* BFURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA6419900A84000BAE3F /* BFURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE9419AFAA6F0000AE75 /* BFWebViewAppLinkResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA6619900A84000BAE3F /* BFWebViewAppLinkResolver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81DC1A621B7A7F4000F491DC /* ExecutorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DC1A611B7A7F4000F491DC /* ExecutorTests.m */; };
+		81DC1A631B7A7F4000F491DC /* ExecutorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DC1A611B7A7F4000F491DC /* ExecutorTests.m */; };
 		85D5138A18E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */; };
 		8E17EC271805D0A40049E862 /* BoltsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA6BF681805CF5600337041 /* BoltsTests.m */; };
 		8E8C8EEA17F23D1D00E3F1C7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */; };
@@ -150,6 +152,7 @@
 		8122B2881AA0E8220025C5AF /* iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "iOS-Info.plist"; path = "Resources/iOS-Info.plist"; sourceTree = "<group>"; };
 		814916E11AD5D46600EE7C63 /* iOS.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = iOS.modulemap; path = Resources/iOS.modulemap; sourceTree = "<group>"; };
 		81D0EE7C19AFA8260000AE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		81DC1A611B7A7F4000F491DC /* ExecutorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutorTests.m; sourceTree = "<group>"; };
 		81F0E88D19E5CB5A00812A88 /* Mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Mac-Info.plist"; path = "Resources/Mac-Info.plist"; sourceTree = "<group>"; };
 		8550FD2E18EE1B7A00976B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkReturnToRefererViewTests.m; sourceTree = "<group>"; };
@@ -298,11 +301,12 @@
 		8E8C8ED717F23C3B00E3F1C7 /* BoltsTests */ = {
 			isa = PBXGroup;
 			children = (
+				85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */,
 				1EC3019018CDABCE00D06D07 /* AppLinkTests.m */,
 				8EA6BF681805CF5600337041 /* BoltsTests.m */,
-				8E9C3D1C17DE9F6500427E62 /* TaskTests.m */,
 				7C60AEC51ACF19F900747DD7 /* CancellationTests.m */,
-				85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */,
+				81DC1A611B7A7F4000F491DC /* ExecutorTests.m */,
+				8E9C3D1C17DE9F6500427E62 /* TaskTests.m */,
 				8E8C8ED817F23C3B00E3F1C7 /* Supporting Files */,
 			);
 			path = BoltsTests;
@@ -589,6 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81DC1A621B7A7F4000F491DC /* ExecutorTests.m in Sources */,
 				1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */,
 				7C60AEC61ACF19F900747DD7 /* CancellationTests.m in Sources */,
 				85D5138A18E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m in Sources */,
@@ -601,6 +606,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81DC1A631B7A7F4000F491DC /* ExecutorTests.m in Sources */,
 				8E17EC271805D0A40049E862 /* BoltsTests.m in Sources */,
 				8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */,
 				7C60AEC71ACF19FD00747DD7 /* CancellationTests.m in Sources */,

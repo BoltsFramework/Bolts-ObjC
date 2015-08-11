@@ -17,14 +17,6 @@
 
 @implementation BoltsTests
 
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
 - (void)testVersion {
     XCTAssertEqualObjects(BOLTS_VERSION, [Bolts version]);
 }
