@@ -1,19 +1,37 @@
 language: objective-c
-osx_image: beta-xcode6.3
+osx_image: xcode6.4
 cache: 
   - bundler
   - cocoapods
+env:
+  matrix:
+    - TEST_TYPE=ios
+    - TEST_TYPE=osx
+    - TEST_TYPE=cocoapods
 before_install:
-  - gem install xcpretty -N --no-ri --no-rdoc
-  - gem install cocoapods --pre --quiet --no-ri --no-rdoc
-  - gem install slather --no-ri --no-rdoc
-  - pod setup --silent
-  - pod repo update --silent
+- |
+  if [ "$TEST_TYPE" = ios ] || [ "$TEST_TYPE" = osx ]; then
+    gem install xcpretty -N --no-ri --no-rdoc
+    gem install slather --no-ri --no-rdoc    
+  elif [ "$TEST_TYPE" = cocoapods ]; then
+    gem install cocoapods --pre --quiet --no-ri --no-rdoc
+    pod setup --silent
+    pod repo update --silent
+  fi
 script:
-  - pod lib lint Bolts.podspec
-  - pod lib lint --use-libraries Bolts.podspec
-  - set -o pipefail
-  - xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
-  - xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+- |
+    if [ "$TEST_TYPE" = ios ]; then
+      set -o pipefail
+      xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+    elif [ "$TEST_TYPE" = osx ]; then
+      set -o pipefail    
+      xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+    elif [ "$TEST_TYPE" = cocoapods ]; then
+      pod lib lint Bolts.podspec
+      pod lib lint --use-libraries Bolts.podspec    
+    fi
 after_success:
-  - slather
+- |
+    if [ "$TEST_TYPE" = ios ] || [ "$TEST_TYPE" = osx ]; then
+      slather
+    fi
