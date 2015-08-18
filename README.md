@@ -333,7 +333,7 @@ With these tools, it's easy to make your own asynchronous functions that return 
 func fetchAsync(object: PFObject) -> BFTask {
   var task = BFTaskCompletionSource()
   object.fetchInBackgroundWithBlock {
-    (object: PFObject!, error: NSError!) -> Void in
+    (object: PFObject?, error: NSError?) -> Void in
     if error == nil {
       task.setResult(object)
     } else {
@@ -498,7 +498,7 @@ MYCancellationToken *cancellationToken = [[MYCancellationToken alloc] init];
 [cancellationToken cancel];
 ```
 
-**Note:** The cancellation token implementation should be thread-safe.  
+**Note:** The cancellation token implementation should be thread-safe.
 We are likely to add some concept like this to Bolts at some point in the future.
 
 # App Links
@@ -517,25 +517,25 @@ For example, you can use the `BFURL` utility class to parse an incoming URL in y
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     BFURL *parsedUrl = [BFURL URLWithInboundURL:url sourceApplication:sourceApplication];
-    
+
     // Use the target URL from the App Link to locate content.
     if ([parsedUrl.targetURL.pathComponents[1] isEqualToString:@"profiles"]) {
         // Open a profile viewer.
     }
-    
+
     // You can also check the query string easily.
     NSString *query = parsedUrl.targetQueryParameters[@"query"];
-    
+
     // Apps that have existing deep-linking support and map their App Links to existing
     // deep-linking functionality may instead want to perform these operations on the input URL.
     // Use the target URL from the App Link to locate content.
     if ([parsedUrl.inputURL.pathComponents[1] isEqualToString:@"profiles"]) {
         // Open a profile viewer.
     }
-    
+
     // You can also check the query string easily.
     NSString *query = parsedUrl.inputQueryParameters[@"query"];
-    
+
     // Apps can easily check the Extras and App Link data from the App Link as well.
     NSString *fbAccessToken = parsedUrl.appLinkExtras[@"fb_access_token"];
     NSDictionary *refererData = parsedUrl.appLinkExtras[@"referer"];
@@ -612,7 +612,7 @@ When an application is opened via an App Link, a banner allowing the user to "To
   // self.returnToRefererView is a BFAppLinkReturnToRefererView.
   // You may initialize the view either by loading it from a NIB or programmatically.
   self.returnToRefererController.view = self.returnToRefererView;
-  
+
   // If you have a UINavigationController in the view, then the bar must be shown above it.
   [self.returnToRefererController]
 }
