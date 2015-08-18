@@ -40,8 +40,14 @@ NSMutableArray *openedUrls = nil;
  Swizzled-in replacement for UIApplication openUrl so that we can capture results.
  */
 - (BOOL)openURLReplacement:(NSURL *)url {
-    [openedUrls addObject:url];
-    return YES;
+    if ([url.absoluteString hasPrefix:@"bolts://"]
+        || [url.absoluteString hasPrefix:@"bolts2://"]
+        || [url.absoluteString hasPrefix:@"http://"]
+        || [url.absoluteString hasPrefix:@"file://"]) {
+        [openedUrls addObject:url];
+        return YES;
+    }
+    return NO;
 }
 
 /*!

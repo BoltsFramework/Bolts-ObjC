@@ -94,31 +94,25 @@ static id<BFAppLinkResolving> defaultResolver;
 }
 
 - (BFAppLinkNavigationType)navigate:(NSError **)error {
-    // Find the first eligible/launchable target in the BFAppLink.
-    BFAppLinkTarget *eligibleTarget = nil;
-    for (BFAppLinkTarget *target in self.appLink.targets) {
-        if ([[UIApplication sharedApplication] canOpenURL:target.URL]) {
-            eligibleTarget = target;
-            break;
-        }
-    }
-
-    NSURL *appLinkURLToOpen = nil;
+    NSURL *openedURL = nil;
     NSError *encodingError = nil;
     BFAppLinkNavigationType retType = BFAppLinkNavigationTypeFailure;
-    if (eligibleTarget) {
-        NSURL *appLinkAppURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:&encodingError];
+
+    // Find the first eligible/launchable target in the BFAppLink.
+    for (BFAppLinkTarget *target in self.appLink.targets) {
+        NSURL *appLinkAppURL = [self appLinkURLWithTargetURL:target.URL error:&encodingError];
         if (encodingError || !appLinkAppURL) {
             if (error) {
                 *error = encodingError;
             }
-        } else if ([[UIApplication sharedApplication] canOpenURL:appLinkAppURL]) {
+        } else if ([[UIApplication sharedApplication] openURL:appLinkAppURL]) {
             retType = BFAppLinkNavigationTypeApp;
-            appLinkURLToOpen = appLinkAppURL;
+            openedURL = appLinkAppURL;
+            break;
         }
     }
 
-    if (!appLinkURLToOpen && self.appLink.webURL) {
+    if (!openedURL && self.appLink.webURL) {
         // Fall back to opening the url in the browser if available.
         NSURL *appLinkBrowserURL = [self appLinkURLWithTargetURL:self.appLink.webURL error:&encodingError];
         if (encodingError || !appLinkBrowserURL) {
@@ -126,20 +120,16 @@ static id<BFAppLinkResolving> defaultResolver;
             if (error) {
                 *error = encodingError;
             }
-        } else if ([[UIApplication sharedApplication] canOpenURL:appLinkBrowserURL]) {
+        } else if ([[UIApplication sharedApplication] openURL:appLinkBrowserURL]) {
             // This was a browser navigation.
             retType = BFAppLinkNavigationTypeBrowser;
-            appLinkURLToOpen = appLinkBrowserURL;
+            openedURL = appLinkBrowserURL;
         }
     }
 
-    [self postAppLinkNavigateEventNotificationWithTargetURL:appLinkURLToOpen
+    [self postAppLinkNavigateEventNotificationWithTargetURL:openedURL
                                                       error:error ? *error : nil
                                                        type:retType];
-    if (appLinkURLToOpen) {
-        [[UIApplication sharedApplication] openURL:appLinkURLToOpen];
-    }
-    // Otherwise, navigation fails.
     return retType;
 }
 
