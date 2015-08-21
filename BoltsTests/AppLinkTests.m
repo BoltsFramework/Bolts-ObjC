@@ -146,6 +146,15 @@ NSMutableArray *openedUrls = nil;
     XCTAssertEqualObjects(url.absoluteString, openedURL.inputURL.absoluteString);
 }
 
+- (void)testOpenedURLWithAppLinkWithNullTarget {
+    NSURL *url = [NSURL URLWithString:@"bolts://?al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3anull%7d"];
+    
+    BFURL *openedURL = [BFURL URLWithURL:url];
+    XCTAssertEqualObjects(url.absoluteString, openedURL.targetURL.absoluteString);
+    XCTAssert(openedURL.appLinkData[@"user_agent"]);
+    XCTAssertEqualObjects(url.absoluteString, openedURL.inputURL.absoluteString);
+}
+
 - (void)testOpenedURLWithAppLinkTargetHasQueryParameters {
     NSURL *url = [NSURL URLWithString:@"bolts://?al_applink_data=%7B%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Ffoo%3Dbar%22%7D"];
 
