@@ -912,6 +912,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
@@ -944,6 +946,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -960,8 +964,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = Bolts/Resources/iOS.modulemap;
 				OTHER_LDFLAGS = "-ObjC";
@@ -983,8 +985,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/iOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = Bolts/Resources/iOS.modulemap;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1006,7 +1006,6 @@
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/Mac-Info.plist";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Bolts;
 				SDKROOT = macosx;
@@ -1026,7 +1025,6 @@
 				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/Mac-Info.plist";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Bolts;
 				SDKROOT = macosx;
