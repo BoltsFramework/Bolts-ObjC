@@ -1,5 +1,10 @@
 # Bolts CHANGELOG
 
+## 1.2.1
+- Improved: Removed the need to check canOpenURL: and just use openURL: directly which improves App Links behavior on iOS 9.
+- Fixed: Potentially never completed task if continuation returns a task and cancellation was requested.
+- Fixed: iOS 9 deprecations that cause warnings when building from source and targeting iOS 9+.
+
 ## 1.2.0
 - Added: `BFCancellationToken`, `BFCancellationTokenSource`, `BFCancellationTokenRegistration`
 - Updated: `BFTask` APIs to have methods that accept `BFCancellationToken` as an argument.
