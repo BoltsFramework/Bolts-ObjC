@@ -34,12 +34,12 @@ if [ -z "$BOLTS_SCRIPT" ]; then
 
   # The directory containing this script
   # We need to go there and use pwd so these are all absolute paths
-  pushd $(dirname $BASH_SOURCE[0]) >/dev/null
-  BOLTS_SCRIPT=$(pwd)
+  pushd "$(dirname $BASH_SOURCE[0])" >/dev/null
+  BOLTS_SCRIPT="$(pwd)"
   popd >/dev/null
 
   # The root directory where Bolts is cloned
-  BOLTS_ROOT=$(dirname $BOLTS_SCRIPT)
+  BOLTS_ROOT=$(dirname "$BOLTS_SCRIPT")
 
   # Path to source files for Bolts
   BOLTS_SRC=$BOLTS_ROOT
@@ -76,7 +76,7 @@ if [ -z $BOLTS_ENV ]; then
   # Explains where the log is if this is the outermost build or if
   # we hit a fatal error.
   function show_summary() {
-    test -r $BOLTS_BUILD_LOG && echo "Build log is at $BOLTS_BUILD_LOG"
+    test -r "$BOLTS_BUILD_LOG" && echo "Build log is at $BOLTS_BUILD_LOG"
   }
 
   # Determines whether this is out the outermost build.
