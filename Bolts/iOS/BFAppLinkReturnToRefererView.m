@@ -146,7 +146,7 @@ static const CGFloat BFCloseButtonHeight = 12.0;
     BOOL include;
     switch (_includeStatusBarInSize) {
         case BFIncludeStatusBarInSizeAlways:
-            include = NO;
+            include = YES;
             break;
         case BFIncludeStatusBarInSizeIOS7AndLater: {
             float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
