@@ -66,29 +66,29 @@ progress_message Building Framework.
 # -----------------------------------------------------------------------------
 # Compile binaries 
 #
-test -d $BOLTS_BUILD \
-  || mkdir -p $BOLTS_BUILD \
+test -d "$BOLTS_BUILD" \
+  || mkdir -p "$BOLTS_BUILD" \
   || die "Could not create directory $BOLTS_BUILD"
 
-test -d $BOLTS_IOS_BUILD \
-  || mkdir -p $BOLTS_IOS_BUILD \
+test -d "$BOLTS_IOS_BUILD" \
+  || mkdir -p "$BOLTS_IOS_BUILD" \
   || die "Could not create directory $BOLTS_IOS_BUILD"
 
-test -d $BOLTS_OSX_BUILD \
-  || mkdir -p $BOLTS_OSX_BUILD \
+test -d "$BOLTS_OSX_BUILD" \
+  || mkdir -p "$BOLTS_OSX_BUILD" \
   || die "Could not create directory $BOLTS_OSX_BUILD"
 
-cd $BOLTS_SRC
+cd "$BOLTS_SRC"
 function xcode_build_target() {
   echo "Compiling for platform: ${1}."
   $XCODEBUILD \
     -target "${3}Bolts" \
     -sdk $1 \
     -configuration "${2}" \
-    SYMROOT=$BOLTS_BUILD \
-    CURRENT_PROJECT_VERSION=$BOLTS_VERSION_FULL \
+    SYMROOT="$BOLTS_BUILD" \
+    CURRENT_PROJECT_VERSION="$BOLTS_VERSION_FULL" \
     clean build \
-    || die "XCode build failed for platform: ${1}."
+    || die "Xcode build failed for platform: ${1}."
 }
 
 xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}"
@@ -100,7 +100,7 @@ xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Mac"
 #
 progress_message "Building Bolts univeral library using lipo."
 
-mkdir -p $(dirname $BOLTS_IOS_BINARY)
+mkdir -p "$(dirname "$BOLTS_IOS_BINARY")"
 
 # Copy/Paste iOS Framework to get structure/resources/etc
 cp -av \
@@ -111,13 +111,13 @@ rm "$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts.framework/Bolts"
 # Combine iOS/Simulator binaries into a single universal binary.
 $LIPO \
   -create \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphonesimulator/Bolts.framework/Bolts \
-    $BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts.framework/Bolts \
-  -output $BOLTS_IOS_BINARY \
+    "$BOLTS_BUILD/${BUILDCONFIGURATION}-iphonesimulator/Bolts.framework/Bolts" \
+    "$BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts.framework/Bolts" \
+  -output "$BOLTS_IOS_BINARY" \
   || die "lipo failed - could not create universal static library"
 
 # Copy/Paste created iOS Framework to final location
-cp -av "$(dirname $BOLTS_IOS_BINARY)" "$BOLTS_IOS_FRAMEWORK"
+cp -av "$(dirname "$BOLTS_IOS_BINARY")" "$BOLTS_IOS_FRAMEWORK"
 
 # Copy/Paste OSX framework, as this is already built for us
 cp -av "$BOLTS_OSX_BINARY" "$BOLTS_OSX_FRAMEWORK"
