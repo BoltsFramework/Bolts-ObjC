@@ -112,7 +112,6 @@
 		1EC3016818CDAA8400D06D07 /* BoltsTestUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoltsTestUI-Info.plist"; sourceTree = "<group>"; };
 		1EC3016A18CDAA8400D06D07 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1EC3016C18CDAA8400D06D07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1EC3016E18CDAA8400D06D07 /* BoltsTestUI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BoltsTestUI-Prefix.pch"; sourceTree = "<group>"; };
 		1EC3016F18CDAA8400D06D07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1EC3017018CDAA8400D06D07 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1EC3017218CDAA8400D06D07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -159,12 +158,10 @@
 		8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8E8C8ED917F23C3B00E3F1C7 /* BoltsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoltsTests-Info.plist"; sourceTree = "<group>"; };
 		8E8C8EDB17F23C3B00E3F1C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8E8C8EDF17F23C3B00E3F1C7 /* BoltsTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BoltsTests-Prefix.pch"; sourceTree = "<group>"; };
 		8E8C8EE917F23D1D00E3F1C7 /* BoltsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoltsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E8C8F1917F241DA00E3F1C7 /* MacBoltsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacBoltsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9C3CE917DE9DE000427E62 /* libBolts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBolts.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9C3CEC17DE9DE000427E62 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		8E9C3CF017DE9DE000427E62 /* Bolts-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bolts-Prefix.pch"; sourceTree = "<group>"; };
 		8E9C3CFB17DE9DE000427E62 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		8E9C3D1C17DE9F6500427E62 /* TaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTests.m; sourceTree = "<group>"; };
 		8EA6BF681805CF5600337041 /* BoltsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoltsTests.m; sourceTree = "<group>"; };
@@ -242,7 +239,6 @@
 				1EC3016818CDAA8400D06D07 /* BoltsTestUI-Info.plist */,
 				1EC3016918CDAA8400D06D07 /* InfoPlist.strings */,
 				1EC3016C18CDAA8400D06D07 /* main.m */,
-				1EC3016E18CDAA8400D06D07 /* BoltsTestUI-Prefix.pch */,
 				1E9BF8DB18EA0CAD00514B1E /* test.html */,
 			);
 			name = "Supporting Files";
@@ -317,7 +313,6 @@
 			children = (
 				8E8C8ED917F23C3B00E3F1C7 /* BoltsTests-Info.plist */,
 				8E8C8EDA17F23C3B00E3F1C7 /* InfoPlist.strings */,
-				8E8C8EDF17F23C3B00E3F1C7 /* BoltsTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -376,7 +371,6 @@
 				814916E11AD5D46600EE7C63 /* iOS.modulemap */,
 				8122B2881AA0E8220025C5AF /* iOS-Info.plist */,
 				81F0E88D19E5CB5A00812A88 /* Mac-Info.plist */,
-				8E9C3CF017DE9DE000427E62 /* Bolts-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -707,8 +701,6 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BoltsTestUI/BoltsTestUI-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -738,8 +730,6 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BoltsTestUI/BoltsTestUI-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -768,8 +758,6 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BoltsTests/BoltsTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -803,8 +791,6 @@
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BoltsTests/BoltsTests-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -831,8 +817,6 @@
 					"$(inherited)",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BoltsTests/BoltsTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -863,8 +847,6 @@
 					"$(inherited)",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BoltsTests/BoltsTests-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -961,8 +943,6 @@
 				);
 				DEFINES_MODULE = YES;
 				DSTROOT = /tmp/Bolts.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/iOS-Info.plist";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = Bolts/Resources/iOS.modulemap;
@@ -982,8 +962,6 @@
 				);
 				DEFINES_MODULE = YES;
 				DSTROOT = /tmp/Bolts.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/iOS-Info.plist";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = Bolts/Resources/iOS.modulemap;
@@ -1002,8 +980,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/Mac-Info.plist";
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1021,8 +997,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				EXECUTABLE_EXTENSION = dylib;
 				EXECUTABLE_PREFIX = "";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Bolts/Bolts-Prefix.pch";
 				INFOPLIST_FILE = "Bolts/Resources/Mac-Info.plist";
 				MACH_O_TYPE = mh_dylib;
 				OTHER_LDFLAGS = "-ObjC";
