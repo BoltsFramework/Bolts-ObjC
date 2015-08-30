@@ -33,23 +33,34 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 @property (atomic, assign, readwrite, getter=isCompleted) BOOL completed;
 
 @property (nonatomic, strong) NSObject *lock;
-@property (nonatomic, strong) NSCondition *condition;
+
+#if (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8)
+@property (nonatomic, assign) dispatch_semaphore_t completedSemaphore;
+#else
+@property (nonatomic, strong) dispatch_semaphore_t completedSemaphore;
+#endif
 @property (nonatomic, strong) NSMutableArray *callbacks;
 
 @end
 
 @implementation BFTask
 
-#pragma mark - Initializer
+#pragma mark - Object lifecycle
 
 - (instancetype)init {
     if (self = [super init]) {
         _lock = [[NSObject alloc] init];
-        _condition = [[NSCondition alloc] init];
+        _completedSemaphore = dispatch_semaphore_create(0);
         _callbacks = [NSMutableArray array];
     }
     return self;
 }
+
+#if (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8)
+- (void)dealloc {
+    dispatch_release(_completedSemaphore);
+}
+#endif
 
 #pragma mark - Task Class methods
 
@@ -299,9 +310,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 - (void)runContinuations {
     @synchronized(self.lock) {
-        [self.condition lock];
-        [self.condition broadcast];
-        [self.condition unlock];
+        dispatch_semaphore_signal(_completedSemaphore);
         for (void (^callback)() in self.callbacks) {
             callback();
         }
@@ -429,15 +438,12 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     if ([NSThread isMainThread]) {
         [self warnOperationOnMainThread];
     }
-
     @synchronized(self.lock) {
         if (self.completed) {
             return;
         }
-        [self.condition lock];
     }
-    [self.condition wait];
-    [self.condition unlock];
+    dispatch_semaphore_wait(_completedSemaphore, DISPATCH_TIME_FOREVER);
 }
 
 #pragma mark - NSObject

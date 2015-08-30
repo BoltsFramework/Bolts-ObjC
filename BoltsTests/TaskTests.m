@@ -608,6 +608,25 @@
     XCTAssertEqualObjects(@"foo", task.result);
 }
 
+- (void)testMultipleWaitUntilFinished {
+    BFTask *task = [[BFTask taskWithDelay:50] continueWithBlock:^id(BFTask *task) {
+        return @"foo";
+    }];
+
+    [task waitUntilFinished];
+
+    // Test that multiple calls to waitUntilFinished doesn't block indefinitely
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"-waitUntilFinished won't block when called a second time"];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [task waitUntilFinished];
+        [expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:1.0 handler:nil];
+}
+
 - (void)testDelayWithToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
 
