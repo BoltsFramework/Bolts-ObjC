@@ -2,15 +2,21 @@ branches:
   only:
     - master
 language: objective-c
-osx_image: xcode6.4
+os: osx
 cache: 
-  - bundler
   - cocoapods
-env:
-  matrix:
-    - TEST_TYPE=ios
-    - TEST_TYPE=osx
-    - TEST_TYPE=cocoapods
+matrix:
+  include:
+    - osx_image: xcode6.4
+      env: TEST_TYPE=ios
+    - osx_image: xcode6.4
+      env: TEST_TYPE=osx
+    - osx_image: xcode6.4
+      env: TEST_TYPE=cocoapods
+    - osx_image: xcode7
+      env: TEST_TYPE=ios
+    - osx_image: xcode7
+      env: TEST_TYPE=osx
 before_install:
 - |
   if [ "$TEST_TYPE" = ios ] || [ "$TEST_TYPE" = osx ]; then
@@ -25,10 +31,10 @@ script:
 - |
     if [ "$TEST_TYPE" = ios ]; then
       set -o pipefail
-      xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = osx ]; then
       set -o pipefail    
-      xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" ONLY_ACTIVE_ARCH=NO GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = cocoapods ]; then
       pod lib lint Bolts.podspec
       pod lib lint --use-libraries Bolts.podspec    
