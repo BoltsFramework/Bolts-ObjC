@@ -1,0 +1,21 @@
+//
+// Copyright (c) 2014, Facebook, Inc.
+// All rights reserved.
+//
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+//
+
+#include "Shared/Platform/OSX.xcconfig"
+#include "Shared/Product/Framework.xcconfig"
+
+PRODUCT_NAME = Bolts
+
+MACH_O_TYPE = mh_dylib
+
+DEFINES_MODULE = YES
+DYLIB_INSTALL_NAME_BASE = @rpath
+OTHER_LD_FLAGS = -ObjC
+
+INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Mac-Info.plist

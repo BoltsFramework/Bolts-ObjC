@@ -299,7 +299,7 @@
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
             return @(i);
         }]];
     }
@@ -322,7 +322,7 @@
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
             if (i == 10) {
                 [NSException raise:@"TestException" format:@"This exception is expected."];
             }
@@ -354,7 +354,7 @@
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
             if (i == 10 || i == 11) {
                 [NSException raise:@"TestException" format:@"This exception is expected."];
             }
@@ -391,7 +391,7 @@
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
             if (i == 10) {
                 return [BFTask taskWithError:[NSError errorWithDomain:@"BoltsTests"
                                                                  code:35
@@ -426,7 +426,7 @@
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
             if (i == 10 || i == 11) {
                 return [BFTask taskWithError:[NSError errorWithDomain:@"BoltsTests"
                                                                  code:35
@@ -467,7 +467,7 @@
     const int kTaskCount = 20;
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
             if (i == 10) {
                 return [BFTask cancelledTask];
             }
@@ -507,7 +507,7 @@
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = i * 10;
         int result = i + 1;
-        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
             return @(result);
         }]];
     }
