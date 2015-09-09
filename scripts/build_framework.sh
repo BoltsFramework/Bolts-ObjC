@@ -117,10 +117,10 @@ $LIPO \
   || die "lipo failed - could not create universal static library"
 
 # Copy/Paste created iOS Framework to final location
-cp -av "$(dirname "$BOLTS_IOS_BINARY")" "$BOLTS_IOS_FRAMEWORK"
+cp -av "$(dirname "$BOLTS_IOS_BINARY")" $BOLTS_IOS_FRAMEWORK
 
 # Copy/Paste OSX framework, as this is already built for us
-cp -av "$BOLTS_OSX_BINARY" "$BOLTS_OSX_FRAMEWORK"
+cp -av "$BOLTS_OSX_BINARY" $BOLTS_OSX_FRAMEWORK
 
 # -----------------------------------------------------------------------------
 # Run unit tests 
