@@ -16,6 +16,9 @@ MACH_O_TYPE = staticlib
 
 DEFINES_MODULE = YES
 MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
-OTHER_LD_FLAGS = -ObjC
+
+BF_BITCODE_FLAG = $()
+BF_BITCODE_FLAG[sdk=iphoneos9.0] = -fembed-bitcode
+OTHER_LD_FLAGS = -ObjC $(BF_BITCODE_FLAG)
 
 INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/iOS-Info.plist
