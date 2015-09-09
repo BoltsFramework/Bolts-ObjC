@@ -1,5 +1,11 @@
 # Bolts CHANGELOG
 
+## 1.2.2
+- New: Added bitcode support when built from source for iOS 9.
+- New: `BFTask` and `BFTaskCompletionSource` now supports Obj-C Generics for types of the result.
+- Fixed: Resolved a crash when creating a BFURL when `target_url` is not a string (null or a number).
+- Fixed: `BFIncludeStatusBarInSizeAlways` is properly handled now.
+
 ## 1.2.1
 - Improved: Removed the need to check canOpenURL: and just use openURL: directly which improves App Links behavior on iOS 9.
 - Fixed: Potentially never completed task if continuation returns a task and cancellation was requested.
