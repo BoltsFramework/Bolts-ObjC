@@ -627,6 +627,35 @@
     [self waitForExpectationsWithTimeout:1.0 handler:nil];
 }
 
+- (void)testMultipleThreadsWaitUntilFinished {
+    BFTask *task = [[BFTask taskWithDelay:500] continueWithBlock:^id(BFTask *task) {
+        return @"foo";
+    }];
+
+    // Test that multiple threads waiting on -waitUntilFinished all continue after task completes
+
+    dispatch_queue_t queue = dispatch_queue_create("wait", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t group = dispatch_group_create();
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"-waitUntilFinished won't block when called a second time"];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        dispatch_group_async(group, queue, ^{
+            [task waitUntilFinished];
+        });
+        dispatch_group_async(group, queue, ^{
+            [task waitUntilFinished];
+        });
+
+        [task waitUntilFinished];
+        dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+        [expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
+}
+
 - (void)testDelayWithToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
 

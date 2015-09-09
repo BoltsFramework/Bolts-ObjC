@@ -26,6 +26,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     id _result;
     NSError *_error;
     NSException *_exception;
+    BOOL _completed;
 }
 
 @property (atomic, assign, readwrite, getter=isCancelled) BOOL cancelled;
@@ -33,12 +34,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 @property (atomic, assign, readwrite, getter=isCompleted) BOOL completed;
 
 @property (nonatomic, strong) NSObject *lock;
-
-#if (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8)
-@property (nonatomic, assign) dispatch_semaphore_t completedSemaphore;
-#else
-@property (nonatomic, strong) dispatch_semaphore_t completedSemaphore;
-#endif
+@property (nonatomic, strong) NSCondition *condition;
 @property (nonatomic, strong) NSMutableArray *callbacks;
 
 @end
@@ -50,17 +46,11 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 - (instancetype)init {
     if (self = [super init]) {
         _lock = [[NSObject alloc] init];
-        _completedSemaphore = dispatch_semaphore_create(0);
+        _condition = [[NSCondition alloc] init];
         _callbacks = [NSMutableArray array];
     }
     return self;
 }
-
-#if (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_8)
-- (void)dealloc {
-    dispatch_release(_completedSemaphore);
-}
-#endif
 
 #pragma mark - Task Class methods
 
@@ -297,20 +287,24 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)isCompleted {
-    @synchronized(self.lock) {
-        return _completed;
-    }
+    [self.condition lock];
+    BOOL completed = _completed;
+    [self.condition unlock];
+
+    return completed;
 }
 
-- (void)setCompleted {
-    @synchronized(self.lock) {
-        _completed = YES;
+- (void)setCompleted:(BOOL)completed {
+    [self.condition lock];
+    _completed = completed;
+    if (_completed) {
+        [self.condition broadcast];
     }
+    [self.condition unlock];
 }
 
 - (void)runContinuations {
     @synchronized(self.lock) {
-        dispatch_semaphore_signal(_completedSemaphore);
         for (void (^callback)() in self.callbacks) {
             callback();
         }
@@ -435,15 +429,12 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (void)waitUntilFinished {
-    if ([NSThread isMainThread]) {
-        [self warnOperationOnMainThread];
+    [self.condition lock];
+
+    while (!_completed) {
+        [self.condition wait];
     }
-    @synchronized(self.lock) {
-        if (self.completed) {
-            return;
-        }
-    }
-    dispatch_semaphore_wait(_completedSemaphore, DISPATCH_TIME_FOREVER);
+    [self.condition unlock];
 }
 
 #pragma mark - NSObject
