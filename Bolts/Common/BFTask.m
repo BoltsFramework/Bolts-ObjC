@@ -170,7 +170,9 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 + (instancetype)taskFromExecutor:(BFExecutor *)executor
                        withBlock:(id (^)())block {
-    return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:block];
+    return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:^id(BFTask *task) {
+        return block();
+    }];
 }
 
 #pragma mark - Custom Setters/Getters
