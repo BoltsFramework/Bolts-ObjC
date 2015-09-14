@@ -58,6 +58,7 @@ test -x "$LIPO" || die 'Could not find lipo in $PATH'
 
 BOLTS_IOS_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts.framework/Bolts
 BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/Bolts.framework
+BOLTS_TVOS_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-appletv-universal/Bolts.framework/Bolts
 
 # -----------------------------------------------------------------------------
 
@@ -78,6 +79,10 @@ test -d "$BOLTS_OSX_BUILD" \
   || mkdir -p "$BOLTS_OSX_BUILD" \
   || die "Could not create directory $BOLTS_OSX_BUILD"
 
+test -d "$BOLTS_TVOS_BUILD" \
+  || mkdir -p "$BOLTS_TVOS_BUILD" \
+  || die "Could not create directory $BOLTS_TVOS_BUILD"
+
 cd "$BOLTS_SRC"
 function xcode_build_target() {
   echo "Compiling for platform: ${1}."
@@ -94,6 +99,8 @@ function xcode_build_target() {
 xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}"
 xcode_build_target "iphoneos" "${BUILDCONFIGURATION}"
 xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Mac"
+xcode_build_target "appletvsimulator" "${BUILDCONFIGURATION}" "TV"
+xcode_build_target "appletvos" "${BUILDCONFIGURATION}" "TV"
 
 # -----------------------------------------------------------------------------
 # Merge lib files for different platforms into universal binary
@@ -101,12 +108,19 @@ xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Mac"
 progress_message "Building Bolts univeral library using lipo."
 
 mkdir -p "$(dirname "$BOLTS_IOS_BINARY")"
+mkdir -p "$(dirname "$BOLTS_TVOS_BINARY")"
 
 # Copy/Paste iOS Framework to get structure/resources/etc
 cp -av \
   "$BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts.framework" \
   "$BOLTS_BUILD/${BUILDCONFIGURATION}-universal"
 rm "$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts.framework/Bolts"
+
+# Copy/Paste AppleTV framework to get structure/resources/etc
+cp -av \
+  "$BOLTS_BUILD/${BUILDCONFIGURATION}-appletvos/Bolts.framework" \
+  "$BOLTS_BUILD/${BUILDCONFIGURATION}-appletv-universal"
+rm "$BOLTS_BUILD/${BUILDCONFIGURATION}-appletv-universal/Bolts.framework/Bolts"
 
 # Combine iOS/Simulator binaries into a single universal binary.
 $LIPO \
@@ -116,11 +130,22 @@ $LIPO \
   -output "$BOLTS_IOS_BINARY" \
   || die "lipo failed - could not create universal static library"
 
+# Combine AppleTV/Simulator binaries into a single universal binary.
+$LIPO \
+  -create \
+    "$BOLTS_BUILD/${BUILDCONFIGURATION}-appletvsimulator/Bolts.framework/Bolts" \
+    "$BOLTS_BUILD/${BUILDCONFIGURATION}-appletvos/Bolts.framework/Bolts" \
+  -output "$BOLTS_TVOS_BINARY" \
+  || die "lipo failed - could not create universal static library"
+
 # Copy/Paste created iOS Framework to final location
 cp -av "$(dirname "$BOLTS_IOS_BINARY")" $BOLTS_IOS_FRAMEWORK
 
 # Copy/Paste OSX framework, as this is already built for us
 cp -av "$BOLTS_OSX_BINARY" $BOLTS_OSX_FRAMEWORK
+
+# Copy/Paste TVOS Framework
+cp -av "$(dirname "$BOLTS_TVOS_BINARY")" $BOLTS_TVOS_FRAMEWORK
 
 # -----------------------------------------------------------------------------
 # Run unit tests 
