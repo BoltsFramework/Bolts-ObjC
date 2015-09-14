@@ -15,7 +15,6 @@ before_install:
 - |
   if [ "$TEST_TYPE" = ios ] || [ "$TEST_TYPE" = osx ]; then
     gem install xcpretty -N --no-ri --no-rdoc
-    gem install slather --no-ri --no-rdoc    
   elif [ "$TEST_TYPE" = cocoapods ]; then
     gem install cocoapods --pre --quiet --no-ri --no-rdoc
     pod setup --silent
@@ -25,10 +24,10 @@ script:
 - |
     if [ "$TEST_TYPE" = ios ]; then
       set -o pipefail
-      xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = osx ]; then
       set -o pipefail    
-      xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug OBJROOT="$PWD/build" SYMROOT="$PWD/build" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = cocoapods ]; then
       pod lib lint Bolts.podspec
       pod lib lint --use-libraries Bolts.podspec    
@@ -36,5 +35,5 @@ script:
 after_success:
 - |
     if [ "$TEST_TYPE" = ios ] || [ "$TEST_TYPE" = osx ]; then
-      slather
+      bash <(curl -s https://codecov.io/bash)
     fi
