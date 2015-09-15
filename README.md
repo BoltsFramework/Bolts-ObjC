@@ -599,37 +599,56 @@ Alternatively, a you can swap out the default resolver to be used by the built-i
 
 ## App Link Return-to-Referer View
 
-When an application is opened via an App Link, a banner allowing the user to "Touch to return to <calling app>" should be displayed. The `BFAppLinkReturnToRefererView` provides this functionality. It will take an incoming App Link and parse the referer information to display the appropriate calling app name.
+When an application is opened via an App Link, a banner allowing the user to "Touch to return to <calling app>" should be displayed. The `BFAppLinkReturnToRefererController` provides this functionality. It will take an incoming App Link and parse the referer information to display the appropriate calling app name.
 
 ```objective-c
-- (void)viewDidLoad {
-  [super viewDidLoad];
+#MyViewController.m
 
-  // Perform other view initialization.
+#import <Bolts/Bolts.h>
 
-  self.returnToRefererController = [[BFAppLinkReturnToRefererController alloc] init];
+@interface MyViewController () <BFAppLinkReturnToRefererControllerDelegate>
 
-  // self.returnToRefererView is a BFAppLinkReturnToRefererView.
-  // You may initialize the view either by loading it from a NIB or programmatically.
-  self.returnToRefererController.view = self.returnToRefererView;
+@property (nonatomic) BFAppLinkReturnToRefererController *returnToRefererController;
 
-  // If you have a UINavigationController in the view, then the bar must be shown above it.
-  [self.returnToRefererController]
+@end
+
+@implementation MyViewController
+
+// Best called at -viewWillAppear, -viewDidAppear and when receivedAppLinkURL changes.
+- (void)toggleRefererBackButtonIfNeeded {
+    // Provide the received AppLink (NSURL) in your app delegate
+    BFURL *receivedAppLinkURL = [SampleAppDelegate sharedInstance].receivedAppLinkURL;
+    if (receivedAppLinkURL.appLinkReferer != nil) {
+        // If you want to display the BFAppLinkReturnToRefererController and its view
+        // in a non-UINavigationController, you need to add the view to your main view
+        // and manage its position/frame yourself.
+        if (self.returnToRefererController == nil && self.navigationController != nil) {
+            self.returnToRefererController = [[BFAppLinkReturnToRefererController alloc] initForDisplayAboveNavController:self.navigationController];
+
+            // You can set a custom BFAppLinkReturnToRefererView:
+            // self.returnToRefererController.view = [MyCustomSubclassOfBFAppLinkReturnToRefererView new];
+            self.returnToRefererController.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 1);
+            self.returnToRefererController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+
+            // When the user taps the back link or the close button of the BFAppLinkReturnToRefererView,
+            // you need to reset the receivedAppLinkURL, so all BFAppLinkReturnToRefererController can
+            // remove themselves. So, observe the "closed" state of the view:
+            [self.returnToRefererController.view addObserver:self
+                                                  forKeyPath:@"closed"
+                                                     options:0
+                                                     context:kReturnToRefererViewClosedObserverContext];
+        }
+        [self.returnToRefererController showViewForRefererAppLink:receivedAppLinkURL.appLinkReferer];
+
+    } else if (self.returnToRefererController != nil) {
+        [self.returnToRefererController.view removeObserver:self
+                                                 forKeyPath:@"closed"
+                                                    context:kReturnToRefererViewClosedObserverContext];
+        [self.returnToRefererController removeFromNavController];
+        self.returnToRefererController = nil;
+    }
 }
 ```
-
-The following code assumes that the view controller has an `openedAppLinkURL` `NSURL` property that has already been populated with the URL used to open the app. You can then do something like this to show the view:
-
-```objective-c
-- (void)viewWillAppear {
-  [super viewWillAppear];
-
-  // Show only if you have a back AppLink.
-  [self.returnToRefererController showViewForRefererURL:self.openedAppLinkURL];
-}
-```
-
-In a navigaton-controller view hierarchy, the banner should be displayed above the navigation bar, and `BFAppLinkReturnToRefererController` provides an `initForDisplayAboveNavController` method to assist with this.
 
 ## Analytics
 
