@@ -48,6 +48,7 @@ if [ -z "$BOLTS_SCRIPT" ]; then
   BOLTS_BUILD=$BOLTS_ROOT/build
   BOLTS_IOS_BUILD=$BOLTS_ROOT/build/ios
   BOLTS_OSX_BUILD=$BOLTS_ROOT/build/osx
+  BOLTS_TVOS_BUILD=$BOLTS_ROOT/build/tvos
   BOLTS_BUILD_LOG=$BOLTS_BUILD/build.log
 
   # The name of the Bolts framework
@@ -56,6 +57,7 @@ if [ -z "$BOLTS_SCRIPT" ]; then
   # The path to the built Bolts .framework file
   BOLTS_IOS_FRAMEWORK=$BOLTS_IOS_BUILD/$BOLTS_FRAMEWORK_NAME
   BOLTS_OSX_FRAMEWORK=$BOLTS_OSX_BUILD/$BOLTS_FRAMEWORK_NAME
+  BOLTS_TVOS_FRAMEWORK=$BOLTS_TVOS_BUILD/$BOLTS_FRAMEWORK_NAME
 
   # The name of the docset
   BOLTS_DOCSET_NAME=Bolts.docset
