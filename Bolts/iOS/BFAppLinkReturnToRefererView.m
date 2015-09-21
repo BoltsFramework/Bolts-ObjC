@@ -59,7 +59,7 @@ static const CGFloat BFCloseButtonHeight = 12.0;
     _includeStatusBarInSize = BFIncludeStatusBarInSizeIOS7AndLater;
 
     // iOS 7 system blue color
-    self.backgroundColor = [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0];
+    self.backgroundColor = [UIColor colorWithRed:0.0f green:122.0f / 255.0f blue:1.0f alpha:1.0f];
     self.textColor = [UIColor whiteColor];
     self.clipsToBounds = YES;
 
@@ -120,12 +120,12 @@ static const CGFloat BFCloseButtonHeight = 12.0;
     _labelView.preferredMaxLayoutWidth = _labelView.bounds.size.width;
     CGSize labelSize = [_labelView sizeThatFits:bounds.size];
     _labelView.frame = CGRectMake(BFMarginX,
-                                  CGRectGetMaxY(bounds) - labelSize.height - 1.5 * BFMarginY,
+                                  CGRectGetMaxY(bounds) - labelSize.height - 1.5f * BFMarginY,
                                   CGRectGetMaxX(bounds) - BFCloseButtonWidth - 3 * BFMarginX,
                                   labelSize.height + BFMarginY);
 
     _closeButton.frame = CGRectMake(CGRectGetMaxX(bounds) - BFCloseButtonWidth - 2 * BFMarginX,
-                                    _labelView.center.y - BFCloseButtonHeight / 2.0 - BFMarginY,
+                                    _labelView.center.y - BFCloseButtonHeight / 2.0f - BFMarginY,
                                     BFCloseButtonWidth + 2 * BFMarginX,
                                     BFCloseButtonHeight + 2 * BFMarginY);
 }
