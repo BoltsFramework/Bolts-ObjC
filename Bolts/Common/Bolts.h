@@ -17,7 +17,7 @@
 #import <Bolts/BFTask.h>
 #import <Bolts/BFTaskCompletionSource.h>
 
-#if __has_include(<Bolts/BFAppLink.h>) && TARGET_OS_IPHONE && !TARGET_OS_TV
+#if __has_include(<Bolts/BFAppLink.h>) && TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 #import <Bolts/BFAppLinkNavigation.h>
 #import <Bolts/BFAppLink.h>
 #import <Bolts/BFAppLinkResolving.h>
