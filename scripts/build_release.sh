@@ -22,9 +22,9 @@
 # -----------------------------------------------------------------------------
 # Call out to build .framework
 #
-. $BOLTS_SCRIPT/build_framework.sh -c Release
+. $BOLTS_SCRIPT/build_framework.sh --with-watchos -c Release
 
 cd $BOLTS_BUILD
-zip -r --symlinks $BOLTS_DISTRIBUTION_ARCHIVE ios/ osx/
+zip -r --symlinks $BOLTS_DISTRIBUTION_ARCHIVE ios/ osx/ watchOS/
 
 common_success
