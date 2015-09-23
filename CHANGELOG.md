@@ -1,5 +1,12 @@
 # Bolts CHANGELOG
 
+## 1.3.0
+**New** 
+- Bolts now fully supports watchOS 2.
+- Bolts for iOS is now compilied with Bitcode slice.
+**Fixed**
+- Potential undefined behavior caused by casting block types.  
+
 ## 1.2.2
 - New: Added bitcode support when built from source for iOS 9.
 - New: `BFTask` and `BFTaskCompletionSource` now supports Obj-C Generics for types of the result.
