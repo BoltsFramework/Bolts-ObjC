@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "61C4B9E3B61282127C102C87B46B8CDE985974AE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "61C4B9E3B61282127C102C87B46B8CDE985974AE" : 0,
+    "0DCFF0852789D5A49F67B6C8EA2636735D303748" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "13F523A8-55A3-4365-9745-D4FE37EC5F20",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "61C4B9E3B61282127C102C87B46B8CDE985974AE" : "bolts-objc\/",
+    "0DCFF0852789D5A49F67B6C8EA2636735D303748" : "bolts-objc\/Vendor\/xctoolchain\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Bolts",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Bolts.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ParsePlatform\/xctoolchain.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0DCFF0852789D5A49F67B6C8EA2636735D303748"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:BoltsFramework\/Bolts-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "61C4B9E3B61282127C102C87B46B8CDE985974AE"
+    }
+  ]
+}

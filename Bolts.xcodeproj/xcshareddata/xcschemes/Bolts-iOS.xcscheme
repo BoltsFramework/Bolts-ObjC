@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E9C3CE817DE9DE000427E62"
                BuildableName = "Bolts.framework"
-               BlueprintName = "Bolts"
+               BlueprintName = "Bolts-iOS"
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E8C8EE817F23D1D00E3F1C7"
                BuildableName = "BoltsTests-iOS.xctest"
-               BlueprintName = "BoltsTests"
+               BlueprintName = "BoltsTests-iOS"
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,7 +44,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E9C3CE817DE9DE000427E62"
             BuildableName = "Bolts.framework"
-            BlueprintName = "Bolts"
+            BlueprintName = "Bolts-iOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,7 +66,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E9C3CE817DE9DE000427E62"
             BuildableName = "Bolts.framework"
-            BlueprintName = "Bolts"
+            BlueprintName = "Bolts-iOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,7 +84,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8E9C3CE817DE9DE000427E62"
             BuildableName = "Bolts.framework"
-            BlueprintName = "Bolts"
+            BlueprintName = "Bolts-iOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
