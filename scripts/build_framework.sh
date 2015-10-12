@@ -124,16 +124,16 @@ function xcode_build_target() {
     || die "Xcode build failed for platform: ${1}."
 }
 
-xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}" "Bolts"
-xcode_build_target "iphoneos" "${BUILDCONFIGURATION}" "Bolts"
-xcode_build_target "macosx" "${BUILDCONFIGURATION}" "MacBolts"
+xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}" "Bolts-iOS"
+xcode_build_target "iphoneos" "${BUILDCONFIGURATION}" "Bolts-iOS"
+xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Bolts-OSX"
 if [ $WATCHOS -eq 1 ]; then
   xcode_build_target "watchsimulator" "${BUILDCONFIGURATION}" "Bolts-watchOS"
   xcode_build_target "watchos" "${BUILDCONFIGURATION}" "Bolts-watchOS"
 fi
 if [ $TVOS -eq 1 ]; then
-  xcode_build_target "appletvsimulator" "${BUILDCONFIGURATION}" "TVBolts"
-  xcode_build_target "appletv" "${BUILDCONFIGURATION}" "TVBolts"
+  xcode_build_target "appletvsimulator" "${BUILDCONFIGURATION}" "Bolts-tvOS"
+  xcode_build_target "appletv" "${BUILDCONFIGURATION}" "Bolts-tvOS"
 fi
 
 # -----------------------------------------------------------------------------

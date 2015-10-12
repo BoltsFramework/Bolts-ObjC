@@ -24,10 +24,10 @@ script:
 - |
     if [ "$TEST_TYPE" = ios ]; then
       set -o pipefail
-      xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts -configuration Debug -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts-iOS -configuration Debug -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = osx ]; then
       set -o pipefail    
-      xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme MacBolts -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme Bolts-OSX -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = cocoapods ]; then
       pod lib lint Bolts.podspec
       pod lib lint --use-libraries Bolts.podspec    

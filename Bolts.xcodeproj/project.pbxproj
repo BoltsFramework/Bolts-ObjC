@@ -650,9 +650,9 @@
 			productReference = 8178F99C1BB0F87700AD289D /* Bolts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8E8C8EE817F23D1D00E3F1C7 /* BoltsTests */ = {
+		8E8C8EE817F23D1D00E3F1C7 /* BoltsTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E8C8EF817F23D1D00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests" */;
+			buildConfigurationList = 8E8C8EF817F23D1D00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-iOS" */;
 			buildPhases = (
 				8E8C8EE517F23D1D00E3F1C7 /* Sources */,
 				8E8C8EE617F23D1D00E3F1C7 /* Frameworks */,
@@ -664,14 +664,14 @@
 				1E617A8A18DA0CA90056A4E2 /* PBXTargetDependency */,
 				8E8C8EF717F23D1D00E3F1C7 /* PBXTargetDependency */,
 			);
-			name = BoltsTests;
+			name = "BoltsTests-iOS";
 			productName = BoltsTests;
 			productReference = 8E8C8EE917F23D1D00E3F1C7 /* BoltsTests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8E8C8F1817F241DA00E3F1C7 /* MacBoltsTests */ = {
+		8E8C8F1817F241DA00E3F1C7 /* BoltsTests-OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "MacBoltsTests" */;
+			buildConfigurationList = 8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-OSX" */;
 			buildPhases = (
 				8E8C8F1517F241DA00E3F1C7 /* Sources */,
 				8E8C8F1617F241DA00E3F1C7 /* Frameworks */,
@@ -682,14 +682,14 @@
 			dependencies = (
 				8E8C8F2517F241DA00E3F1C7 /* PBXTargetDependency */,
 			);
-			name = MacBoltsTests;
+			name = "BoltsTests-OSX";
 			productName = MacBoltsTests;
 			productReference = 8E8C8F1917F241DA00E3F1C7 /* BoltsTests-OSX.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8E9C3CE817DE9DE000427E62 /* Bolts */ = {
+		8E9C3CE817DE9DE000427E62 /* Bolts-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E9C3D0E17DE9DE000427E62 /* Build configuration list for PBXNativeTarget "Bolts" */;
+			buildConfigurationList = 8E9C3D0E17DE9DE000427E62 /* Build configuration list for PBXNativeTarget "Bolts-iOS" */;
 			buildPhases = (
 				81D0EE7F19AFA9BC0000AE75 /* Headers */,
 				8E9C3CE517DE9DE000427E62 /* Sources */,
@@ -699,14 +699,14 @@
 			);
 			dependencies = (
 			);
-			name = Bolts;
+			name = "Bolts-iOS";
 			productName = Bolts;
 			productReference = 8EDDA63517E17DDD00655F8A /* Bolts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8EDDA62817E17DDC00655F8A /* MacBolts */ = {
+		8EDDA62817E17DDC00655F8A /* Bolts-OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "MacBolts" */;
+			buildConfigurationList = 8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "Bolts-OSX" */;
 			buildPhases = (
 				8EDDA62C17E17DDC00655F8A /* Sources */,
 				8EDDA62F17E17DDC00655F8A /* Frameworks */,
@@ -716,14 +716,14 @@
 			);
 			dependencies = (
 			);
-			name = MacBolts;
+			name = "Bolts-OSX";
 			productName = Bolts;
 			productReference = 8EDDA63517E17DDD00655F8A /* Bolts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F5AFC9EA1BA752750076E927 /* TVBolts */ = {
+		F5AFC9EA1BA752750076E927 /* Bolts-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F5AFC9FF1BA752750076E927 /* Build configuration list for PBXNativeTarget "TVBolts" */;
+			buildConfigurationList = F5AFC9FF1BA752750076E927 /* Build configuration list for PBXNativeTarget "Bolts-tvOS" */;
 			buildPhases = (
 				F5AFC9EB1BA752750076E927 /* Sources */,
 				F5AFC9F31BA752750076E927 /* Frameworks */,
@@ -733,14 +733,14 @@
 			);
 			dependencies = (
 			);
-			name = TVBolts;
+			name = "Bolts-tvOS";
 			productName = Bolts;
 			productReference = F5AFCA021BA752750076E927 /* Bolts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		F5AFCA041BA752770076E927 /* TVBoltsTests */ = {
+		F5AFCA041BA752770076E927 /* BoltsTests-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F5AFCA101BA752770076E927 /* Build configuration list for PBXNativeTarget "TVBoltsTests" */;
+			buildConfigurationList = F5AFCA101BA752770076E927 /* Build configuration list for PBXNativeTarget "BoltsTests-tvOS" */;
 			buildPhases = (
 				F5AFCA071BA752770076E927 /* Sources */,
 				F5AFCA0C1BA752770076E927 /* Frameworks */,
@@ -751,7 +751,7 @@
 			dependencies = (
 				F5AFCA051BA752770076E927 /* PBXTargetDependency */,
 			);
-			name = TVBoltsTests;
+			name = "BoltsTests-tvOS";
 			productName = MacBoltsTests;
 			productReference = F5AFCA131BA752770076E927 /* BoltsTests-tvOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -782,13 +782,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8E9C3CE817DE9DE000427E62 /* Bolts */,
-				8EDDA62817E17DDC00655F8A /* MacBolts */,
-				F5AFC9EA1BA752750076E927 /* TVBolts */,
+				8E9C3CE817DE9DE000427E62 /* Bolts-iOS */,
+				8EDDA62817E17DDC00655F8A /* Bolts-OSX */,
+				F5AFC9EA1BA752750076E927 /* Bolts-tvOS */,
 				8178F9841BB0F87700AD289D /* Bolts-watchOS */,
-				8E8C8EE817F23D1D00E3F1C7 /* BoltsTests */,
-				8E8C8F1817F241DA00E3F1C7 /* MacBoltsTests */,
-				F5AFCA041BA752770076E927 /* TVBoltsTests */,
+				8E8C8EE817F23D1D00E3F1C7 /* BoltsTests-iOS */,
+				8E8C8F1817F241DA00E3F1C7 /* BoltsTests-OSX */,
+				F5AFCA041BA752770076E927 /* BoltsTests-tvOS */,
 				1EC3015F18CDAA8300D06D07 /* BoltsTestUI */,
 			);
 		};
@@ -947,17 +947,17 @@
 		};
 		8E8C8EF717F23D1D00E3F1C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8E9C3CE817DE9DE000427E62 /* Bolts */;
+			target = 8E9C3CE817DE9DE000427E62 /* Bolts-iOS */;
 			targetProxy = 8E8C8EF617F23D1D00E3F1C7 /* PBXContainerItemProxy */;
 		};
 		8E8C8F2517F241DA00E3F1C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8EDDA62817E17DDC00655F8A /* MacBolts */;
+			target = 8EDDA62817E17DDC00655F8A /* Bolts-OSX */;
 			targetProxy = 8E8C8F2417F241DA00E3F1C7 /* PBXContainerItemProxy */;
 		};
 		F5AFCA051BA752770076E927 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8EDDA62817E17DDC00655F8A /* MacBolts */;
+			target = 8EDDA62817E17DDC00655F8A /* Bolts-OSX */;
 			targetProxy = F5AFCA061BA752770076E927 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1176,7 +1176,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E8C8EF817F23D1D00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests" */ = {
+		8E8C8EF817F23D1D00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E8C8EF917F23D1D00E3F1C7 /* Debug */,
@@ -1185,7 +1185,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "MacBoltsTests" */ = {
+		8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E8C8F2717F241DA00E3F1C7 /* Debug */,
@@ -1203,7 +1203,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E9C3D0E17DE9DE000427E62 /* Build configuration list for PBXNativeTarget "Bolts" */ = {
+		8E9C3D0E17DE9DE000427E62 /* Build configuration list for PBXNativeTarget "Bolts-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E9C3D0F17DE9DE000427E62 /* Debug */,
@@ -1212,7 +1212,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "MacBolts" */ = {
+		8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "Bolts-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8EDDA63317E17DDC00655F8A /* Debug */,
@@ -1221,7 +1221,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F5AFC9FF1BA752750076E927 /* Build configuration list for PBXNativeTarget "TVBolts" */ = {
+		F5AFC9FF1BA752750076E927 /* Build configuration list for PBXNativeTarget "Bolts-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5AFCA001BA752750076E927 /* Debug */,
@@ -1230,7 +1230,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F5AFCA101BA752770076E927 /* Build configuration list for PBXNativeTarget "TVBoltsTests" */ = {
+		F5AFCA101BA752770076E927 /* Build configuration list for PBXNativeTarget "BoltsTests-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5AFCA111BA752770076E927 /* Debug */,

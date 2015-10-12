@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
+               BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
                BuildableName = "Bolts.framework"
-               BlueprintName = "TVBolts"
+               BlueprintName = "Bolts-OSX"
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,22 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5AFCA041BA752770076E927"
-               BuildableName = "BoltsTests-tvOS.xctest"
-               BlueprintName = "TVBoltsTests"
+               BlueprintIdentifier = "8E8C8F1817F241DA00E3F1C7"
+               BuildableName = "BoltsTests-OSX.xctest"
+               BlueprintName = "BoltsTests-OSX"
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
-            BuildableName = "Bolts.framework"
-            BlueprintName = "TVBolts"
-            ReferencedContainer = "container:Bolts.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +55,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
+            BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
             BuildableName = "Bolts.framework"
-            BlueprintName = "TVBolts"
+            BlueprintName = "Bolts-OSX"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,15 +70,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
-            BuildableName = "Bolts.framework"
-            BlueprintName = "TVBolts"
-            ReferencedContainer = "container:Bolts.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
