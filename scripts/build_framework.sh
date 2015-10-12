@@ -114,7 +114,7 @@ fi
 cd "$BOLTS_SRC"
 function xcode_build_target() {
   echo "Compiling for platform: ${1}."
-  $XCODEBUILD \
+  "$XCODEBUILD" \
     -target "${3}" \
     -sdk $1 \
     -configuration "${2}" \
@@ -174,7 +174,7 @@ if [ $TVOS -eq 1 ]; then
 fi
 
 # Combine iOS/Simulator binaries into a single universal binary.
-$LIPO \
+"$LIPO" \
   -create \
     "$BOLTS_BUILD/${BUILDCONFIGURATION}-iphonesimulator/Bolts.framework/Bolts" \
     "$BOLTS_BUILD/${BUILDCONFIGURATION}-iphoneos/Bolts.framework/Bolts" \
@@ -183,7 +183,7 @@ $LIPO \
 
 if [ $WATCHOS -eq 1 ]; then
   # Combine watchOS/Simulator binaries into a single universal binary.
-  $LIPO \
+  "$LIPO" \
     -create \
       "$BOLTS_BUILD/${BUILDCONFIGURATION}-watchsimulator/Bolts.framework/Bolts" \
       "$BOLTS_BUILD/${BUILDCONFIGURATION}-watchos/Bolts.framework/Bolts" \
@@ -193,7 +193,7 @@ fi
 
 if [ $TVOS -eq 1 ]; then
   # Combine tvOS/Simulator binaries into a single universal binary.
-  $LIPO \
+  "$LIPO" \
     -create \
       "$BOLTS_BUILD/${BUILDCONFIGURATION}-appletvsimulator/Bolts.framework/Bolts" \
       "$BOLTS_BUILD/${BUILDCONFIGURATION}-appletvos/Bolts.framework/Bolts" \
