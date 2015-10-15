@@ -11,6 +11,7 @@
 #include "Shared/Product/Framework.xcconfig"
 
 PRODUCT_NAME = Bolts
+IPHONEOS_DEPLOYMENT_TARGET = 6.0
 
 MACH_O_TYPE = staticlib
 

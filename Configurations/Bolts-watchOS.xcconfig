@@ -11,6 +11,7 @@
 #include "Shared/Product/Framework.xcconfig"
 
 PRODUCT_NAME = Bolts
+WATCHOS_DEPLOYMENT_TARGET = 2.0
 
 MACH_O_TYPE = staticlib
 APPLICATION_EXTENSION_API_ONLY = YES
