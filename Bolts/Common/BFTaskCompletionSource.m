@@ -40,9 +40,11 @@
 }
 
 - (instancetype)init {
-    if (self = [super init]) {
-        _task = [[BFTask alloc] init];
-    }
+    self = [super init];
+    if (!self) return nil;
+
+    _task = [[BFTask alloc] init];
+
     return self;
 }
 
