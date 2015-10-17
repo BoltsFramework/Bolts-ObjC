@@ -133,7 +133,7 @@ if [ $WATCHOS -eq 1 ]; then
 fi
 if [ $TVOS -eq 1 ]; then
   xcode_build_target "appletvsimulator" "${BUILDCONFIGURATION}" "Bolts-tvOS"
-  xcode_build_target "appletv" "${BUILDCONFIGURATION}" "Bolts-tvOS"
+  xcode_build_target "appletvos" "${BUILDCONFIGURATION}" "Bolts-tvOS"
 fi
 
 # -----------------------------------------------------------------------------
