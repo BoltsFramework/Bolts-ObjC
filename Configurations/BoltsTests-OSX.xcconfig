@@ -12,6 +12,7 @@
 
 PRODUCT_NAME = BoltsTests-OSX
 PRODUCT_MODULE_NAME = BoltsTests
+MACOSX_DEPLOYMENT_TARGET = 10.8
 
 INFOPLIST_FILE = BoltsTests/BoltsTests-Info.plist
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @loader_path/../Frameworks

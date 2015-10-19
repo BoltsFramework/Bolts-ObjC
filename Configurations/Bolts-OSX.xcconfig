@@ -11,6 +11,7 @@
 #include "Shared/Product/Framework.xcconfig"
 
 PRODUCT_NAME = Bolts
+MACOSX_DEPLOYMENT_TARGET = 10.8
 
 MACH_O_TYPE = mh_dylib
 
