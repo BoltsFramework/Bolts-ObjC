@@ -198,7 +198,7 @@ static id<BFAppLinkResolving> defaultResolver;
     }
 }
 
-+ (BFTask *)resolveAppLinkInBackground:(NSURL *)destination resolver:(id)resolver {
++ (BFTask *)resolveAppLinkInBackground:(NSURL *)destination resolver:(id<BFAppLinkResolving>)resolver {
     return [resolver appLinkFromURLInBackground:destination];
 }
 

@@ -8,9 +8,9 @@
  *
  */
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 
-#import "Bolts.h"
+#import <Bolts/Bolts.h>
 
 @interface CancellationTests : XCTestCase
 @end

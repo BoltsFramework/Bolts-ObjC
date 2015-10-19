@@ -13,97 +13,90 @@
 #import "BFAppLinkTarget.h"
 #import "BFMeasurementEvent_Internal.h"
 
-FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
-FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
-FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
-FOUNDATION_EXPORT NSString *const BFAppLinkExtrasKeyName;
-FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
-FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppLink;
-FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppName;
-FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
-
 @implementation BFURL
 
 - (instancetype)initWithURL:(NSURL *)url forOpenInboundURL:(BOOL)forOpenURLEvent sourceApplication:(NSString *)sourceApplication forRenderBackToReferrerBar:(BOOL)forRenderBackToReferrerBar {
-    if (self = [super init]) {
-        _inputURL = url;
-        _targetURL = url;
+    self = [super init];
+    if (!self) return nil;
 
-        // Parse the query string parameters for the base URL
-        NSDictionary *baseQuery = [BFURL queryParametersForURL:url];
-        _inputQueryParameters = baseQuery;
-        _targetQueryParameters = baseQuery;
+    _inputURL = url;
+    _targetURL = url;
 
-        // Check for applink_data
-        NSString *appLinkDataString = baseQuery[BFAppLinkDataParameterName];
-        if (appLinkDataString) {
-            // Try to parse the JSON
-            NSError *error = nil;
-            NSDictionary *applinkData = [NSJSONSerialization JSONObjectWithData:[appLinkDataString dataUsingEncoding:NSUTF8StringEncoding]
-                                                                        options:0
-                                                                          error:&error];
-            if (!error && [applinkData isKindOfClass:[NSDictionary class]]) {
-                // If the version is not specified, assume it is 1.
-                NSString *version = applinkData[BFAppLinkVersionKeyName] ?: @"1.0";
-                NSString *target = applinkData[BFAppLinkTargetKeyName];
-                if ([version isKindOfClass:[NSString class]] &&
-                    [version isEqual:BFAppLinkVersion]) {
-                    // There's applink data!  The target should actually be the applink target.
-                    _appLinkData = applinkData;
-                    id applinkExtras = applinkData[BFAppLinkExtrasKeyName];
-                    if (applinkExtras && [applinkExtras isKindOfClass:[NSDictionary class]]) {
-                        _appLinkExtras = applinkExtras;
-                    }
-                    _targetURL = ([target isKindOfClass:[NSString class]] ? [NSURL URLWithString:target] : url);
-                    _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];
+    // Parse the query string parameters for the base URL
+    NSDictionary *baseQuery = [BFURL queryParametersForURL:url];
+    _inputQueryParameters = baseQuery;
+    _targetQueryParameters = baseQuery;
 
-                    NSDictionary *refererAppLink = _appLinkData[BFAppLinkRefererAppLink];
-                    NSString *refererURLString = refererAppLink[BFAppLinkRefererUrl];
-                    NSString *refererAppName = refererAppLink[BFAppLinkRefererAppName];
+    // Check for applink_data
+    NSString *appLinkDataString = baseQuery[BFAppLinkDataParameterName];
+    if (appLinkDataString) {
+        // Try to parse the JSON
+        NSError *error = nil;
+        NSDictionary *applinkData = [NSJSONSerialization JSONObjectWithData:[appLinkDataString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                    options:0
+                                                                      error:&error];
+        if (!error && [applinkData isKindOfClass:[NSDictionary class]]) {
+            // If the version is not specified, assume it is 1.
+            NSString *version = applinkData[BFAppLinkVersionKeyName] ?: @"1.0";
+            NSString *target = applinkData[BFAppLinkTargetKeyName];
+            if ([version isKindOfClass:[NSString class]] &&
+                [version isEqual:BFAppLinkVersion]) {
+                // There's applink data!  The target should actually be the applink target.
+                _appLinkData = applinkData;
+                id applinkExtras = applinkData[BFAppLinkExtrasKeyName];
+                if (applinkExtras && [applinkExtras isKindOfClass:[NSDictionary class]]) {
+                    _appLinkExtras = applinkExtras;
+                }
+                _targetURL = ([target isKindOfClass:[NSString class]] ? [NSURL URLWithString:target] : url);
+                _targetQueryParameters = [BFURL queryParametersForURL:_targetURL];
 
-                    if (refererURLString && refererAppName) {
-                        BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:refererURLString]
-                                                                             appStoreId:nil
-                                                                                appName:refererAppName];
-                        _appLinkReferer = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
-                                                                  targets:@[ target ]
-                                                                   webURL:nil
-                                                         isBackToReferrer:YES];
-                    }
+                NSDictionary *refererAppLink = _appLinkData[BFAppLinkRefererAppLink];
+                NSString *refererURLString = refererAppLink[BFAppLinkRefererUrl];
+                NSString *refererAppName = refererAppLink[BFAppLinkRefererAppName];
 
-                    // Raise Measurement Event
-                    NSString *const EVENT_YES_VAL = @"1";
-                    NSString *const EVENT_NO_VAL = @"0";
-                    NSMutableDictionary *logData = [[NSMutableDictionary alloc] init];
-                    logData[@"version"] = version;
-                    if (refererURLString) {
-                        logData[@"refererURL"] = refererURLString;
-                    }
-                    if (refererAppName) {
-                        logData[@"refererAppName"] = refererAppName;
-                    }
-                    if (sourceApplication) {
-                        logData[@"sourceApplication"] = sourceApplication;
-                    }
-                    if ([_targetURL absoluteString]) {
-                        logData[@"targetURL"] = [_targetURL absoluteString];
-                    }
-                    if ([_inputURL absoluteString]) {
-                        logData[@"inputURL"] = [_inputURL absoluteString];
-                    }
-                    if ([_inputURL scheme]) {
-                        logData[@"inputURLScheme"] = [_inputURL scheme];
-                    }
-                    logData[@"forRenderBackToReferrerBar"] = forRenderBackToReferrerBar ? EVENT_YES_VAL : EVENT_NO_VAL;
-                    logData[@"forOpenUrl"] = forOpenURLEvent ? EVENT_YES_VAL : EVENT_NO_VAL;
-                    [BFMeasurementEvent postNotificationForEventName:BFAppLinkParseEventName args:logData];
-                    if (forOpenURLEvent) {
-                        [BFMeasurementEvent postNotificationForEventName:BFAppLinkNavigateInEventName args:logData];
-                    }
+                if (refererURLString && refererAppName) {
+                    BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:refererURLString]
+                                                                         appStoreId:nil
+                                                                            appName:refererAppName];
+                    _appLinkReferer = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
+                                                              targets:@[ target ]
+                                                               webURL:nil
+                                                     isBackToReferrer:YES];
+                }
+
+                // Raise Measurement Event
+                NSString *const EVENT_YES_VAL = @"1";
+                NSString *const EVENT_NO_VAL = @"0";
+                NSMutableDictionary *logData = [[NSMutableDictionary alloc] init];
+                logData[@"version"] = version;
+                if (refererURLString) {
+                    logData[@"refererURL"] = refererURLString;
+                }
+                if (refererAppName) {
+                    logData[@"refererAppName"] = refererAppName;
+                }
+                if (sourceApplication) {
+                    logData[@"sourceApplication"] = sourceApplication;
+                }
+                if ([_targetURL absoluteString]) {
+                    logData[@"targetURL"] = [_targetURL absoluteString];
+                }
+                if ([_inputURL absoluteString]) {
+                    logData[@"inputURL"] = [_inputURL absoluteString];
+                }
+                if ([_inputURL scheme]) {
+                    logData[@"inputURLScheme"] = [_inputURL scheme];
+                }
+                logData[@"forRenderBackToReferrerBar"] = forRenderBackToReferrerBar ? EVENT_YES_VAL : EVENT_NO_VAL;
+                logData[@"forOpenUrl"] = forOpenURLEvent ? EVENT_YES_VAL : EVENT_NO_VAL;
+                [BFMeasurementEvent postNotificationForEventName:BFAppLinkParseEventName args:logData];
+                if (forOpenURLEvent) {
+                    [BFMeasurementEvent postNotificationForEventName:BFAppLinkNavigateInEventName args:logData];
                 }
             }
         }
     }
+
     return self;
 }
 
