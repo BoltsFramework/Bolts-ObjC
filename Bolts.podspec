@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
   s.watchos.deployment_target = '2.0'
+  s.tvos.deployment_target = '9.0'
   
   s.subspec 'Tasks' do |ss|
     ss.ios.source_files = 'Bolts/Common/*.[hm]'
@@ -30,6 +31,9 @@ Pod::Spec.new do |s|
     
     ss.watchos.source_files = 'Bolts/Common/*.[hm]'
     ss.watchos.public_header_files = 'Bolts/Common/*.h'
+
+    ss.tvos.source_files = 'Bolts/Common/*.[hm]'
+    ss.tvos.public_header_files = 'Bolts/Common/*.h'
   end
   
   s.subspec 'AppLinks' do |ss|
