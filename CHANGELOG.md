@@ -1,5 +1,12 @@
 # Bolts CHANGELOG
 
+## 1.4.0
+**New**
+- Bolts now fully supports tvOS and Xcode 7.1.
+**Changes**
+- Bolts for iOS requires at least iOS 6.0.
+- Bolts for OS X requires at least OS X 10.8.
+
 ## 1.3.0
 **New** 
 - Bolts now fully supports watchOS 2.
