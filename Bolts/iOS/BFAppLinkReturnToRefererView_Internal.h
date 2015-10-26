@@ -8,7 +8,7 @@
  *
  */
 
-#import <Bolts/BFAppLinkReturnToRefererView.h>
+#import "BFAppLinkReturnToRefererView.h"
 
 @interface BFAppLinkReturnToRefererView (Internal)
 

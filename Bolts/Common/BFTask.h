@@ -10,8 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFCancellationToken.h>
-#import <Bolts/BFDefines.h>
+#import "BFCancellationToken.h"
+#import "BFDefines.h"
 
 /*!
  Error domain used if there was multiple errors on <BFTask taskForCompletionOfAllTasks:>.

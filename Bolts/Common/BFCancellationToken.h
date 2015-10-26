@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFCancellationTokenRegistration.h>
+#import "BFCancellationTokenRegistration.h"
 
 /*!
  A block that will be called when a token is cancelled.

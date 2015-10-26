@@ -8,7 +8,7 @@
  *
  */
 
-#import <Bolts/BFAppLink.h>
+#import "BFAppLink.h"
 
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;

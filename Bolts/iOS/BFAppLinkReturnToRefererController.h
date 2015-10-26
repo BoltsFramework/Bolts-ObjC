@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <Bolts/BFAppLinkReturnToRefererView.h>
+#import "BFAppLinkReturnToRefererView.h"
 
 @class BFAppLink;
 @class BFAppLinkReturnToRefererController;
