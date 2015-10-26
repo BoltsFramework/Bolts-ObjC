@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFDefines.h>
+#import "BFDefines.h"
 
 @class BFTask BF_GENERIC(BFGenericType);
 
