@@ -421,11 +421,13 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     BOOL completed;
     BOOL cancelled;
     BOOL faulted;
+    NSString *resultDescription = nil;
 
     @synchronized(self.lock) {
         completed = self.completed;
         cancelled = self.cancelled;
         faulted = self.faulted;
+        resultDescription = completed ? [NSString stringWithFormat:@" result = %@", self.result] : @"";
     }
 
     // Description string includes status information and, if available, the
@@ -436,7 +438,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
             completed ? @"YES" : @"NO",
             cancelled ? @"YES" : @"NO",
             faulted ? @"YES" : @"NO",
-            completed ? [NSString stringWithFormat:@" result:%@", _result] : @""];
+            resultDescription];
 }
 
 @end
