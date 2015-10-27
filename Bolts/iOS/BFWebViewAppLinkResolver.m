@@ -246,6 +246,9 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
             platformData = @[ appLinkDict[BFWebViewAppLinkResolverIPhoneKey] ?: @{},
                               appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
             break;
+#ifdef __TVOS_9_0
+        case UIUserInterfaceIdiomTV:
+#endif
         case UIUserInterfaceIdiomUnspecified:
         default:
             // Future-proofing. Other User Interface idioms should only hit ios.

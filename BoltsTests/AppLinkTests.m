@@ -461,6 +461,9 @@ static NSMutableArray *openedUrls;
         case UIUserInterfaceIdiomPad:
             XCTAssertEqualObjects(@"bolts2://ipad", target.URL.absoluteString);
             break;
+#ifdef __TVOS_9_0
+        case UIUserInterfaceIdiomTV:
+#endif
         case UIUserInterfaceIdiomUnspecified:
         default:
             break;
@@ -727,6 +730,9 @@ static NSMutableArray *openedUrls;
         case UIUserInterfaceIdiomPad:
             XCTAssertEqualObjects(@"bolts2://ipad", target.URL.absoluteString);
             break;
+#ifdef __TVOS_9_0
+        case UIUserInterfaceIdiomTV:
+#endif
         case UIUserInterfaceIdiomUnspecified:
         default:
             break;
