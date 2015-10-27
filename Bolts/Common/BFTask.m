@@ -185,13 +185,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     }
 }
 
-- (void)setResult:(id)result {
-    if (![self trySetResult:result]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot set the result on a completed task."];
-    }
-}
-
 - (BOOL)trySetResult:(id)result {
     @synchronized(self.lock) {
         if (self.completed) {
@@ -207,13 +200,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 - (NSError *)error {
     @synchronized(self.lock) {
         return _error;
-    }
-}
-
-- (void)setError:(NSError *)error {
-    if (![self trySetError:error]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot set the error on a completed task."];
     }
 }
 
@@ -233,13 +219,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 - (NSException *)exception {
     @synchronized(self.lock) {
         return _exception;
-    }
-}
-
-- (void)setException:(NSException *)exception {
-    if (![self trySetException:exception]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot set the exception on a completed task."];
     }
 }
 
@@ -265,15 +244,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 - (BOOL)isFaulted {
     @synchronized(self.lock) {
         return _faulted;
-    }
-}
-
-- (void)cancel {
-    @synchronized(self.lock) {
-        if (![self trySetCancelled]) {
-            [NSException raise:NSInternalInconsistencyException
-                        format:@"Cannot cancel a completed task."];
-        }
     }
 }
 
