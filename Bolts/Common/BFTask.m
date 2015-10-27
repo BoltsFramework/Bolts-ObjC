@@ -56,27 +56,27 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 #pragma mark - Task Class methods
 
 + (instancetype)taskWithResult:(id)result {
-    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-    tcs.result = result;
-    return tcs.task;
+    BFTask *task = [[self alloc] init];
+    [task trySetResult:result];
+    return task;
 }
 
 + (instancetype)taskWithError:(NSError *)error {
-    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-    tcs.error = error;
-    return tcs.task;
+    BFTask *task = [[self alloc] init];
+    [task trySetError:error];
+    return task;
 }
 
 + (instancetype)taskWithException:(NSException *)exception {
-    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-    tcs.exception = exception;
-    return tcs.task;
+    BFTask *task = [[self alloc] init];
+    [task trySetException:exception];
+    return task;
 }
 
 + (instancetype)cancelledTask {
-    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-    [tcs cancel];
-    return tcs.task;
+    BFTask *task = [[self alloc] init];
+    [task trySetCancelled];
+    return task;
 }
 
 + (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks {
