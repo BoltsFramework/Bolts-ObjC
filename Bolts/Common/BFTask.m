@@ -53,30 +53,58 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return self;
 }
 
+- (instancetype)initWithResult:(id)result {
+    self = [super init];
+    if (!self) return nil;
+
+    [self trySetResult:result];
+
+    return self;
+}
+
+- (instancetype)initWithError:(NSError *)error {
+    self = [super init];
+    if (!self) return nil;
+
+    [self trySetError:error];
+
+    return self;
+}
+
+- (instancetype)initWithException:(NSException *)exception {
+    self = [super init];
+    if (!self) return nil;
+
+    [self trySetException:exception];
+
+    return self;
+}
+
+- (instancetype)initCancelled {
+    self = [super init];
+    if (!self) return nil;
+
+    [self trySetCancelled];
+
+    return self;
+}
+
 #pragma mark - Task Class methods
 
 + (instancetype)taskWithResult:(id)result {
-    BFTask *task = [[self alloc] init];
-    [task trySetResult:result];
-    return task;
+    return [[self alloc] initWithResult:result];
 }
 
 + (instancetype)taskWithError:(NSError *)error {
-    BFTask *task = [[self alloc] init];
-    [task trySetError:error];
-    return task;
+    return [[self alloc] initWithError:error];
 }
 
 + (instancetype)taskWithException:(NSException *)exception {
-    BFTask *task = [[self alloc] init];
-    [task trySetException:exception];
-    return task;
+    return [[self alloc] initWithException:exception];
 }
 
 + (instancetype)cancelledTask {
-    BFTask *task = [[self alloc] init];
-    [task trySetCancelled];
-    return task;
+    return [[self alloc] initCancelled];
 }
 
 + (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks {
