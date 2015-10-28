@@ -642,7 +642,7 @@
 
 - (void)testDescription {
     BFTask *task = [BFTask taskWithResult:nil];
-    NSString *expected = [NSString stringWithFormat:@"<BFTask: %p; completed = YES; cancelled = NO; faulted = NO; result:(null)>", task];
+    NSString *expected = [NSString stringWithFormat:@"<BFTask: %p; completed = YES; cancelled = NO; faulted = NO; result = (null)>", task];
     
     NSString *description = task.description;
     
