@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8E8C8F1817F241DA00E3F1C7"
+               BuildableName = "BoltsTests-OSX.xctest"
+               BlueprintName = "BoltsTests-OSX"
+               ReferencedContainer = "container:Bolts.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -40,6 +54,15 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
+            BuildableName = "Bolts.framework"
+            BlueprintName = "Bolts-OSX"
+            ReferencedContainer = "container:Bolts.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -71,6 +94,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
+            BuildableName = "Bolts.framework"
+            BlueprintName = "Bolts-OSX"
+            ReferencedContainer = "container:Bolts.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F5AFCA041BA752770076E927"
+               BuildableName = "BoltsTests-tvOS.xctest"
+               BlueprintName = "BoltsTests-tvOS"
+               ReferencedContainer = "container:Bolts.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
