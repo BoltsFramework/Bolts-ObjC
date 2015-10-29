@@ -12,6 +12,8 @@
 
 #import <Bolts/BFDefines.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class BFTask BF_GENERIC(BFGenericType);
 
 /*!
@@ -36,7 +38,7 @@
  Attempting to set this for a completed task will raise an exception.
  @param result The result of the task.
  */
-- (void)setResult:(BFGenericType)result;
+- (void)setResult:(nullable BFGenericType)result;
 
 /*!
  Completes the task by setting the error.
@@ -62,7 +64,7 @@
  Sets the result of the task if it wasn't already completed.
  @returns whether the new value was set.
  */
-- (BOOL)trySetResult:(BFGenericType)result;
+- (BOOL)trySetResult:(nullable BFGenericType)result;
 
 /*!
  Sets the error of the task if it wasn't already completed.
@@ -85,3 +87,5 @@
 - (BOOL)trySetCancelled;
 
 @end
+
+NS_ASSUME_NONNULL_END
