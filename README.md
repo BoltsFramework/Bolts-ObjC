@@ -261,7 +261,7 @@ It's often convenient to have a long chain of success callbacks with only one er
 
 ## Creating Tasks
 
-When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new `BFTask`, and control whether it gets marked as finished or cancelled. After you create a `BFTask`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
+When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new `BFTask`, and control whether it gets marked as finished or cancelled. After you create a `BFTaskCompletionSource`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
 
 ```objective-c
 // Objective-C
