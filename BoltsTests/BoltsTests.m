@@ -11,6 +11,8 @@
 @import XCTest;
 
 #import <Bolts/Bolts.h>
+#import <Bolts/BoltsVersion.h>
+
 
 @interface BoltsTests : XCTestCase
 @end

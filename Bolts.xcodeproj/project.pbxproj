@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0937F9431BE577F1008C38BA /* BFAppLinkNavigationType.h in Headers */ = {isa = PBXBuildFile; fileRef = 0937F9401BE576BE008C38BA /* BFAppLinkNavigationType.h */; };
-		0937F9441BE577F1008C38BA /* BFAppLinkReturnToRefererViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0937F93F1BE575FF008C38BA /* BFAppLinkReturnToRefererViewDelegate.h */; };
+		0937F9431BE577F1008C38BA /* BFAppLinkNavigationType.h in Headers */ = {isa = PBXBuildFile; fileRef = 0937F9401BE576BE008C38BA /* BFAppLinkNavigationType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0937F9441BE577F1008C38BA /* BFAppLinkReturnToRefererViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0937F93F1BE575FF008C38BA /* BFAppLinkReturnToRefererViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E9BF8DC18EA0CAD00514B1E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 1E9BF8DB18EA0CAD00514B1E /* test.html */; };
 		1EC3016118CDAA8400D06D07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
 		1EC3016318CDAA8400D06D07 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
@@ -584,6 +584,7 @@
 				81ED941D1BE147CF00795F05 /* BFCancellationTokenRegistration.h in Headers */,
 				81ED941E1BE147CF00795F05 /* BFTask.h in Headers */,
 				81ED942E1BE1481900795F05 /* BFAppLinkNavigation.h in Headers */,
+				0937F9431BE577F1008C38BA /* BFAppLinkNavigationType.h in Headers */,
 				81ED94351BE1481900795F05 /* BFAppLinkReturnToRefererView.h in Headers */,
 				81ED941F1BE147CF00795F05 /* BFCancellationTokenSource.h in Headers */,
 				81ED94201BE147CF00795F05 /* BFExecutor.h in Headers */,
@@ -598,7 +599,6 @@
 				81ED943A1BE1481900795F05 /* BFMeasurementEvent_Internal.h in Headers */,
 				81ED943B1BE1481900795F05 /* BFMeasurementEvent.h in Headers */,
 				81ED942B1BE1481900795F05 /* BFAppLink_Internal.h in Headers */,
-				0937F9431BE577F1008C38BA /* BFAppLinkNavigationType.h in Headers */,
 				0937F9441BE577F1008C38BA /* BFAppLinkReturnToRefererViewDelegate.h in Headers */,
 				81ED94241BE147CF00795F05 /* Bolts.h in Headers */,
 				81ED94251BE147CF00795F05 /* BFCancellationToken.h in Headers */,
