@@ -8,7 +8,6 @@
  *
  */
 
-#import <Bolts/BoltsVersion.h>
 #import <Bolts/BFCancellationToken.h>
 #import <Bolts/BFCancellationTokenRegistration.h>
 #import <Bolts/BFCancellationTokenSource.h>

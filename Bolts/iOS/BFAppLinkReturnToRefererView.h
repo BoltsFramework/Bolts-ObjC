@@ -13,6 +13,8 @@
 
 #import <Bolts/BFAppLinkNavigation.h>
 
+#import "BFAppLinkReturnToRefererViewDelegate.h"
+
 @class BFAppLinkReturnToRefererView;
 @class BFURL;
 
@@ -21,25 +23,6 @@ typedef NS_ENUM(NSUInteger, BFIncludeStatusBarInSize) {
     BFIncludeStatusBarInSizeIOS7AndLater,
     BFIncludeStatusBarInSizeAlways,
 };
-
-/*!
- Protocol that a class can implement in order to be notified when the user has navigated back
- to the referer of an App Link.
- */
-@protocol BFAppLinkReturnToRefererViewDelegate <NSObject>
-
-/*!
- Called when the user has tapped inside the close button.
- */
-- (void)returnToRefererViewDidTapInsideCloseButton:(BFAppLinkReturnToRefererView *)view;
-
-/*!
- Called when the user has tapped inside the App Link portion of the view.
- */
-- (void)returnToRefererViewDidTapInsideLink:(BFAppLinkReturnToRefererView *)view
-                                       link:(BFAppLink *)link;
-
-@end
 
 /*!
  Provides a UIView that displays a button allowing users to navigate back to the

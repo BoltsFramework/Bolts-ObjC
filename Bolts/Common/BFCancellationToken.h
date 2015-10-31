@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFCancellationTokenRegistration.h>
+@class BFCancellationTokenRegistration;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -9,20 +9,8 @@
  */
 
 #import <Foundation/Foundation.h>
-
 #import <Bolts/BFAppLink.h>
-
-/*!
- The result of calling navigate on a BFAppLinkNavigation
- */
-typedef NS_ENUM(NSInteger, BFAppLinkNavigationType) {
-    /*! Indicates that the navigation failed and no app was opened */
-    BFAppLinkNavigationTypeFailure,
-    /*! Indicates that the navigation succeeded by opening the URL in the browser */
-    BFAppLinkNavigationTypeBrowser,
-    /*! Indicates that the navigation succeeded by opening the URL in an app on the device */
-    BFAppLinkNavigationTypeApp
-};
+#import <Bolts/BFAppLinkNavigationType.h>
 
 @protocol BFAppLinkResolving;
 @class BFTask;

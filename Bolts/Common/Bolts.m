@@ -9,6 +9,7 @@
  */
 
 #import "Bolts.h"
+#import "BoltsVersion.h"
 
 NSInteger const kBFMultipleErrorsError = 80175001;
 

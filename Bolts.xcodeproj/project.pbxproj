@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0937F9431BE577F1008C38BA /* BFAppLinkNavigationType.h in Headers */ = {isa = PBXBuildFile; fileRef = 0937F9401BE576BE008C38BA /* BFAppLinkNavigationType.h */; };
+		0937F9441BE577F1008C38BA /* BFAppLinkReturnToRefererViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0937F93F1BE575FF008C38BA /* BFAppLinkReturnToRefererViewDelegate.h */; };
 		1E9BF8DC18EA0CAD00514B1E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 1E9BF8DB18EA0CAD00514B1E /* test.html */; };
 		1EC3016118CDAA8400D06D07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
 		1EC3016318CDAA8400D06D07 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
@@ -155,6 +157,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0937F93F1BE575FF008C38BA /* BFAppLinkReturnToRefererViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFAppLinkReturnToRefererViewDelegate.h; sourceTree = "<group>"; };
+		0937F9401BE576BE008C38BA /* BFAppLinkNavigationType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BFAppLinkNavigationType.h; sourceTree = "<group>"; };
 		1E9BF8DB18EA0CAD00514B1E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		1EC3016018CDAA8400D06D07 /* BoltsTestUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoltsTestUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -371,6 +375,7 @@
 				8103FA5A19900A84000BAE3F /* BFAppLinkNavigation.h */,
 				8103FA5B19900A84000BAE3F /* BFAppLinkNavigation.m */,
 				8103FA5C19900A84000BAE3F /* BFAppLinkResolving.h */,
+				0937F9401BE576BE008C38BA /* BFAppLinkNavigationType.h */,
 				8103FA6619900A84000BAE3F /* BFWebViewAppLinkResolver.h */,
 				8103FA6719900A84000BAE3F /* BFWebViewAppLinkResolver.m */,
 				8103FA5D19900A84000BAE3F /* BFAppLinkReturnToRefererController.h */,
@@ -378,6 +383,7 @@
 				8103FA5F19900A84000BAE3F /* BFAppLinkReturnToRefererView.h */,
 				8103FA6019900A84000BAE3F /* BFAppLinkReturnToRefererView.m */,
 				8103FA6119900A84000BAE3F /* BFAppLinkReturnToRefererView_Internal.h */,
+				0937F93F1BE575FF008C38BA /* BFAppLinkReturnToRefererViewDelegate.h */,
 				8103FA6219900A84000BAE3F /* BFAppLinkTarget.h */,
 				8103FA6319900A84000BAE3F /* BFAppLinkTarget.m */,
 				B242FAC019A599CD0097ECAE /* BFMeasurementEvent_Internal.h */,
@@ -592,6 +598,8 @@
 				81ED943A1BE1481900795F05 /* BFMeasurementEvent_Internal.h in Headers */,
 				81ED943B1BE1481900795F05 /* BFMeasurementEvent.h in Headers */,
 				81ED942B1BE1481900795F05 /* BFAppLink_Internal.h in Headers */,
+				0937F9431BE577F1008C38BA /* BFAppLinkNavigationType.h in Headers */,
+				0937F9441BE577F1008C38BA /* BFAppLinkReturnToRefererViewDelegate.h in Headers */,
 				81ED94241BE147CF00795F05 /* Bolts.h in Headers */,
 				81ED94251BE147CF00795F05 /* BFCancellationToken.h in Headers */,
 				81ED942C1BE1481900795F05 /* BFAppLink.h in Headers */,
