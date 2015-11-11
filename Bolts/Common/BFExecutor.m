@@ -10,6 +10,31 @@
 
 #import "BFExecutor.h"
 
+#import <pthread.h>
+
+/*!
+ Get the remaining stack-size of the current thread.
+
+ @param totalSize The total stack size of the current thread.
+
+ @return The remaining size, in bytes, available to the current thread.
+
+ @note This function cannot be inlined, as otherwise the internal implementation could fail to report the proper
+ remaining stack space.
+ */
+__attribute__((noinline)) static size_t remaining_stack_size(size_t *__nonnull restrict totalSize) {
+    pthread_t currentThread = pthread_self();
+
+    // NOTE: We must store stack pointers as uint8_t so that the pointer math is well-defined
+    uint8_t *endStack = pthread_get_stackaddr_np(currentThread);
+    *totalSize = pthread_get_stacksize_np(currentThread);
+
+    // NOTE: If the function is inlined, this value could be incorrect
+    uint8_t *frameAddr = __builtin_frame_address(0);
+
+    return (*totalSize) - (endStack - frameAddr);
+}
+
 @interface BFExecutor ()
 
 @property (nonatomic, copy) void(^block)(void(^block)());
@@ -25,27 +50,16 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         defaultExecutor = [self executorWithBlock:^void(void(^block)()) {
-            static const NSString *BFTaskDepthKey = @"BFTaskDepth";
-            static const int BFTaskDefaultExecutorMaxDepth = 20;
-
             // We prefer to run everything possible immediately, so that there is callstack information
-            // when debugging. However, we don't want the stack to get too deep, so if the number of
-            // recursive calls to this method exceeds a certain depth, we dispatch to another GCD queue.
-            NSMutableDictionary *threadLocal = [[NSThread currentThread] threadDictionary];
-            NSNumber *depth = threadLocal[BFTaskDepthKey];
-            if (!depth) {
-                depth = @0;
-            }
-            if (depth.intValue > BFTaskDefaultExecutorMaxDepth) {
+            // when debugging. However, we don't want the stack to get too deep, so if the remaining stack space
+            // is less than 10% of the total space, we dispatch to another GCD queue.
+            size_t totalStackSize = 0;
+            size_t remainingStackSize = remaining_stack_size(&totalStackSize);
+
+            if (remainingStackSize < (totalStackSize / 10)) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
             } else {
-                NSNumber *previousDepth = depth;
-                threadLocal[BFTaskDepthKey] = @(previousDepth.intValue + 1);
-                @try {
-                    block();
-                } @finally {
-                    threadLocal[BFTaskDepthKey] = previousDepth;
-                }
+                block();
             }
         }];
     });
