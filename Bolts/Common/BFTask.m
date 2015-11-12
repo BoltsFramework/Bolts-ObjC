@@ -313,14 +313,14 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 #pragma mark - Chaining methods
 
-- (instancetype)continueWithExecutor:(BFExecutor *)executor
-                           withBlock:(BFContinuationBlock)block {
+- (BFTask *)continueWithExecutor:(BFExecutor *)executor
+                       withBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:executor block:block cancellationToken:nil];
 }
 
-- (instancetype)continueWithExecutor:(BFExecutor *)executor
-                               block:(BFContinuationBlock)block
-                   cancellationToken:(BFCancellationToken *)cancellationToken {
+- (BFTask *)continueWithExecutor:(BFExecutor *)executor
+                           block:(BFContinuationBlock)block
+               cancellationToken:(BFCancellationToken *)cancellationToken {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
 
     // Capture all of the state that needs to used when the continuation is complete.
@@ -382,23 +382,23 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return tcs.task;
 }
 
-- (instancetype)continueWithBlock:(BFContinuationBlock)block {
+- (BFTask *)continueWithBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:[BFExecutor defaultExecutor] block:block cancellationToken:nil];
 }
 
-- (instancetype)continueWithBlock:(BFContinuationBlock)block
-                cancellationToken:(BFCancellationToken *)cancellationToken {
+- (BFTask *)continueWithBlock:(BFContinuationBlock)block
+            cancellationToken:(BFCancellationToken *)cancellationToken {
     return [self continueWithExecutor:[BFExecutor defaultExecutor] block:block cancellationToken:cancellationToken];
 }
 
-- (instancetype)continueWithExecutor:(BFExecutor *)executor
-                    withSuccessBlock:(BFContinuationBlock)block {
+- (BFTask *)continueWithExecutor:(BFExecutor *)executor
+                withSuccessBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:executor successBlock:block cancellationToken:nil];
 }
 
-- (instancetype)continueWithExecutor:(BFExecutor *)executor
-                        successBlock:(BFContinuationBlock)block
-                   cancellationToken:(BFCancellationToken *)cancellationToken {
+- (BFTask *)continueWithExecutor:(BFExecutor *)executor
+                    successBlock:(BFContinuationBlock)block
+               cancellationToken:(BFCancellationToken *)cancellationToken {
     if (cancellationToken.cancellationRequested) {
         return [BFTask cancelledTask];
     }
@@ -412,12 +412,12 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     } cancellationToken:cancellationToken];
 }
 
-- (instancetype)continueWithSuccessBlock:(BFContinuationBlock)block {
+- (BFTask *)continueWithSuccessBlock:(BFContinuationBlock)block {
     return [self continueWithExecutor:[BFExecutor defaultExecutor] successBlock:block cancellationToken:nil];
 }
 
-- (instancetype)continueWithSuccessBlock:(BFContinuationBlock)block
-                       cancellationToken:(BFCancellationToken *)cancellationToken {
+- (BFTask *)continueWithSuccessBlock:(BFContinuationBlock)block
+                   cancellationToken:(BFCancellationToken *)cancellationToken {
     return [self continueWithExecutor:[BFExecutor defaultExecutor] successBlock:block cancellationToken:cancellationToken];
 }
 
