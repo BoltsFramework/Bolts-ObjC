@@ -1,5 +1,18 @@
 # Bolts CHANGELOG
 
+## 1.5.0
+**New**
+- Bolts Tasks now have nullability annotations. #161
+**Improved**
+- Improved return types for continuation methods of a `BFTask` when used with generics. #198
+- Improved performance of constructing a `BFTask` with result/error/exception. #181, #187
+- Improved performance and dispatch policy of `BFExecutor.defaultExecutor()`. #197
+- Improved performance and removed a stack frame when completing a `BFTask`. #184
+**Fixed**
+- Fixed rare issue when compilation would fail if Bolts is used as a subproject reference. #188
+- Fixed potential data inconsistency when getting description of a `BFTask`. #182
+- Fixed a warning in `BFWebViewAppLinkResolver`. #183
+
 ## 1.4.0
 **New**
 - Bolts now fully supports tvOS and Xcode 7.1.
@@ -8,11 +21,11 @@
 - Bolts for OS X requires at least OS X 10.8.
 
 ## 1.3.0
-**New** 
+**New**
 - Bolts now fully supports watchOS 2.
 - Bolts for iOS is now compilied with Bitcode slice.
 **Fixed**
-- Potential undefined behavior caused by casting block types.  
+- Potential undefined behavior caused by casting block types.
 
 ## 1.2.2
 - New: Added bitcode support when built from source for iOS 9.
