@@ -10,9 +10,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <Bolts/BFAppLinkReturnToRefererViewDelegate.h>
+#import <Bolts/BFAppLinkNavigationType.h>
 
-#import <Bolts/BFAppLinkReturnToRefererView.h>
-
+@class BFAppLinkReturnToRefererView;
 @class BFAppLink;
 @class BFAppLinkReturnToRefererController;
 

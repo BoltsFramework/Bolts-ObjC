@@ -9,7 +9,7 @@
  */
 
 #import "BFAppLinkReturnToRefererController.h"
-
+#import "BFAppLinkReturnToRefererView.h"
 #import "BFAppLink.h"
 #import "BFAppLinkReturnToRefererView_Internal.h"
 #import "BFURL_Internal.h"
