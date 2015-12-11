@@ -31,7 +31,7 @@ script:
       xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme Bolts-OSX -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = tvOS ]; then      
       set -o pipefail
-      xcodebuild test -project Bolts.xcodeproj -sdk appletvsimulator -scheme Bolts-tvOS -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Bolts.xcodeproj -sdk appletvsimulator -scheme Bolts-tvOS -destination "platform=tvOS Simulator,name=Apple TV 1080p" -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = CocoaPods ]; then
       pod lib lint Bolts.podspec
       pod lib lint --use-libraries Bolts.podspec    
