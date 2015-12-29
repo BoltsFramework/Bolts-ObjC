@@ -86,6 +86,23 @@
 		818ADC6A1BE1A7FB00C8006C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AFCA021BA752750076E927 /* Bolts.framework */; };
 		818ADC6B1BE1A80300C8006C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81ED946E1BE14B5200795F05 /* Bolts.framework */; };
 		818ADC6C1BE1A80F00C8006C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81ED94291BE147CF00795F05 /* Bolts.framework */; };
+		819573DB1C2B8ECB00BFCA39 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
+		819573DC1C2B8ECB00BFCA39 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
+		819573DD1C2B8ECB00BFCA39 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
+		819573DE1C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
+		819573DF1C2B8ECB00BFCA39 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
+		819573E01C2B8ECB00BFCA39 /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
+		819573E11C2B8ECB00BFCA39 /* BFCancellationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEBE1ACF08F300747DD7 /* BFCancellationToken.m */; };
+		819573E31C2B8ECB00BFCA39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
+		819573E51C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CA39C901ADE715400DD78CC /* BFCancellationTokenRegistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573E61C2B8ECB00BFCA39 /* BFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5019900A84000BAE3F /* BFTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573E71C2B8ECB00BFCA39 /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573E81C2B8ECB00BFCA39 /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573E91C2B8ECB00BFCA39 /* BFDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8105DA241B7A83BC0092AE4F /* BFDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573EA1C2B8ECB00BFCA39 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573EB1C2B8ECB00BFCA39 /* BoltsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5619900A84000BAE3F /* BoltsVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573EC1C2B8ECB00BFCA39 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		819573ED1C2B8ECB00BFCA39 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE7D19AFA8260000AE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D0EE7C19AFA8260000AE75 /* UIKit.framework */; };
 		81D0EE8219AFAA060000AE75 /* BoltsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5619900A84000BAE3F /* BoltsVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE8319AFAA0E0000AE75 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -94,6 +111,23 @@
 		81D0EE8A19AFAA2C0000AE75 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81DC1A621B7A7F4000F491DC /* ExecutorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DC1A611B7A7F4000F491DC /* ExecutorTests.m */; };
 		81DC1A631B7A7F4000F491DC /* ExecutorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DC1A611B7A7F4000F491DC /* ExecutorTests.m */; };
+		81E94D541C2B8BF200A6291E /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
+		81E94D551C2B8BF200A6291E /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
+		81E94D561C2B8BF200A6291E /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
+		81E94D571C2B8BF200A6291E /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
+		81E94D581C2B8BF200A6291E /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
+		81E94D591C2B8BF200A6291E /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
+		81E94D5A1C2B8BF200A6291E /* BFCancellationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEBE1ACF08F300747DD7 /* BFCancellationToken.m */; };
+		81E94D5C1C2B8BF200A6291E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
+		81E94D5E1C2B8BF200A6291E /* BFCancellationTokenRegistration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CA39C901ADE715400DD78CC /* BFCancellationTokenRegistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D5F1C2B8BF200A6291E /* BFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5019900A84000BAE3F /* BFTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D601C2B8BF200A6291E /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D611C2B8BF200A6291E /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D621C2B8BF200A6291E /* BFDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8105DA241B7A83BC0092AE4F /* BFDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D631C2B8BF200A6291E /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D641C2B8BF200A6291E /* BoltsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5619900A84000BAE3F /* BoltsVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D651C2B8BF200A6291E /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81E94D661C2B8BF200A6291E /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED94131BE147CF00795F05 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
 		81ED94141BE147CF00795F05 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
 		81ED94151BE147CF00795F05 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
@@ -257,8 +291,12 @@
 		8178F9831BB0F86000AD289D /* Bolts-watchOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-watchOS.xcconfig"; sourceTree = "<group>"; };
 		8178F99C1BB0F87700AD289D /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8178F99E1BB0F8A600AD289D /* watchOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "watchOS-Info.plist"; path = "Resources/watchOS-Info.plist"; sourceTree = "<group>"; };
+		819573F11C2B8ECB00BFCA39 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		819573F31C2B8EF400BFCA39 /* Bolts-watchOS-Dynamic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-watchOS-Dynamic.xcconfig"; sourceTree = "<group>"; };
 		81D0EE7C19AFA8260000AE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		81DC1A611B7A7F4000F491DC /* ExecutorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutorTests.m; sourceTree = "<group>"; };
+		81E94D6A1C2B8BF200A6291E /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81E94D6C1C2B8C0400A6291E /* Bolts-tvOS-Dynamic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-tvOS-Dynamic.xcconfig"; sourceTree = "<group>"; };
 		81ED94291BE147CF00795F05 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81ED946E1BE14B5200795F05 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F0E88D19E5CB5A00812A88 /* Mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Mac-Info.plist"; path = "Resources/Mac-Info.plist"; sourceTree = "<group>"; };
@@ -311,6 +349,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8178F98E1BB0F87700AD289D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		819573E21C2B8ECB00BFCA39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				819573E31C2B8ECB00BFCA39 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81E94D5B1C2B8BF200A6291E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81E94D5C1C2B8BF200A6291E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,7 +499,9 @@
 				1D5D7DA41BE3CE7C00FD67C7 /* Bolts-iOS-Dynamic.xcconfig */,
 				81279F731B9A3F06006696C2 /* Bolts-OSX.xcconfig */,
 				F5AFCA151BA752AF0076E927 /* Bolts-tvOS.xcconfig */,
+				81E94D6C1C2B8C0400A6291E /* Bolts-tvOS-Dynamic.xcconfig */,
 				8178F9831BB0F86000AD289D /* Bolts-watchOS.xcconfig */,
+				819573F31C2B8EF400BFCA39 /* Bolts-watchOS-Dynamic.xcconfig */,
 				81279F741B9A3F06006696C2 /* BoltsTests-iOS.xcconfig */,
 				81279F751B9A3F06006696C2 /* BoltsTests-OSX.xcconfig */,
 				F5AFCA161BA752D30076E927 /* BoltsTests-tvOS.xcconfig */,
@@ -546,6 +602,8 @@
 				81ED94291BE147CF00795F05 /* Bolts.framework */,
 				81ED946E1BE14B5200795F05 /* Bolts.framework */,
 				1D5D7DD31BE3CE8200FD67C7 /* Bolts.framework */,
+				81E94D6A1C2B8BF200A6291E /* Bolts.framework */,
+				819573F11C2B8ECB00BFCA39 /* Bolts.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -633,6 +691,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		819573E41C2B8ECB00BFCA39 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				819573E51C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.h in Headers */,
+				819573E61C2B8ECB00BFCA39 /* BFTask.h in Headers */,
+				819573E71C2B8ECB00BFCA39 /* BFCancellationTokenSource.h in Headers */,
+				819573E81C2B8ECB00BFCA39 /* BFExecutor.h in Headers */,
+				819573E91C2B8ECB00BFCA39 /* BFDefines.h in Headers */,
+				819573EA1C2B8ECB00BFCA39 /* BFTaskCompletionSource.h in Headers */,
+				819573EB1C2B8ECB00BFCA39 /* BoltsVersion.h in Headers */,
+				819573EC1C2B8ECB00BFCA39 /* Bolts.h in Headers */,
+				819573ED1C2B8ECB00BFCA39 /* BFCancellationToken.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81D0EE8119AFA9EE0000AE75 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -646,6 +720,22 @@
 				81D0EE8219AFAA060000AE75 /* BoltsVersion.h in Headers */,
 				81D0EE8319AFAA0E0000AE75 /* Bolts.h in Headers */,
 				7C60AEC81ACF1A0100747DD7 /* BFCancellationToken.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81E94D5D1C2B8BF200A6291E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81E94D5E1C2B8BF200A6291E /* BFCancellationTokenRegistration.h in Headers */,
+				81E94D5F1C2B8BF200A6291E /* BFTask.h in Headers */,
+				81E94D601C2B8BF200A6291E /* BFCancellationTokenSource.h in Headers */,
+				81E94D611C2B8BF200A6291E /* BFExecutor.h in Headers */,
+				81E94D621C2B8BF200A6291E /* BFDefines.h in Headers */,
+				81E94D631C2B8BF200A6291E /* BFTaskCompletionSource.h in Headers */,
+				81E94D641C2B8BF200A6291E /* BoltsVersion.h in Headers */,
+				81E94D651C2B8BF200A6291E /* Bolts.h in Headers */,
+				81E94D661C2B8BF200A6291E /* BFCancellationToken.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +836,40 @@
 			name = "Bolts-watchOS";
 			productName = Bolts;
 			productReference = 8178F99C1BB0F87700AD289D /* Bolts.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		819573D91C2B8ECB00BFCA39 /* Bolts-watchOS-Dynamic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 819573EE1C2B8ECB00BFCA39 /* Build configuration list for PBXNativeTarget "Bolts-watchOS-Dynamic" */;
+			buildPhases = (
+				819573DA1C2B8ECB00BFCA39 /* Sources */,
+				819573E21C2B8ECB00BFCA39 /* Frameworks */,
+				819573E41C2B8ECB00BFCA39 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bolts-watchOS-Dynamic";
+			productName = Bolts;
+			productReference = 819573F11C2B8ECB00BFCA39 /* Bolts.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		81E94D521C2B8BF200A6291E /* Bolts-tvOS-Dynamic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81E94D671C2B8BF200A6291E /* Build configuration list for PBXNativeTarget "Bolts-tvOS-Dynamic" */;
+			buildPhases = (
+				81E94D531C2B8BF200A6291E /* Sources */,
+				81E94D5B1C2B8BF200A6291E /* Frameworks */,
+				81E94D5D1C2B8BF200A6291E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bolts-tvOS-Dynamic";
+			productName = Bolts;
+			productReference = 81E94D6A1C2B8BF200A6291E /* Bolts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		81ED94111BE147CF00795F05 /* Bolts-iOS */ = {
@@ -884,7 +1008,9 @@
 				1D5D7DA61BE3CE8200FD67C7 /* Bolts-iOS-Dynamic */,
 				8EDDA62817E17DDC00655F8A /* Bolts-OSX */,
 				F5AFC9EA1BA752750076E927 /* Bolts-tvOS */,
+				81E94D521C2B8BF200A6291E /* Bolts-tvOS-Dynamic */,
 				8178F9841BB0F87700AD289D /* Bolts-watchOS */,
+				819573D91C2B8ECB00BFCA39 /* Bolts-watchOS-Dynamic */,
 				8E8C8EE817F23D1D00E3F1C7 /* BoltsTests-iOS */,
 				8E8C8F1817F241DA00E3F1C7 /* BoltsTests-OSX */,
 				F5AFCA041BA752770076E927 /* BoltsTests-tvOS */,
@@ -970,6 +1096,34 @@
 				8178F98A1BB0F87700AD289D /* BFCancellationTokenSource.m in Sources */,
 				8178F98B1BB0F87700AD289D /* BFExecutor.m in Sources */,
 				8178F98C1BB0F87700AD289D /* BFCancellationToken.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		819573DA1C2B8ECB00BFCA39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				819573DB1C2B8ECB00BFCA39 /* BFTaskCompletionSource.m in Sources */,
+				819573DC1C2B8ECB00BFCA39 /* BFTask.m in Sources */,
+				819573DD1C2B8ECB00BFCA39 /* Bolts.m in Sources */,
+				819573DE1C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.m in Sources */,
+				819573DF1C2B8ECB00BFCA39 /* BFCancellationTokenSource.m in Sources */,
+				819573E01C2B8ECB00BFCA39 /* BFExecutor.m in Sources */,
+				819573E11C2B8ECB00BFCA39 /* BFCancellationToken.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81E94D531C2B8BF200A6291E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81E94D541C2B8BF200A6291E /* BFTaskCompletionSource.m in Sources */,
+				81E94D551C2B8BF200A6291E /* BFTask.m in Sources */,
+				81E94D561C2B8BF200A6291E /* Bolts.m in Sources */,
+				81E94D571C2B8BF200A6291E /* BFCancellationTokenRegistration.m in Sources */,
+				81E94D581C2B8BF200A6291E /* BFCancellationTokenSource.m in Sources */,
+				81E94D591C2B8BF200A6291E /* BFExecutor.m in Sources */,
+				81E94D5A1C2B8BF200A6291E /* BFCancellationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1192,6 +1346,34 @@
 			};
 			name = Release;
 		};
+		819573EF1C2B8ECB00BFCA39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 819573F31C2B8EF400BFCA39 /* Bolts-watchOS-Dynamic.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		819573F01C2B8ECB00BFCA39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 819573F31C2B8EF400BFCA39 /* Bolts-watchOS-Dynamic.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		81E94D681C2B8BF200A6291E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81E94D6C1C2B8C0400A6291E /* Bolts-tvOS-Dynamic.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		81E94D691C2B8BF200A6291E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81E94D6C1C2B8C0400A6291E /* Bolts-tvOS-Dynamic.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
 		81ED94271BE147CF00795F05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81279F721B9A3F06006696C2 /* Bolts-iOS.xcconfig */;
@@ -1316,6 +1498,24 @@
 			buildConfigurations = (
 				8178F99A1BB0F87700AD289D /* Debug */,
 				8178F99B1BB0F87700AD289D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		819573EE1C2B8ECB00BFCA39 /* Build configuration list for PBXNativeTarget "Bolts-watchOS-Dynamic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				819573EF1C2B8ECB00BFCA39 /* Debug */,
+				819573F01C2B8ECB00BFCA39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81E94D671C2B8BF200A6291E /* Build configuration list for PBXNativeTarget "Bolts-tvOS-Dynamic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81E94D681C2B8BF200A6291E /* Debug */,
+				81E94D691C2B8BF200A6291E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

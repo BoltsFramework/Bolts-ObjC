@@ -7,17 +7,16 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 //
 
-#include "Shared/Platform/OSX.xcconfig"
+#include "Shared/Platform/tvOS.xcconfig"
 #include "Shared/Product/Framework.xcconfig"
 
 PRODUCT_NAME = Bolts
-MACOSX_DEPLOYMENT_TARGET = 10.8
 
 MACH_O_TYPE = mh_dylib
-
-DEFINES_MODULE = YES
 DYLIB_INSTALL_NAME_BASE = @rpath
 
-OTHER_LD_FLAGS = -ObjC
+DEFINES_MODULE = YES
 
-INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Mac-Info.plist
+OTHER_LDFLAGS = $(inherited) -ObjC
+
+INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/tvOS-Info.plist
