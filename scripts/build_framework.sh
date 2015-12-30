@@ -22,6 +22,7 @@
 # process options, valid arguments -c [Debug|Release] -n 
 BUILDCONFIGURATION=Debug
 NOEXTRAS=1
+DYNAMIC=0
 WATCHOS=0
 TVOS=0
 while getopts ":ntc:-:" OPTNAME
@@ -38,6 +39,9 @@ do
       ;;
     -)
       case "${OPTARG}" in
+        "with-dynamic")
+          DYNAMIC=1
+        ;;
         "with-watchos")
           WATCHOS=1
         ;;
@@ -124,16 +128,34 @@ function xcode_build_target() {
     || die "Xcode build failed for platform: ${1}."
 }
 
-xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}" "Bolts-iOS"
-xcode_build_target "iphoneos" "${BUILDCONFIGURATION}" "Bolts-iOS"
-xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Bolts-OSX"
-if [ $WATCHOS -eq 1 ]; then
-  xcode_build_target "watchsimulator" "${BUILDCONFIGURATION}" "Bolts-watchOS"
-  xcode_build_target "watchos" "${BUILDCONFIGURATION}" "Bolts-watchOS"
+if [ $DYNAMIC -eq 1 ]; then
+  xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}" "Bolts-iOS-Dynamic"
+  xcode_build_target "iphoneos" "${BUILDCONFIGURATION}" "Bolts-iOS-Dynamic"
+else
+  xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}" "Bolts-iOS"
+  xcode_build_target "iphoneos" "${BUILDCONFIGURATION}" "Bolts-iOS"
 fi
+
+xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Bolts-OSX"
+
+if [ $WATCHOS -eq 1 ]; then
+  if [ $DYNAMIC -eq 1 ]; then
+    xcode_build_target "watchsimulator" "${BUILDCONFIGURATION}" "Bolts-watchOS-Dynamic"
+    xcode_build_target "watchos" "${BUILDCONFIGURATION}" "Bolts-watchOS-Dynamic"
+  else
+    xcode_build_target "watchsimulator" "${BUILDCONFIGURATION}" "Bolts-watchOS"
+    xcode_build_target "watchos" "${BUILDCONFIGURATION}" "Bolts-watchOS"
+  fi
+fi
+
 if [ $TVOS -eq 1 ]; then
-  xcode_build_target "appletvsimulator" "${BUILDCONFIGURATION}" "Bolts-tvOS"
-  xcode_build_target "appletvos" "${BUILDCONFIGURATION}" "Bolts-tvOS"
+  if [ $DYNAMIC -eq 1 ]; then
+    xcode_build_target "appletvsimulator" "${BUILDCONFIGURATION}" "Bolts-tvOS-Dynamic"
+    xcode_build_target "appletvos" "${BUILDCONFIGURATION}" "Bolts-tvOS-Dynamic"
+  else  
+    xcode_build_target "appletvsimulator" "${BUILDCONFIGURATION}" "Bolts-tvOS"
+    xcode_build_target "appletvos" "${BUILDCONFIGURATION}" "Bolts-tvOS"
+  fi
 fi
 
 # -----------------------------------------------------------------------------
