@@ -1,5 +1,18 @@
 # Bolts CHANGELOG
 
+## 1.5.1
+
+**New**
+- Bolts is now compatible with [Carthage](https://github.com/carthage/carthage) on all platforms (iOS, OS X, watchOS, tvOS).  
+  [#168](https://github.com/BoltsFramework/Bolts-iOS/pull/168)
+  by [lucasderraugh](https://github.com/lucasderraugh)  
+  [#206](https://github.com/BoltsFramework/Bolts-iOS/pull/206)
+  by [nlutsenko](https://github.com/nlutsenko)  
+
+**Improved**
+- Most executor types will create and drain an autorelease pool for each individual task.  
+  [#202](https://github.com/BoltsFramework/Bolts-iOS/pull/206) by [richardjrossiii](https://github.com/richardjrossiii)  
+
 ## 1.5.0
 **New**
 - Bolts Tasks now have nullability annotations. #161
