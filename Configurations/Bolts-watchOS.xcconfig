@@ -11,6 +11,7 @@
 #include "Shared/Product/Framework.xcconfig"
 
 PRODUCT_NAME = Bolts
+PRODUCT_BUNDLE_IDENTIFIER = com.bolts.watchos
 WATCHOS_DEPLOYMENT_TARGET = 2.0
 
 MACH_O_TYPE = staticlib

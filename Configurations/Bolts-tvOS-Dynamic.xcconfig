@@ -11,6 +11,7 @@
 #include "Shared/Product/Framework.xcconfig"
 
 PRODUCT_NAME = Bolts
+PRODUCT_BUNDLE_IDENTIFIER = com.bolts.tvos
 
 MACH_O_TYPE = mh_dylib
 DYLIB_INSTALL_NAME_BASE = @rpath
