@@ -984,7 +984,7 @@
 		8E9C3CE117DE9DE000427E62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Parse Inc.";
 				TargetAttributes = {
 					8E8C8F1817F241DA00E3F1C7 = {
@@ -1300,6 +1300,7 @@
 				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios.testapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1325,6 +1326,7 @@
 				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 6.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios.testapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
