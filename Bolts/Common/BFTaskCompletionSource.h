@@ -10,8 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFDefines.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @class BFTask<ResultType>;
