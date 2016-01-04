@@ -21,6 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const BFTaskErrorDomain;
 
 /*!
+ An error code used for <BFTask taskForCompletionOfAllTasks:>, if there were multiple errors.
+ */
+extern NSInteger const kBFMultipleErrorsError;
+
+/*!
  An exception that is thrown if there was multiple exceptions on <BFTask taskForCompletionOfAllTasks:>.
  */
 extern NSString *const BFTaskMultipleExceptionsException;

@@ -10,8 +10,6 @@
 
 #import "Bolts.h"
 
-NSInteger const kBFMultipleErrorsError = 80175001;
-
 @implementation Bolts
 
 + (NSString *)version {
