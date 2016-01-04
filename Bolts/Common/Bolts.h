@@ -31,9 +31,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*! @abstract 80175001: There were multiple errors. */
-extern NSInteger const kBFMultipleErrorsError;
-
 @interface Bolts : NSObject
 
 /*!

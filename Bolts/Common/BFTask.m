@@ -20,6 +20,7 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
 }
 
 NSString *const BFTaskErrorDomain = @"bolts";
+NSInteger const kBFMultipleErrorsError = 80175001;
 NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
 @interface BFTask () {
