@@ -33,18 +33,18 @@ extern NSString *const BFTaskMultipleExceptionsException;
  inspect the state of the task, and to add continuations to
  be run once the task is complete.
  */
-@interface BFTask BF_GENERIC(__covariant BFGenericType) : NSObject
+@interface BFTask<__covariant ResultType> : NSObject
 
 /*!
  A block that can act as a continuation for a task.
  */
-typedef __nullable id(^BFContinuationBlock)(BFTask BF_GENERIC(BFGenericType) *task);
+typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
 
 /*!
  Creates a task that is already completed with the given result.
  @param result The result for the task.
  */
-+ (instancetype)taskWithResult:(nullable BFGenericType)result;
++ (instancetype)taskWithResult:(nullable ResultType)result;
 
 /*!
  Creates a task that is already completed with the given error.
@@ -110,7 +110,7 @@ typedef __nullable id(^BFContinuationBlock)(BFTask BF_GENERIC(BFGenericType) *ta
 /*!
  The result of a successful task.
  */
-@property (nullable, nonatomic, strong, readonly) BFGenericType result;
+@property (nullable, nonatomic, strong, readonly) ResultType result;
 
 /*!
  The error of a failed task.
