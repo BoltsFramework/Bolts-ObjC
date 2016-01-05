@@ -22,7 +22,7 @@
 # -----------------------------------------------------------------------------
 # Call out to build .framework
 #
-. $BOLTS_SCRIPT/build_framework.sh --with-watchos --with-tvos -c Release
+. $BOLTS_SCRIPT/build_framework.sh --with-watchos --with-tvos --with-dynamic -c Release
 
 cd $BOLTS_BUILD
 zip -r --symlinks $BOLTS_DISTRIBUTION_ARCHIVE ios/ osx/ watchOS/ tvOS/
