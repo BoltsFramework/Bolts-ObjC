@@ -72,7 +72,7 @@ typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
  all of the input tasks have completed.
  @param tasks An `NSArray` of the tasks to use as an input.
  */
-+ (instancetype)taskForCompletionOfAllTasks:(nullable NSArray *)tasks;
++ (instancetype)taskForCompletionOfAllTasks:(nullable NSArray<BFTask *> *)tasks;
 
 /*!
  Returns a task that will be completed once all of the input tasks have completed.
@@ -80,7 +80,7 @@ typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
  an `NSArray` of all task results in the order they were provided.
  @param tasks An `NSArray` of the tasks to use as an input.
  */
-+ (instancetype)taskForCompletionOfAllTasksWithResults:(nullable NSArray *)tasks;
++ (instancetype)taskForCompletionOfAllTasksWithResults:(nullable NSArray<BFTask *> *)tasks;
 
 /*!
  Returns a task that will be completed a certain amount of time in the future.

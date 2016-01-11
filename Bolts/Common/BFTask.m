@@ -108,7 +108,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return [[self alloc] initCancelled];
 }
 
-+ (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks {
++ (instancetype)taskForCompletionOfAllTasks:(NSArray<BFTask *> *)tasks {
     __block int32_t total = (int32_t)tasks.count;
     if (total == 0) {
         return [self taskWithResult:nil];
@@ -166,7 +166,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return tcs.task;
 }
 
-+ (instancetype)taskForCompletionOfAllTasksWithResults:(NSArray *)tasks {
++ (instancetype)taskForCompletionOfAllTasksWithResults:(NSArray<BFTask *> *)tasks {
     return [[self taskForCompletionOfAllTasks:tasks] continueWithSuccessBlock:^id(BFTask *task) {
         return [tasks valueForKey:@"result"];
     }];
