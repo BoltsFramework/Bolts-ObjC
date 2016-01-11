@@ -29,9 +29,9 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     NSException *_exception;
 }
 
-@property (atomic, assign, readwrite, getter=isCancelled) BOOL cancelled;
-@property (atomic, assign, readwrite, getter=isFaulted) BOOL faulted;
-@property (atomic, assign, readwrite, getter=isCompleted) BOOL completed;
+@property (nonatomic, assign, readwrite, getter=isCancelled) BOOL cancelled;
+@property (nonatomic, assign, readwrite, getter=isFaulted) BOOL faulted;
+@property (nonatomic, assign, readwrite, getter=isCompleted) BOOL completed;
 
 @property (nonatomic, strong) NSObject *lock;
 @property (nonatomic, strong) NSCondition *condition;
