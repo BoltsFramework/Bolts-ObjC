@@ -1,5 +1,25 @@
 # Bolts CHANGELOG
 
+## 1.6.0
+
+**New**
+- Bolts now requires Xcode 7.0+.  
+  [#212](https://github.com/BoltsFramework/Bolts-iOS/pull/212)
+  by @nlutsenko
+  
+**Improved**
+- Specify generic type for `BFTask.+taskForCompletionofAllTasks*()`.
+  [#217](https://github.com/BoltsFramework/Bolts-iOS/pull/217)
+  by @nlutsenko
+- Remove `nonnull` requirement for return type from the block of `BFTas,+taskFromExecutor(_ , block:)`.
+  [#218](https://github.com/BoltsFramework/Bolts-iOS/pull/218)
+  by @nlutsenko
+
+**Fixed**
+- Fixed compiler warnings on Xcode 7.3.
+  [#216](https://github.com/BoltsFramework/Bolts-iOS/pull/216)
+  by @nlutsenko
+
 ## 1.5.1
 
 **New**
