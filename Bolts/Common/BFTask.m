@@ -199,8 +199,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     return tcs.task;
 }
 
-+ (instancetype)taskFromExecutor:(BFExecutor *)executor
-                       withBlock:(id (^)())block {
++ (instancetype)taskFromExecutor:(BFExecutor *)executor withBlock:(nullable id (^)())block {
     return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:^id(BFTask *task) {
         return block();
     }];

@@ -107,7 +107,7 @@ typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
  If block returns a BFTask, then the task returned from
  this method will not be completed until that task is completed.
  */
-+ (instancetype)taskFromExecutor:(BFExecutor *)executor withBlock:(id (^)())block;
++ (instancetype)taskFromExecutor:(BFExecutor *)executor withBlock:(nullable id (^)())block;
 
 // Properties that will be set on the task once it is completed.
 
