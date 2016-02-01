@@ -24,7 +24,37 @@
     }] waitUntilFinished];
 }
 
+- (void)testBasicOnSuccessWithExecutor {
+    __block BOOL completed = NO;
+    BFTask *task = [[BFTask taskWithDelay:100] continueWithExecutor:[BFExecutor immediateExecutor]
+                                                   withSuccessBlock:^id _Nullable(BFTask * _Nonnull task) {
+                                                       completed = YES;
+                                                       return nil;
+                                                   }];
+    [task waitUntilFinished];
+    XCTAssertTrue(completed);
+    XCTAssertTrue(task.completed);
+    XCTAssertFalse(task.faulted);
+    XCTAssertFalse(task.cancelled);
+    XCTAssertNil(task.result);
+}
+
 - (void)testBasicOnSuccessWithToken {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    BFTask *task = [BFTask taskWithDelay:100];
+
+    task = [task continueWithSuccessBlock:^id(BFTask *task) {
+        XCTFail(@"Success block should not be triggered");
+        return nil;
+    } cancellationToken:cts.token];
+
+    [cts cancel];
+    [task waitUntilFinished];
+
+    XCTAssertTrue(task.cancelled);
+}
+
+- (void)testBasicOnSuccessWithExecutorToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     BFTask *task = [BFTask taskWithDelay:100];
 
@@ -38,7 +68,7 @@
     [cts cancel];
     [task waitUntilFinished];
 
-    XCTAssertTrue(task.isCancelled);
+    XCTAssertTrue(task.cancelled);
 }
 
 - (void)testBasicOnSuccessWithCancelledToken {
