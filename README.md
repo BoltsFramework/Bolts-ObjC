@@ -1,11 +1,11 @@
 Bolts
 ============
-[![Build Status](http://img.shields.io/travis/BoltsFramework/Bolts-iOS/master.svg?style=flat)](https://travis-ci.org/BoltsFramework/Bolts-iOS)
+[![Build Status](https://img.shields.io/travis/BoltsFramework/Bolts-iOS/master.svg?style=flat)](https://travis-ci.org/BoltsFramework/Bolts-iOS)
 [![Coverage Status](https://codecov.io/github/BoltsFramework/Bolts-iOS/coverage.svg?branch=master)](https://codecov.io/github/BoltsFramework/Bolts-iOS?branch=master)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Pod Version](http://img.shields.io/cocoapods/v/Bolts.svg?style=flat)](http://cocoadocs.org/docsets/Bolts/)
-[![Pod Platform](http://img.shields.io/cocoapods/p/Bolts.svg?style=flat)](http://cocoadocs.org/docsets/Bolts/)
-[![Pod License](http://img.shields.io/cocoapods/l/Bolts.svg?style=flat)](https://github.com/BoltsFramework/Bolts-iOS/blob/master/LICENSE)
+[![Pod Version](https://img.shields.io/cocoapods/v/Bolts.svg?style=flat)](http://cocoadocs.org/docsets/Bolts/)
+[![Pod Platform](https://img.shields.io/cocoapods/p/Bolts.svg?style=flat)](http://cocoadocs.org/docsets/Bolts/)
+[![Pod License](https://img.shields.io/cocoapods/l/Bolts.svg?style=flat)](https://github.com/BoltsFramework/Bolts-iOS/blob/master/LICENSE)
 [![Reference Status](https://www.versioneye.com/objective-c/bolts/reference_badge.svg?style=flat)](https://www.versioneye.com/objective-c/bolts/references)
 
 Bolts is a collection of low-level libraries designed to make developing mobile
@@ -17,7 +17,7 @@ do they require having a Parse or Facebook developer account.
 Bolts includes:
 
 * "Tasks", which make organization of complex asynchronous code more manageable. A task is kind of like a JavaScript Promise, but available for iOS and Android.
-* An implementation of the [App Links protocol](http://www.applinks.org), helping you link to content in other apps and handle incoming deep-links.
+* An implementation of the [App Links protocol](http://applinks.org/), helping you link to content in other apps and handle incoming deep-links.
 
 For more information, see the [Bolts iOS API Reference](http://boltsframework.github.io/docs/ios/).
 
@@ -503,7 +503,7 @@ We are likely to add some concept like this to Bolts at some point in the future
 
 # App Links
 
-[App Links](http://www.applinks.org) provide a cross-platform mechanism that allows a developer to define and publish a deep-linking scheme for their content, allowing other apps to link directly to an experience optimized for the device they are running on. Whether you are building an app that receives incoming links or one that may link out to other apps' content, Bolts provides tools to simplify implementation of the [App Links protocol](http://www.applinks.org/documentation).
+[App Links](http://www.applinks.org) provide a cross-platform mechanism that allows a developer to define and publish a deep-linking scheme for their content, allowing other apps to link directly to an experience optimized for the device they are running on. Whether you are building an app that receives incoming links or one that may link out to other apps' content, Bolts provides tools to simplify implementation of the [App Links protocol](http://applinks.org/documentation/).
 
 ## Handling an App Link
 
@@ -675,8 +675,8 @@ App Links Measurement Events sends additional information from App Links Intents
 
 # Installation
 
-You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-iOS/releases).
+You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-ObjC/releases).
 
-Bolts is also available through [CocoaPods](http://cocoapods.org). To install it simply add the following line to your Podfile:
+Bolts is also available through [CocoaPods](https://cocoapods.org/). To install it simply add the following line to your Podfile:
 
     pod 'Bolts'
