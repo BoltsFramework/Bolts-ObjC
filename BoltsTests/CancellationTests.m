@@ -17,7 +17,7 @@
 
 @implementation CancellationTests
 
-- (void)testCancellation {
+- (void)testCancel {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
 
     XCTAssertFalse(cts.cancellationRequested, @"Source should not be cancelled");
@@ -27,6 +27,20 @@
 
     XCTAssertTrue(cts.cancellationRequested, @"Source should be cancelled");
     XCTAssertTrue(cts.token.cancellationRequested, @"Token should be cancelled");
+}
+
+- (void)testCancelMultipleTimes {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    XCTAssertFalse(cts.cancellationRequested);
+    XCTAssertFalse(cts.token.cancellationRequested);
+
+    [cts cancel];
+    XCTAssertTrue(cts.cancellationRequested);
+    XCTAssertTrue(cts.token.cancellationRequested);
+
+    [cts cancel];
+    XCTAssertTrue(cts.cancellationRequested);
+    XCTAssertTrue(cts.token.cancellationRequested);
 }
 
 - (void)testCancellationBlock {
@@ -62,6 +76,39 @@
     XCTAssertTrue(cts.token.cancellationRequested, @"Token should be cancelled");
 }
 
+- (void)testCancellationAfterDelayValidation {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+
+    XCTAssertFalse(cts.cancellationRequested);
+    XCTAssertFalse(cts.token.cancellationRequested);
+
+    XCTAssertThrowsSpecificNamed([cts cancelAfterDelay:-2], NSException, NSInvalidArgumentException);
+}
+
+- (void)testCancellationAfterZeroDelay {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+
+    XCTAssertFalse(cts.cancellationRequested);
+    XCTAssertFalse(cts.token.cancellationRequested);
+
+    [cts cancelAfterDelay:0];
+
+    XCTAssertTrue(cts.cancellationRequested);
+    XCTAssertTrue(cts.token.cancellationRequested);
+}
+
+- (void)testCancellationAfterDelayOnCancelled {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    [cts cancel];
+    XCTAssertTrue(cts.cancellationRequested);
+    XCTAssertTrue(cts.token.cancellationRequested);
+
+    [cts cancelAfterDelay:1];
+
+    XCTAssertTrue(cts.cancellationRequested);
+    XCTAssertTrue(cts.token.cancellationRequested);
+}
+
 - (void)testDispose {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     [cts dispose];
@@ -77,6 +124,41 @@
     [cts dispose];
     XCTAssertThrowsSpecificNamed(cts.cancellationRequested, NSException, NSInternalInconsistencyException);
     XCTAssertThrowsSpecificNamed(cts.token.cancellationRequested, NSException, NSInternalInconsistencyException);
+}
+
+- (void)testDisposeMultipleTimes {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    [cts dispose];
+    XCTAssertNoThrow([cts dispose]);
+}
+
+- (void)testDisposeRegistration {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    BFCancellationTokenRegistration *registration = [cts.token registerCancellationObserverWithBlock:^{
+        XCTFail();
+    }];
+    XCTAssertNoThrow([registration dispose]);
+
+    [cts cancel];
+}
+
+- (void)testDisposeRegistrationMultipleTimes {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    BFCancellationTokenRegistration *registration = [cts.token registerCancellationObserverWithBlock:^{
+        XCTFail();
+    }];
+    XCTAssertNoThrow([registration dispose]);
+    XCTAssertNoThrow([registration dispose]);
+
+    [cts cancel];
+}
+
+- (void)testDisposeRegistrationAfterCancellationToken {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    BFCancellationTokenRegistration *registration = [cts.token registerCancellationObserverWithBlock:^{ }];
+
+    [registration dispose];
+    [cts dispose];
 }
 
 - (void)testDisposeRegistrationBeforeCancellationToken {

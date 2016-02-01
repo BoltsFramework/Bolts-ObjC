@@ -13,7 +13,6 @@
 
 @interface BFCancellationToken ()
 
-@property (nonatomic, assign, getter=isCancellationRequested) BOOL cancellationRequested;
 @property (nonatomic, strong) NSMutableArray *registrations;
 @property (nonatomic, strong) NSObject *lock;
 @property (nonatomic) BOOL disposed;
@@ -29,6 +28,8 @@
 @end
 
 @implementation BFCancellationToken
+
+@synthesize cancellationRequested = _cancellationRequested;
 
 #pragma mark - Initializer
 
