@@ -124,11 +124,9 @@
         if (self.disposed) {
             return;
         }
+        [self.registrations makeObjectsPerformSelector:@selector(dispose)];
+        self.registrations = nil;
         self.disposed = YES;
-        for (BFCancellationTokenRegistration *registration in self.registrations) {
-            [registration dispose];
-        }
-        [self.registrations removeAllObjects];
     }
 }
 

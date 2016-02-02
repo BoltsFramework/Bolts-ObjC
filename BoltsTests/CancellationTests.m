@@ -79,4 +79,12 @@
     XCTAssertThrowsSpecificNamed(cts.token.cancellationRequested, NSException, NSInternalInconsistencyException);
 }
 
+- (void)testDisposeRegistrationBeforeCancellationToken {
+    BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
+    BFCancellationTokenRegistration *registration = [cts.token registerCancellationObserverWithBlock:^{ }];
+
+    [cts dispose];
+    XCTAssertNoThrow([registration dispose]);
+}
+
 @end
