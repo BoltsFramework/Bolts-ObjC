@@ -23,7 +23,7 @@ before_install:
     pod repo update --silent
   elif [ "$TEST_TYPE" = Carthage ]; then
     brew update
-    brew install carthage
+    brew install carthage || brew upgrade carthage
   fi
 script:
 - |
