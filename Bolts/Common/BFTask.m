@@ -27,6 +27,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     id _result;
     NSError *_error;
     NSException *_exception;
+    BOOL _completed;
 }
 
 @property (nonatomic, assign, readwrite, getter=isCancelled) BOOL cancelled;
@@ -41,7 +42,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 
 @implementation BFTask
 
-#pragma mark - Initializer
+#pragma mark - Object lifecycle
 
 - (instancetype)init {
     self = [super init];
@@ -288,22 +289,24 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (BOOL)isCompleted {
-    @synchronized(self.lock) {
-        return _completed;
-    }
+    [self.condition lock];
+    BOOL completed = _completed;
+    [self.condition unlock];
+
+    return completed;
 }
 
-- (void)setCompleted {
-    @synchronized(self.lock) {
-        _completed = YES;
+- (void)setCompleted:(BOOL)completed {
+    [self.condition lock];
+    _completed = completed;
+    if (_completed) {
+        [self.condition broadcast];
     }
+    [self.condition unlock];
 }
 
 - (void)runContinuations {
     @synchronized(self.lock) {
-        [self.condition lock];
-        [self.condition broadcast];
-        [self.condition unlock];
         for (void (^callback)() in self.callbacks) {
             callback();
         }
@@ -428,17 +431,11 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
 }
 
 - (void)waitUntilFinished {
-    if ([NSThread isMainThread]) {
-        [self warnOperationOnMainThread];
-    }
+    [self.condition lock];
 
-    @synchronized(self.lock) {
-        if (self.completed) {
-            return;
-        }
-        [self.condition lock];
+    while (!_completed) {
+        [self.condition wait];
     }
-    [self.condition wait];
     [self.condition unlock];
 }
 
