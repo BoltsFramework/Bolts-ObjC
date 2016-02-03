@@ -12,12 +12,6 @@
 
 #import "BFTask.h"
 
-@interface BFTaskCompletionSource ()
-
-@property (nonatomic, strong, readwrite) BFTask *task;
-
-@end
-
 @interface BFTask (BFTaskCompletionSource)
 
 - (BOOL)trySetResult:(id)result;

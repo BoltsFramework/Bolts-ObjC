@@ -293,12 +293,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     }
 }
 
-- (void)setCompleted {
-    @synchronized(self.lock) {
-        _completed = YES;
-    }
-}
-
 - (void)runContinuations {
     @synchronized(self.lock) {
         [self.condition lock];
