@@ -174,19 +174,21 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     }];
 }
 
-+ (instancetype)race:(NSArray<BFTask *> *)tasks
++ (instancetype)taskForCompletionOfAnyTask:(NSArray<BFTask *> *)tasks
 {
+    __block int32_t total = (int32_t)tasks.count;
+    if (total == 0) {
+        return [self taskWithResult:nil];
+    }
+    
     __block dispatch_once_t token = 0;
-    BFTaskCompletionSource *source = [BFTaskCompletionSource taskCompletionSource];
+    __block int32_t cancelled = 0;
     
     NSObject *lock = [NSObject new];
-    
     NSMutableArray *errors = [NSMutableArray new];
     NSMutableArray *exceptions = [NSMutableArray new];
     
-    __block int32_t total = (int32_t)tasks.count;
-    __block int32_t cancelled = 0;
-    
+    BFTaskCompletionSource *source = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
         [task continueWithBlock:^id(BFTask *task) {
             if (task.exception != nil) {
