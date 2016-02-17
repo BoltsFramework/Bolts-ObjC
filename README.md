@@ -60,7 +60,7 @@ self.saveAsync(obj).continueWithBlock {
   (task: BFTask!) -> BFTask in
   if task.isCancelled() {
     // the save was cancelled.
-  } else if task.error() {
+  } else if task.error != nil {
     // the save failed.
   } else {
     // the object was saved successfully.
@@ -238,7 +238,7 @@ findAsync(query).continueWithSuccessBlock {
   return self.findAsync(query)
 }.continueWithBlock {
   (task: BFTask!) -> AnyObject! in
-  if task.error() {
+  if task.error != nil {
     // This error handler WILL be called.
     // The error will be the NSError returned above.
     // Let's handle the error by returning a new value.
