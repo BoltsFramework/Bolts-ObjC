@@ -12,6 +12,8 @@
 
 #import <pthread.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  Get the remaining stack-size of the current thread.
 
@@ -22,7 +24,7 @@
  @note This function cannot be inlined, as otherwise the internal implementation could fail to report the proper
  remaining stack space.
  */
-__attribute__((noinline)) static size_t remaining_stack_size(size_t *__nonnull restrict totalSize) {
+__attribute__((noinline)) static size_t remaining_stack_size(size_t *restrict totalSize) {
     pthread_t currentThread = pthread_self();
 
     // NOTE: We must store stack pointers as uint8_t so that the pointer math is well-defined
@@ -116,7 +118,7 @@ __attribute__((noinline)) static size_t remaining_stack_size(size_t *__nonnull r
 
 - (instancetype)initWithBlock:(void(^)(void(^block)()))block {
     self = [super init];
-    if (!self) return nil;
+    if (!self) return self;
 
     _block = block;
 
@@ -130,3 +132,5 @@ __attribute__((noinline)) static size_t remaining_stack_size(size_t *__nonnull r
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

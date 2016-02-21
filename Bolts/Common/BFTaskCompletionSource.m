@@ -12,9 +12,11 @@
 
 #import "BFTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BFTask (BFTaskCompletionSource)
 
-- (BOOL)trySetResult:(id)result;
+- (BOOL)trySetResult:(nullable id)result;
 - (BOOL)trySetError:(NSError *)error;
 - (BOOL)trySetException:(NSException *)exception;
 - (BOOL)trySetCancelled;
@@ -31,7 +33,7 @@
 
 - (instancetype)init {
     self = [super init];
-    if (!self) return nil;
+    if (!self) return self;
 
     _task = [[BFTask alloc] init];
 
@@ -40,7 +42,7 @@
 
 #pragma mark - Custom Setters/Getters
 
-- (void)setResult:(id)result {
+- (void)setResult:(nullable id)result {
     if (![self.task trySetResult:result]) {
         [NSException raise:NSInternalInconsistencyException
                     format:@"Cannot set the result on a completed task."];
@@ -68,7 +70,7 @@
     }
 }
 
-- (BOOL)trySetResult:(id)result {
+- (BOOL)trySetResult:(nullable id)result {
     return [self.task trySetResult:result];
 }
 
@@ -85,3 +87,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
