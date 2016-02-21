@@ -249,6 +249,9 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
 #ifdef __TVOS_9_0
         case UIUserInterfaceIdiomTV:
 #endif
+#ifdef __IPHONE_9_3
+        case UIUserInterfaceIdiomCarPlay:
+#endif
         case UIUserInterfaceIdiomUnspecified:
         default:
             // Future-proofing. Other User Interface idioms should only hit ios.
