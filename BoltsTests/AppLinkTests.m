@@ -464,6 +464,9 @@ static NSMutableArray *openedUrls;
 #ifdef __TVOS_9_0
         case UIUserInterfaceIdiomTV:
 #endif
+#ifdef __IPHONE_9_3
+        case UIUserInterfaceIdiomCarPlay:
+#endif
         case UIUserInterfaceIdiomUnspecified:
         default:
             break;
@@ -732,6 +735,9 @@ static NSMutableArray *openedUrls;
             break;
 #ifdef __TVOS_9_0
         case UIUserInterfaceIdiomTV:
+#endif
+#ifdef __IPHONE_9_3
+        case UIUserInterfaceIdiomCarPlay:
 #endif
         case UIUserInterfaceIdiomUnspecified:
         default:
