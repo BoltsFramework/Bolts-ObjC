@@ -133,10 +133,10 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                     [errors addObject:task.error];
                 }
             } else if (task.cancelled) {
-                OSAtomicIncrement32(&cancelled);
+                OSAtomicIncrement32Barrier(&cancelled);
             }
 
-            if (OSAtomicDecrement32(&total) == 0) {
+            if (OSAtomicDecrement32Barrier(&total) == 0) {
                 if (exceptions.count > 0) {
                     if (exceptions.count == 1) {
                         tcs.exception = [exceptions firstObject];
