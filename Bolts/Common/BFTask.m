@@ -174,14 +174,14 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     }];
 }
 
-+ (instancetype)taskForCompletionOfAnyTask:(NSArray<BFTask *> *)tasks
++ (instancetype)taskForCompletionOfAnyTask:(nullable NSArray<BFTask *> *)tasks
 {
     __block int32_t total = (int32_t)tasks.count;
     if (total == 0) {
         return [self taskWithResult:nil];
     }
     
-    __block dispatch_once_t token = 0;
+    __block int succeeded = 0;
     __block int32_t cancelled = 0;
     
     NSObject *lock = [NSObject new];
@@ -195,38 +195,39 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 @synchronized(lock) {
                     [exceptions addObject:task.exception];
                 }
-            }else if (task.error != nil) {
+            } else if (task.error != nil) {
                 @synchronized(lock) {
                     [errors addObject:task.error];
                 }
-            }else if (task.cancelled) {
-                OSAtomicIncrement32(&cancelled);
+            } else if (task.cancelled) {
+                OSAtomicIncrement32Barrier(&cancelled);
             }
             
-            if (task.result != nil) {
-                dispatch_once(&token, ^{
+            if (task.completed && !task.faulted && !task.cancelled) {
+                if(OSAtomicCompareAndSwap32Barrier(0, 1, &succeeded)) {
                     [source setResult:task.result];
-                });
+                }
             }
             
-            if (OSAtomicDecrement32(&total) == 0 && token == 0) {
+            if (OSAtomicDecrement32Barrier(&total) == 0 &&
+                OSAtomicCompareAndSwap32Barrier(0, 1, &succeeded)) {
                 if (cancelled > 0) {
                     [source cancel];
                 } else if (exceptions.count > 0) {
                     if (exceptions.count == 1) {
-                        source.exception = [exceptions objectAtIndex:0];
+                        source.exception = [exceptions firstObject];
                     } else {
                         NSException *exception =
-                        [NSException exceptionWithName:@"BFMultipleExceptionsException"
+                        [NSException exceptionWithName:BFTaskMultipleExceptionsException
                                                 reason:@"There were multiple exceptions."
                                               userInfo:@{ @"exceptions": exceptions }];
                         source.exception = exception;
                     }
                 } else if (errors.count > 0) {
                     if (errors.count == 1) {
-                        source.error = [errors objectAtIndex:0];
+                        source.error = [errors firstObject];
                     } else {
-                        NSError *error = [NSError errorWithDomain:@"bolts"
+                        NSError *error = [NSError errorWithDomain:BFTaskErrorDomain
                                                              code:kBFMultipleErrorsError
                                                          userInfo:@{ @"errors": errors }];
                         source.error = error;
@@ -237,8 +238,6 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
             return nil;
         }];
     }
-    
-    
     return source.task;
 }
 
