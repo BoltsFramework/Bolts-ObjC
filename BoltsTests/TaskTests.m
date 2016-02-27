@@ -630,7 +630,7 @@
 }
 
 - (void)testTasksForTaskForCompletionOfAnyTasksWithSuccess {
-    BFTask * task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithDelay:20], [BFTask taskWithResult:@"success"]]];
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithDelay:20], [BFTask taskWithResult:@"success"]]];
     [task waitUntilFinished];
     
     XCTAssertEqualObjects(@"success", task.result);
@@ -645,20 +645,18 @@
     }];
 
     
-    BFTask * task = [BFTask taskForCompletionOfAnyTask:@[first, second]];
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[first, second]];
     [task waitUntilFinished];
     
     XCTAssertEqualObjects(@"first", task.result);
 }
-
-
 
 - (void)testTasksForTaskForCompletionOfAnyTasksWithErrorAndSuccess {
     NSError *error = [NSError errorWithDomain:@"BoltsTests"
                                          code:35
                                      userInfo:nil];
     
-    BFTask * task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error], [BFTask taskWithResult:@"success"]]];
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error], [BFTask taskWithResult:@"success"]]];
     [task waitUntilFinished];
     
     XCTAssertEqualObjects(@"success", task.result);
@@ -670,7 +668,7 @@
                                          code:35
                                      userInfo:nil];
     
-    BFTask * task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error]]];
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error]]];
     [task waitUntilFinished];
     
     XCTAssertEqualObjects(error, task.error);
@@ -678,11 +676,8 @@
 }
 
 - (void)testTasksForTaskForCompletionOfAnyTasksWithNilArray {
-    NSError *error = [NSError errorWithDomain:@"BoltsTests"
-                                         code:35
-                                     userInfo:nil];
     
-    BFTask * task = [BFTask taskForCompletionOfAnyTask:nil];
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:nil];
     [task waitUntilFinished];
     
     XCTAssertNil(task.result);
@@ -695,7 +690,7 @@
                                          code:35
                                      userInfo:nil];
     
-    BFTask * task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error], [BFTask taskWithError:error]]];
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error], [BFTask taskWithError:error]]];
     [task waitUntilFinished];
     
     XCTAssertNil(task.result);

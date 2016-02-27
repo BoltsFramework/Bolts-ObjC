@@ -181,12 +181,12 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
         return [self taskWithResult:nil];
     }
     
-    __block int succeeded = 0;
+    __block int completed = 0;
     __block int32_t cancelled = 0;
     
     NSObject *lock = [NSObject new];
-    NSMutableArray *errors = [NSMutableArray new];
-    NSMutableArray *exceptions = [NSMutableArray new];
+    NSMutableArray<NSError *> *errors = [NSMutableArray new];
+    NSMutableArray<NSException *> *exceptions = [NSMutableArray new];
     
     BFTaskCompletionSource *source = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
@@ -201,21 +201,19 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                 }
             } else if (task.cancelled) {
                 OSAtomicIncrement32Barrier(&cancelled);
-            }
-            
-            if (task.completed && !task.faulted && !task.cancelled) {
-                if(OSAtomicCompareAndSwap32Barrier(0, 1, &succeeded)) {
+            } else {
+                if(OSAtomicCompareAndSwap32Barrier(0, 1, &completed)) {
                     [source setResult:task.result];
                 }
             }
             
             if (OSAtomicDecrement32Barrier(&total) == 0 &&
-                OSAtomicCompareAndSwap32Barrier(0, 1, &succeeded)) {
+                OSAtomicCompareAndSwap32Barrier(0, 1, &completed)) {
                 if (cancelled > 0) {
                     [source cancel];
                 } else if (exceptions.count > 0) {
                     if (exceptions.count == 1) {
-                        source.exception = [exceptions firstObject];
+                        source.exception = exceptions.firstObject;
                     } else {
                         NSException *exception =
                         [NSException exceptionWithName:BFTaskMultipleExceptionsException
@@ -225,7 +223,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                     }
                 } else if (errors.count > 0) {
                     if (errors.count == 1) {
-                        source.error = [errors firstObject];
+                        source.error = errors.firstObject;
                     } else {
                         NSError *error = [NSError errorWithDomain:BFTaskErrorDomain
                                                              code:kBFMultipleErrorsError
