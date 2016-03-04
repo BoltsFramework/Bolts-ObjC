@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation Bolts
 
-+ (NSString *)version {
++ (NSString *)frameworkVersion {
     return BOLTS_VERSION;
 }
 
