@@ -318,59 +318,59 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
 
     // Capture all of the state that needs to used when the continuation is complete.
-    void (^wrappedBlock)() = ^() {
-        [executor execute:^{
-            if (cancellationToken.cancellationRequested) {
-                [tcs cancel];
-                return;
-            }
+    dispatch_block_t executionBlock = ^{
+        if (cancellationToken.cancellationRequested) {
+            [tcs cancel];
+            return;
+        }
 
-            id result = nil;
-            @try {
-                result = block(self);
-            } @catch (NSException *exception) {
-                tcs.exception = exception;
-                return;
-            }
+        id result = nil;
+        @try {
+            result = block(self);
+        } @catch (NSException *exception) {
+            tcs.exception = exception;
+            return;
+        }
 
-            if ([result isKindOfClass:[BFTask class]]) {
+        if ([result isKindOfClass:[BFTask class]]) {
 
-                id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
-                    if (cancellationToken.cancellationRequested || task.cancelled) {
-                        [tcs cancel];
-                    } else if (task.exception) {
-                        tcs.exception = task.exception;
-                    } else if (task.error) {
-                        tcs.error = task.error;
-                    } else {
-                        tcs.result = task.result;
-                    }
-                    return nil;
-                };
-
-                BFTask *resultTask = (BFTask *)result;
-
-                if (resultTask.completed) {
-                    setupWithTask(resultTask);
+            id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
+                if (cancellationToken.cancellationRequested || task.cancelled) {
+                    [tcs cancel];
+                } else if (task.exception) {
+                    tcs.exception = task.exception;
+                } else if (task.error) {
+                    tcs.error = task.error;
                 } else {
-                    [resultTask continueWithBlock:setupWithTask];
+                    tcs.result = task.result;
                 }
+                return nil;
+            };
 
+            BFTask *resultTask = (BFTask *)result;
+
+            if (resultTask.completed) {
+                setupWithTask(resultTask);
             } else {
-                tcs.result = result;
+                [resultTask continueWithBlock:setupWithTask];
             }
-        }];
+
+        } else {
+            tcs.result = result;
+        }
     };
 
     BOOL completed;
     @synchronized(self.lock) {
         completed = self.completed;
         if (!completed) {
-            [self.callbacks addObject:[wrappedBlock copy]];
+            [self.callbacks addObject:[^{
+                [executor execute:executionBlock];
+            } copy]];
         }
     }
     if (completed) {
-        wrappedBlock();
+        [executor execute:executionBlock];
     }
 
     return tcs.task;
