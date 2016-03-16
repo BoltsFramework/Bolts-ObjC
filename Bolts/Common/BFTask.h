@@ -29,6 +29,9 @@ extern NSInteger const kBFMultipleErrorsError;
  */
 extern NSString *const BFTaskMultipleExceptionsException;
 
+extern NSString *const BFTaskMultipleErrorsUserInfoKey; // NSArray<NSError *>
+extern NSString *const BFTaskMultipleExceptionsUserInfoKey; // NSArray<NSException *>
+
 @class BFExecutor;
 @class BFTask;
 

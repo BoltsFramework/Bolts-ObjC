@@ -25,6 +25,9 @@ NSString *const BFTaskErrorDomain = @"bolts";
 NSInteger const kBFMultipleErrorsError = 80175001;
 NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsException";
 
+NSString *const BFTaskMultipleErrorsUserInfoKey = @"errors";
+NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
+
 @interface BFTask () {
     id _result;
     NSError *_error;
@@ -144,7 +147,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                         NSException *exception =
                         [NSException exceptionWithName:BFTaskMultipleExceptionsException
                                                 reason:@"There were multiple exceptions."
-                                              userInfo:@{ @"exceptions": exceptions }];
+                                              userInfo:@{ BFTaskMultipleExceptionsUserInfoKey: exceptions }];
                         tcs.exception = exception;
                     }
                 } else if (errors.count > 0) {
@@ -153,7 +156,7 @@ NSString *const BFTaskMultipleExceptionsException = @"BFMultipleExceptionsExcept
                     } else {
                         NSError *error = [NSError errorWithDomain:BFTaskErrorDomain
                                                              code:kBFMultipleErrorsError
-                                                         userInfo:@{ @"errors": errors }];
+                                                         userInfo:@{ BFTaskMultipleErrorsUserInfoKey: errors }];
                         tcs.error = error;
                     }
                 } else if (cancelled > 0) {
