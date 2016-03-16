@@ -399,7 +399,7 @@
 
         XCTAssertEqualObjects(@"BFMultipleExceptionsException", task.exception.name);
 
-        NSArray *exceptions = [task.exception.userInfo objectForKey:@"exceptions"];
+        NSArray *exceptions = [task.exception.userInfo objectForKey:BFTaskMultipleExceptionsUserInfoKey];
         XCTAssertEqual(2, (int)exceptions.count);
         XCTAssertEqualObjects(@"TestException", [[exceptions objectAtIndex:0] name]);
         XCTAssertEqualObjects(@"TestException", [[exceptions objectAtIndex:1] name]);
@@ -474,7 +474,7 @@
         XCTAssertEqualObjects(@"bolts", task.error.domain);
         XCTAssertEqual(kBFMultipleErrorsError, task.error.code);
 
-        NSArray *errors = [task.error.userInfo objectForKey:@"errors"];
+        NSArray *errors = [task.error.userInfo objectForKey:BFTaskMultipleErrorsUserInfoKey];
         XCTAssertEqualObjects(@"BoltsTests", [[errors objectAtIndex:0] domain]);
         XCTAssertEqual(35, (int)[[errors objectAtIndex:0] code]);
         XCTAssertEqualObjects(@"BoltsTests", [[errors objectAtIndex:1] domain]);
