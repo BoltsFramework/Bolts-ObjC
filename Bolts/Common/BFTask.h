@@ -37,7 +37,7 @@ extern NSString *const BFTaskMultipleErrorsUserInfoKey;
 
 /*!
  An error userInfo key used if there were multiple exceptions on <BFTask taskForCompletionOfAllTasks:>.
- Value type is  `NSArray<NSException *> *`.
+ Value type is `NSArray<NSException *> *`.
  */
 extern NSString *const BFTaskMultipleExceptionsUserInfoKey;
 
