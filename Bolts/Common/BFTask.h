@@ -29,8 +29,17 @@ extern NSInteger const kBFMultipleErrorsError;
  */
 extern NSString *const BFTaskMultipleExceptionsException;
 
-extern NSString *const BFTaskMultipleErrorsUserInfoKey; // NSArray<NSError *>
-extern NSString *const BFTaskMultipleExceptionsUserInfoKey; // NSArray<NSException *>
+/*!
+ An error userInfo key used if there were multiple errors on <BFTask taskForCompletionOfAllTasks:>.
+ Value type is `NSArray<NSError *> *`.
+ */
+extern NSString *const BFTaskMultipleErrorsUserInfoKey;
+
+/*!
+ An error userInfo key used if there were multiple exceptions on <BFTask taskForCompletionOfAllTasks:>.
+ Value type is  `NSArray<NSException *> *`.
+ */
+extern NSString *const BFTaskMultipleExceptionsUserInfoKey;
 
 @class BFExecutor;
 @class BFTask;
