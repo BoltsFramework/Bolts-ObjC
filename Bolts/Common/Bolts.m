@@ -12,12 +12,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation Bolts
-
-+ (NSString *)version {
-    return BOLTS_VERSION;
-}
-
-@end
+NSString *const BoltsFrameworkVersionString = @"1.6.0";
 
 NS_ASSUME_NONNULL_END
