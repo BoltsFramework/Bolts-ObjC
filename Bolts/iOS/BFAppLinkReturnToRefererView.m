@@ -27,7 +27,6 @@ static const CGFloat BFCloseButtonHeight = 12.0;
 @property (nonatomic, strong) UILabel *labelView;
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) UITapGestureRecognizer *insideTapGestureRecognizer;
-@property (nonatomic, strong) UIView *viewToMoveWithNavController;
 
 @end
 
