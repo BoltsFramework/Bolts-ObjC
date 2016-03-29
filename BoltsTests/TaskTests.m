@@ -618,6 +618,7 @@
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
 }
 
+
 - (void)testTaskForCompletionOfAllTasksWithResultsNoTasksImmediateCompletion {
     NSMutableArray *tasks = [NSMutableArray array];
 
@@ -626,6 +627,78 @@
     XCTAssertFalse(task.cancelled);
     XCTAssertFalse(task.faulted);
     XCTAssertTrue(task.result != nil);
+}
+
+- (void)testTasksForTaskForCompletionOfAnyTasksWithSuccess {
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithDelay:20], [BFTask taskWithResult:@"success"]]];
+    [task waitUntilFinished];
+    
+    XCTAssertEqualObjects(@"success", task.result);
+}
+
+- (void)testTasksForTaskForCompletionOfAnyTasksWithRacing {
+    BFTask *first = [[BFTask taskWithDelay:2] continueWithBlock:^id _Nullable(BFTask * _Nonnull task) {
+        return [BFTask taskWithResult:@"first"];
+    }];
+    BFTask *second = [[BFTask taskWithDelay:3] continueWithBlock:^id _Nullable(BFTask * _Nonnull task) {
+        return [BFTask taskWithResult:@"second"];
+    }];
+
+    
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[first, second]];
+    [task waitUntilFinished];
+    
+    XCTAssertEqualObjects(@"first", task.result);
+}
+
+- (void)testTasksForTaskForCompletionOfAnyTasksWithErrorAndSuccess {
+    NSError *error = [NSError errorWithDomain:@"BoltsTests"
+                                         code:35
+                                     userInfo:nil];
+    
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error], [BFTask taskWithResult:@"success"]]];
+    [task waitUntilFinished];
+    
+    XCTAssertEqualObjects(@"success", task.result);
+    XCTAssertNil(task.error);
+}
+
+- (void)testTasksForTaskForCompletionOfAnyTasksWithError {
+    NSError *error = [NSError errorWithDomain:@"BoltsTests"
+                                         code:35
+                                     userInfo:nil];
+    
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error]]];
+    [task waitUntilFinished];
+    
+    XCTAssertEqualObjects(error, task.error);
+    XCTAssertNotNil(task.error);
+}
+
+- (void)testTasksForTaskForCompletionOfAnyTasksWithNilArray {
+    
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:nil];
+    [task waitUntilFinished];
+    
+    XCTAssertNil(task.result);
+    XCTAssertNil(task.error);
+    XCTAssertNil(task.exception);
+}
+
+- (void)testTasksForTaskForCompletionOfAnyTasksAllErrors {
+    NSError *error = [NSError errorWithDomain:@"BoltsTests"
+                                         code:35
+                                     userInfo:nil];
+    
+    BFTask *task = [BFTask taskForCompletionOfAnyTask:@[[BFTask taskWithError:error], [BFTask taskWithError:error]]];
+    [task waitUntilFinished];
+    
+    XCTAssertNil(task.result);
+    XCTAssertNotNil(task.error);
+    XCTAssertNotNil(task.error.userInfo);
+    XCTAssertEqualObjects(@"bolts", task.error.domain);
+    XCTAssertTrue([task.error.userInfo[@"errors"] isKindOfClass:[NSArray class]]);
+    XCTAssertEqual(2, [task.error.userInfo[@"errors"] count]);
 }
 
 - (void)testWaitUntilFinished {

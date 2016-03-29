@@ -177,6 +177,72 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     }];
 }
 
++ (instancetype)taskForCompletionOfAnyTask:(nullable NSArray<BFTask *> *)tasks
+{
+    __block int32_t total = (int32_t)tasks.count;
+    if (total == 0) {
+        return [self taskWithResult:nil];
+    }
+    
+    __block int completed = 0;
+    __block int32_t cancelled = 0;
+    
+    NSObject *lock = [NSObject new];
+    NSMutableArray<NSError *> *errors = [NSMutableArray new];
+    NSMutableArray<NSException *> *exceptions = [NSMutableArray new];
+    
+    BFTaskCompletionSource *source = [BFTaskCompletionSource taskCompletionSource];
+    for (BFTask *task in tasks) {
+        [task continueWithBlock:^id(BFTask *task) {
+            if (task.exception != nil) {
+                @synchronized(lock) {
+                    [exceptions addObject:task.exception];
+                }
+            } else if (task.error != nil) {
+                @synchronized(lock) {
+                    [errors addObject:task.error];
+                }
+            } else if (task.cancelled) {
+                OSAtomicIncrement32Barrier(&cancelled);
+            } else {
+                if(OSAtomicCompareAndSwap32Barrier(0, 1, &completed)) {
+                    [source setResult:task.result];
+                }
+            }
+            
+            if (OSAtomicDecrement32Barrier(&total) == 0 &&
+                OSAtomicCompareAndSwap32Barrier(0, 1, &completed)) {
+                if (cancelled > 0) {
+                    [source cancel];
+                } else if (exceptions.count > 0) {
+                    if (exceptions.count == 1) {
+                        source.exception = exceptions.firstObject;
+                    } else {
+                        NSException *exception =
+                        [NSException exceptionWithName:BFTaskMultipleExceptionsException
+                                                reason:@"There were multiple exceptions."
+                                              userInfo:@{ @"exceptions": exceptions }];
+                        source.exception = exception;
+                    }
+                } else if (errors.count > 0) {
+                    if (errors.count == 1) {
+                        source.error = errors.firstObject;
+                    } else {
+                        NSError *error = [NSError errorWithDomain:BFTaskErrorDomain
+                                                             code:kBFMultipleErrorsError
+                                                         userInfo:@{ @"errors": errors }];
+                        source.error = error;
+                    }
+                }
+            }
+            // Abort execution of per tasks continuations
+            return nil;
+        }];
+    }
+    return source.task;
+}
+
+
 + (instancetype)taskWithDelay:(int)millis {
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, millis * NSEC_PER_MSEC);

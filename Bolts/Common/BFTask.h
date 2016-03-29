@@ -95,6 +95,14 @@ typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
 + (instancetype)taskForCompletionOfAllTasksWithResults:(nullable NSArray<BFTask *> *)tasks;
 
 /*!
+ Returns a task that will be completed once there is at least one successful task.
+ The first task to successuly complete will set the result, all other tasks results are 
+ ignored.
+ @param tasks An `NSArray` of the tasks to use as an input.
+ */
++ (instancetype)taskForCompletionOfAnyTask:(nullable NSArray<BFTask *> *)tasks;
+
+/*!
  Returns a task that will be completed a certain amount of time in the future.
  @param millis The approximate number of milliseconds to wait before the
  task will be finished (with result == nil).
