@@ -630,7 +630,7 @@ The following code assumes that the view controller has an `openedAppLinkURL` `N
 }
 ```
 
-In a navigaton-controller view hierarchy, the banner should be displayed above the navigation bar, and `BFAppLinkReturnToRefererController` provides an `initForDisplayAboveNavController` method to assist with this.
+In a navigation-controller view hierarchy, the banner should be displayed above the navigation bar, and `BFAppLinkReturnToRefererController` provides an `initForDisplayAboveNavController` method to assist with this.
 
 ## Analytics
 
