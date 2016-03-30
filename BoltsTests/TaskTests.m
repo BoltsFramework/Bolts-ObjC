@@ -637,16 +637,22 @@
 }
 
 - (void)testTasksForTaskForCompletionOfAnyTasksWithRacing {
-    BFTask *first = [[BFTask taskWithDelay:2] continueWithBlock:^id _Nullable(BFTask * _Nonnull task) {
-        return [BFTask taskWithResult:@"first"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+
+    BFExecutor *executor = [BFExecutor executorWithDispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+
+    BFTask *first = [BFTask taskFromExecutor:executor withBlock:^id _Nullable {
+        return @"first";
     }];
-    BFTask *second = [[BFTask taskWithDelay:3] continueWithBlock:^id _Nullable(BFTask * _Nonnull task) {
-        return [BFTask taskWithResult:@"second"];
+    BFTask *second = [BFTask taskFromExecutor:executor withBlock:^id _Nullable {
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+        return @"second";
     }];
 
-    
     BFTask *task = [BFTask taskForCompletionOfAnyTask:@[first, second]];
     [task waitUntilFinished];
+
+    dispatch_semaphore_signal(semaphore);
     
     XCTAssertEqualObjects(@"first", task.result);
 }
