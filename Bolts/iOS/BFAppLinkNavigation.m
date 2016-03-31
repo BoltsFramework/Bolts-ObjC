@@ -8,7 +8,7 @@
  *
  */
 
-#import <UIKit/UIKit.h>
+#import "BFAppLinkNavigation.h"
 
 #import <Bolts/Bolts.h>
 
