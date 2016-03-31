@@ -1,5 +1,38 @@
 # Bolts CHANGELOG
 
+## 1.7.0
+
+**New**
+- Added `BFTask.+taskForCompletionOfAnyTask:`.  
+  This method creates a task that will be completed when first of the provided task completes.  
+  [#229](https://github.com/BoltsFramework/Bolts-ObjC/pull/229)
+  by [Florent Vilmart](https://github.com/flovilmart)  
+- New constants defined for userInfo keys of multi-error/multi-exception.  
+  [#238](https://github.com/BoltsFramework/Bolts-ObjC/pull/238)
+  by [Takeru Chuganji](https://github.com/hoppenichu)
+- Replaced `Bolts` class, `BoltsVersion` macro with a constant string.  
+  [#239](https://github.com/BoltsFramework/Bolts-ObjC/pull/239)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+
+**Improved**
+- Reduced stack frame from continuation stack trace if task is completed.  
+  [#237](https://github.com/BoltsFramework/Bolts-ObjC/pull/237)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)  
+
+**Fixed**
+- Fixed disposing of `BFCancellationToken` when it has registrations.  
+  [#226](https://github.com/BoltsFramework/Bolts-ObjC/pull/226)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+- Fixed and improved documentation.  
+  [#230](https://github.com/BoltsFramework/Bolts-ObjC/pull/230)
+  by [Paweł Wrzosek](https://github.com/wzs)
+- Fix warnings that surfaced in the release version of Xcode 7.3.  
+  [#231](https://github.com/BoltsFramework/Bolts-ObjC/pull/231)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+- Fixed edge case scenario of `BFTask.+taskForCompletionOfAllTasks:` wouldn't finish or wouldn't be cancelled.  
+  [#235](https://github.com/BoltsFramework/Bolts-ObjC/pull/235)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+
 ## 1.6.0
 
 **New**
