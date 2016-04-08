@@ -20,6 +20,9 @@ FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkUserAgentKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkExtrasKeyName;
 FOUNDATION_EXPORT NSString *const BFAppLinkVersionKeyName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppLink;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererAppName;
+FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
 
 static id<BFAppLinkResolving> defaultResolver;
 
@@ -41,6 +44,10 @@ static id<BFAppLinkResolving> defaultResolver;
     navigation.extras = extras;
     navigation.appLinkData = appLinkData;
     return navigation;
+}
+
++ (NSDictionary *)callbackAppLinkDataForAppWithName:(NSString *)appName url:(NSString *)url {
+    return @{BFAppLinkRefererAppLink: @{BFAppLinkRefererAppName: appName, BFAppLinkRefererUrl: url}};
 }
 
 - (NSString *)stringByEscapingQueryString:(NSString *)string {
@@ -227,6 +234,40 @@ static id<BFAppLinkResolving> defaultResolver;
     return [[BFAppLinkNavigation navigationWithAppLink:link
                                                 extras:nil
                                            appLinkData:nil] navigate:error];
+}
+
++ (BFAppLinkNavigationType)navigationTypeForLink:(BFAppLink *)link {
+    return [[self navigationWithAppLink:link extras:nil appLinkData:nil] navigationType];
+}
+
+- (BFAppLinkNavigationType)navigationType {
+    BFAppLinkTarget *eligibleTarget = nil;
+    for (BFAppLinkTarget *target in self.appLink.targets) {
+        if ([[UIApplication sharedApplication] canOpenURL:target.URL]) {
+            eligibleTarget = target;
+            break;
+        }
+    }
+
+    if (eligibleTarget != nil) {
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:nil];
+        if (appLinkURL != nil) {
+            return BFAppLinkNavigationTypeApp;
+        } else {
+            return BFAppLinkNavigationTypeFailure;
+        }
+    }
+
+    if (self.appLink.webURL != nil) {
+        NSURL *appLinkURL = [self appLinkURLWithTargetURL:eligibleTarget.URL error:nil];
+        if (appLinkURL != nil) {
+            return BFAppLinkNavigationTypeBrowser;
+        } else {
+            return BFAppLinkNavigationTypeFailure;
+        }
+    }
+
+    return BFAppLinkNavigationTypeFailure;
 }
 
 + (id<BFAppLinkResolving>)defaultResolver {
