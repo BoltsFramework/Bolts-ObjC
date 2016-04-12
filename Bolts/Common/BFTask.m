@@ -499,7 +499,9 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
         }
         [self.condition lock];
     }
-    [self.condition wait];
+    while (!self.completed) {
+        [self.condition wait];
+    }
     [self.condition unlock];
 }
 

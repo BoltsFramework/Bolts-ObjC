@@ -858,4 +858,43 @@
     XCTAssertTrue(taskCompletionSource.task.cancelled);
 }
 
+- (void)testMultipleWaitUntilFinished {
+    BFTask *task = [[BFTask taskWithDelay:50] continueWithBlock:^id(BFTask *task) {
+        return @"foo";
+    }];
+
+    [task waitUntilFinished];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [task waitUntilFinished];
+        [expectation fulfill];
+    });
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
+}
+
+- (void)testMultipleThreadsWaitUntilFinished {
+    BFTask *task = [[BFTask taskWithDelay:500] continueWithBlock:^id(BFTask *task) {
+        return @"foo";
+    }];
+
+    dispatch_queue_t queue = dispatch_queue_create("com.bolts.tests.wait", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t group = dispatch_group_create();
+
+    XCTestExpectation *expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_group_async(group, queue, ^{
+            [task waitUntilFinished];
+        });
+        dispatch_group_async(group, queue, ^{
+            [task waitUntilFinished];
+        });
+        [task waitUntilFinished];
+
+        dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+        [expectation fulfill];
+    });
+    [self waitForExpectationsWithTimeout:10.0 handler:nil];
+}
+
 @end
