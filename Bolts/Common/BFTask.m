@@ -13,6 +13,7 @@
 #import <libkern/OSAtomic.h>
 
 #import "Bolts.h"
+#import "BFTask+Exceptions.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -394,11 +395,15 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
         }
 
         id result = nil;
-        @try {
+        if (BFTaskCatchesExceptions()) {
+            @try {
+                result = block(self);
+            } @catch (NSException *exception) {
+                tcs.exception = exception;
+                return;
+            }
+        } else {
             result = block(self);
-        } @catch (NSException *exception) {
-            tcs.exception = exception;
-            return;
         }
 
         if ([result isKindOfClass:[BFTask class]]) {
