@@ -26,8 +26,11 @@ extern NSInteger const kBFMultipleErrorsError;
 
 /*!
  An exception that is thrown if there was multiple exceptions on <BFTask taskForCompletionOfAllTasks:>.
+ 
+ @deprecated `BFTask` exception handling is deprecated and will be removed in a future release.
  */
-extern NSString *const BFTaskMultipleExceptionsException;
+extern NSString *const BFTaskMultipleExceptionsException
+__attribute__((deprecated("`BFTask` exception handling is deprecated and will be removed in a future release.")));
 
 /*!
  An error userInfo key used if there were multiple errors on <BFTask taskForCompletionOfAllTasks:>.
@@ -38,8 +41,11 @@ extern NSString *const BFTaskMultipleErrorsUserInfoKey;
 /*!
  An error userInfo key used if there were multiple exceptions on <BFTask taskForCompletionOfAllTasks:>.
  Value type is `NSArray<NSException *> *`.
+ 
+ @deprecated `BFTask` exception handling is deprecated and will be removed in a future release.
  */
-extern NSString *const BFTaskMultipleExceptionsUserInfoKey;
+extern NSString *const BFTaskMultipleExceptionsUserInfoKey
+__attribute__((deprecated("`BFTask` exception handling is deprecated and will be removed in a future release.")));
 
 @class BFExecutor;
 @class BFTask;
@@ -71,8 +77,11 @@ typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
 /*!
  Creates a task that is already completed with the given exception.
  @param exception The exception for the task.
+ 
+ @deprecated `BFTask` exception handling is deprecated and will be removed in a future release.
  */
-+ (instancetype)taskWithException:(NSException *)exception;
++ (instancetype)taskWithException:(NSException *)exception
+__attribute__((deprecated("`BFTask` exception handling is deprecated and will be removed in a future release.")));
 
 /*!
  Creates a task that is already cancelled.
@@ -143,8 +152,11 @@ typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
 
 /*!
  The exception of a failed task.
+
+ @deprecated `BFTask` exception handling is deprecated and will be removed in a future release.
  */
-@property (nullable, nonatomic, strong, readonly) NSException *exception;
+@property (nullable, nonatomic, strong, readonly) NSException *exception
+__attribute__((deprecated("`BFTask` exception handling is deprecated and will be removed in a future release.")));
 
 /*!
  Whether this task has been cancelled.

@@ -13,6 +13,7 @@
 #import <libkern/OSAtomic.h>
 
 #import "Bolts.h"
+#import "BFTask+Exceptions.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -127,10 +128,13 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
         [task continueWithBlock:^id(BFTask *task) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             if (task.exception) {
                 [lock lock];
                 [exceptions addObject:task.exception];
                 [lock unlock];
+#pragma clang diagnostic pop
             } else if (task.error) {
                 [lock lock];
                 [errors addObject:task.error];
@@ -141,15 +145,17 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 
             if (OSAtomicDecrement32Barrier(&total) == 0) {
                 if (exceptions.count > 0) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                     if (exceptions.count == 1) {
                         tcs.exception = [exceptions firstObject];
                     } else {
-                        NSException *exception =
-                        [NSException exceptionWithName:BFTaskMultipleExceptionsException
-                                                reason:@"There were multiple exceptions."
-                                              userInfo:@{ BFTaskMultipleExceptionsUserInfoKey: exceptions }];
+                        NSException *exception = [NSException exceptionWithName:BFTaskMultipleExceptionsException
+                                                                         reason:@"There were multiple exceptions."
+                                                                       userInfo:@{ BFTaskMultipleExceptionsUserInfoKey: exceptions }];
                         tcs.exception = exception;
                     }
+#pragma clang diagnostic pop
                 } else if (errors.count > 0) {
                     if (errors.count == 1) {
                         tcs.error = [errors firstObject];
@@ -194,10 +200,13 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     BFTaskCompletionSource *source = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
         [task continueWithBlock:^id(BFTask *task) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             if (task.exception != nil) {
                 [lock lock];
                 [exceptions addObject:task.exception];
                 [lock unlock];
+#pragma clang diagnostic pop
             } else if (task.error != nil) {
                 [lock lock];
                 [errors addObject:task.error];
@@ -215,14 +224,16 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
                 if (cancelled > 0) {
                     [source cancel];
                 } else if (exceptions.count > 0) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                     if (exceptions.count == 1) {
                         source.exception = exceptions.firstObject;
                     } else {
-                        NSException *exception =
-                        [NSException exceptionWithName:BFTaskMultipleExceptionsException
-                                                reason:@"There were multiple exceptions."
-                                              userInfo:@{ @"exceptions": exceptions }];
+                        NSException *exception = [NSException exceptionWithName:BFTaskMultipleExceptionsException
+                                                                         reason:@"There were multiple exceptions."
+                                                                       userInfo:@{ BFTaskMultipleExceptionsUserInfoKey: exceptions }];
                         source.exception = exception;
+#pragma clang diagnostic pop
                     }
                 } else if (errors.count > 0) {
                     if (errors.count == 1) {
@@ -419,20 +430,33 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
         }
 
         id result = nil;
-        @try {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        if (BFTaskCatchesExceptions()) {
+            @try {
+                result = block(self);
+            } @catch (NSException *exception) {
+                NSLog(@"[Bolts] Warning: `BFTask` caught an exception in the continuation block."
+                      @" This behavior is discouraged and will be removed in a future release."
+                      @" Caught Exception: %@", exception);
+                tcs.exception = exception;
+                return;
+            }
+        } else {
             result = block(self);
-        } @catch (NSException *exception) {
-            tcs.exception = exception;
-            return;
         }
+#pragma clang diagnostic pop
 
         if ([result isKindOfClass:[BFTask class]]) {
 
             id (^setupWithTask) (BFTask *) = ^id(BFTask *task) {
                 if (cancellationToken.cancellationRequested || task.cancelled) {
                     [tcs cancel];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                 } else if (task.exception) {
                     tcs.exception = task.exception;
+#pragma clang diagnostic pop
                 } else if (task.error) {
                     tcs.error = task.error;
                 } else {
