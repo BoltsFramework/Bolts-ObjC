@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BFCancellationToken ()
 
 @property (nullable, nonatomic, strong) NSMutableArray *registrations;
-@property (nonatomic, strong) NSObject *lock;
+@property (nonatomic, strong) NSRecursiveLock *lock;
 @property (nonatomic) BOOL disposed;
 
 @end
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
     if (!self) return self;
 
     _registrations = [NSMutableArray array];
-    _lock = [NSObject new];
+    _lock = [NSRecursiveLock new];
 
     return self;
 }
@@ -48,23 +48,25 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Custom Setters/Getters
 
 - (BOOL)isCancellationRequested {
-    @synchronized(self.lock) {
-        [self throwIfDisposed];
-        return _cancellationRequested;
-    }
+    [self.lock lock];
+    [self throwIfDisposed];
+    BOOL returnValue = _cancellationRequested;
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (void)cancel {
     NSArray *registrations;
-    @synchronized(self.lock) {
-        [self throwIfDisposed];
-        if (_cancellationRequested) {
-            return;
-        }
+    
+    [self.lock lock];
+    [self throwIfDisposed];
+    if (!_cancellationRequested) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(cancelPrivate) object:nil];
         _cancellationRequested = YES;
         registrations = [self.registrations copy];
     }
+    [self.lock unlock];
 
     [self notifyCancellation:registrations];
 }
@@ -76,19 +78,18 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BFCancellationTokenRegistration *)registerCancellationObserverWithBlock:(BFCancellationBlock)block {
-    @synchronized(self.lock) {
-        BFCancellationTokenRegistration *registration = [BFCancellationTokenRegistration registrationWithToken:self delegate:[block copy]];
-        [self.registrations addObject:registration];
-
-        return registration;
-    }
+    [self.lock lock];
+    BFCancellationTokenRegistration *registration = [BFCancellationTokenRegistration registrationWithToken:self delegate:[block copy]];
+    [self.registrations addObject:registration];
+    [self.lock unlock];
+    return registration;
 }
 
 - (void)unregisterRegistration:(BFCancellationTokenRegistration *)registration {
-    @synchronized(self.lock) {
-        [self throwIfDisposed];
-        [self.registrations removeObject:registration];
-    }
+    [self.lock lock];
+    [self throwIfDisposed];
+    [self.registrations removeObject:registration];
+    [self.lock unlock];
 }
 
 // Delay on a non-public method to prevent interference with a user calling performSelector or
@@ -108,29 +109,26 @@ NS_ASSUME_NONNULL_BEGIN
         return;
     }
 
-    @synchronized(self.lock) {
-        [self throwIfDisposed];
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(cancelPrivate) object:nil];
-        if (self.cancellationRequested) {
-            return;
-        }
-
+    [self.lock lock];
+    [self throwIfDisposed];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(cancelPrivate) object:nil];
+    if (!self.cancellationRequested) {
         if (millis != -1) {
             double delay = (double)millis / 1000;
             [self performSelector:@selector(cancelPrivate) withObject:nil afterDelay:delay];
         }
     }
+    [self.lock unlock];
 }
 
 - (void)dispose {
-    @synchronized(self.lock) {
-        if (self.disposed) {
-            return;
-        }
+    [self.lock lock];
+    if (!self.disposed) {
         [self.registrations makeObjectsPerformSelector:@selector(dispose)];
         self.registrations = nil;
         self.disposed = YES;
     }
+    [self.lock unlock];
 }
 
 - (void)throwIfDisposed {

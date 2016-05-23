@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) BFCancellationToken *token;
 @property (nullable, nonatomic, strong) BFCancellationBlock cancellationObserverBlock;
-@property (nonatomic, strong) NSObject *lock;
+@property (nonatomic, strong) NSRecursiveLock *lock;
 @property (nonatomic) BOOL disposed;
 
 @end
@@ -42,19 +42,20 @@ NS_ASSUME_NONNULL_BEGIN
     self = [super init];
     if (!self) return self;
 
-    _lock = [NSObject new];
+    _lock = [NSRecursiveLock new];
     
     return self;
 }
 
 - (void)dispose {
-    @synchronized(self.lock) {
-        if (self.disposed) {
-            return;
-        }
-        self.disposed = YES;
+    [self.lock lock];
+    if (self.disposed) {
+        [self.lock unlock];
+        return;
     }
-
+    self.disposed = YES;
+    [self.lock unlock];
+    
     BFCancellationToken *token = self.token;
     if (token != nil) {
         [token unregisterRegistration:self];
@@ -64,10 +65,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)notifyDelegate {
-    @synchronized(self.lock) {
-        [self throwIfDisposed];
-        self.cancellationObserverBlock();
-    }
+    [self.lock lock];
+    [self throwIfDisposed];
+    self.cancellationObserverBlock();
+    [self.lock unlock];
 }
 
 - (void)throwIfDisposed {
