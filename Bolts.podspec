@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
     ss.ios.deployment_target = '6.0'
     ss.dependency 'Bolts/Tasks'
 
-    ss.ios.source_files = 'Bolts/iOS/*.[hm]'
+    ss.ios.source_files = 'Bolts/iOS/**/*.[hm]'
     ss.ios.public_header_files = 'Bolts/iOS/*.h'
     ss.osx.source_files = ''
     ss.watchos.source_files = ''
