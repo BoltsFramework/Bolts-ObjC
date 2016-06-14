@@ -39,7 +39,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 @property (nonatomic, assign, readwrite, getter=isFaulted) BOOL faulted;
 @property (nonatomic, assign, readwrite, getter=isCompleted) BOOL completed;
 
-@property (nonatomic, strong) NSObject *lock;
+@property (nonatomic, strong) NSRecursiveLock *lock;
 @property (nonatomic, strong) NSCondition *condition;
 @property (nonatomic, strong) NSMutableArray *callbacks;
 
@@ -53,7 +53,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     self = [super init];
     if (!self) return self;
 
-    _lock = [[NSObject alloc] init];
+    _lock = [[NSRecursiveLock alloc] init];
     _condition = [[NSCondition alloc] init];
     _callbacks = [NSMutableArray array];
 
@@ -121,7 +121,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     }
 
     __block int32_t cancelled = 0;
-    NSObject *lock = [[NSObject alloc] init];
+    NSRecursiveLock *lock = [[NSRecursiveLock alloc] init];
     NSMutableArray *errors = [NSMutableArray array];
     NSMutableArray *exceptions = [NSMutableArray array];
 
@@ -131,14 +131,14 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
             if (task.exception) {
-                @synchronized (lock) {
-                    [exceptions addObject:task.exception];
+                [lock lock];
+                [exceptions addObject:task.exception];
+                [lock unlock];
 #pragma clang diagnostic pop
-                }
             } else if (task.error) {
-                @synchronized (lock) {
-                    [errors addObject:task.error];
-                }
+                [lock lock];
+                [errors addObject:task.error];
+                [lock unlock];
             } else if (task.cancelled) {
                 OSAtomicIncrement32Barrier(&cancelled);
             }
@@ -193,7 +193,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     __block int completed = 0;
     __block int32_t cancelled = 0;
     
-    NSObject *lock = [NSObject new];
+    NSRecursiveLock *lock = [NSRecursiveLock new];
     NSMutableArray<NSError *> *errors = [NSMutableArray new];
     NSMutableArray<NSException *> *exceptions = [NSMutableArray new];
     
@@ -203,14 +203,14 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
             if (task.exception != nil) {
-                @synchronized(lock) {
-                    [exceptions addObject:task.exception];
+                [lock lock];
+                [exceptions addObject:task.exception];
+                [lock unlock];
 #pragma clang diagnostic pop
-                }
             } else if (task.error != nil) {
-                @synchronized(lock) {
-                    [errors addObject:task.error];
-                }
+                [lock lock];
+                [errors addObject:task.error];
+                [lock unlock];
             } else if (task.cancelled) {
                 OSAtomicIncrement32Barrier(&cancelled);
             } else {
@@ -289,101 +289,126 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 #pragma mark - Custom Setters/Getters
 
 - (nullable id)result {
-    @synchronized(self.lock) {
-        return _result;
-    }
+    [self.lock lock];
+    id returnValue = _result;
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (BOOL)trySetResult:(nullable id)result {
-    @synchronized(self.lock) {
-        if (self.completed) {
-            return NO;
-        }
+    [self.lock lock];
+    
+    BOOL returnValue = NO;
+    if (!self.completed) {
         self.completed = YES;
         _result = result;
         [self runContinuations];
-        return YES;
+        returnValue = YES;
     }
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (nullable NSError *)error {
-    @synchronized(self.lock) {
-        return _error;
-    }
+    [self.lock lock];
+    NSError *returnValue = _error;
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (BOOL)trySetError:(NSError *)error {
-    @synchronized(self.lock) {
-        if (self.completed) {
-            return NO;
-        }
+    [self.lock lock];
+    
+    BOOL returnValue = NO;
+    if (!self.completed) {
         self.completed = YES;
         self.faulted = YES;
         _error = error;
         [self runContinuations];
-        return YES;
+        returnValue = YES;
     }
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (nullable NSException *)exception {
-    @synchronized(self.lock) {
-        return _exception;
-    }
+    [self.lock lock];
+    NSException *returnValue = _exception;
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (BOOL)trySetException:(NSException *)exception {
-    @synchronized(self.lock) {
-        if (self.completed) {
-            return NO;
-        }
+    [self.lock lock];
+    BOOL returnValue = NO;
+    
+    if (!self.completed) {
         self.completed = YES;
         self.faulted = YES;
         _exception = exception;
         [self runContinuations];
-        return YES;
+        returnValue = YES;
     }
+    
+    [self.lock unlock];
+    return returnValue;
+
 }
 
 - (BOOL)isCancelled {
-    @synchronized(self.lock) {
-        return _cancelled;
-    }
+    [self.lock lock];
+    BOOL returnValue = _cancelled;
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (BOOL)isFaulted {
-    @synchronized(self.lock) {
-        return _faulted;
-    }
+    [self.lock lock];
+    BOOL returnValue = _faulted;
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (BOOL)trySetCancelled {
-    @synchronized(self.lock) {
-        if (self.completed) {
-            return NO;
-        }
+    [self.lock lock];
+    
+    BOOL returnValue = NO;
+    if (!self.completed) {
         self.completed = YES;
         self.cancelled = YES;
         [self runContinuations];
-        return YES;
+        returnValue = YES;
     }
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (BOOL)isCompleted {
-    @synchronized(self.lock) {
-        return _completed;
-    }
+    [self.lock lock];
+    BOOL returnValue = _completed;
+    
+    [self.lock unlock];
+    return returnValue;
 }
 
 - (void)runContinuations {
-    @synchronized(self.lock) {
-        [self.condition lock];
-        [self.condition broadcast];
-        [self.condition unlock];
-        for (void (^callback)() in self.callbacks) {
-            callback();
-        }
-        [self.callbacks removeAllObjects];
+    [self.lock lock];
+    [self.condition lock];
+    [self.condition broadcast];
+    [self.condition unlock];
+    for (void (^callback)() in self.callbacks) {
+        callback();
     }
+    [self.callbacks removeAllObjects];
+    [self.lock unlock];
 }
 
 #pragma mark - Chaining methods
@@ -454,14 +479,15 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     };
 
     BOOL completed;
-    @synchronized(self.lock) {
-        completed = self.completed;
-        if (!completed) {
-            [self.callbacks addObject:[^{
-                [executor execute:executionBlock];
-            } copy]];
-        }
+    [self.lock lock];
+    completed = self.completed;
+    if (!completed) {
+        [self.callbacks addObject:[^{
+            [executor execute:executionBlock];
+        } copy]];
     }
+    [self.lock unlock];
+    
     if (completed) {
         [executor execute:executionBlock];
     }
@@ -516,13 +542,15 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     if ([NSThread isMainThread]) {
         [self warnOperationOnMainThread];
     }
-
-    @synchronized(self.lock) {
-        if (self.completed) {
-            return;
-        }
-        [self.condition lock];
+    
+    [self.lock lock];
+    if (self.completed) {
+        [self.lock unlock];
+        return;
     }
+    [self.condition lock];
+    [self.lock unlock];
+    
     while (!self.completed) {
         [self.condition wait];
     }
@@ -538,12 +566,12 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     BOOL faulted;
     NSString *resultDescription = nil;
 
-    @synchronized(self.lock) {
-        completed = self.completed;
-        cancelled = self.cancelled;
-        faulted = self.faulted;
-        resultDescription = completed ? [NSString stringWithFormat:@" result = %@", self.result] : @"";
-    }
+    [self.lock lock];
+    completed = self.completed;
+    cancelled = self.cancelled;
+    faulted = self.faulted;
+    resultDescription = completed ? [NSString stringWithFormat:@" result = %@", self.result] : @"";
+    [self.lock unlock];
 
     // Description string includes status information and, if available, the
     // result since in some ways this is what a promise actually "is".
