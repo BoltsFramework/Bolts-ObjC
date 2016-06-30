@@ -20,6 +20,31 @@ static NSMutableArray *openedUrls;
 
 @implementation AppLinkTests
 
++ (NSArray *)testInvocations {
+    NSMutableArray *testInvocations = [[super testInvocations] mutableCopy];
+
+    NSArray *resolvers = @[[BFWebViewAppLinkResolver sharedInstance], [BFXMLAppLinkResolver sharedInstance]];
+
+    unsigned count;
+    Method *methods = class_copyMethodList(self, &count);
+    for (unsigned i = 0; i < count; i++) {
+        SEL selector = method_getName(methods[i]);
+        NSString *name = NSStringFromSelector(selector);
+        if ([name hasPrefix:@"test"] && [name hasSuffix:@"WithResolver:"]) {
+            for (id<BFAppLinkResolving> resolver in resolvers) {
+                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self instanceMethodSignatureForSelector:selector]];
+                [invocation setSelector:selector];
+                [invocation setArgument:(void *)&resolver atIndex:2];
+                [invocation retainArguments];
+                [testInvocations addObject:invocation];
+            }
+
+        }
+    }
+
+    return [testInvocations copy];
+}
+
 - (NSString *)stringByEscapingQueryString:(NSString *)string {
     return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
                                                                                  (CFStringRef)string,
@@ -210,9 +235,10 @@ static NSMutableArray *openedUrls;
     XCTAssertTrue(notificationSent, @"URLWithInboundURL didn't sent notification.");
 }
 
-#pragma mark WebView App Link resolution
+#pragma mark Built in App Link resolution
 
-- (void)testWebViewSimpleAppLinkParsing {
+
+- (void)testSimpleAppLinkParsingWithResolver:(id<BFAppLinkResolving>)resolver {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios" : [NSNull null] },
                                               @{
@@ -223,7 +249,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
@@ -237,14 +263,14 @@ static NSMutableArray *openedUrls;
     XCTAssertEqualObjects(url, link.webURL);
 }
 
-- (void)testWebViewAppLinkParsingFailure {
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:[NSURL URLWithString:@"http://badurl"]];
+- (void)testAppLinkParsingFailureWithResolver:(id<BFAppLinkResolving>)resolver  {
+    BFTask *task = [resolver appLinkFromURLInBackground:[NSURL URLWithString:@"http://badurl"]];
     [self waitForTaskOnMainThread:task];
 
     XCTAssertNotNil(task.error);
 }
 
-- (void)testWebViewSimpleAppLinkParsingZeroShouldFallback {
+- (void)testSimpleAppLinkParsingNoShouldFallbackWithResolver:(id<BFAppLinkResolving>)resolver  {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios" : [NSNull null] },
                                               @{
@@ -256,7 +282,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
@@ -270,7 +296,7 @@ static NSMutableArray *openedUrls;
     XCTAssertNil(link.webURL);
 }
 
-- (void)testWebViewSimpleAppLinkParsingFalseShouldFallback {
+- (void)testSimpleAppLinkParsingFalseShouldFallbackWithResolver:(id<BFAppLinkResolving>)resolver  {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios" : [NSNull null] },
                                               @{
@@ -282,7 +308,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
@@ -296,7 +322,7 @@ static NSMutableArray *openedUrls;
     XCTAssertNil(link.webURL);
 }
 
-- (void)testWebViewSimpleAppLinkParsingWithWebUrl {
+- (void)testSimpleAppLinkParsingWithWebUrlWithResolver:(id<BFAppLinkResolving>)resolver {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios" : [NSNull null] },
                                               @{
@@ -308,7 +334,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
@@ -322,7 +348,7 @@ static NSMutableArray *openedUrls;
     XCTAssertEqualObjects([NSURL URLWithString:@"http://www.example.com"], link.webURL);
 }
 
-- (void)testWebViewVersionedAppLinkParsing {
+- (void)testVersionedAppLinkParsingWithResolver:(id<BFAppLinkResolving>)resolver {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios" : [NSNull null] },
                                               @{
@@ -339,7 +365,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
@@ -358,7 +384,7 @@ static NSMutableArray *openedUrls;
     XCTAssertEqualObjects(url, link.webURL);
 }
 
-- (void)testWebViewVersionedAppLinkParsingOnlyUrls {
+- (void)testVersionedAppLinkParsingOnlyUrlsWithResolver:(id<BFAppLinkResolving>)resolver  {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
                                                   @"al:ios:url" : @"bolts://"
@@ -369,7 +395,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
@@ -384,7 +410,7 @@ static NSMutableArray *openedUrls;
     XCTAssertEqualObjects(url, link.webURL);
 }
 
-- (void)testWebViewVersionedAppLinkParsingUrlsAndNames {
+- (void)testVersionedAppLinkParsingUrlsAndNamesWithResolver:(id<BFAppLinkResolving>)resolver {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{
                                                   @"al:ios:url" : @"bolts://"
@@ -401,7 +427,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
@@ -418,7 +444,7 @@ static NSMutableArray *openedUrls;
     XCTAssertEqualObjects(url, link.webURL);
 }
 
-- (void)testWebViewPlatformFiltering {
+- (void)testPlatformFilteringWithResolver:(id<BFAppLinkResolving>)resolver {
     NSString *html = [self htmlWithMetaTags:@[
                                               @{ @"al:ios" : [NSNull null] },
                                               @{
@@ -446,7 +472,7 @@ static NSMutableArray *openedUrls;
                                               ]];
     NSURL *url = [self dataUrlForHtml:html];
 
-    BFTask *task = [[BFWebViewAppLinkResolver sharedInstance] appLinkFromURLInBackground:url];
+    BFTask *task = [resolver appLinkFromURLInBackground:url];
     [self waitForTaskOnMainThread:task];
 
     BFAppLink *link = task.result;
