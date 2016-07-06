@@ -60,7 +60,7 @@ __attribute__((deprecated("`BFTask` exception handling is deprecated and will be
 /*!
  A block that can act as a continuation for a task.
  */
-typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *task);
+typedef __nullable id(^BFContinuationBlock)(BFTask<ResultType> *t);
 
 /*!
  Creates a task that is already completed with the given result.
