@@ -8,12 +8,10 @@
 //
 
 #include "Shared/Platform/tvOS.xcconfig"
-#include "Shared/Product/UnitTest.xcconfig"
+#include "Shared/Product/LogicTests.xcconfig"
 
 PRODUCT_NAME = BoltsTests-tvOS
 PRODUCT_MODULE_NAME = BoltsTests
 PRODUCT_BUNDLE_IDENTIFIER = com.bolts.tvos.tests
 
 INFOPLIST_FILE = BoltsTests/BoltsTests-Info.plist
-
-CLANG_ENABLE_MODULES = YES

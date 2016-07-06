@@ -7,18 +7,11 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 //
 
-#include "Shared/Platform/OSX.xcconfig"
-#include "Shared/Product/Framework.xcconfig"
+#include "Shared/Platform/macOS.xcconfig"
+#include "Shared/Product/DynamicFramework.xcconfig"
 
 PRODUCT_NAME = Bolts
-PRODUCT_BUNDLE_IDENTIFIER = com.bolts.osx
+PRODUCT_BUNDLE_IDENTIFIER = com.bolts.macos
 MACOSX_DEPLOYMENT_TARGET = 10.8
 
-MACH_O_TYPE = mh_dylib
-
-DEFINES_MODULE = YES
-DYLIB_INSTALL_NAME_BASE = @rpath
-
-OTHER_LD_FLAGS = -ObjC
-
-INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Mac-Info.plist
+INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist

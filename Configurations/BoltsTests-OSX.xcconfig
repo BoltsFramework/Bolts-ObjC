@@ -7,8 +7,8 @@
 // of patent rights can be found in the PATENTS file in the same directory.
 //
 
-#include "Shared/Platform/OSX.xcconfig"
-#include "Shared/Product/UnitTest.xcconfig"
+#include "Shared/Platform/macOS.xcconfig"
+#include "Shared/Product/LogicTests.xcconfig"
 
 PRODUCT_NAME = BoltsTests-OSX
 PRODUCT_MODULE_NAME = BoltsTests
@@ -17,4 +17,3 @@ PRODUCT_BUNDLE_IDENTIFIER = com.bolts.osx.tests
 MACOSX_DEPLOYMENT_TARGET = 10.8
 
 INFOPLIST_FILE = BoltsTests/BoltsTests-Info.plist
-LD_RUNPATH_SEARCH_PATHS = $(inherited) @loader_path/../Frameworks

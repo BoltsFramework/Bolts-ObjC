@@ -55,11 +55,11 @@
                 NSString *refererAppName = refererAppLink[BFAppLinkRefererAppName];
 
                 if (refererURLString && refererAppName) {
-                    BFAppLinkTarget *target = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:refererURLString]
-                                                                         appStoreId:nil
-                                                                            appName:refererAppName];
+                    BFAppLinkTarget *appLinkTarget = [BFAppLinkTarget appLinkTargetWithURL:[NSURL URLWithString:refererURLString]
+                                                                                appStoreId:nil
+                                                                                   appName:refererAppName];
                     _appLinkReferer = [BFAppLink appLinkWithSourceURL:[NSURL URLWithString:refererURLString]
-                                                              targets:@[ target ]
+                                                              targets:@[ appLinkTarget ]
                                                                webURL:nil
                                                      isBackToReferrer:YES];
                 }

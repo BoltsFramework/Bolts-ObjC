@@ -23,7 +23,7 @@
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"test immediate executor"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        task = [task continueWithExecutor:[BFExecutor immediateExecutor] withBlock:^id(BFTask *task) {
+        task = [task continueWithExecutor:[BFExecutor immediateExecutor] withBlock:^id(BFTask *_) {
             return nil;
         }];
         XCTAssertTrue(task.completed);
@@ -37,7 +37,7 @@
     BFExecutor *queueExecutor = [BFExecutor executorWithDispatchQueue:queue];
 
     BFTask *task = [BFTask taskWithResult:nil];
-    task = [task continueWithExecutor:queueExecutor withBlock:^id(BFTask *task) {
+    task = [task continueWithExecutor:queueExecutor withBlock:^id(BFTask *_) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         XCTAssertEqual(queue, dispatch_get_current_queue());
@@ -52,7 +52,7 @@
     BFExecutor *queueExecutor = [BFExecutor executorWithOperationQueue:queue];
 
     BFTask *task = [BFTask taskWithResult:nil];
-    task = [task continueWithExecutor:queueExecutor withBlock:^id(BFTask *task) {
+    task = [task continueWithExecutor:queueExecutor withBlock:^id(BFTask *_) {
         XCTAssertEqual(queue, [NSOperationQueue currentQueue]);
         return nil;
     }];
