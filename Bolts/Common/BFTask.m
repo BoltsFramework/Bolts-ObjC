@@ -127,19 +127,19 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
-        [task continueWithBlock:^id(BFTask *task) {
+        [task continueWithBlock:^id(BFTask *t) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            if (task.exception) {
+            if (t.exception) {
                 @synchronized (lock) {
-                    [exceptions addObject:task.exception];
+                    [exceptions addObject:t.exception];
 #pragma clang diagnostic pop
                 }
-            } else if (task.error) {
+            } else if (t.error) {
                 @synchronized (lock) {
-                    [errors addObject:task.error];
+                    [errors addObject:t.error];
                 }
-            } else if (task.cancelled) {
+            } else if (t.cancelled) {
                 OSAtomicIncrement32Barrier(&cancelled);
             }
 
@@ -199,23 +199,23 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     
     BFTaskCompletionSource *source = [BFTaskCompletionSource taskCompletionSource];
     for (BFTask *task in tasks) {
-        [task continueWithBlock:^id(BFTask *task) {
+        [task continueWithBlock:^id(BFTask *t) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-            if (task.exception != nil) {
+            if (t.exception != nil) {
                 @synchronized(lock) {
-                    [exceptions addObject:task.exception];
+                    [exceptions addObject:t.exception];
 #pragma clang diagnostic pop
                 }
-            } else if (task.error != nil) {
+            } else if (t.error != nil) {
                 @synchronized(lock) {
-                    [errors addObject:task.error];
+                    [errors addObject:t.error];
                 }
-            } else if (task.cancelled) {
+            } else if (t.cancelled) {
                 OSAtomicIncrement32Barrier(&cancelled);
             } else {
                 if(OSAtomicCompareAndSwap32Barrier(0, 1, &completed)) {
-                    [source setResult:task.result];
+                    [source setResult:t.result];
                 }
             }
             
