@@ -16,21 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
                BuildableName = "Bolts.framework"
-               BlueprintName = "Bolts-OSX"
-               ReferencedContainer = "container:Bolts.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8E8C8F1817F241DA00E3F1C7"
-               BuildableName = "BoltsTests-OSX.xctest"
-               BlueprintName = "BoltsTests-OSX"
+               BlueprintName = "Bolts-macOS"
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -40,8 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -49,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8E8C8F1817F241DA00E3F1C7"
                BuildableName = "BoltsTests-OSX.xctest"
-               BlueprintName = "BoltsTests-OSX"
+               BlueprintName = "BoltsTests-macOS"
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -59,7 +44,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
             BuildableName = "Bolts.framework"
-            BlueprintName = "Bolts-OSX"
+            BlueprintName = "Bolts-macOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -81,7 +66,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
             BuildableName = "Bolts.framework"
-            BlueprintName = "Bolts-OSX"
+            BlueprintName = "Bolts-macOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -99,7 +84,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8EDDA62817E17DDC00655F8A"
             BuildableName = "Bolts.framework"
-            BlueprintName = "Bolts-OSX"
+            BlueprintName = "Bolts-macOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

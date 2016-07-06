@@ -279,7 +279,7 @@
 		81D0EE7C19AFA8260000AE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-iOS-Dynamic.xcconfig"; sourceTree = "<group>"; };
 		81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-iOS.xcconfig"; sourceTree = "<group>"; };
-		81D646E51D2CA0E000690609 /* Bolts-OSX.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-OSX.xcconfig"; sourceTree = "<group>"; };
+		81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-macOS.xcconfig"; sourceTree = "<group>"; };
 		81D646E61D2CA0E000690609 /* Bolts-tvOS-Dynamic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-tvOS-Dynamic.xcconfig"; sourceTree = "<group>"; };
 		81D646E71D2CA0E000690609 /* Bolts-tvOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-tvOS.xcconfig"; sourceTree = "<group>"; };
 		81D646E81D2CA0E000690609 /* Bolts-watchOS-Dynamic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-watchOS-Dynamic.xcconfig"; sourceTree = "<group>"; };
@@ -502,7 +502,7 @@
 			children = (
 				81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */,
 				81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */,
-				81D646E51D2CA0E000690609 /* Bolts-OSX.xcconfig */,
+				81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */,
 				81D646E71D2CA0E000690609 /* Bolts-tvOS.xcconfig */,
 				81D646E61D2CA0E000690609 /* Bolts-tvOS-Dynamic.xcconfig */,
 				81D646E91D2CA0E000690609 /* Bolts-watchOS.xcconfig */,
@@ -906,9 +906,9 @@
 			productReference = 8E8C8EE917F23D1D00E3F1C7 /* BoltsTests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8E8C8F1817F241DA00E3F1C7 /* BoltsTests-OSX */ = {
+		8E8C8F1817F241DA00E3F1C7 /* BoltsTests-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-OSX" */;
+			buildConfigurationList = 8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-macOS" */;
 			buildPhases = (
 				8E8C8F1517F241DA00E3F1C7 /* Sources */,
 				8E8C8F1617F241DA00E3F1C7 /* Frameworks */,
@@ -919,14 +919,14 @@
 			dependencies = (
 				8E8C8F2517F241DA00E3F1C7 /* PBXTargetDependency */,
 			);
-			name = "BoltsTests-OSX";
+			name = "BoltsTests-macOS";
 			productName = MacBoltsTests;
 			productReference = 8E8C8F1917F241DA00E3F1C7 /* BoltsTests-OSX.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		8EDDA62817E17DDC00655F8A /* Bolts-OSX */ = {
+		8EDDA62817E17DDC00655F8A /* Bolts-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "Bolts-OSX" */;
+			buildConfigurationList = 8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "Bolts-macOS" */;
 			buildPhases = (
 				8EDDA62C17E17DDC00655F8A /* Sources */,
 				8EDDA62F17E17DDC00655F8A /* Frameworks */,
@@ -936,7 +936,7 @@
 			);
 			dependencies = (
 			);
-			name = "Bolts-OSX";
+			name = "Bolts-macOS";
 			productName = Bolts;
 			productReference = 81ED946E1BE14B5200795F05 /* Bolts.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1004,13 +1004,13 @@
 			targets = (
 				81ED94111BE147CF00795F05 /* Bolts-iOS */,
 				1D5D7DA61BE3CE8200FD67C7 /* Bolts-iOS-Dynamic */,
-				8EDDA62817E17DDC00655F8A /* Bolts-OSX */,
+				8EDDA62817E17DDC00655F8A /* Bolts-macOS */,
 				F5AFC9EA1BA752750076E927 /* Bolts-tvOS */,
 				81E94D521C2B8BF200A6291E /* Bolts-tvOS-Dynamic */,
 				8178F9841BB0F87700AD289D /* Bolts-watchOS */,
 				819573D91C2B8ECB00BFCA39 /* Bolts-watchOS-Dynamic */,
 				8E8C8EE817F23D1D00E3F1C7 /* BoltsTests-iOS */,
-				8E8C8F1817F241DA00E3F1C7 /* BoltsTests-OSX */,
+				8E8C8F1817F241DA00E3F1C7 /* BoltsTests-macOS */,
 				F5AFCA041BA752770076E927 /* BoltsTests-tvOS */,
 				1EC3015F18CDAA8300D06D07 /* BoltsTestUI */,
 			);
@@ -1234,7 +1234,7 @@
 		};
 		8E8C8F2517F241DA00E3F1C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8EDDA62817E17DDC00655F8A /* Bolts-OSX */;
+			target = 8EDDA62817E17DDC00655F8A /* Bolts-macOS */;
 			targetProxy = 8E8C8F2417F241DA00E3F1C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1436,14 +1436,14 @@
 		};
 		8EDDA63317E17DDC00655F8A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-OSX.xcconfig */;
+			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		8EDDA63417E17DDC00655F8A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-OSX.xcconfig */;
+			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
@@ -1542,7 +1542,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-OSX" */ = {
+		8E8C8F2617F241DA00E3F1C7 /* Build configuration list for PBXNativeTarget "BoltsTests-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8E8C8F2717F241DA00E3F1C7 /* Debug */,
@@ -1560,7 +1560,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "Bolts-OSX" */ = {
+		8EDDA63217E17DDC00655F8A /* Build configuration list for PBXNativeTarget "Bolts-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8EDDA63317E17DDC00655F8A /* Debug */,
