@@ -15,7 +15,6 @@ PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios
 IPHONEOS_DEPLOYMENT_TARGET = 8.0
 
 MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
+INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
 
 OTHER_LDFLAGS = $(inherited) -framework CoreGraphics -framework UIKit
-
-INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/iOS-Info.plist

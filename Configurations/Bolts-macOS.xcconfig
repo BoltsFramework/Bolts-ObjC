@@ -11,7 +11,7 @@
 #include "Shared/Product/DynamicFramework.xcconfig"
 
 PRODUCT_NAME = Bolts
-PRODUCT_BUNDLE_IDENTIFIER = com.bolts.osx
+PRODUCT_BUNDLE_IDENTIFIER = com.bolts.macos
 MACOSX_DEPLOYMENT_TARGET = 10.8
 
-INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Mac-Info.plist
+INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
