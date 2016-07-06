@@ -8,19 +8,14 @@
 //
 
 #include "Shared/Platform/iOS.xcconfig"
-#include "Shared/Product/Framework.xcconfig"
+#include "Shared/Product/StaticFramework.xcconfig"
 
 PRODUCT_NAME = Bolts
 PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios
 IPHONEOS_DEPLOYMENT_TARGET = 6.0
 
-MACH_O_TYPE = staticlib
-
-DEFINES_MODULE = YES
 MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
 
 OTHER_CFLAGS[sdk=iphoneos9.*] = $(inherited) -fembed-bitcode
-
-OTHER_LDFLAGS = $(inherited) -ObjC
 
 INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/iOS-Info.plist

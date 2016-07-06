@@ -8,7 +8,7 @@
 //
 
 #include "Shared/Platform/iOS.xcconfig"
-#include "Shared/Product/UnitTest.xcconfig"
+#include "Shared/Product/LogicTests.xcconfig"
 
 PRODUCT_NAME = BoltsTests-iOS
 PRODUCT_MODULE_NAME = BoltsTests
@@ -16,9 +16,6 @@ PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios.tests
 
 IPHONEOS_DEPLOYMENT_TARGET = 7.0
 
-BUNDLE_LOADER = $(BUILT_PRODUCTS_DIR)/BoltsTestUI.app/BoltsTestUI
-TEST_HOST = $(BUNDLE_LOADER)
-
 INFOPLIST_FILE = BoltsTests/BoltsTests-Info.plist
 
-CLANG_ENABLE_MODULES = YES
+TEST_HOST = $(BUILT_PRODUCTS_DIR)/BoltsTestUI.app/BoltsTestUI
