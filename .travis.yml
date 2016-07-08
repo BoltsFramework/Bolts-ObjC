@@ -15,7 +15,7 @@ env:
     - TEST_TYPE=Carthage
 before_install:
 - |
-  if [ "$TEST_TYPE" = iOS ] || [ "$TEST_TYPE" = OSX ] || [ "$TEST_TYPE" = tvOS ]; then
+  if [ "$TEST_TYPE" = iOS ] || [ "$TEST_TYPE" = macOS ] || [ "$TEST_TYPE" = tvOS ]; then
     gem install xcpretty -N --no-ri --no-rdoc
   elif [ "$TEST_TYPE" = CocoaPods ]; then
     gem install cocoapods --pre --quiet --no-ri --no-rdoc
@@ -30,7 +30,7 @@ script:
     if [ "$TEST_TYPE" = iOS ]; then
       set -o pipefail
       xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts-iOS -configuration Debug -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
-    elif [ "$TEST_TYPE" = OSX ]; then
+    elif [ "$TEST_TYPE" = macOS ]; then
       set -o pipefail
       xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme Bolts-macOS -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
     elif [ "$TEST_TYPE" = tvOS ]; then
