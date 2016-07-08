@@ -16,5 +16,3 @@ IPHONEOS_DEPLOYMENT_TARGET = 6.0
 
 MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
 INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
-
-OTHER_CFLAGS[sdk=iphoneos9.*] = $(inherited) -fembed-bitcode
