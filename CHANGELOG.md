@@ -1,5 +1,12 @@
 # Bolts CHANGELOG
 
+## 1.8.1
+
+**Fixed**
+- Fixed compilation of dynamic frameworks due to codesigning requirements.
+  [#260](https://github.com/BoltsFramework/Bolts-ObjC/pull/260)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+
 ## 1.8.0
 
 **New**
