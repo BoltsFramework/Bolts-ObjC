@@ -76,7 +76,7 @@ test -x "$XCODEBUILD" || die 'Could not find xcodebuild in $PATH'
 test -x "$LIPO" || die 'Could not find lipo in $PATH'
 
 BOLTS_IOS_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-universal/Bolts.framework/Bolts
-BOLTS_OSX_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/Bolts.framework
+BOLTS_MACOS_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}/Bolts.framework
 BOLTS_TVOS_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-appletv-universal/Bolts.framework/Bolts
 BOLTS_WATCHOS_BINARY=$BOLTS_BUILD/${BUILDCONFIGURATION}-watch-universal/Bolts.framework/Bolts
 
@@ -95,9 +95,9 @@ test -d "$BOLTS_IOS_BUILD" \
   || mkdir -p "$BOLTS_IOS_BUILD" \
   || die "Could not create directory $BOLTS_IOS_BUILD"
 
-test -d "$BOLTS_OSX_BUILD" \
-  || mkdir -p "$BOLTS_OSX_BUILD" \
-  || die "Could not create directory $BOLTS_OSX_BUILD"
+test -d "$BOLTS_MACOS_BUILD" \
+  || mkdir -p "$BOLTS_MACOS_BUILD" \
+  || die "Could not create directory $BOLTS_MACOS_BUILD"
 
 if [ $WATCHOS -eq 1 ]; then
   test -d "$BOLTS_WATCHOS_BUILD" \
@@ -126,7 +126,7 @@ function xcode_build_target() {
 
 xcode_build_target "iphonesimulator" "${BUILDCONFIGURATION}" "Bolts-iOS"
 xcode_build_target "iphoneos" "${BUILDCONFIGURATION}" "Bolts-iOS"
-xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Bolts-OSX"
+xcode_build_target "macosx" "${BUILDCONFIGURATION}" "Bolts-macOS"
 if [ $WATCHOS -eq 1 ]; then
   xcode_build_target "watchsimulator" "${BUILDCONFIGURATION}" "Bolts-watchOS"
   xcode_build_target "watchos" "${BUILDCONFIGURATION}" "Bolts-watchOS"
@@ -204,8 +204,8 @@ fi
 # Copy/Paste created iOS Framework to final location
 cp -av "$(dirname "$BOLTS_IOS_BINARY")" $BOLTS_IOS_FRAMEWORK
 
-# Copy/Paste OSX framework, as this is already built for us
-cp -av "$BOLTS_OSX_BINARY" $BOLTS_OSX_FRAMEWORK
+# Copy/Paste macOS framework, as this is already built for us
+cp -av "$BOLTS_MACOS_BINARY" $BOLTS_MACOS_FRAMEWORK
 
 if [ $WATCHOS -eq 1 ]; then
   # Copy/Paste watchOS Framework
