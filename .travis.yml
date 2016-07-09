@@ -19,8 +19,6 @@ before_install:
     gem install xcpretty -N --no-ri --no-rdoc
   elif [ "$TEST_TYPE" = CocoaPods ]; then
     gem install cocoapods --pre --quiet --no-ri --no-rdoc
-    pod setup --silent
-    pod repo update --silent
   elif [ "$TEST_TYPE" = Carthage ]; then
     brew update
     brew install carthage || brew upgrade carthage
