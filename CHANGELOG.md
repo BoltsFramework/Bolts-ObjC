@@ -1,5 +1,18 @@
 # Bolts CHANGELOG
 
+## 1.8.2
+
+**Fixed**
+- Fixed custom build frameworks script.
+  [#263](https://github.com/BoltsFramework/Bolts-ObjC/pull/263)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+- Fixed incorrect dynamic framework install name base and install name making dynamic framework not load in some cases.
+  [#266](https://github.com/BoltsFramework/Bolts-ObjC/pull/266)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+- Fixed compilation of dynamic frameworks for watchOS/tvOS when no code signing identity is present.
+  [#266](https://github.com/BoltsFramework/Bolts-ObjC/pull/266)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+
 ## 1.8.1
 
 **Fixed**
