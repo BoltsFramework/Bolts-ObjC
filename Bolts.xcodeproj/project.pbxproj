@@ -268,6 +268,7 @@
 		814916E11AD5D46600EE7C63 /* iOS.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = iOS.modulemap; path = Resources/iOS.modulemap; sourceTree = "<group>"; };
 		8178F99C1BB0F87700AD289D /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		819573F11C2B8ECB00BFCA39 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81AB8BB11D36D7BD00066F63 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BFTask+Exceptions.h"; sourceTree = "<group>"; };
 		81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BFTask+Exceptions.m"; sourceTree = "<group>"; };
 		81CF83061D0B559700633946 /* BFAppLink_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink_Internal.h; sourceTree = "<group>"; };
@@ -507,6 +508,7 @@
 				81D646EA1D2CA0E000690609 /* BoltsTests-iOS.xcconfig */,
 				81D646EB1D2CA0E000690609 /* BoltsTests-OSX.xcconfig */,
 				81D646EC1D2CA0E000690609 /* BoltsTests-tvOS.xcconfig */,
+				81AB8BB11D36D7BD00066F63 /* Version.xcconfig */,
 				81D646ED1D2CA0E000690609 /* Shared */,
 			);
 			path = Configurations;

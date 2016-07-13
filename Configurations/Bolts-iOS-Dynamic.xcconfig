@@ -9,6 +9,7 @@
 
 #include "Shared/Platform/iOS.xcconfig"
 #include "Shared/Product/DynamicFramework.xcconfig"
+#include "Version.xcconfig"
 
 PRODUCT_NAME = Bolts
 PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios
@@ -18,3 +19,6 @@ MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
 INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
 
 OTHER_LDFLAGS = $(inherited) -framework CoreGraphics -framework UIKit
+
+// Use the 1.0.0 to avoid breaking changes with older version of Bolts.
+DYLIB_COMPATIBILITY_VERSION = 1
