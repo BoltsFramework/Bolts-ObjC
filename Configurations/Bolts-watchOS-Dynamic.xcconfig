@@ -17,3 +17,6 @@ WATCHOS_DEPLOYMENT_TARGET = 2.0
 APPLICATION_EXTENSION_API_ONLY = YES
 
 INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
+
+// Use the 1.0.0 to avoid breaking changes with older version of Bolts.
+DYLIB_COMPATIBILITY_VERSION = 1

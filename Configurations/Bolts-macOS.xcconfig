@@ -15,3 +15,6 @@ PRODUCT_BUNDLE_IDENTIFIER = com.bolts.macos
 MACOSX_DEPLOYMENT_TARGET = 10.8
 
 INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
+
+// Use the 1.0.0 to avoid breaking changes with older version of Bolts.
+DYLIB_COMPATIBILITY_VERSION = 1
