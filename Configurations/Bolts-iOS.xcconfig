@@ -9,6 +9,7 @@
 
 #include "Shared/Platform/iOS.xcconfig"
 #include "Shared/Product/StaticFramework.xcconfig"
+#include "Version.xcconfig"
 
 PRODUCT_NAME = Bolts
 PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios
