@@ -1,5 +1,12 @@
 # Bolts CHANGELOG
 
+## 1.8.4
+
+**Fixed**
+- Fix potential breaking change related to dynamic library compatibility version.  
+  [#270](https://github.com/BoltsFramework/Bolts-ObjC/pull/270)
+  by [Nikita Lutsenko](https://github.com/nlutsenko)
+
 ## 1.8.3
 
 **Fixed**
