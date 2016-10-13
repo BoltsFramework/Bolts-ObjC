@@ -60,6 +60,12 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     return self;
 }
 
+- (void)dealloc {
+    if (![self isCompleted]) {
+        [self trySetCancelled];
+    }
+}
+
 - (instancetype)initWithResult:(id)result {
     self = [super init];
     if (!self) return self;
@@ -379,8 +385,8 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
         [self.condition lock];
         [self.condition broadcast];
         [self.condition unlock];
-        for (void (^callback)() in self.callbacks) {
-            callback();
+        for (void (^callback)(BFTask*) in self.callbacks) {
+            callback(self);
         }
         [self.callbacks removeAllObjects];
     }
@@ -398,7 +404,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
 
     // Capture all of the state that needs to used when the continuation is complete.
-    dispatch_block_t executionBlock = ^{
+    void(^executionBlock)(BFTask*) = ^(BFTask* task){
         if (cancellationToken.cancellationRequested) {
             [tcs cancel];
             return;
@@ -409,7 +415,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         if (BFTaskCatchesExceptions()) {
             @try {
-                result = block(self);
+                result = block(task);
             } @catch (NSException *exception) {
                 NSLog(@"[Bolts] Warning: `BFTask` caught an exception in the continuation block."
                       @" This behavior is discouraged and will be removed in a future release."
@@ -418,7 +424,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
                 return;
             }
         } else {
-            result = block(self);
+            result = block(task);
         }
 #pragma clang diagnostic pop
 
@@ -457,13 +463,17 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
     @synchronized(self.lock) {
         completed = self.completed;
         if (!completed) {
-            [self.callbacks addObject:[^{
-                [executor execute:executionBlock];
+            [self.callbacks addObject:[^(BFTask* task){
+                [executor execute:^{
+                    executionBlock(task);
+                }];
             } copy]];
         }
     }
     if (completed) {
-        [executor execute:executionBlock];
+        [executor execute:^{
+            executionBlock(self);
+        }];
     }
 
     return tcs.task;
