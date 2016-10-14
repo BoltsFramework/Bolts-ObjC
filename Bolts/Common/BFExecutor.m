@@ -34,7 +34,7 @@ __attribute__((noinline)) static size_t remaining_stack_size(size_t *restrict to
     // NOTE: If the function is inlined, this value could be incorrect
     uint8_t *frameAddr = __builtin_frame_address(0);
 
-    return (*totalSize) - (endStack - frameAddr);
+    return (*totalSize) - (size_t)(endStack - frameAddr);
 }
 
 @interface BFExecutor ()
