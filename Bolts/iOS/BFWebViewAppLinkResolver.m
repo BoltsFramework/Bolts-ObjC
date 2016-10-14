@@ -200,7 +200,7 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
             continue;
         }
         NSMutableDictionary *root = al;
-        for (int i = 1; i < nameComponents.count; i++) {
+        for (NSUInteger i = 1; i < nameComponents.count; i++) {
             NSMutableArray *children = root[nameComponents[i]];
             if (!children) {
                 children = [NSMutableArray array];
