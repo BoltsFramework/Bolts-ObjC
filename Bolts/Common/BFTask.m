@@ -178,7 +178,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
 }
 
 + (instancetype)taskForCompletionOfAllTasksWithResults:(nullable NSArray<BFTask *> *)tasks {
-    return [[self taskForCompletionOfAllTasks:tasks] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[self taskForCompletionOfAllTasks:tasks] continueWithSuccessBlock:^id(BFTask * __unused task) {
         return [tasks valueForKey:@"result"];
     }];
 }

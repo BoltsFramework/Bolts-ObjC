@@ -549,7 +549,7 @@
     for (int i = 0; i < kTaskCount; ++i) {
         double sleepTimeInMs = i * 10;
         int result = i + 1;
-        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *t) {
+        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *__unused t) {
             return @(result);
         }]];
     }
