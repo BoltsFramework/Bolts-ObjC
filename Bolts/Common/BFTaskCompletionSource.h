@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BFTask<ResultType>;
+@class BFTask<__covariant ResultType>;
 
 /*!
  A BFTaskCompletionSource represents the producer side of tasks.
