@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/ParseIt'
   s.requires_arc = true
 
-  s.ios.deployment_target = '6.0'
+  s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.8'
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'AppLinks' do |ss|
-    ss.ios.deployment_target = '6.0'
+    ss.ios.deployment_target = '8.0'
     ss.dependency 'Bolts/Tasks'
 
     ss.ios.source_files = 'Bolts/iOS/**/*.[hm]'
