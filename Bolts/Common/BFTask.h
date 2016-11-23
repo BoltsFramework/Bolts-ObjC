@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 
 #import <Bolts/BFCancellationToken.h>
+#import <Bolts/BFGeneric.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -116,7 +117,7 @@ __attribute__((deprecated("`BFTask` exception handling is deprecated and will be
  @param millis The approximate number of milliseconds to wait before the
  task will be finished (with result == nil).
  */
-+ (instancetype)taskWithDelay:(int)millis;
++ (BFTask<BFVoid> *)taskWithDelay:(int)millis;
 
 /*!
  Returns a task that will be completed a certain amount of time in the future.
@@ -124,7 +125,7 @@ __attribute__((deprecated("`BFTask` exception handling is deprecated and will be
  task will be finished (with result == nil).
  @param token The cancellation token (optional).
  */
-+ (instancetype)taskWithDelay:(int)millis cancellationToken:(nullable BFCancellationToken *)token;
++ (BFTask<BFVoid> *)taskWithDelay:(int)millis cancellationToken:(nullable BFCancellationToken *)token;
 
 /*!
  Returns a task that will be completed after the given block completes with
