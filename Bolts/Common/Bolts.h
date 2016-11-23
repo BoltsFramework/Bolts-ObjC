@@ -12,6 +12,7 @@
 #import <Bolts/BFCancellationTokenRegistration.h>
 #import <Bolts/BFCancellationTokenSource.h>
 #import <Bolts/BFExecutor.h>
+#import <Bolts/BFGeneric.h>
 #import <Bolts/BFTask.h>
 #import <Bolts/BFTask+Exceptions.h>
 #import <Bolts/BFTaskCompletionSource.h>
