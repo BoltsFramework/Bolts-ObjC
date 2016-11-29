@@ -143,7 +143,7 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
     }];
 }
 
-- (BFTask *)appLinkFromURLInBackground:(NSURL *)url {
+- (BFTask *)appLinkFromURLInBackground:(NSURL *)url NS_EXTENSION_UNAVAILABLE_IOS("") {
     return [[self followRedirects:url] continueWithExecutor:[BFExecutor mainThreadExecutor]
                                            withSuccessBlock:^id(BFTask *task) {
                                                NSData *responseData = task.result[@"data"];
