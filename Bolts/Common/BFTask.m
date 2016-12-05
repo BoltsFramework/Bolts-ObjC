@@ -168,7 +168,7 @@ NSString *const BFTaskMultipleExceptionsUserInfoKey = @"exceptions";
                 } else if (cancelled > 0) {
                     [tcs cancel];
                 } else {
-                    tcs.result = nil;
+                    tcs.result = tasks;
                 }
             }
             return nil;

@@ -329,6 +329,30 @@
     XCTAssertTrue(task.isCancelled);
 }
 
+- (void)testTaskForCompletionOfAllTasksResult {
+    NSMutableArray *tasks = [NSMutableArray array];
+    
+    const int kTaskCount = 20;
+    for (int i = 0; i < kTaskCount; ++i) {
+        double sleepTimeInMs = rand() % 100;
+        [tasks addObject:[[BFTask taskWithDelay:sleepTimeInMs] continueWithBlock:^id(BFTask *task) {
+            return @(i);
+        }]];
+    }
+    
+    [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
+        XCTAssertEqual(task.result, tasks);
+        XCTAssertNil(task.error);
+        XCTAssertNil(task.exception);
+        XCTAssertFalse(task.isCancelled);
+        
+        for (int i = 0; i < kTaskCount; ++i) {
+            XCTAssertEqual(i, [((BFTask *)[task result][i]).result intValue]);
+        }
+        return nil;
+    }] waitUntilFinished];
+}
+
 - (void)testTaskForCompletionOfAllTasksSuccess {
     NSMutableArray *tasks = [NSMutableArray array];
 
