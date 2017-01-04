@@ -99,20 +99,6 @@
 		819573EA1C2B8ECB00BFCA39 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		819573EC1C2B8ECB00BFCA39 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		819573ED1C2B8ECB00BFCA39 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD062A1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD062B1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD062C1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD062D1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD062E1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD062F1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD06301CEED28A00497F47 /* BFTask+Exceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CD06331CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */; };
-		81CD06341CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */; };
-		81CD06351CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */; };
-		81CD06361CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */; };
-		81CD06371CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */; };
-		81CD06381CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */; };
-		81CD06391CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */; };
 		81CF830A1D0B559800633946 /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83061D0B559700633946 /* BFAppLink_Internal.h */; };
 		81CF830B1D0B559800633946 /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83061D0B559700633946 /* BFAppLink_Internal.h */; };
 		81CF830C1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */; };
@@ -277,8 +263,6 @@
 		8178F99C1BB0F87700AD289D /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		819573F11C2B8ECB00BFCA39 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB8BB11D36D7BD00066F63 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
-		81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BFTask+Exceptions.h"; sourceTree = "<group>"; };
-		81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BFTask+Exceptions.m"; sourceTree = "<group>"; };
 		81CF83061D0B559700633946 /* BFAppLink_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink_Internal.h; sourceTree = "<group>"; };
 		81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkReturnToRefererView_Internal.h; sourceTree = "<group>"; };
 		81CF83081D0B559700633946 /* BFMeasurementEvent_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMeasurementEvent_Internal.h; sourceTree = "<group>"; };
@@ -452,8 +436,6 @@
 				8160B82B1DE6277200C6E285 /* BFGeneric.h */,
 				8103FA5019900A84000BAE3F /* BFTask.h */,
 				8103FA5119900A84000BAE3F /* BFTask.m */,
-				81CD06291CEED28A00497F47 /* BFTask+Exceptions.h */,
-				81CD06321CEED2BC00497F47 /* BFTask+Exceptions.m */,
 				8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */,
 				8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */,
 				8103FA4E19900A84000BAE3F /* BFExecutor.h */,
@@ -661,7 +643,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D5D7DBA1BE3CE8200FD67C7 /* BFWebViewAppLinkResolver.h in Headers */,
-				81CD062B1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */,
 				8160B82D1DE6277200C6E285 /* BFGeneric.h in Headers */,
 				81CF830D1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
 				81CF83111D0B559800633946 /* BFURL_Internal.h in Headers */,
@@ -690,7 +671,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8178F9901BB0F87700AD289D /* BFCancellationTokenRegistration.h in Headers */,
-				81CD062F1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */,
 				8178F9911BB0F87700AD289D /* BFTask.h in Headers */,
 				8178F9921BB0F87700AD289D /* BFCancellationTokenSource.h in Headers */,
 				8178F9931BB0F87700AD289D /* BFExecutor.h in Headers */,
@@ -706,7 +686,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				819573E51C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.h in Headers */,
-				81CD06301CEED28A00497F47 /* BFTask+Exceptions.h in Headers */,
 				819573E61C2B8ECB00BFCA39 /* BFTask.h in Headers */,
 				819573E71C2B8ECB00BFCA39 /* BFCancellationTokenSource.h in Headers */,
 				819573E81C2B8ECB00BFCA39 /* BFExecutor.h in Headers */,
@@ -722,7 +701,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA39C931ADE715400DD78CC /* BFCancellationTokenRegistration.h in Headers */,
-				81CD062C1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */,
 				81D0EE8519AFAA190000AE75 /* BFTask.h in Headers */,
 				7C60AECA1ACF1A0B00747DD7 /* BFCancellationTokenSource.h in Headers */,
 				81D0EE8819AFAA240000AE75 /* BFExecutor.h in Headers */,
@@ -738,7 +716,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				81E94D5E1C2B8BF200A6291E /* BFCancellationTokenRegistration.h in Headers */,
-				81CD062E1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */,
 				81E94D5F1C2B8BF200A6291E /* BFTask.h in Headers */,
 				81E94D601C2B8BF200A6291E /* BFCancellationTokenSource.h in Headers */,
 				81E94D611C2B8BF200A6291E /* BFExecutor.h in Headers */,
@@ -754,7 +731,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				81ED94311BE1481900795F05 /* BFWebViewAppLinkResolver.h in Headers */,
-				81CD062A1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */,
 				8160B82C1DE6277200C6E285 /* BFGeneric.h in Headers */,
 				81CF830C1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
 				81CF83101D0B559800633946 /* BFURL_Internal.h in Headers */,
@@ -783,7 +759,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5AFC9F61BA752750076E927 /* BFCancellationTokenRegistration.h in Headers */,
-				81CD062D1CEED28A00497F47 /* BFTask+Exceptions.h in Headers */,
 				F5AFC9F71BA752750076E927 /* BFTask.h in Headers */,
 				F5AFC9F81BA752750076E927 /* BFCancellationTokenSource.h in Headers */,
 				F5AFC9F91BA752750076E927 /* BFExecutor.h in Headers */,
@@ -1074,7 +1049,6 @@
 				1D5D7DAB1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.m in Sources */,
 				1D5D7DAC1BE3CE8200FD67C7 /* BFTask.m in Sources */,
 				1D5D7DAD1BE3CE8200FD67C7 /* Bolts.m in Sources */,
-				81CD06341CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */,
 				1D5D7DAE1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.m in Sources */,
 				1D5D7DAF1BE3CE8200FD67C7 /* BFCancellationTokenSource.m in Sources */,
 				1D5D7DB01BE3CE8200FD67C7 /* BFMeasurementEvent.m in Sources */,
@@ -1106,7 +1080,6 @@
 				8178F9891BB0F87700AD289D /* BFCancellationTokenRegistration.m in Sources */,
 				8178F98A1BB0F87700AD289D /* BFCancellationTokenSource.m in Sources */,
 				8178F98B1BB0F87700AD289D /* BFExecutor.m in Sources */,
-				81CD06381CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */,
 				8178F98C1BB0F87700AD289D /* BFCancellationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1121,7 +1094,6 @@
 				819573DE1C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.m in Sources */,
 				819573DF1C2B8ECB00BFCA39 /* BFCancellationTokenSource.m in Sources */,
 				819573E01C2B8ECB00BFCA39 /* BFExecutor.m in Sources */,
-				81CD06391CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */,
 				819573E11C2B8ECB00BFCA39 /* BFCancellationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1136,7 +1108,6 @@
 				81E94D571C2B8BF200A6291E /* BFCancellationTokenRegistration.m in Sources */,
 				81E94D581C2B8BF200A6291E /* BFCancellationTokenSource.m in Sources */,
 				81E94D591C2B8BF200A6291E /* BFExecutor.m in Sources */,
-				81CD06371CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */,
 				81E94D5A1C2B8BF200A6291E /* BFCancellationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1151,7 +1122,6 @@
 				81ED94361BE1481900795F05 /* BFAppLinkReturnToRefererView.m in Sources */,
 				81ED94141BE147CF00795F05 /* BFTask.m in Sources */,
 				81ED94151BE147CF00795F05 /* Bolts.m in Sources */,
-				81CD06331CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */,
 				81ED94161BE147CF00795F05 /* BFCancellationTokenRegistration.m in Sources */,
 				81ED94171BE147CF00795F05 /* BFCancellationTokenSource.m in Sources */,
 				81ED943C1BE1481900795F05 /* BFMeasurementEvent.m in Sources */,
@@ -1196,7 +1166,6 @@
 				7CA39C951ADE715400DD78CC /* BFCancellationTokenRegistration.m in Sources */,
 				7C60AECB1ACF1A0D00747DD7 /* BFCancellationTokenSource.m in Sources */,
 				8103FA6919900A84000BAE3F /* BFExecutor.m in Sources */,
-				81CD06351CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */,
 				7C60AEC91ACF1A0900747DD7 /* BFCancellationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1211,7 +1180,6 @@
 				F5AFC9EF1BA752750076E927 /* BFCancellationTokenRegistration.m in Sources */,
 				F5AFC9F01BA752750076E927 /* BFCancellationTokenSource.m in Sources */,
 				F5AFC9F11BA752750076E927 /* BFExecutor.m in Sources */,
-				81CD06361CEED2BC00497F47 /* BFTask+Exceptions.m in Sources */,
 				F5AFC9F21BA752750076E927 /* BFCancellationToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

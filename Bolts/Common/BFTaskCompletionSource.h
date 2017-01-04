@@ -46,16 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setError:(NSError *)error NS_SWIFT_NAME(set(error:));
 
 /*!
- Completes the task by setting an exception.
- Attempting to set this for a completed task will raise an exception.
- @param exception The exception for the task.
- 
- @deprecated `BFTask` exception handling is deprecated and will be removed in a future release.
- */
-- (void)setException:(NSException *)exception
-__attribute__((deprecated("`BFTask` exception handling is deprecated and will be removed in a future release.")));
-
-/*!
  Completes the task by marking it as cancelled.
  Attempting to set this for a completed task will raise an exception.
  */
@@ -73,16 +63,6 @@ __attribute__((deprecated("`BFTask` exception handling is deprecated and will be
  @returns whether the new value was set.
  */
 - (BOOL)trySetError:(NSError *)error NS_SWIFT_NAME(trySet(error:));
-
-/*!
- Sets the exception of the task if it wasn't already completed.
- @param exception The exception for the task.
- @returns whether the new value was set.
- 
- @deprecated `BFTask` exception handling is deprecated and will be removed in a future release.
- */
-- (BOOL)trySetException:(NSException *)exception
-__attribute__((deprecated("`BFTask` exception handling is deprecated and will be removed in a future release.")));
 
 /*!
  Sets the cancellation state of the task if it wasn't already completed.
