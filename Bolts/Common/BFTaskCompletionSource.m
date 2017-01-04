@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)trySetResult:(nullable id)result;
 - (BOOL)trySetError:(NSError *)error;
-- (BOOL)trySetException:(NSException *)exception;
 - (BOOL)trySetCancelled;
 
 @end
@@ -56,13 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)setException:(NSException *)exception {
-    if (![self.task trySetException:exception]) {
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Cannot set the exception on a completed task."];
-    }
-}
-
 - (void)cancel {
     if (![self.task trySetCancelled]) {
         [NSException raise:NSInternalInconsistencyException
@@ -76,10 +68,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)trySetError:(NSError *)error {
     return [self.task trySetError:error];
-}
-
-- (BOOL)trySetException:(NSException *)exception {
-    return [self.task trySetException:exception];
 }
 
 - (BOOL)trySetCancelled {

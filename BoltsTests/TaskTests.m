@@ -96,21 +96,6 @@
     }] waitUntilFinished];
 }
 
-- (void)testBasicContinueWithException {
-    NSString *message = @"This is expected.";
-    [[[[BFTask taskWithResult:nil] continueWithBlock:^id(BFTask *t) {
-        [NSException raise:NSInternalInconsistencyException format:message];
-        return nil;
-    }] continueWithBlock:^id(BFTask *t) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        XCTAssertNotNil(t.exception, @"Task should have failed.");
-        XCTAssertEqualObjects(message, t.exception.description);
-#pragma clang diagnostic pop
-        return nil;
-    }] waitUntilFinished];
-}
-
 - (void)testBasicContinueWithToken {
     BFCancellationTokenSource *cts = [BFCancellationTokenSource cancellationTokenSource];
     BFTask *task = [BFTask taskWithDelay:100];
@@ -168,23 +153,6 @@
         tcs.error = [NSError errorWithDomain:@"Bolts" code:23 userInfo:nil];
         return nil;
     }];
-    [task waitUntilFinished];
-}
-
-- (void)testFinishLaterWithException {
-    NSString *message = @"This is expected.";
-    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    BFTask *task = [tcs.task continueWithBlock:^id(BFTask *t) {
-        XCTAssertNotNil(t.exception, @"Task should have failed.");
-        XCTAssertEqualObjects(message, t.exception.description);
-        return nil;
-    }];
-    [tcs setException:[NSException exceptionWithName:NSInternalInconsistencyException
-                                              reason:message
-                                            userInfo:nil]];
-#pragma clang diagnostic pop
     [task waitUntilFinished];
 }
 
@@ -342,90 +310,11 @@
 
     [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *t) {
         XCTAssertNil(t.error);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        XCTAssertNil(t.exception);
-#pragma clang diagnostic pop
         XCTAssertFalse(t.isCancelled);
 
         for (int i = 0; i < kTaskCount; ++i) {
             XCTAssertEqual(i, [((BFTask *)[tasks objectAtIndex:i]).result intValue]);
         }
-        return nil;
-    }] waitUntilFinished];
-}
-
-- (void)testTaskForCompletionOfAllTasksOneException {
-    NSMutableArray *tasks = [NSMutableArray array];
-
-    const int kTaskCount = 20;
-    for (int i = 0; i < kTaskCount; ++i) {
-        double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *t) {
-            if (i == 10) {
-                [NSException raise:@"TestException" format:@"This exception is expected."];
-            }
-            return @(i);
-        }]];
-    }
-
-    [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *t) {
-        XCTAssertNil(t.error);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        XCTAssertNotNil(t.exception);
-        XCTAssertFalse(t.isCancelled);
-
-        XCTAssertEqualObjects(@"TestException", t.exception.name);
-
-        for (int i = 0; i < kTaskCount; ++i) {
-            if (i == 10) {
-                XCTAssertNotNil(((BFTask *)[tasks objectAtIndex:i]).exception);
-            } else {
-                XCTAssertEqual(i, [((BFTask *)[tasks objectAtIndex:i]).result intValue]);
-            }
-        }
-#pragma clang diagnostic pop
-        return nil;
-    }] waitUntilFinished];
-}
-
-- (void)testTaskForCompletionOfAllTasksTwoExceptions {
-    NSMutableArray *tasks = [NSMutableArray array];
-
-    const int kTaskCount = 20;
-    for (int i = 0; i < kTaskCount; ++i) {
-        double sleepTimeInMs = rand() % 100;
-        [tasks addObject:[[BFTask taskWithDelay:(int)sleepTimeInMs] continueWithBlock:^id(BFTask *t) {
-            if (i == 10 || i == 11) {
-                [NSException raise:@"TestException" format:@"This exception is expected."];
-            }
-            return @(i);
-        }]];
-    }
-
-    [[[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *t) {
-        XCTAssertNil(t.error);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        XCTAssertNotNil(t.exception);
-        XCTAssertFalse(t.isCancelled);
-
-        XCTAssertEqualObjects(@"BFMultipleExceptionsException", t.exception.name);
-
-        NSArray *exceptions = [t.exception.userInfo objectForKey:BFTaskMultipleExceptionsUserInfoKey];
-        XCTAssertEqual(2, (int)exceptions.count);
-        XCTAssertEqualObjects(@"TestException", [[exceptions objectAtIndex:0] name]);
-        XCTAssertEqualObjects(@"TestException", [[exceptions objectAtIndex:1] name]);
-
-        for (int i = 0; i < kTaskCount; ++i) {
-            if (i == 10 || i == 11) {
-                XCTAssertNotNil(((BFTask *)[tasks objectAtIndex:i]).exception);
-            } else {
-                XCTAssertEqual(i, [((BFTask *)[tasks objectAtIndex:i]).result intValue]);
-            }
-        }
-#pragma clang diagnostic pop
         return nil;
     }] waitUntilFinished];
 }
@@ -577,36 +466,15 @@
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
 }
 
-- (void)testTaskForCompletionOfAllTasksExceptionCancelledSuccess {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSException *exception = [NSException exceptionWithName:@"" reason:@"" userInfo:nil];
-    BFTask *exceptionTask = [BFTask taskWithException:exception];
-    BFTask *cancelledTask = [BFTask cancelledTask];
-    BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
-
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, cancelledTask, exceptionTask ]];
-
-    XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
-    XCTAssertNil(allTasks.error, @"Task shoud not have error");
-    XCTAssertNotNil(allTasks.exception, @"Task should have exception");
-#pragma clang diagnostic pop
-}
-
 - (void)testTaskForCompletionOfAllTasksExceptionErrorCancelledSuccess {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     BFTask *errorTask = [BFTask taskWithError:[NSError new]];
-    BFTask *exceptionTask = [BFTask taskWithException:[NSException new]];
     BFTask *cancelledTask = [BFTask cancelledTask];
     BFTask *successfulTask = [BFTask taskWithResult:[NSNumber numberWithInt:2]];
 
-    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, cancelledTask, exceptionTask, errorTask ]];
+    BFTask *allTasks = [BFTask taskForCompletionOfAllTasks:@[ successfulTask, cancelledTask, errorTask ]];
 
     XCTAssertTrue(allTasks.faulted, @"Task should be faulted");
     XCTAssertNotNil(allTasks.error, @"Task should have error");
-    XCTAssertNil(allTasks.exception, @"Task should not have exception");
-#pragma clang diagnostic pop
 }
 
 - (void)testTaskForCompletionOfAllTasksErrorCancelled {
@@ -831,36 +699,6 @@
     XCTAssertTrue(taskCompletionSource.task.completed);
     XCTAssertTrue(taskCompletionSource.task.faulted);
     XCTAssertEqualObjects(taskCompletionSource.task.error, error);
-}
-
-- (void)testSetException {
-    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException reason:@"test" userInfo:nil];
-    taskCompletionSource.exception = exception;
-    XCTAssertThrowsSpecificNamed([taskCompletionSource setException:exception], NSException, NSInternalInconsistencyException);
-
-    XCTAssertTrue(taskCompletionSource.task.completed);
-    XCTAssertTrue(taskCompletionSource.task.faulted);
-    XCTAssertEqualObjects(taskCompletionSource.task.exception, exception);
-#pragma clang diagnostic pop
-}
-
-- (void)testTrySetException {
-    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException reason:@"test" userInfo:nil];
-    [taskCompletionSource trySetException:exception];
-    [taskCompletionSource trySetException:exception];
-
-    XCTAssertTrue(taskCompletionSource.task.completed);
-    XCTAssertTrue(taskCompletionSource.task.faulted);
-    XCTAssertEqualObjects(taskCompletionSource.task.exception, exception);
-#pragma clang diagnostic pop
 }
 
 - (void)testSetCancelled {
