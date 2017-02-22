@@ -11,6 +11,7 @@
 #import "BFExecutor.h"
 
 #import <pthread.h>
+#import <objc/runtime.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -36,6 +37,9 @@ __attribute__((noinline)) static size_t remaining_stack_size(size_t *restrict to
 
     return (*totalSize) - (size_t)(endStack - frameAddr);
 }
+
+static char *const BFExecutorDispatchQueueAssociationKey = "BFExecutorDispatchQueueAssociationKey";
+static char *const BFExecutorOperationQueueAssociationKey = "BFExecutorOperationQueueAssociationKey";
 
 @interface BFExecutor ()
 
@@ -103,15 +107,19 @@ __attribute__((noinline)) static size_t remaining_stack_size(size_t *restrict to
 }
 
 + (instancetype)executorWithDispatchQueue:(dispatch_queue_t)queue {
-    return [self executorWithBlock:^void(void(^block)()) {
+    BFExecutor *executor = [self executorWithBlock:^void(void(^block)()) {
         dispatch_async(queue, block);
     }];
+    objc_setAssociatedObject(executor, BFExecutorDispatchQueueAssociationKey, queue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return executor;
 }
 
 + (instancetype)executorWithOperationQueue:(NSOperationQueue *)queue {
-    return [self executorWithBlock:^void(void(^block)()) {
+    BFExecutor *executor = [self executorWithBlock:^void(void(^block)()) {
         [queue addOperation:[NSBlockOperation blockOperationWithBlock:block]];
     }];
+    objc_setAssociatedObject(executor, BFExecutorOperationQueueAssociationKey, queue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    return executor;
 }
 
 #pragma mark - Initializer
