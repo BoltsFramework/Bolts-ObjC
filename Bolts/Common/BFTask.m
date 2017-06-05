@@ -223,7 +223,7 @@ NSString *const BFTaskMultipleErrorsUserInfoKey = @"errors";
     return tcs.task;
 }
 
-+ (instancetype)taskFromExecutor:(BFExecutor *)executor withBlock:(nullable id (^)())block {
++ (instancetype)taskFromExecutor:(BFExecutor *)executor withBlock:(nullable id (^)(void))block {
     return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:^id(BFTask *task) {
         return block();
     }];
@@ -303,7 +303,7 @@ NSString *const BFTaskMultipleErrorsUserInfoKey = @"errors";
         [self.condition lock];
         [self.condition broadcast];
         [self.condition unlock];
-        for (void (^callback)() in self.callbacks) {
+        for (void (^callback)(void) in self.callbacks) {
             callback();
         }
         [self.callbacks removeAllObjects];
