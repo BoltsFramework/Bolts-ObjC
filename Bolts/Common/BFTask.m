@@ -56,7 +56,7 @@ NSString *const BFTaskMultipleErrorsUserInfoKey = @"errors";
     return self;
 }
 
-- (instancetype)initWithResult:(id)result {
+- (instancetype)initWithResult:(nullable id)result {
     self = [super init];
     if (!self) return self;
 
