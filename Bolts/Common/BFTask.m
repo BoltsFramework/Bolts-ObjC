@@ -334,17 +334,15 @@ NSString *const BFTaskMultipleErrorsUserInfoKey = @"errors";
 }
 
 - (void)runContinuations {
-    __block NSArray* callbacks;
     dispatch_sync(_synchronizationQueue, ^{
         [self.condition lock];
         [self.condition broadcast];
         [self.condition unlock];
-        callbacks = [NSArray arrayWithArray:self.callbacks];
+        for (void (^callback)() in self.callbacks) {
+            callback();
+        }
         [self.callbacks removeAllObjects];
     });
-    for (void (^callback)() in callbacks) {
-        callback();
-    }
 }
 
 #pragma mark - Chaining methods
