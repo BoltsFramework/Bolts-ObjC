@@ -455,8 +455,9 @@ NSString *const BFTaskMultipleErrorsUserInfoKey = @"errors";
     if ([NSThread isMainThread]) {
         [self warnOperationOnMainThread];
     }
-    BOOL completed = self.isCompleted;
-    dispatch_barrier_sync(_synchronizationQueue, ^{
+    __block BOOL completed;
+    dispatch_sync(_synchronizationQueue, ^{
+        completed = _state != BFTaskStatePending;
         if (!completed) {
             [self.condition lock];
         }
