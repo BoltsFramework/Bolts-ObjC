@@ -424,13 +424,11 @@ NSString *const BFTaskMultipleErrorsUserInfoKey = @"errors";
             return;
         }
         [self.condition lock];
+        while (!self.completed) {
+            [self.condition wait];
+        }
+        [self.condition unlock];
     }
-    // TODO: (nlutsenko) Restructure this to use Bolts-Swift thread access synchronization architecture
-    // In the meantime, it's absolutely safe to get `_completed` aka an ivar, as long as it's a `BOOL` aka less than word size.
-    while (!_completed) {
-        [self.condition wait];
-    }
-    [self.condition unlock];
 }
 
 #pragma mark - NSObject
