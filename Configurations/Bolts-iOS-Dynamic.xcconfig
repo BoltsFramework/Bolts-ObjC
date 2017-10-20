@@ -1,0 +1,24 @@
+//
+// Copyright (c) 2014, Facebook, Inc.
+// All rights reserved.
+//
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+//
+
+#include "Shared/Platform/iOS.xcconfig"
+#include "Shared/Product/DynamicFramework.xcconfig"
+#include "Version.xcconfig"
+
+PRODUCT_NAME = Bolts
+PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios
+IPHONEOS_DEPLOYMENT_TARGET = 8.0
+
+MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
+INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
+
+OTHER_LDFLAGS = $(inherited) -framework CoreGraphics -framework UIKit
+
+// Use the 1.0.0 to avoid breaking changes with older version of Bolts.
+DYLIB_COMPATIBILITY_VERSION = 1

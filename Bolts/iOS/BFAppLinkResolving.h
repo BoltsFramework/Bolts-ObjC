@@ -21,10 +21,10 @@
 
 /*!
  Asynchronously resolves App Link data for a given URL.
- 
+
  @param url The URL to resolve into an App Link.
  @returns A BFTask that will return a BFAppLink for the given URL.
  */
-- (BFTask *)appLinkFromURLInBackground:(NSURL *)url;
+- (BFTask *)appLinkFromURLInBackground:(NSURL *)url NS_EXTENSION_UNAVAILABLE_IOS("Not available in app extension");
 
 @end

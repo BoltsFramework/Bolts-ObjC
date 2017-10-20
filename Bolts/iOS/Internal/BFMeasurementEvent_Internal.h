@@ -14,7 +14,6 @@
  */
 @interface BFMeasurementEvent (Internal)
 
-+ (void) postNotificationForEventName:(NSString *)name args:(NSDictionary *)args;
++ (void)postNotificationForEventName:(NSString *)name args:(NSDictionary *)args;
 
 @end
-

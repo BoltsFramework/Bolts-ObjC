@@ -8,10 +8,9 @@
  *
  */
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 
-#import "BFAppLinkReturnToRefererView.h"
-#import "BFURL.h"
+#import <Bolts/Bolts.h>
 
 static NSString *const BFURLWithRefererData = @"bolts://?foo=bar&al_applink_data=%7B%22a%22%3A%22b%22%2C%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Fbaz%3Dbat%22%2C%22referer_app_link%22%3A%7B%22app_name%22%3A%22Facebook%22%2C%22url%22%3A%22fb%3A%5C%2F%5C%2Fsomething%5C%2F%22%7D%7D";
 static NSString *const BFURLWithRefererUrlNoName = @"bolts://?foo=bar&al_applink_data=%7B%22a%22%3A%22b%22%2C%22user_agent%22%3A%22Bolts%20iOS%201.0.0%22%2C%22target_url%22%3A%22http%3A%5C%2F%5C%2Fwww.example.com%5C%2Fpath%3Fbaz%3Dbat%22%2C%22referer_app_link%22%3A%7B%22url%22%3A%22fb%3A%5C%2F%5C%2Fsomething%5C%2F%22%7D%7D";
@@ -22,16 +21,6 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
 @end
 
 @implementation AppLinkReturnToRefererViewTests
-
-- (void)setUp {
-    [super setUp];
-    // Put setup code here; it will be run once, before the first test case.
-}
-
-- (void)tearDown {
-    // Put teardown code here; it will be run once, after the last test case.
-    [super tearDown];
-}
 
 - (void)testInitReturnsValidView {
     BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
@@ -84,17 +73,30 @@ static NSString *const BFURLWithRefererNameNoUrl = @"bolts://?foo=bar&al_applink
     XCTAssert(sizeThatFits.width > 0.0);
 }
 
+- (void)testIncludesStatusBarResultsInLargerHeight {
+    NSURL *url = [NSURL URLWithString:BFURLWithRefererData];
+    BFAppLink *appLink = [[BFURL URLWithURL:url] appLinkReferer];
+
+    BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
+    view.refererAppLink = appLink;
+    view.includeStatusBarInSize = BFIncludeStatusBarInSizeNever;
+    CGSize sizeThatFitsNotIncludingStatusBar = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
+
+    view.includeStatusBarInSize = BFIncludeStatusBarInSizeAlways;
+    CGSize sizeThatFitsIncludingStatusBar = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
+
+    XCTAssert(sizeThatFitsIncludingStatusBar.height > sizeThatFitsNotIncludingStatusBar.height);
+}
+
 - (void)testNotIncludingStatusBarResultsInSmallerHeight {
     NSURL *url = [NSURL URLWithString:BFURLWithRefererData];
     BFAppLink *appLink = [[BFURL URLWithURL:url] appLinkReferer];
 
     BFAppLinkReturnToRefererView *view = [[BFAppLinkReturnToRefererView alloc] init];
     view.refererAppLink = appLink;
-
     CGSize sizeThatFitsIncludingStatusBar = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 
     view.includeStatusBarInSize = BFIncludeStatusBarInSizeNever;
-
     CGSize sizeThatFitsNotIncludingStatusBar = [view sizeThatFits:CGSizeMake(100.0, 100.0)];
 
     XCTAssert(sizeThatFitsIncludingStatusBar.height > sizeThatFitsNotIncludingStatusBar.height);

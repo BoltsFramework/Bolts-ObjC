@@ -8,25 +8,8 @@
  *
  */
 
-#import <XCTest/XCTest.h>
+#import <Bolts/BFURL.h>
 
-#import "Bolts.h"
-
-@interface BoltsTests : XCTestCase
-@end
-
-@implementation BoltsTests
-
-- (void)setUp {
-    [super setUp];
-}
-
-- (void)tearDown {
-    [super tearDown];
-}
-
-- (void)testVersion {
-    XCTAssertEqualObjects(BOLTS_VERSION, [Bolts version]);
-}
-
+@interface BFURL (Internal)
++ (BFURL *)URLForRenderBackToReferrerBarURL:(NSURL *)url;
 @end

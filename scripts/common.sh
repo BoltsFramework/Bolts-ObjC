@@ -34,12 +34,12 @@ if [ -z "$BOLTS_SCRIPT" ]; then
 
   # The directory containing this script
   # We need to go there and use pwd so these are all absolute paths
-  pushd $(dirname $BASH_SOURCE[0]) >/dev/null
-  BOLTS_SCRIPT=$(pwd)
+  pushd "$(dirname $BASH_SOURCE[0])" >/dev/null
+  BOLTS_SCRIPT="$(pwd)"
   popd >/dev/null
 
   # The root directory where Bolts is cloned
-  BOLTS_ROOT=$(dirname $BOLTS_SCRIPT)
+  BOLTS_ROOT=$(dirname "$BOLTS_SCRIPT")
 
   # Path to source files for Bolts
   BOLTS_SRC=$BOLTS_ROOT
@@ -47,7 +47,9 @@ if [ -z "$BOLTS_SCRIPT" ]; then
   # The directory where the target is built
   BOLTS_BUILD=$BOLTS_ROOT/build
   BOLTS_IOS_BUILD=$BOLTS_ROOT/build/ios
-  BOLTS_OSX_BUILD=$BOLTS_ROOT/build/osx
+  BOLTS_MACOS_BUILD=$BOLTS_ROOT/build/osx
+  BOLTS_WATCHOS_BUILD=$BOLTS_ROOT/build/watchOS
+  BOLTS_TVOS_BUILD=$BOLTS_ROOT/build/tvOS
   BOLTS_BUILD_LOG=$BOLTS_BUILD/build.log
 
   # The name of the Bolts framework
@@ -55,7 +57,9 @@ if [ -z "$BOLTS_SCRIPT" ]; then
 
   # The path to the built Bolts .framework file
   BOLTS_IOS_FRAMEWORK=$BOLTS_IOS_BUILD/$BOLTS_FRAMEWORK_NAME
-  BOLTS_OSX_FRAMEWORK=$BOLTS_OSX_BUILD/$BOLTS_FRAMEWORK_NAME
+  BOLTS_MACOS_FRAMEWORK=$BOLTS_MACOS_BUILD/$BOLTS_FRAMEWORK_NAME
+  BOLTS_WATCHOS_FRAMEWORK=$BOLTS_WATCHOS_BUILD/$BOLTS_FRAMEWORK_NAME
+  BOLTS_TVOS_FRAMEWORK=$BOLTS_TVOS_BUILD/$BOLTS_FRAMEWORK_NAME
 
   # The name of the docset
   BOLTS_DOCSET_NAME=Bolts.docset
@@ -76,7 +80,7 @@ if [ -z $BOLTS_ENV ]; then
   # Explains where the log is if this is the outermost build or if
   # we hit a fatal error.
   function show_summary() {
-    test -r $BOLTS_BUILD_LOG && echo "Build log is at $BOLTS_BUILD_LOG"
+    test -r "$BOLTS_BUILD_LOG" && echo "Build log is at $BOLTS_BUILD_LOG"
   }
 
   # Determines whether this is out the outermost build.

@@ -1,0 +1,17 @@
+//
+// Copyright (c) 2014, Facebook, Inc.
+// All rights reserved.
+//
+// This source code is licensed under the BSD-style license found in the
+// LICENSE file in the root directory of this source tree. An additional grant
+// of patent rights can be found in the PATENTS file in the same directory.
+//
+
+#include "Shared/Platform/tvOS.xcconfig"
+#include "Shared/Product/StaticFramework.xcconfig"
+#include "Version.xcconfig"
+
+PRODUCT_NAME = Bolts
+PRODUCT_BUNDLE_IDENTIFIER = com.bolts.tvos
+
+INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist

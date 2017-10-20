@@ -38,8 +38,9 @@
 
 /*!
  A controller class that implements default behavior for a BFAppLinkReturnToRefererView, including
- the ability to display the view above the navigation bar for navigation-bsaed apps. 
+ the ability to display the view above the navigation bar for navigation-based apps.
  */
+NS_EXTENSION_UNAVAILABLE_IOS("Not available in app extension")
 @interface BFAppLinkReturnToRefererController : NSObject <BFAppLinkReturnToRefererViewDelegate>
 
 /*!
@@ -75,7 +76,7 @@
 - (void)showViewForRefererAppLink:(BFAppLink *)refererAppLink;
 
 /*!
- Shows the BFAppLinkReturnToRefererView with referer information extracted from the specified URL. 
+ Shows the BFAppLinkReturnToRefererView with referer information extracted from the specified URL.
  If nil or missing referer App Link data, the view will not be displayed. */
 - (void)showViewForRefererURL:(NSURL *)url;
 

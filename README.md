@@ -1,11 +1,13 @@
 Bolts
 ============
-[![Build Status](http://img.shields.io/travis/BoltsFramework/Bolts-iOS/master.svg?style=flat)](https://travis-ci.org/BoltsFramework/Bolts-iOS)
-[![Pod Version](http://img.shields.io/cocoapods/v/Bolts.svg?style=flat)](http://cocoadocs.org/docsets/Bolts/)
-[![Pod Platform](http://img.shields.io/cocoapods/p/Bolts.svg?style=flat)](http://cocoadocs.org/docsets/Bolts/)
-[![Pod License](http://img.shields.io/cocoapods/l/Bolts.svg?style=flat)](https://github.com/BoltsFramework/Bolts-iOS/blob/master/LICENSE)
-[![Dependency Status](https://www.versioneye.com/objective-c/bolts/1.1.1/badge.svg?style=flat)](https://www.versioneye.com/objective-c/bolts)
+[![Build Status](https://img.shields.io/travis/BoltsFramework/Bolts-ObjC/master.svg?style=flat)](https://travis-ci.org/BoltsFramework/Bolts-ObjC)
+[![Coverage Status](https://codecov.io/github/BoltsFramework/Bolts-ObjC/coverage.svg?branch=master)](https://codecov.io/github/BoltsFramework/Bolts-ObjC?branch=master)
+[![Pod Platform](https://img.shields.io/cocoapods/p/Bolts.svg?style=flat)](https://cocoapods.org/pods/Bolts)
+[![Pod License](https://img.shields.io/cocoapods/l/Bolts.svg?style=flat)](https://github.com/BoltsFramework/Bolts-ObjC/blob/master/LICENSE)
 [![Reference Status](https://www.versioneye.com/objective-c/bolts/reference_badge.svg?style=flat)](https://www.versioneye.com/objective-c/bolts/references)
+
+[![Pod Version](https://img.shields.io/cocoapods/v/Bolts.svg?style=flat)](https://cocoapods.org/pods/Bolts)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Bolts is a collection of low-level libraries designed to make developing mobile
 apps easier. Bolts was designed by Parse and Facebook for our own internal use,
@@ -16,7 +18,7 @@ do they require having a Parse or Facebook developer account.
 Bolts includes:
 
 * "Tasks", which make organization of complex asynchronous code more manageable. A task is kind of like a JavaScript Promise, but available for iOS and Android.
-* An implementation of the [App Links protocol](http://www.applinks.org), helping you link to content in other apps and handle incoming deep-links.
+* An implementation of the [App Links protocol](http://applinks.org/), helping you link to content in other apps and handle incoming deep-links.
 
 For more information, see the [Bolts iOS API Reference](http://boltsframework.github.io/docs/ios/).
 
@@ -58,7 +60,7 @@ self.saveAsync(obj).continueWithBlock {
   (task: BFTask!) -> BFTask in
   if task.isCancelled() {
     // the save was cancelled.
-  } else if task.error() {
+  } else if task.error != nil {
     // the save failed.
   } else {
     // the object was saved successfully.
@@ -236,7 +238,7 @@ findAsync(query).continueWithSuccessBlock {
   return self.findAsync(query)
 }.continueWithBlock {
   (task: BFTask!) -> AnyObject! in
-  if task.error() {
+  if task.error != nil {
     // This error handler WILL be called.
     // The error will be the NSError returned above.
     // Let's handle the error by returning a new value.
@@ -260,7 +262,7 @@ It's often convenient to have a long chain of success callbacks with only one er
 
 ## Creating Tasks
 
-When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new `BFTask`, and control whether it gets marked as finished or cancelled. After you create a `BFTask`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
+When you're getting started, you can just use the tasks returned from methods like `findAsync:` or `saveAsync:`. However, for more advanced scenarios, you may want to make your own tasks. To do that, you create a `BFTaskCompletionSource`. This object will let you create a new `BFTask`, and control whether it gets marked as finished or cancelled. After you create a `BFTaskCompletionSource`, you'll need to call `setResult:`, `setError:`, or `cancel` to trigger its continuations.
 
 ```objective-c
 // Objective-C
@@ -332,8 +334,8 @@ With these tools, it's easy to make your own asynchronous functions that return 
 func fetchAsync(object: PFObject) -> BFTask {
   var task = BFTaskCompletionSource()
   object.fetchInBackgroundWithBlock {
-    (object: PFObject!, error: NSError!) -> Void in
-    if !error {
+    (object: PFObject?, error: NSError?) -> Void in
+    if error == nil {
       task.setResult(object)
     } else {
       task.setError(error)
@@ -497,12 +499,12 @@ MYCancellationToken *cancellationToken = [[MYCancellationToken alloc] init];
 [cancellationToken cancel];
 ```
 
-**Note:** The cancellation token implementation should be thread-safe.  
+**Note:** The cancellation token implementation should be thread-safe.
 We are likely to add some concept like this to Bolts at some point in the future.
 
 # App Links
 
-[App Links](http://www.applinks.org) provide a cross-platform mechanism that allows a developer to define and publish a deep-linking scheme for their content, allowing other apps to link directly to an experience optimized for the device they are running on. Whether you are building an app that receives incoming links or one that may link out to other apps' content, Bolts provides tools to simplify implementation of the [App Links protocol](http://www.applinks.org/documentation).
+[App Links](http://applinks.org/) provide a cross-platform mechanism that allows a developer to define and publish a deep-linking scheme for their content, allowing other apps to link directly to an experience optimized for the device they are running on. Whether you are building an app that receives incoming links or one that may link out to other apps' content, Bolts provides tools to simplify implementation of the [App Links protocol](http://applinks.org/documentation).
 
 ## Handling an App Link
 
@@ -516,25 +518,25 @@ For example, you can use the `BFURL` utility class to parse an incoming URL in y
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     BFURL *parsedUrl = [BFURL URLWithInboundURL:url sourceApplication:sourceApplication];
-    
+
     // Use the target URL from the App Link to locate content.
     if ([parsedUrl.targetURL.pathComponents[1] isEqualToString:@"profiles"]) {
         // Open a profile viewer.
     }
-    
+
     // You can also check the query string easily.
     NSString *query = parsedUrl.targetQueryParameters[@"query"];
-    
+
     // Apps that have existing deep-linking support and map their App Links to existing
     // deep-linking functionality may instead want to perform these operations on the input URL.
     // Use the target URL from the App Link to locate content.
     if ([parsedUrl.inputURL.pathComponents[1] isEqualToString:@"profiles"]) {
         // Open a profile viewer.
     }
-    
+
     // You can also check the query string easily.
     NSString *query = parsedUrl.inputQueryParameters[@"query"];
-    
+
     // Apps can easily check the Extras and App Link data from the App Link as well.
     NSString *fbAccessToken = parsedUrl.appLinkExtras[@"fb_access_token"];
     NSDictionary *refererData = parsedUrl.appLinkExtras[@"referer"];
@@ -611,7 +613,7 @@ When an application is opened via an App Link, a banner allowing the user to "To
   // self.returnToRefererView is a BFAppLinkReturnToRefererView.
   // You may initialize the view either by loading it from a NIB or programmatically.
   self.returnToRefererController.view = self.returnToRefererView;
-  
+
   // If you have a UINavigationController in the view, then the bar must be shown above it.
   [self.returnToRefererController]
 }
@@ -628,7 +630,7 @@ The following code assumes that the view controller has an `openedAppLinkURL` `N
 }
 ```
 
-In a navigaton-controller view hierarchy, the banner should be displayed above the navigation bar, and `BFAppLinkReturnToRefererController` provides an `initForDisplayAboveNavController` method to assist with this.
+In a navigation-controller view hierarchy, the banner should be displayed above the navigation bar, and `BFAppLinkReturnToRefererController` provides an `initForDisplayAboveNavController` method to assist with this.
 
 ## Analytics
 
@@ -674,8 +676,8 @@ App Links Measurement Events sends additional information from App Links Intents
 
 # Installation
 
-You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-iOS/releases).
+You can download the latest framework files from our [Releases page](https://github.com/BoltsFramework/Bolts-ObjC/releases).
 
-Bolts is also available through [CocoaPods](http://cocoapods.org). To install it simply add the following line to your Podfile:
+Bolts is also available through [CocoaPods](https://cocoapods.org/). To install it simply add the following line to your Podfile:
 
     pod 'Bolts'
