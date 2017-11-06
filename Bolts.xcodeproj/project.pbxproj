@@ -7,38 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D5D7DA81BE3CE8200FD67C7 /* BFURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6519900A84000BAE3F /* BFURL.m */; };
-		1D5D7DA91BE3CE8200FD67C7 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
-		1D5D7DAA1BE3CE8200FD67C7 /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6319900A84000BAE3F /* BFAppLinkTarget.m */; };
-		1D5D7DAB1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6019900A84000BAE3F /* BFAppLinkReturnToRefererView.m */; };
-		1D5D7DAC1BE3CE8200FD67C7 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
-		1D5D7DAD1BE3CE8200FD67C7 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
-		1D5D7DAE1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
-		1D5D7DAF1BE3CE8200FD67C7 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
-		1D5D7DB01BE3CE8200FD67C7 /* BFMeasurementEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B242FAB919A567660097ECAE /* BFMeasurementEvent.m */; };
-		1D5D7DB11BE3CE8200FD67C7 /* BFWebViewAppLinkResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6719900A84000BAE3F /* BFWebViewAppLinkResolver.m */; };
-		1D5D7DB21BE3CE8200FD67C7 /* BFAppLinkNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5B19900A84000BAE3F /* BFAppLinkNavigation.m */; };
-		1D5D7DB31BE3CE8200FD67C7 /* BFAppLinkReturnToRefererController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5E19900A84000BAE3F /* BFAppLinkReturnToRefererController.m */; };
-		1D5D7DB41BE3CE8200FD67C7 /* BFAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5919900A84000BAE3F /* BFAppLink.m */; };
-		1D5D7DB51BE3CE8200FD67C7 /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
-		1D5D7DB61BE3CE8200FD67C7 /* BFCancellationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEBE1ACF08F300747DD7 /* BFCancellationToken.m */; };
-		1D5D7DB81BE3CE8200FD67C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
-		1D5D7DBA1BE3CE8200FD67C7 /* BFWebViewAppLinkResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA6619900A84000BAE3F /* BFWebViewAppLinkResolver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DBB1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CA39C901ADE715400DD78CC /* BFCancellationTokenRegistration.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DBC1BE3CE8200FD67C7 /* BFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5019900A84000BAE3F /* BFTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DBD1BE3CE8200FD67C7 /* BFAppLinkNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5A19900A84000BAE3F /* BFAppLinkNavigation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DBE1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5F19900A84000BAE3F /* BFAppLinkReturnToRefererView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DBF1BE3CE8200FD67C7 /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DC01BE3CE8200FD67C7 /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DC11BE3CE8200FD67C7 /* BFAppLinkTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA6219900A84000BAE3F /* BFAppLinkTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DC41BE3CE8200FD67C7 /* BFAppLinkResolving.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5C19900A84000BAE3F /* BFAppLinkResolving.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DC61BE3CE8200FD67C7 /* BFURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA6419900A84000BAE3F /* BFURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DC71BE3CE8200FD67C7 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DCA1BE3CE8200FD67C7 /* BFMeasurementEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B242FAB819A567660097ECAE /* BFMeasurementEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DCC1BE3CE8200FD67C7 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DCD1BE3CE8200FD67C7 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DCE1BE3CE8200FD67C7 /* BFAppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5819900A84000BAE3F /* BFAppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DCF1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5D19900A84000BAE3F /* BFAppLinkReturnToRefererController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E9BF8DC18EA0CAD00514B1E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 1E9BF8DB18EA0CAD00514B1E /* test.html */; };
 		1EC3016118CDAA8400D06D07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
 		1EC3016318CDAA8400D06D07 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
@@ -48,7 +16,6 @@
 		1EC3017318CDAA8400D06D07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EC3017218CDAA8400D06D07 /* Images.xcassets */; };
 		1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3019018CDABCE00D06D07 /* AppLinkTests.m */; };
 		693BFA461F997D8C0086D92E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BFA451F997D800086D92E /* UIKit.framework */; };
-		693BFA471F997D8D0086D92E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BFA451F997D800086D92E /* UIKit.framework */; };
 		693BFA481F997D8D0086D92E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BFA451F997D800086D92E /* UIKit.framework */; };
 		693BFA491F997D8D0086D92E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BFA451F997D800086D92E /* UIKit.framework */; };
 		693BFA4A1F997D8E0086D92E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BFA451F997D800086D92E /* UIKit.framework */; };
@@ -59,7 +26,6 @@
 		693BFA4F1F997D900086D92E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BFA451F997D800086D92E /* UIKit.framework */; };
 		693BFA501F997D900086D92E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BFA451F997D800086D92E /* UIKit.framework */; };
 		693BFA511F997DB80086D92E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
-		693BFA521F997DB90086D92E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
 		693BFA531F997DBA0086D92E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
 		693BFA541F997DBA0086D92E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
 		693BFA551F997DBB0086D92E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */; };
@@ -81,7 +47,6 @@
 		8103FA6D19900A84000BAE3F /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
 		8103FA6F19900A84000BAE3F /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		8160B82C1DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8160B82D1DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8160B82E1DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8160B82F1DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8160B8301DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -121,13 +86,9 @@
 		819573EC1C2B8ECB00BFCA39 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		819573ED1C2B8ECB00BFCA39 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81CF830A1D0B559800633946 /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83061D0B559700633946 /* BFAppLink_Internal.h */; };
-		81CF830B1D0B559800633946 /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83061D0B559700633946 /* BFAppLink_Internal.h */; };
 		81CF830C1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */; };
-		81CF830D1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */; };
 		81CF830E1D0B559800633946 /* BFMeasurementEvent_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83081D0B559700633946 /* BFMeasurementEvent_Internal.h */; };
-		81CF830F1D0B559800633946 /* BFMeasurementEvent_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83081D0B559700633946 /* BFMeasurementEvent_Internal.h */; };
 		81CF83101D0B559800633946 /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83091D0B559700633946 /* BFURL_Internal.h */; };
-		81CF83111D0B559800633946 /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83091D0B559700633946 /* BFURL_Internal.h */; };
 		81D0EE8319AFAA0E0000AE75 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE8519AFAA190000AE75 /* BFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5019900A84000BAE3F /* BFTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE8819AFAA240000AE75 /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -237,7 +198,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1D5D7DD31BE3CE8200FD67C7 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9BF8DB18EA0CAD00514B1E /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		1EC3016018CDAA8400D06D07 /* BoltsTestUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoltsTestUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EC3016218CDAA8400D06D07 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -333,16 +293,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1D5D7DB71BE3CE8200FD67C7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				693BFA521F997DB90086D92E /* CoreGraphics.framework in Frameworks */,
-				1D5D7DB81BE3CE8200FD67C7 /* Foundation.framework in Frameworks */,
-				693BFA471F997D8D0086D92E /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1EC3015D18CDAA8300D06D07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -636,7 +586,6 @@
 				8178F99C1BB0F87700AD289D /* Bolts.framework */,
 				81ED94291BE147CF00795F05 /* Bolts.framework */,
 				81ED946E1BE14B5200795F05 /* Bolts.framework */,
-				1D5D7DD31BE3CE8200FD67C7 /* Bolts.framework */,
 				81E94D6A1C2B8BF200A6291E /* Bolts.framework */,
 				819573F11C2B8ECB00BFCA39 /* Bolts.framework */,
 			);
@@ -678,34 +627,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		1D5D7DB91BE3CE8200FD67C7 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D5D7DBA1BE3CE8200FD67C7 /* BFWebViewAppLinkResolver.h in Headers */,
-				8160B82D1DE6277200C6E285 /* BFGeneric.h in Headers */,
-				81CF830D1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
-				81CF83111D0B559800633946 /* BFURL_Internal.h in Headers */,
-				1D5D7DBB1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.h in Headers */,
-				1D5D7DBC1BE3CE8200FD67C7 /* BFTask.h in Headers */,
-				1D5D7DBD1BE3CE8200FD67C7 /* BFAppLinkNavigation.h in Headers */,
-				81CF830B1D0B559800633946 /* BFAppLink_Internal.h in Headers */,
-				1D5D7DBE1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.h in Headers */,
-				1D5D7DBF1BE3CE8200FD67C7 /* BFCancellationTokenSource.h in Headers */,
-				1D5D7DC01BE3CE8200FD67C7 /* BFExecutor.h in Headers */,
-				1D5D7DC11BE3CE8200FD67C7 /* BFAppLinkTarget.h in Headers */,
-				1D5D7DC41BE3CE8200FD67C7 /* BFAppLinkResolving.h in Headers */,
-				1D5D7DC61BE3CE8200FD67C7 /* BFURL.h in Headers */,
-				81CF830F1D0B559800633946 /* BFMeasurementEvent_Internal.h in Headers */,
-				1D5D7DC71BE3CE8200FD67C7 /* BFTaskCompletionSource.h in Headers */,
-				1D5D7DCA1BE3CE8200FD67C7 /* BFMeasurementEvent.h in Headers */,
-				1D5D7DCC1BE3CE8200FD67C7 /* Bolts.h in Headers */,
-				1D5D7DCD1BE3CE8200FD67C7 /* BFCancellationToken.h in Headers */,
-				1D5D7DCE1BE3CE8200FD67C7 /* BFAppLink.h in Headers */,
-				1D5D7DCF1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererController.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8178F98F1BB0F87700AD289D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -812,23 +733,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1D5D7DA61BE3CE8200FD67C7 /* Bolts-iOS-Dynamic */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1D5D7DD01BE3CE8200FD67C7 /* Build configuration list for PBXNativeTarget "Bolts-iOS-Dynamic" */;
-			buildPhases = (
-				1D5D7DA71BE3CE8200FD67C7 /* Sources */,
-				1D5D7DB71BE3CE8200FD67C7 /* Frameworks */,
-				1D5D7DB91BE3CE8200FD67C7 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Bolts-iOS-Dynamic";
-			productName = Bolts;
-			productReference = 1D5D7DD31BE3CE8200FD67C7 /* Bolts.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		1EC3015F18CDAA8300D06D07 /* BoltsTestUI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1EC3018E18CDAA8400D06D07 /* Build configuration list for PBXNativeTarget "BoltsTestUI" */;
@@ -1030,7 +934,6 @@
 			projectRoot = "";
 			targets = (
 				81ED94111BE147CF00795F05 /* Bolts-iOS */,
-				1D5D7DA61BE3CE8200FD67C7 /* Bolts-iOS-Dynamic */,
 				8EDDA62817E17DDC00655F8A /* Bolts-macOS */,
 				F5AFC9EA1BA752750076E927 /* Bolts-tvOS */,
 				81E94D521C2B8BF200A6291E /* Bolts-tvOS-Dynamic */,
@@ -1079,28 +982,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1D5D7DA71BE3CE8200FD67C7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D5D7DA81BE3CE8200FD67C7 /* BFURL.m in Sources */,
-				1D5D7DA91BE3CE8200FD67C7 /* BFTaskCompletionSource.m in Sources */,
-				1D5D7DAA1BE3CE8200FD67C7 /* BFAppLinkTarget.m in Sources */,
-				1D5D7DAB1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.m in Sources */,
-				1D5D7DAC1BE3CE8200FD67C7 /* BFTask.m in Sources */,
-				1D5D7DAD1BE3CE8200FD67C7 /* Bolts.m in Sources */,
-				1D5D7DAE1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.m in Sources */,
-				1D5D7DAF1BE3CE8200FD67C7 /* BFCancellationTokenSource.m in Sources */,
-				1D5D7DB01BE3CE8200FD67C7 /* BFMeasurementEvent.m in Sources */,
-				1D5D7DB11BE3CE8200FD67C7 /* BFWebViewAppLinkResolver.m in Sources */,
-				1D5D7DB21BE3CE8200FD67C7 /* BFAppLinkNavigation.m in Sources */,
-				1D5D7DB31BE3CE8200FD67C7 /* BFAppLinkReturnToRefererController.m in Sources */,
-				1D5D7DB41BE3CE8200FD67C7 /* BFAppLink.m in Sources */,
-				1D5D7DB51BE3CE8200FD67C7 /* BFExecutor.m in Sources */,
-				1D5D7DB61BE3CE8200FD67C7 /* BFCancellationToken.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1EC3015C18CDAA8300D06D07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1287,24 +1168,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1D5D7DD11BE3CE8200FD67C7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
-			buildSettings = {
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-			};
-			name = Debug;
-		};
-		1D5D7DD21BE3CE8200FD67C7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
-			buildSettings = {
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-			};
-			name = Release;
-		};
 		1EC3018618CDAA8400D06D07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1546,15 +1409,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D5D7DD01BE3CE8200FD67C7 /* Build configuration list for PBXNativeTarget "Bolts-iOS-Dynamic" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D5D7DD11BE3CE8200FD67C7 /* Debug */,
-				1D5D7DD21BE3CE8200FD67C7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1EC3018E18CDAA8400D06D07 /* Build configuration list for PBXNativeTarget "BoltsTestUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
