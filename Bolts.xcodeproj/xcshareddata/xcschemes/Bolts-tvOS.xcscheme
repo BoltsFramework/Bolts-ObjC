@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
-               BuildableName = "Bolts.framework"
+               BuildableName = "Bolts-tvOS.framework"
                BlueprintName = "Bolts-tvOS"
                ReferencedContainer = "container:Bolts.xcodeproj">
             </BuildableReference>
@@ -40,6 +40,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
@@ -58,7 +59,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
-            BuildableName = "Bolts.framework"
+            BuildableName = "Bolts-tvOS.framework"
             BlueprintName = "Bolts-tvOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
@@ -70,6 +71,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -80,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
-            BuildableName = "Bolts.framework"
+            BuildableName = "Bolts-tvOS.framework"
             BlueprintName = "Bolts-tvOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
@@ -98,7 +100,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F5AFC9EA1BA752750076E927"
-            BuildableName = "Bolts.framework"
+            BuildableName = "Bolts-tvOS.framework"
             BlueprintName = "Bolts-tvOS"
             ReferencedContainer = "container:Bolts.xcodeproj">
          </BuildableReference>
