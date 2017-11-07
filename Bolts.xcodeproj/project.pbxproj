@@ -1267,6 +1267,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */;
 			buildSettings = {
+				INSTALL_PATH = "";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
@@ -1276,6 +1277,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */;
 			buildSettings = {
+				INSTALL_PATH = "";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
