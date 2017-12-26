@@ -18,6 +18,8 @@ IPHONEOS_DEPLOYMENT_TARGET = 8.0
 MODULEMAP_FILE = $(SRCROOT)/Bolts/Resources/iOS.modulemap
 INFOPLIST_FILE = $(SRCROOT)/Bolts/Resources/Info.plist
 
+APPLICATION_EXTENSION_API_ONLY = YES
+
 OTHER_LDFLAGS = $(inherited) -framework CoreGraphics -framework UIKit
 
 // Use the 1.0.0 to avoid breaking changes with older version of Bolts.
