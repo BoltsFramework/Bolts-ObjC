@@ -237,26 +237,17 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
     NSMutableArray *linkTargets = [NSMutableArray array];
 
     NSArray *platformData = nil;
-    switch (UI_USER_INTERFACE_IDIOM()) {
-        case UIUserInterfaceIdiomPad:
-            platformData = @[ appLinkDict[BFWebViewAppLinkResolverIPadKey] ?: @{},
-                              appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
-            break;
-        case UIUserInterfaceIdiomPhone:
-            platformData = @[ appLinkDict[BFWebViewAppLinkResolverIPhoneKey] ?: @{},
-                              appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
-            break;
-#ifdef __TVOS_9_0
-        case UIUserInterfaceIdiomTV:
-#endif
-#ifdef __IPHONE_9_3
-        case UIUserInterfaceIdiomCarPlay:
-#endif
-        case UIUserInterfaceIdiomUnspecified:
-        default:
-            // Future-proofing. Other User Interface idioms should only hit ios.
-            platformData = @[ appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
-            break;
+
+    const UIUserInterfaceIdiom idiom = UI_USER_INTERFACE_IDIOM();
+    if (idiom == UIUserInterfaceIdiomPad) {
+        platformData = @[ appLinkDict[BFWebViewAppLinkResolverIPadKey] ?: @{},
+                          appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
+    } else if (idiom == UIUserInterfaceIdiomPhone) {
+        platformData = @[ appLinkDict[BFWebViewAppLinkResolverIPhoneKey] ?: @{},
+                          appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
+    } else {
+        // Future-proofing. Other User Interface idioms should only hit ios.
+        platformData = @[ appLinkDict[BFWebViewAppLinkResolverIOSKey] ?: @{} ];
     }
 
     for (NSArray *platformObjects in platformData) {
