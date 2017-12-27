@@ -25,21 +25,29 @@ before_install:
   fi
 script:
 - |
-    if [ "$TEST_TYPE" = iOS ]; then
+    case $TEST_TYPE in
+    iOS)
       set -o pipefail
       xcodebuild test -project Bolts.xcodeproj -sdk iphonesimulator -scheme Bolts-iOS -configuration Debug -destination "platform=iOS Simulator,name=iPhone SE" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
-    elif [ "$TEST_TYPE" = macOS ]; then
+      ;;
+    macOS)
       set -o pipefail
       xcodebuild test -project Bolts.xcodeproj -sdk macosx -scheme Bolts-macOS -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
-    elif [ "$TEST_TYPE" = tvOS ]; then
+      ;;
+    tvOS)
       set -o pipefail
       xcodebuild test -project Bolts.xcodeproj -sdk appletvsimulator -scheme Bolts-tvOS -destination "platform=tvOS Simulator,name=Apple TV" -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
-    elif [ "$TEST_TYPE" = CocoaPods ]; then
+      ;;
+    CocoaPods)
       pod lib lint --use-libraries Bolts.podspec
       pod lib lint Bolts.podspec
-    elif [ "$TEST_TYPE" = Carthage ]; then
+      ;;
+    Carthage)
       carthage build --no-skip-current
-    fi
+      ;;
+    *)
+      ;;
+    esac
 after_success:
 - |
     if [ "$TEST_TYPE" = iOS ] || [ "$TEST_TYPE" = OSX ] || [ "$TEST_TYPE" = tvOS ]; then
