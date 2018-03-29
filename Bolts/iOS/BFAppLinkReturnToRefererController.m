@@ -130,7 +130,7 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
         if (CGRectGetHeight(newFrame) == 40) {
             UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
             [UIView animateWithDuration:kBFViewAnimationDuration delay:0.0 options:options animations:^{
-                _view.frame = CGRectMake(0.0, 0.0, CGRectGetWidth(_view.bounds), 0.0);
+                self->_view.frame = CGRectMake(0.0, 0.0, CGRectGetWidth(self->_view.bounds), 0.0);
             } completion:nil];
         }
     }
@@ -145,7 +145,7 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
         if (CGRectGetHeight(newFrame) == 40) {
             UIViewAnimationOptions options = UIViewAnimationOptionBeginFromCurrentState;
             [UIView animateWithDuration:kBFViewAnimationDuration delay:0.0 options:options animations:^{
-                [_view sizeToFit];
+                [self->_view sizeToFit];
                 [self moveNavigationBar];
             } completion:nil];
         }
@@ -186,13 +186,13 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 
 - (void)closeViewAnimated:(BOOL)animated explicitlyClosed:(BOOL)explicitlyClosed {
     void (^closer)(void) = ^{
-        if (_navigationController) {
-            [self updateNavigationBarY:_view.statusBarHeight];
+        if (self->_navigationController) {
+            [self updateNavigationBarY:self->_view.statusBarHeight];
         }
 
-        CGRect frame = _view.frame;
+        CGRect frame = self->_view.frame;
         frame.size.height = 0.0;
-        _view.frame = frame;
+        self->_view.frame = frame;
     };
 
     if (animated) {
@@ -200,13 +200,13 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
             closer();
         } completion:^(BOOL finished) {
             if (explicitlyClosed) {
-                _view.closed = YES;
+                self->_view.closed = YES;
             }
         }];
     } else {
         closer();
         if (explicitlyClosed) {
-            _view.closed = YES;
+            self->_view.closed = YES;
         }
     }
 }
