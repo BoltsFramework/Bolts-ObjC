@@ -1251,7 +1251,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1259,7 +1258,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};
@@ -1320,7 +1318,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E91D2CA0E000690609 /* Bolts-watchOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1328,7 +1325,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E91D2CA0E000690609 /* Bolts-watchOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};
@@ -1336,7 +1332,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E81D2CA0E000690609 /* Bolts-watchOS-Dynamic.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1344,7 +1339,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E81D2CA0E000690609 /* Bolts-watchOS-Dynamic.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};
@@ -1352,7 +1346,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E61D2CA0E000690609 /* Bolts-tvOS-Dynamic.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1360,7 +1353,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E61D2CA0E000690609 /* Bolts-tvOS-Dynamic.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};
@@ -1368,7 +1360,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1376,7 +1367,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};
@@ -1426,7 +1416,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1434,7 +1423,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};
@@ -1442,7 +1430,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E71D2CA0E000690609 /* Bolts-tvOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Debug;
 		};
@@ -1450,7 +1437,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E71D2CA0E000690609 /* Bolts-tvOS.xcconfig */;
 			buildSettings = {
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 			};
 			name = Release;
 		};
