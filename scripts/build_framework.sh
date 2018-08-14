@@ -120,7 +120,6 @@ function xcode_build_target() {
     -configuration "${2}" \
     SYMROOT="$BOLTS_BUILD" \
     CURRENT_PROJECT_VERSION="$BOLTS_VERSION_FULL" \
-    clean build \
     || die "Xcode build failed for platform: ${1}."
 }
 
