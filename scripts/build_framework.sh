@@ -87,8 +87,8 @@ progress_message Building Framework.
 # -----------------------------------------------------------------------------
 # Compile binaries 
 #
-test -d "$BOLTS_BUILD" \
-  || mkdir -p "$BOLTS_BUILD" \
+rm -rf "$BOLTS_BUILD"
+mkdir -p "$BOLTS_BUILD" \
   || die "Could not create directory $BOLTS_BUILD"
 
 test -d "$BOLTS_IOS_BUILD" \
@@ -120,7 +120,7 @@ function xcode_build_target() {
     -configuration "${2}" \
     SYMROOT="$BOLTS_BUILD" \
     CURRENT_PROJECT_VERSION="$BOLTS_VERSION_FULL" \
-    clean build \
+    build \
     || die "Xcode build failed for platform: ${1}."
 }
 
