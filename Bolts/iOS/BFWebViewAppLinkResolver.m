@@ -9,6 +9,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 #import "BFWebViewAppLinkResolver.h"
 #import "BFAppLink.h"
@@ -47,32 +48,32 @@ static NSString *const BFWebViewAppLinkResolverIPadKey = @"ipad";
 static NSString *const BFWebViewAppLinkResolverWebURLKey = @"url";
 static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fallback";
 
-@interface BFWebViewAppLinkResolverWebViewDelegate : NSObject <UIWebViewDelegate>
+@interface BFWebViewAppLinkResolverWebViewDelegate : NSObject <WKNavigationDelegate>
 
-@property (nonatomic, copy) void (^didFinishLoad)(UIWebView *webView);
-@property (nonatomic, copy) void (^didFailLoadWithError)(UIWebView *webView, NSError *error);
+@property (nonatomic, copy) void (^didFinishLoad)(WKWebView *webView);
+@property (nonatomic, copy) void (^didFailLoadWithError)(WKWebView *webView, NSError *error);
 @property (nonatomic, assign) BOOL hasLoaded;
 
 @end
 
 @implementation BFWebViewAppLinkResolverWebViewDelegate
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(WKWebView *)webView {
     if (self.didFinishLoad) {
         self.didFinishLoad(webView);
     }
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webViewDidStartLoad:(WKWebView *)webView {
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailLoadWithError:(NSError *)error {
     if (self.didFailLoadWithError) {
         self.didFailLoadWithError(webView, error);
     }
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+- (BOOL)webView:(WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     if (self.hasLoaded) {
         // Consider loading a second resource to be "success", since it indicates an inner frame
         // or redirect is happening. We can run the tag extraction script at this point.
@@ -150,31 +151,32 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
                                                NSHTTPURLResponse *response = task.result[@"response"];
                                                BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSource];
 
-                                               UIWebView *webView = [[UIWebView alloc] init];
+                                               WKWebView *webView = [[WKWebView alloc] init];
                                                BFWebViewAppLinkResolverWebViewDelegate *listener = [[BFWebViewAppLinkResolverWebViewDelegate alloc] init];
                                                __block BFWebViewAppLinkResolverWebViewDelegate *retainedListener = listener;
-                                               listener.didFinishLoad = ^(UIWebView *view) {
+                                               listener.didFinishLoad = ^(WKWebView *view) {
                                                    if (retainedListener) {
-                                                       NSDictionary *ogData = [self getALDataFromLoadedPage:view];
-                                                       [view removeFromSuperview];
-                                                       view.delegate = nil;
-                                                       retainedListener = nil;
-                                                       [tcs setResult:[self appLinkFromALData:ogData destination:url]];
+                                                       [self getALDataFromLoadedPage:view completion:^(NSDictionary *result, NSError *error) {
+                                                           [view removeFromSuperview];
+                                                           view.navigationDelegate = nil;
+                                                           retainedListener = nil;
+                                                           [tcs setResult:[self appLinkFromALData:result destination:url]];
+                                                       }];
                                                    }
                                                };
-                                               listener.didFailLoadWithError = ^(UIWebView* view, NSError *error) {
+                                               listener.didFailLoadWithError = ^(WKWebView* view, NSError *error) {
                                                    if (retainedListener) {
                                                        [view removeFromSuperview];
-                                                       view.delegate = nil;
+                                                       view.navigationDelegate = nil;
                                                        retainedListener = nil;
                                                        [tcs setError:error];
                                                    }
                                                };
-                                               webView.delegate = listener;
+                                               webView.navigationDelegate = listener;
                                                webView.hidden = YES;
                                                [webView loadData:responseData
                                                         MIMEType:response.MIMEType
-                                                textEncodingName:response.textEncodingName
+                                           characterEncodingName:response.textEncodingName
                                                          baseURL:response.URL];
                                                UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
                                                [window addSubview:webView];
@@ -220,14 +222,20 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
     return al;
 }
 
-- (NSDictionary *)getALDataFromLoadedPage:(UIWebView *)webView {
+- (void)getALDataFromLoadedPage:(WKWebView *)webView completion:(void (^ _Nullable)(NSDictionary * _Nullable, NSError * _Nullable error))completionHandler {
     // Run some JavaScript in the webview to fetch the meta tags.
-    NSString *jsonString = [webView stringByEvaluatingJavaScriptFromString:BFWebViewAppLinkResolverTagExtractionJavaScript];
-    NSError *error = nil;
-    NSArray *arr = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
-                                                   options:0
-                                                     error:&error];
-    return [self parseALData:arr];
+    [webView evaluateJavaScript:BFWebViewAppLinkResolverTagExtractionJavaScript completionHandler:^(id result, NSError * error) {
+        if (error == nil) {
+            NSString *jsonString = result;
+            NSError *parseError = nil;
+            NSArray *arr = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
+                                                           options:0
+                                                             error:&parseError];
+            completionHandler([self parseALData:arr], parseError);
+        } else {
+            completionHandler(nil, error);
+        }
+    }];
 }
 
 /*
