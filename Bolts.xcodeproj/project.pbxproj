@@ -49,6 +49,7 @@
 		1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3019018CDABCE00D06D07 /* AppLinkTests.m */; };
 		46A4AE4424094C690022BB98 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
 		46A4AE4524094DD70022BB98 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
+		46D245272409796A00AB92BE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
 		7C60AEC61ACF19F900747DD7 /* CancellationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC51ACF19F900747DD7 /* CancellationTests.m */; };
 		7C60AEC71ACF19FD00747DD7 /* CancellationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC51ACF19F900747DD7 /* CancellationTests.m */; };
 		7C60AEC81ACF1A0100747DD7 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -320,6 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D245272409796A00AB92BE /* WebKit.framework in Frameworks */,
 				1D5D7DB81BE3CE8200FD67C7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
