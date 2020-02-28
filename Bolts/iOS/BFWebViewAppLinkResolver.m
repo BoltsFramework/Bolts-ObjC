@@ -61,7 +61,6 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
     if (self.didFinishLoad) {
         self.didFinishLoad(webView);
     }
-    self.hasLoaded = YES;
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation
