@@ -75,14 +75,16 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
     }
 }
 
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-//    if (self.hasLoaded) {
-//        // Consider loading a second resource to be "success", since it indicates an inner frame
-//        // or redirect is happening. We can run the tag extraction script at this point.
-//        self.didFinishLoad(webView);
-//    }
-//    self.hasLoaded = YES;
-//}
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    if (self.hasLoaded) {
+        // Consider loading a second resource to be "success", since it indicates an inner frame
+        // or redirect is happening. We can run the tag extraction script at this point.
+        self.didFinishLoad(webView);
+    }
+    self.hasLoaded = YES;
+    
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
 
 @end
 
