@@ -24,3 +24,4 @@
 + (instancetype)sharedInstance;
 
 @end
+
