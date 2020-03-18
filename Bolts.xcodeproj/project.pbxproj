@@ -47,6 +47,9 @@
 		1EC3017118CDAA8400D06D07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3017018CDAA8400D06D07 /* AppDelegate.m */; };
 		1EC3017318CDAA8400D06D07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EC3017218CDAA8400D06D07 /* Images.xcassets */; };
 		1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3019018CDABCE00D06D07 /* AppLinkTests.m */; };
+		46A4AE4424094C690022BB98 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
+		46A4AE4524094DD70022BB98 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
+		46D245272409796A00AB92BE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
 		7C60AEC61ACF19F900747DD7 /* CancellationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC51ACF19F900747DD7 /* CancellationTests.m */; };
 		7C60AEC71ACF19FD00747DD7 /* CancellationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC51ACF19F900747DD7 /* CancellationTests.m */; };
 		7C60AEC81ACF1A0100747DD7 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -228,6 +231,7 @@
 		1EC3017018CDAA8400D06D07 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1EC3017218CDAA8400D06D07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1EC3019018CDABCE00D06D07 /* AppLinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
+		46A4AE4324094C690022BB98 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFCancellationToken.h; sourceTree = "<group>"; };
 		7C60AEBE1ACF08F300747DD7 /* BFCancellationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFCancellationToken.m; sourceTree = "<group>"; };
 		7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFCancellationTokenSource.h; sourceTree = "<group>"; };
@@ -317,6 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D245272409796A00AB92BE /* WebKit.framework in Frameworks */,
 				1D5D7DB81BE3CE8200FD67C7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46A4AE4424094C690022BB98 /* WebKit.framework in Frameworks */,
 				81ED941B1BE147CF00795F05 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +373,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46A4AE4524094DD70022BB98 /* WebKit.framework in Frameworks */,
 				818ADC6C1BE1A80F00C8006C /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,6 +613,7 @@
 		8E9C3CEB17DE9DE000427E62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46A4AE4324094C690022BB98 /* WebKit.framework */,
 				81D0EE7C19AFA8260000AE75 /* UIKit.framework */,
 				8E9C3CEC17DE9DE000427E62 /* Foundation.framework */,
 				8E9C3CFB17DE9DE000427E62 /* SenTestingKit.framework */,
@@ -982,6 +990,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 8E9C3CE017DE9DE000427E62;
@@ -1374,6 +1383,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646EA1D2CA0E000690609 /* BoltsTests-iOS.xcconfig */;
 			buildSettings = {
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1381,6 +1393,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646EA1D2CA0E000690609 /* BoltsTests-iOS.xcconfig */;
 			buildSettings = {
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
 			};
 			name = Release;
 		};

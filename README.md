@@ -582,7 +582,7 @@ NSError *error = nil;
 
 ### Resolving App Link Metadata
 
-Bolts allows for custom App Link resolution, which may be used as a performance optimization (e.g. caching the metadata) or as a mechanism to allow developers to use a centralized index for obtaining App Link metadata. A custom App Link resolver just needs to be able to take a URL and return a `BFAppLink` containing the ordered list of `BFAppLinkTarget`s that are applicable for this device. Bolts provides one of these out of the box that performs this resolution on the device using a hidden UIWebView.
+Bolts allows for custom App Link resolution, which may be used as a performance optimization (e.g. caching the metadata) or as a mechanism to allow developers to use a centralized index for obtaining App Link metadata. A custom App Link resolver just needs to be able to take a URL and return a `BFAppLink` containing the ordered list of `BFAppLinkTarget`s that are applicable for this device. Bolts provides one of these out of the box that performs this resolution on the device using a hidden ~~UIWebView~~ WKWebview.
 
 You can use any resolver that implements the `BFAppLinkResolving` protocol by using one of the overloads on `BFAppLinkNavigation`:
 
