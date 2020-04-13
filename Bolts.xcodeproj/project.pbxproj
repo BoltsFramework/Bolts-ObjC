@@ -977,7 +977,7 @@
 		8E9C3CE117DE9DE000427E62 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Parse Inc.";
 				TargetAttributes = {
 					8E8C8F1817F241DA00E3F1C7 = {
@@ -987,11 +987,12 @@
 			};
 			buildConfigurationList = 8E9C3CE417DE9DE000427E62 /* Build configuration list for PBXProject "Bolts" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
 				en,
+				Base,
 			);
 			mainGroup = 8E9C3CE017DE9DE000427E62;
 			productRefGroup = 8E9C3CEA17DE9DE000427E62 /* Products */;
@@ -1417,6 +1418,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646FA1D2CA0E000690609 /* Debug.xcconfig */;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 			};
 			name = Debug;
 		};
@@ -1424,6 +1428,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646FB1D2CA0E000690609 /* Release.xcconfig */;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 			};
 			name = Release;
 		};

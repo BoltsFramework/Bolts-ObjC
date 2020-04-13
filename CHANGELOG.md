@@ -1,5 +1,17 @@
 # Change Log
 
+## [1.9.1](https://github.com/BoltsFramework/Bolts-ObjC/tree/1.9.1) (2020-3-18)
+[Full Changelog](https://github.com/BoltsFramework/Bolts-ObjC/compare/1.9.0...1.9.1)
+
+**Merged pull requests:**
+
+- UIWebview -> WKWebView [\#334](https://github.com/BoltsFramework/Bolts-ObjC/issues/334)([roremeol](https://github.com/roremeol))
+
+**Closed issues:**
+ 
+ - Apple Review [\#331](https://github.com/BoltsFramework/Bolts-ObjC/issues/331)
+ - Need the Bolts framework with mac catalyst support[\#333]([https://github.com/BoltsFramework/Bolts-ObjC/issues/333])
+
 ## [1.9.0](https://github.com/BoltsFramework/Bolts-ObjC/tree/1.9.0) (2017-12-31)
 [Full Changelog](https://github.com/BoltsFramework/Bolts-ObjC/compare/1.8.4...1.9.0)
 
