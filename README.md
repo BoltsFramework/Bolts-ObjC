@@ -1,4 +1,4 @@
-Bolts
+*Bolts*
 ============
 [![Build Status](https://img.shields.io/travis/BoltsFramework/Bolts-ObjC/master.svg?style=flat)](https://travis-ci.org/BoltsFramework/Bolts-ObjC)
 [![Coverage Status](https://codecov.io/github/BoltsFramework/Bolts-ObjC/coverage.svg?branch=master)](https://codecov.io/github/BoltsFramework/Bolts-ObjC?branch=master)
