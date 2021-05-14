@@ -23,6 +23,7 @@ NSString *const BFAppLinkNavigateInEventName = @"al_nav_in";
 NSString *const BFAppLinkNavigateOutEventName = @"al_nav_out";
 NSString *const BFAppLinkNavigateBackToReferrerEventName = @"al_ref_back_out";
 
+__attribute__((noinline)) void warnOnMissingEventName(void);
 __attribute__((noinline)) void warnOnMissingEventName() {
     NSLog(@"Warning: Missing event name when logging bolts measurement event. \n"
           " Ignoring this event in logging.");
