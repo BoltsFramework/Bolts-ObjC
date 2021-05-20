@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+
 #import "BFURL_Internal.h"
 #import "BFAppLink_Internal.h"
 #import "BFAppLinkTarget.h"
@@ -140,3 +142,5 @@
 }
 
 @end
+
+#endif

@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+
 #import "BFAppLinkReturnToRefererController.h"
 
 #import "BFAppLink.h"
@@ -228,3 +230,5 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 }
 
 @end
+
+#endif

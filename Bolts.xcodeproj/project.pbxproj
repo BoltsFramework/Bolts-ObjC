@@ -12,7 +12,6 @@
 		1D5D7DAA1BE3CE8200FD67C7 /* BFAppLinkTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6319900A84000BAE3F /* BFAppLinkTarget.m */; };
 		1D5D7DAB1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6019900A84000BAE3F /* BFAppLinkReturnToRefererView.m */; };
 		1D5D7DAC1BE3CE8200FD67C7 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
-		1D5D7DAD1BE3CE8200FD67C7 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		1D5D7DAE1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
 		1D5D7DAF1BE3CE8200FD67C7 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
 		1D5D7DB01BE3CE8200FD67C7 /* BFMeasurementEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B242FAB919A567660097ECAE /* BFMeasurementEvent.m */; };
@@ -35,7 +34,6 @@
 		1D5D7DC61BE3CE8200FD67C7 /* BFURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA6419900A84000BAE3F /* BFURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D5D7DC71BE3CE8200FD67C7 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D5D7DCA1BE3CE8200FD67C7 /* BFMeasurementEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B242FAB819A567660097ECAE /* BFMeasurementEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D5D7DCC1BE3CE8200FD67C7 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D5D7DCD1BE3CE8200FD67C7 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D5D7DCE1BE3CE8200FD67C7 /* BFAppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5819900A84000BAE3F /* BFAppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D5D7DCF1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5D19900A84000BAE3F /* BFAppLinkReturnToRefererController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,7 +44,6 @@
 		1EC3016D18CDAA8400D06D07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3016C18CDAA8400D06D07 /* main.m */; };
 		1EC3017118CDAA8400D06D07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3017018CDAA8400D06D07 /* AppDelegate.m */; };
 		1EC3017318CDAA8400D06D07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EC3017218CDAA8400D06D07 /* Images.xcassets */; };
-		1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3019018CDABCE00D06D07 /* AppLinkTests.m */; };
 		46A4AE4424094C690022BB98 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
 		46A4AE4524094DD70022BB98 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
 		46D245272409796A00AB92BE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A4AE4324094C690022BB98 /* WebKit.framework */; };
@@ -61,7 +58,6 @@
 		8103FA6919900A84000BAE3F /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
 		8103FA6B19900A84000BAE3F /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
 		8103FA6D19900A84000BAE3F /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
-		8103FA6F19900A84000BAE3F /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		8160B82C1DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8160B82D1DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8160B82E1DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -71,7 +67,6 @@
 		8160B8321DE6277200C6E285 /* BFGeneric.h in Headers */ = {isa = PBXBuildFile; fileRef = 8160B82B1DE6277200C6E285 /* BFGeneric.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8178F9861BB0F87700AD289D /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
 		8178F9871BB0F87700AD289D /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
-		8178F9881BB0F87700AD289D /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		8178F9891BB0F87700AD289D /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
 		8178F98A1BB0F87700AD289D /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
 		8178F98B1BB0F87700AD289D /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
@@ -82,14 +77,12 @@
 		8178F9921BB0F87700AD289D /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8178F9931BB0F87700AD289D /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8178F9951BB0F87700AD289D /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8178F9971BB0F87700AD289D /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8178F9981BB0F87700AD289D /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		818ADC6A1BE1A7FB00C8006C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AFCA021BA752750076E927 /* Bolts.framework */; };
 		818ADC6B1BE1A80300C8006C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81ED946E1BE14B5200795F05 /* Bolts.framework */; };
 		818ADC6C1BE1A80F00C8006C /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81ED94291BE147CF00795F05 /* Bolts.framework */; };
 		819573DB1C2B8ECB00BFCA39 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
 		819573DC1C2B8ECB00BFCA39 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
-		819573DD1C2B8ECB00BFCA39 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		819573DE1C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
 		819573DF1C2B8ECB00BFCA39 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
 		819573E01C2B8ECB00BFCA39 /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
@@ -100,18 +93,8 @@
 		819573E71C2B8ECB00BFCA39 /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		819573E81C2B8ECB00BFCA39 /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		819573EA1C2B8ECB00BFCA39 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		819573EC1C2B8ECB00BFCA39 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		819573ED1C2B8ECB00BFCA39 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81CF830A1D0B559800633946 /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83061D0B559700633946 /* BFAppLink_Internal.h */; };
-		81CF830B1D0B559800633946 /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83061D0B559700633946 /* BFAppLink_Internal.h */; };
-		81CF830C1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */; };
-		81CF830D1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */; };
-		81CF830E1D0B559800633946 /* BFMeasurementEvent_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83081D0B559700633946 /* BFMeasurementEvent_Internal.h */; };
-		81CF830F1D0B559800633946 /* BFMeasurementEvent_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83081D0B559700633946 /* BFMeasurementEvent_Internal.h */; };
-		81CF83101D0B559800633946 /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83091D0B559700633946 /* BFURL_Internal.h */; };
-		81CF83111D0B559800633946 /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 81CF83091D0B559700633946 /* BFURL_Internal.h */; };
 		81D0EE7D19AFA8260000AE75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81D0EE7C19AFA8260000AE75 /* UIKit.framework */; };
-		81D0EE8319AFAA0E0000AE75 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE8519AFAA190000AE75 /* BFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5019900A84000BAE3F /* BFTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE8819AFAA240000AE75 /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81D0EE8A19AFAA2C0000AE75 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -119,7 +102,6 @@
 		81DC1A631B7A7F4000F491DC /* ExecutorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DC1A611B7A7F4000F491DC /* ExecutorTests.m */; };
 		81E94D541C2B8BF200A6291E /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
 		81E94D551C2B8BF200A6291E /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
-		81E94D561C2B8BF200A6291E /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		81E94D571C2B8BF200A6291E /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
 		81E94D581C2B8BF200A6291E /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
 		81E94D591C2B8BF200A6291E /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
@@ -130,11 +112,9 @@
 		81E94D601C2B8BF200A6291E /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81E94D611C2B8BF200A6291E /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81E94D631C2B8BF200A6291E /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81E94D651C2B8BF200A6291E /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81E94D661C2B8BF200A6291E /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED94131BE147CF00795F05 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
 		81ED94141BE147CF00795F05 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
-		81ED94151BE147CF00795F05 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		81ED94161BE147CF00795F05 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
 		81ED94171BE147CF00795F05 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
 		81ED94181BE147CF00795F05 /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
@@ -145,7 +125,6 @@
 		81ED941F1BE147CF00795F05 /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED94201BE147CF00795F05 /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED94221BE147CF00795F05 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81ED94241BE147CF00795F05 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED94251BE147CF00795F05 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED942C1BE1481900795F05 /* BFAppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5819900A84000BAE3F /* BFAppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED942D1BE1481900795F05 /* BFAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5919900A84000BAE3F /* BFAppLink.m */; };
@@ -164,13 +143,39 @@
 		81ED943C1BE1481900795F05 /* BFMeasurementEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = B242FAB919A567660097ECAE /* BFMeasurementEvent.m */; };
 		81ED943E1BE1481900795F05 /* BFURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA6419900A84000BAE3F /* BFURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		81ED943F1BE1481900795F05 /* BFURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA6519900A84000BAE3F /* BFURL.m */; };
-		85D5138A18E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */; };
 		8E8C8EFB17F23E5F00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
 		8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
 		8EDDA63017E17DDC00655F8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
+		BCBD72B42652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCBD72B52652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCBD72B62652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCBD72B72652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCBD72B82652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCBD72B92652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCBD72BA2652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCBD72BC2652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCBD72BD2652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCBD72BE2652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCBD72BF2652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCBD72C02652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCBD72C12652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCBD72C22652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCBD72C82652E50D00F6BFFD /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C42652E50D00F6BFFD /* BFURL_Internal.h */; };
+		BCBD72C92652E50D00F6BFFD /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C52652E50D00F6BFFD /* BFAppLink_Internal.h */; };
+		BCBD72CA2652E50D00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C62652E50D00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h */; };
+		BCBD72CB2652E50D00F6BFFD /* BFMeasurementEvent_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C72652E50D00F6BFFD /* BFMeasurementEvent_Internal.h */; };
+		BCBD72CC2652E57B00F6BFFD /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C42652E50D00F6BFFD /* BFURL_Internal.h */; };
+		BCBD72CD2652E57B00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C62652E50D00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h */; };
+		BCBD72CE2652E57B00F6BFFD /* BFMeasurementEvent_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C72652E50D00F6BFFD /* BFMeasurementEvent_Internal.h */; };
+		BCBD72CF2652E57B00F6BFFD /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72C52652E50D00F6BFFD /* BFAppLink_Internal.h */; };
+		BCDDD7C526557CEA00851ED0 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDDD7C326557CEA00851ED0 /* AppLinkTests.m */; };
+		BCDDD7C626557CEA00851ED0 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDDD7C326557CEA00851ED0 /* AppLinkTests.m */; };
+		BCDDD7C726557CEA00851ED0 /* AppLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDDD7C326557CEA00851ED0 /* AppLinkTests.m */; };
+		BCDDD7C826557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDDD7C426557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m */; };
+		BCDDD7C926557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDDD7C426557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m */; };
+		BCDDD7CA26557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BCDDD7C426557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m */; };
 		F5AFC9EC1BA752750076E927 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */; };
 		F5AFC9ED1BA752750076E927 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5119900A84000BAE3F /* BFTask.m */; };
-		F5AFC9EE1BA752750076E927 /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA5519900A84000BAE3F /* Bolts.m */; };
 		F5AFC9EF1BA752750076E927 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */; };
 		F5AFC9F01BA752750076E927 /* BFCancellationTokenSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */; };
 		F5AFC9F11BA752750076E927 /* BFExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8103FA4F19900A84000BAE3F /* BFExecutor.m */; };
@@ -181,7 +186,6 @@
 		F5AFC9F81BA752750076E927 /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5AFC9F91BA752750076E927 /* BFExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA4E19900A84000BAE3F /* BFExecutor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5AFC9FB1BA752750076E927 /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F5AFC9FD1BA752750076E927 /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 8103FA5419900A84000BAE3F /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5AFC9FE1BA752750076E927 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5AFCA081BA752770076E927 /* ExecutorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 81DC1A611B7A7F4000F491DC /* ExecutorTests.m */; };
 		F5AFCA0A1BA752770076E927 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
@@ -230,7 +234,6 @@
 		1EC3016F18CDAA8400D06D07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1EC3017018CDAA8400D06D07 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1EC3017218CDAA8400D06D07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		1EC3019018CDABCE00D06D07 /* AppLinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
 		46A4AE4324094C690022BB98 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFCancellationToken.h; sourceTree = "<group>"; };
 		7C60AEBE1ACF08F300747DD7 /* BFCancellationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFCancellationToken.m; sourceTree = "<group>"; };
@@ -245,8 +248,6 @@
 		8103FA5119900A84000BAE3F /* BFTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTask.m; sourceTree = "<group>"; };
 		8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTaskCompletionSource.h; sourceTree = "<group>"; };
 		8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTaskCompletionSource.m; sourceTree = "<group>"; };
-		8103FA5419900A84000BAE3F /* Bolts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bolts.h; sourceTree = "<group>"; };
-		8103FA5519900A84000BAE3F /* Bolts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bolts.m; sourceTree = "<group>"; };
 		8103FA5819900A84000BAE3F /* BFAppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink.h; sourceTree = "<group>"; };
 		8103FA5919900A84000BAE3F /* BFAppLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFAppLink.m; sourceTree = "<group>"; };
 		8103FA5A19900A84000BAE3F /* BFAppLinkNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkNavigation.h; sourceTree = "<group>"; };
@@ -262,15 +263,11 @@
 		8103FA6519900A84000BAE3F /* BFURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFURL.m; sourceTree = "<group>"; };
 		8103FA6619900A84000BAE3F /* BFWebViewAppLinkResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFWebViewAppLinkResolver.h; sourceTree = "<group>"; };
 		8103FA6719900A84000BAE3F /* BFWebViewAppLinkResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFWebViewAppLinkResolver.m; sourceTree = "<group>"; };
-		814916E11AD5D46600EE7C63 /* iOS.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = iOS.modulemap; path = Resources/iOS.modulemap; sourceTree = "<group>"; };
+		814916E11AD5D46600EE7C63 /* iOS.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iOS.modulemap; sourceTree = "<group>"; };
 		8160B82B1DE6277200C6E285 /* BFGeneric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFGeneric.h; sourceTree = "<group>"; };
 		8178F99C1BB0F87700AD289D /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		819573F11C2B8ECB00BFCA39 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB8BB11D36D7BD00066F63 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
-		81CF83061D0B559700633946 /* BFAppLink_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink_Internal.h; sourceTree = "<group>"; };
-		81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkReturnToRefererView_Internal.h; sourceTree = "<group>"; };
-		81CF83081D0B559700633946 /* BFMeasurementEvent_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMeasurementEvent_Internal.h; sourceTree = "<group>"; };
-		81CF83091D0B559700633946 /* BFURL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFURL_Internal.h; sourceTree = "<group>"; };
 		81D0EE7C19AFA8260000AE75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-iOS-Dynamic.xcconfig"; sourceTree = "<group>"; };
 		81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Bolts-iOS.xcconfig"; sourceTree = "<group>"; };
@@ -294,13 +291,11 @@
 		81D646FB1D2CA0E000690609 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		81D646FC1D2CA0E000690609 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
 		81D6472A1D2CA2C600690609 /* macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = macOS.xcconfig; path = Vendor/xctoolchain/Configurations/Platform/macOS.xcconfig; sourceTree = SOURCE_ROOT; };
-		81D647431D2CA52300690609 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
+		81D647431D2CA52300690609 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81DC1A611B7A7F4000F491DC /* ExecutorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExecutorTests.m; sourceTree = "<group>"; };
 		81E94D6A1C2B8BF200A6291E /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81ED94291BE147CF00795F05 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81ED946E1BE14B5200795F05 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8550FD2E18EE1B7A00976B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkReturnToRefererViewTests.m; sourceTree = "<group>"; };
 		8E8C8ED217F23C3B00E3F1C7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		8E8C8ED917F23C3B00E3F1C7 /* BoltsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BoltsTests-Info.plist"; sourceTree = "<group>"; };
 		8E8C8EDB17F23C3B00E3F1C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -312,6 +307,14 @@
 		8E9C3D1C17DE9F6500427E62 /* TaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTests.m; sourceTree = "<group>"; };
 		B242FAB819A567660097ECAE /* BFMeasurementEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMeasurementEvent.h; sourceTree = "<group>"; };
 		B242FAB919A567660097ECAE /* BFMeasurementEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFMeasurementEvent.m; sourceTree = "<group>"; };
+		BCBD72B32652C70200F6BFFD /* Bolts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bolts.h; sourceTree = "<group>"; };
+		BCBD72BB2652C70C00F6BFFD /* Bolts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bolts.m; sourceTree = "<group>"; };
+		BCBD72C42652E50D00F6BFFD /* BFURL_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFURL_Internal.h; sourceTree = "<group>"; };
+		BCBD72C52652E50D00F6BFFD /* BFAppLink_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLink_Internal.h; sourceTree = "<group>"; };
+		BCBD72C62652E50D00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFAppLinkReturnToRefererView_Internal.h; sourceTree = "<group>"; };
+		BCBD72C72652E50D00F6BFFD /* BFMeasurementEvent_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMeasurementEvent_Internal.h; sourceTree = "<group>"; };
+		BCDDD7C326557CEA00851ED0 /* AppLinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
+		BCDDD7C426557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppLinkReturnToRefererViewTests.m; sourceTree = "<group>"; };
 		F5AFCA021BA752750076E927 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bolts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5AFCA131BA752770076E927 /* BoltsTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BoltsTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -435,32 +438,9 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8103FA4D19900A84000BAE3F /* Common */ = {
+		8103FA5719900A84000BAE3F /* Bolts-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8103FA5419900A84000BAE3F /* Bolts.h */,
-				8103FA5519900A84000BAE3F /* Bolts.m */,
-				8160B82B1DE6277200C6E285 /* BFGeneric.h */,
-				8103FA5019900A84000BAE3F /* BFTask.h */,
-				8103FA5119900A84000BAE3F /* BFTask.m */,
-				8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */,
-				8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */,
-				8103FA4E19900A84000BAE3F /* BFExecutor.h */,
-				8103FA4F19900A84000BAE3F /* BFExecutor.m */,
-				7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */,
-				7C60AEBE1ACF08F300747DD7 /* BFCancellationToken.m */,
-				7CA39C901ADE715400DD78CC /* BFCancellationTokenRegistration.h */,
-				7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */,
-				7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */,
-				7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		8103FA5719900A84000BAE3F /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				81CF83051D0B559700633946 /* Internal */,
 				8103FA5819900A84000BAE3F /* BFAppLink.h */,
 				8103FA5919900A84000BAE3F /* BFAppLink.m */,
 				8103FA5A19900A84000BAE3F /* BFAppLinkNavigation.h */,
@@ -478,19 +458,12 @@
 				B242FAB919A567660097ECAE /* BFMeasurementEvent.m */,
 				8103FA6419900A84000BAE3F /* BFURL.h */,
 				8103FA6519900A84000BAE3F /* BFURL.m */,
+				BCBD72C52652E50D00F6BFFD /* BFAppLink_Internal.h */,
+				BCBD72C62652E50D00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h */,
+				BCBD72C72652E50D00F6BFFD /* BFMeasurementEvent_Internal.h */,
+				BCBD72C42652E50D00F6BFFD /* BFURL_Internal.h */,
 			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		81CF83051D0B559700633946 /* Internal */ = {
-			isa = PBXGroup;
-			children = (
-				81CF83061D0B559700633946 /* BFAppLink_Internal.h */,
-				81CF83071D0B559700633946 /* BFAppLinkReturnToRefererView_Internal.h */,
-				81CF83081D0B559700633946 /* BFMeasurementEvent_Internal.h */,
-				81CF83091D0B559700633946 /* BFURL_Internal.h */,
-			);
-			path = Internal;
+			path = "Bolts-iOS";
 			sourceTree = "<group>";
 		};
 		81D646E21D2CA0E000690609 /* Configurations */ = {
@@ -558,8 +531,8 @@
 		8E8C8ED717F23C3B00E3F1C7 /* BoltsTests */ = {
 			isa = PBXGroup;
 			children = (
-				85D5138918E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m */,
-				1EC3019018CDABCE00D06D07 /* AppLinkTests.m */,
+				BCDDD7C426557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m */,
+				BCDDD7C326557CEA00851ED0 /* AppLinkTests.m */,
 				7C60AEC51ACF19F900747DD7 /* CancellationTests.m */,
 				81DC1A611B7A7F4000F491DC /* ExecutorTests.m */,
 				8E9C3D1C17DE9F6500427E62 /* TaskTests.m */,
@@ -583,7 +556,10 @@
 				81D646E21D2CA0E000690609 /* Configurations */,
 				8E9C3CEE17DE9DE000427E62 /* Bolts */,
 				8E8C8ED717F23C3B00E3F1C7 /* BoltsTests */,
+				8103FA5719900A84000BAE3F /* Bolts-iOS */,
+				BCBD72C32652DCCC00F6BFFD /* Bolts-iOS-Tests */,
 				1EC3016618CDAA8400D06D07 /* BoltsTestUI */,
+				8E9C3CEF17DE9DE000427E62 /* Supporting Files */,
 				8E9C3CEB17DE9DE000427E62 /* Frameworks */,
 				8E9C3CEA17DE9DE000427E62 /* Products */,
 			);
@@ -626,10 +602,23 @@
 		8E9C3CEE17DE9DE000427E62 /* Bolts */ = {
 			isa = PBXGroup;
 			children = (
-				8103FA4D19900A84000BAE3F /* Common */,
-				8103FA5719900A84000BAE3F /* iOS */,
-				8E9C3CEF17DE9DE000427E62 /* Supporting Files */,
-				8550FD2D18EE1B7A00976B4B /* Localizable.strings */,
+				BCBD72B32652C70200F6BFFD /* Bolts.h */,
+				BCBD72BB2652C70C00F6BFFD /* Bolts.m */,
+				8160B82B1DE6277200C6E285 /* BFGeneric.h */,
+				8103FA5019900A84000BAE3F /* BFTask.h */,
+				8103FA5119900A84000BAE3F /* BFTask.m */,
+				8103FA5219900A84000BAE3F /* BFTaskCompletionSource.h */,
+				8103FA5319900A84000BAE3F /* BFTaskCompletionSource.m */,
+				8103FA4E19900A84000BAE3F /* BFExecutor.h */,
+				8103FA4F19900A84000BAE3F /* BFExecutor.m */,
+				7C60AEBD1ACF08F300747DD7 /* BFCancellationToken.h */,
+				7C60AEBE1ACF08F300747DD7 /* BFCancellationToken.m */,
+				7CA39C901ADE715400DD78CC /* BFCancellationTokenRegistration.h */,
+				7CA39C911ADE715400DD78CC /* BFCancellationTokenRegistration.m */,
+				7C60AEC11ACF093D00747DD7 /* BFCancellationTokenSource.h */,
+				7C60AEC21ACF093D00747DD7 /* BFCancellationTokenSource.m */,
+				814916E11AD5D46600EE7C63 /* iOS.modulemap */,
+				81D647431D2CA52300690609 /* Info.plist */,
 			);
 			path = Bolts;
 			sourceTree = "<group>";
@@ -637,10 +626,16 @@
 		8E9C3CEF17DE9DE000427E62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				814916E11AD5D46600EE7C63 /* iOS.modulemap */,
-				81D647431D2CA52300690609 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			path = Bolts;
+			sourceTree = "<group>";
+		};
+		BCBD72C32652DCCC00F6BFFD /* Bolts-iOS-Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Bolts-iOS-Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -650,25 +645,25 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCBD72CF2652E57B00F6BFFD /* BFAppLink_Internal.h in Headers */,
 				1D5D7DBA1BE3CE8200FD67C7 /* BFWebViewAppLinkResolver.h in Headers */,
 				8160B82D1DE6277200C6E285 /* BFGeneric.h in Headers */,
-				81CF830D1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
-				81CF83111D0B559800633946 /* BFURL_Internal.h in Headers */,
 				1D5D7DBB1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.h in Headers */,
+				BCBD72CE2652E57B00F6BFFD /* BFMeasurementEvent_Internal.h in Headers */,
 				1D5D7DBC1BE3CE8200FD67C7 /* BFTask.h in Headers */,
 				1D5D7DBD1BE3CE8200FD67C7 /* BFAppLinkNavigation.h in Headers */,
-				81CF830B1D0B559800633946 /* BFAppLink_Internal.h in Headers */,
 				1D5D7DBE1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.h in Headers */,
 				1D5D7DBF1BE3CE8200FD67C7 /* BFCancellationTokenSource.h in Headers */,
 				1D5D7DC01BE3CE8200FD67C7 /* BFExecutor.h in Headers */,
 				1D5D7DC11BE3CE8200FD67C7 /* BFAppLinkTarget.h in Headers */,
 				1D5D7DC41BE3CE8200FD67C7 /* BFAppLinkResolving.h in Headers */,
 				1D5D7DC61BE3CE8200FD67C7 /* BFURL.h in Headers */,
-				81CF830F1D0B559800633946 /* BFMeasurementEvent_Internal.h in Headers */,
+				BCBD72CD2652E57B00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
+				BCBD72B52652C70200F6BFFD /* Bolts.h in Headers */,
 				1D5D7DC71BE3CE8200FD67C7 /* BFTaskCompletionSource.h in Headers */,
 				1D5D7DCA1BE3CE8200FD67C7 /* BFMeasurementEvent.h in Headers */,
-				1D5D7DCC1BE3CE8200FD67C7 /* Bolts.h in Headers */,
 				1D5D7DCD1BE3CE8200FD67C7 /* BFCancellationToken.h in Headers */,
+				BCBD72CC2652E57B00F6BFFD /* BFURL_Internal.h in Headers */,
 				1D5D7DCE1BE3CE8200FD67C7 /* BFAppLink.h in Headers */,
 				1D5D7DCF1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererController.h in Headers */,
 			);
@@ -679,11 +674,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8178F9901BB0F87700AD289D /* BFCancellationTokenRegistration.h in Headers */,
+				BCBD72B92652C70200F6BFFD /* Bolts.h in Headers */,
 				8178F9911BB0F87700AD289D /* BFTask.h in Headers */,
 				8178F9921BB0F87700AD289D /* BFCancellationTokenSource.h in Headers */,
 				8178F9931BB0F87700AD289D /* BFExecutor.h in Headers */,
 				8178F9951BB0F87700AD289D /* BFTaskCompletionSource.h in Headers */,
-				8178F9971BB0F87700AD289D /* Bolts.h in Headers */,
 				8160B8311DE6277200C6E285 /* BFGeneric.h in Headers */,
 				8178F9981BB0F87700AD289D /* BFCancellationToken.h in Headers */,
 			);
@@ -694,11 +689,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				819573E51C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.h in Headers */,
+				BCBD72BA2652C70200F6BFFD /* Bolts.h in Headers */,
 				819573E61C2B8ECB00BFCA39 /* BFTask.h in Headers */,
 				819573E71C2B8ECB00BFCA39 /* BFCancellationTokenSource.h in Headers */,
 				819573E81C2B8ECB00BFCA39 /* BFExecutor.h in Headers */,
 				819573EA1C2B8ECB00BFCA39 /* BFTaskCompletionSource.h in Headers */,
-				819573EC1C2B8ECB00BFCA39 /* Bolts.h in Headers */,
 				8160B8321DE6277200C6E285 /* BFGeneric.h in Headers */,
 				819573ED1C2B8ECB00BFCA39 /* BFCancellationToken.h in Headers */,
 			);
@@ -709,11 +704,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA39C931ADE715400DD78CC /* BFCancellationTokenRegistration.h in Headers */,
+				BCBD72B62652C70200F6BFFD /* Bolts.h in Headers */,
 				81D0EE8519AFAA190000AE75 /* BFTask.h in Headers */,
 				7C60AECA1ACF1A0B00747DD7 /* BFCancellationTokenSource.h in Headers */,
 				81D0EE8819AFAA240000AE75 /* BFExecutor.h in Headers */,
 				81D0EE8A19AFAA2C0000AE75 /* BFTaskCompletionSource.h in Headers */,
-				81D0EE8319AFAA0E0000AE75 /* Bolts.h in Headers */,
 				8160B82E1DE6277200C6E285 /* BFGeneric.h in Headers */,
 				7C60AEC81ACF1A0100747DD7 /* BFCancellationToken.h in Headers */,
 			);
@@ -724,11 +719,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				81E94D5E1C2B8BF200A6291E /* BFCancellationTokenRegistration.h in Headers */,
+				BCBD72B82652C70200F6BFFD /* Bolts.h in Headers */,
 				81E94D5F1C2B8BF200A6291E /* BFTask.h in Headers */,
 				81E94D601C2B8BF200A6291E /* BFCancellationTokenSource.h in Headers */,
 				81E94D611C2B8BF200A6291E /* BFExecutor.h in Headers */,
 				81E94D631C2B8BF200A6291E /* BFTaskCompletionSource.h in Headers */,
-				81E94D651C2B8BF200A6291E /* Bolts.h in Headers */,
 				8160B8301DE6277200C6E285 /* BFGeneric.h in Headers */,
 				81E94D661C2B8BF200A6291E /* BFCancellationToken.h in Headers */,
 			);
@@ -740,22 +735,22 @@
 			files = (
 				81ED94311BE1481900795F05 /* BFWebViewAppLinkResolver.h in Headers */,
 				8160B82C1DE6277200C6E285 /* BFGeneric.h in Headers */,
-				81CF830C1D0B559800633946 /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
-				81CF83101D0B559800633946 /* BFURL_Internal.h in Headers */,
 				81ED941D1BE147CF00795F05 /* BFCancellationTokenRegistration.h in Headers */,
 				81ED941E1BE147CF00795F05 /* BFTask.h in Headers */,
+				BCBD72C92652E50D00F6BFFD /* BFAppLink_Internal.h in Headers */,
 				81ED942E1BE1481900795F05 /* BFAppLinkNavigation.h in Headers */,
-				81CF830A1D0B559800633946 /* BFAppLink_Internal.h in Headers */,
+				BCBD72CA2652E50D00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
 				81ED94351BE1481900795F05 /* BFAppLinkReturnToRefererView.h in Headers */,
 				81ED941F1BE147CF00795F05 /* BFCancellationTokenSource.h in Headers */,
 				81ED94201BE147CF00795F05 /* BFExecutor.h in Headers */,
+				BCBD72CB2652E50D00F6BFFD /* BFMeasurementEvent_Internal.h in Headers */,
 				81ED94381BE1481900795F05 /* BFAppLinkTarget.h in Headers */,
 				81ED94301BE1481900795F05 /* BFAppLinkResolving.h in Headers */,
+				BCBD72C82652E50D00F6BFFD /* BFURL_Internal.h in Headers */,
 				81ED943E1BE1481900795F05 /* BFURL.h in Headers */,
-				81CF830E1D0B559800633946 /* BFMeasurementEvent_Internal.h in Headers */,
 				81ED94221BE147CF00795F05 /* BFTaskCompletionSource.h in Headers */,
+				BCBD72B42652C70200F6BFFD /* Bolts.h in Headers */,
 				81ED943B1BE1481900795F05 /* BFMeasurementEvent.h in Headers */,
-				81ED94241BE147CF00795F05 /* Bolts.h in Headers */,
 				81ED94251BE147CF00795F05 /* BFCancellationToken.h in Headers */,
 				81ED942C1BE1481900795F05 /* BFAppLink.h in Headers */,
 				81ED94331BE1481900795F05 /* BFAppLinkReturnToRefererController.h in Headers */,
@@ -767,11 +762,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5AFC9F61BA752750076E927 /* BFCancellationTokenRegistration.h in Headers */,
+				BCBD72B72652C70200F6BFFD /* Bolts.h in Headers */,
 				F5AFC9F71BA752750076E927 /* BFTask.h in Headers */,
 				F5AFC9F81BA752750076E927 /* BFCancellationTokenSource.h in Headers */,
 				F5AFC9F91BA752750076E927 /* BFExecutor.h in Headers */,
 				F5AFC9FB1BA752750076E927 /* BFTaskCompletionSource.h in Headers */,
-				F5AFC9FD1BA752750076E927 /* Bolts.h in Headers */,
 				8160B82F1DE6277200C6E285 /* BFGeneric.h in Headers */,
 				F5AFC9FE1BA752750076E927 /* BFCancellationToken.h in Headers */,
 			);
@@ -1058,7 +1053,6 @@
 				1D5D7DAA1BE3CE8200FD67C7 /* BFAppLinkTarget.m in Sources */,
 				1D5D7DAB1BE3CE8200FD67C7 /* BFAppLinkReturnToRefererView.m in Sources */,
 				1D5D7DAC1BE3CE8200FD67C7 /* BFTask.m in Sources */,
-				1D5D7DAD1BE3CE8200FD67C7 /* Bolts.m in Sources */,
 				1D5D7DAE1BE3CE8200FD67C7 /* BFCancellationTokenRegistration.m in Sources */,
 				1D5D7DAF1BE3CE8200FD67C7 /* BFCancellationTokenSource.m in Sources */,
 				1D5D7DB01BE3CE8200FD67C7 /* BFMeasurementEvent.m in Sources */,
@@ -1066,6 +1060,7 @@
 				1D5D7DB21BE3CE8200FD67C7 /* BFAppLinkNavigation.m in Sources */,
 				1D5D7DB31BE3CE8200FD67C7 /* BFAppLinkReturnToRefererController.m in Sources */,
 				1D5D7DB41BE3CE8200FD67C7 /* BFAppLink.m in Sources */,
+				BCBD72BD2652C70C00F6BFFD /* Bolts.m in Sources */,
 				1D5D7DB51BE3CE8200FD67C7 /* BFExecutor.m in Sources */,
 				1D5D7DB61BE3CE8200FD67C7 /* BFCancellationToken.m in Sources */,
 			);
@@ -1086,7 +1081,7 @@
 			files = (
 				8178F9861BB0F87700AD289D /* BFTaskCompletionSource.m in Sources */,
 				8178F9871BB0F87700AD289D /* BFTask.m in Sources */,
-				8178F9881BB0F87700AD289D /* Bolts.m in Sources */,
+				BCBD72C12652C70C00F6BFFD /* Bolts.m in Sources */,
 				8178F9891BB0F87700AD289D /* BFCancellationTokenRegistration.m in Sources */,
 				8178F98A1BB0F87700AD289D /* BFCancellationTokenSource.m in Sources */,
 				8178F98B1BB0F87700AD289D /* BFExecutor.m in Sources */,
@@ -1100,7 +1095,7 @@
 			files = (
 				819573DB1C2B8ECB00BFCA39 /* BFTaskCompletionSource.m in Sources */,
 				819573DC1C2B8ECB00BFCA39 /* BFTask.m in Sources */,
-				819573DD1C2B8ECB00BFCA39 /* Bolts.m in Sources */,
+				BCBD72C22652C70C00F6BFFD /* Bolts.m in Sources */,
 				819573DE1C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.m in Sources */,
 				819573DF1C2B8ECB00BFCA39 /* BFCancellationTokenSource.m in Sources */,
 				819573E01C2B8ECB00BFCA39 /* BFExecutor.m in Sources */,
@@ -1114,7 +1109,7 @@
 			files = (
 				81E94D541C2B8BF200A6291E /* BFTaskCompletionSource.m in Sources */,
 				81E94D551C2B8BF200A6291E /* BFTask.m in Sources */,
-				81E94D561C2B8BF200A6291E /* Bolts.m in Sources */,
+				BCBD72C02652C70C00F6BFFD /* Bolts.m in Sources */,
 				81E94D571C2B8BF200A6291E /* BFCancellationTokenRegistration.m in Sources */,
 				81E94D581C2B8BF200A6291E /* BFCancellationTokenSource.m in Sources */,
 				81E94D591C2B8BF200A6291E /* BFExecutor.m in Sources */,
@@ -1131,7 +1126,6 @@
 				81ED94391BE1481900795F05 /* BFAppLinkTarget.m in Sources */,
 				81ED94361BE1481900795F05 /* BFAppLinkReturnToRefererView.m in Sources */,
 				81ED94141BE147CF00795F05 /* BFTask.m in Sources */,
-				81ED94151BE147CF00795F05 /* Bolts.m in Sources */,
 				81ED94161BE147CF00795F05 /* BFCancellationTokenRegistration.m in Sources */,
 				81ED94171BE147CF00795F05 /* BFCancellationTokenSource.m in Sources */,
 				81ED943C1BE1481900795F05 /* BFMeasurementEvent.m in Sources */,
@@ -1139,6 +1133,7 @@
 				81ED942F1BE1481900795F05 /* BFAppLinkNavigation.m in Sources */,
 				81ED94341BE1481900795F05 /* BFAppLinkReturnToRefererController.m in Sources */,
 				81ED942D1BE1481900795F05 /* BFAppLink.m in Sources */,
+				BCBD72BC2652C70C00F6BFFD /* Bolts.m in Sources */,
 				81ED94181BE147CF00795F05 /* BFExecutor.m in Sources */,
 				81ED94191BE147CF00795F05 /* BFCancellationToken.m in Sources */,
 			);
@@ -1149,10 +1144,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				81DC1A621B7A7F4000F491DC /* ExecutorTests.m in Sources */,
-				1EC3019118CDABCE00D06D07 /* AppLinkTests.m in Sources */,
 				7C60AEC61ACF19F900747DD7 /* CancellationTests.m in Sources */,
-				85D5138A18E4E45800D19D87 /* AppLinkReturnToRefererViewTests.m in Sources */,
 				8E8C8EFB17F23E5F00E3F1C7 /* TaskTests.m in Sources */,
+				BCDDD7C826557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m in Sources */,
+				BCDDD7C526557CEA00851ED0 /* AppLinkTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,6 +1158,8 @@
 				81DC1A631B7A7F4000F491DC /* ExecutorTests.m in Sources */,
 				8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */,
 				7C60AEC71ACF19FD00747DD7 /* CancellationTests.m in Sources */,
+				BCDDD7C926557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m in Sources */,
+				BCDDD7C626557CEA00851ED0 /* AppLinkTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1172,7 +1169,7 @@
 			files = (
 				8103FA6D19900A84000BAE3F /* BFTaskCompletionSource.m in Sources */,
 				8103FA6B19900A84000BAE3F /* BFTask.m in Sources */,
-				8103FA6F19900A84000BAE3F /* Bolts.m in Sources */,
+				BCBD72BE2652C70C00F6BFFD /* Bolts.m in Sources */,
 				7CA39C951ADE715400DD78CC /* BFCancellationTokenRegistration.m in Sources */,
 				7C60AECB1ACF1A0D00747DD7 /* BFCancellationTokenSource.m in Sources */,
 				8103FA6919900A84000BAE3F /* BFExecutor.m in Sources */,
@@ -1186,7 +1183,7 @@
 			files = (
 				F5AFC9EC1BA752750076E927 /* BFTaskCompletionSource.m in Sources */,
 				F5AFC9ED1BA752750076E927 /* BFTask.m in Sources */,
-				F5AFC9EE1BA752750076E927 /* Bolts.m in Sources */,
+				BCBD72BF2652C70C00F6BFFD /* Bolts.m in Sources */,
 				F5AFC9EF1BA752750076E927 /* BFCancellationTokenRegistration.m in Sources */,
 				F5AFC9F01BA752750076E927 /* BFCancellationTokenSource.m in Sources */,
 				F5AFC9F11BA752750076E927 /* BFExecutor.m in Sources */,
@@ -1201,6 +1198,8 @@
 				F5AFCA081BA752770076E927 /* ExecutorTests.m in Sources */,
 				F5AFCA0A1BA752770076E927 /* TaskTests.m in Sources */,
 				F5AFCA0B1BA752770076E927 /* CancellationTests.m in Sources */,
+				BCDDD7CA26557CEA00851ED0 /* AppLinkReturnToRefererViewTests.m in Sources */,
+				BCDDD7C726557CEA00851ED0 /* AppLinkTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1238,14 +1237,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		8550FD2D18EE1B7A00976B4B /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8550FD2E18EE1B7A00976B4B /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		8E8C8EDA17F23C3B00E3F1C7 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1261,6 +1252,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
 			buildSettings = {
+				INFOPLIST_FILE = "$(SRCROOT)/Bolts/Info.plist";
 			};
 			name = Debug;
 		};
@@ -1268,6 +1260,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
 			buildSettings = {
+				INFOPLIST_FILE = "$(SRCROOT)/Bolts/Info.plist";
 			};
 			name = Release;
 		};
@@ -1384,6 +1377,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646EA1D2CA0E000690609 /* BoltsTests-iOS.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
@@ -1394,6 +1388,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646EA1D2CA0E000690609 /* BoltsTests-iOS.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "arm64 arm64e armv7 armv7s";
@@ -1404,6 +1399,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646EB1D2CA0E000690609 /* BoltsTests-OSX.xcconfig */;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 			};
 			name = Debug;
 		};
@@ -1411,6 +1407,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646EB1D2CA0E000690609 /* BoltsTests-OSX.xcconfig */;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 			};
 			name = Release;
 		};

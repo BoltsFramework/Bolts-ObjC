@@ -8,7 +8,9 @@
  *
  */
 
-#import <Bolts/BFAppLink.h>
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+
+#import "BFAppLink.h"
 
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
@@ -30,3 +32,6 @@ FOUNDATION_EXPORT NSString *const BFAppLinkRefererUrl;
 @property (nonatomic, assign, readonly, getter=isBackToReferrer) BOOL backToReferrer;
 
 @end
+
+
+#endif

@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+
 #import <Foundation/Foundation.h>
 
 /*!
@@ -31,3 +33,5 @@
 @property (nonatomic, copy, readonly) NSString *appName;
 
 @end
+
+#endif

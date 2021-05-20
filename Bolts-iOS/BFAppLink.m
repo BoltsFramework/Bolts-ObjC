@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+
 #import "BFAppLink_Internal.h"
 
 NSString *const BFAppLinkDataParameterName = @"al_applink_data";
@@ -60,3 +62,6 @@ NSString *const BFAppLinkVersion = @"1.0";
 }
 
 @end
+
+
+#endif

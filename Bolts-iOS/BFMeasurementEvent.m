@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+
 #import "BFMeasurementEvent_Internal.h"
 
 NSString *const BFMeasurementEventNotificationName = @"com.parse.bolts.measurement_event";
@@ -60,3 +62,5 @@ __attribute__((noinline)) void warnOnMissingEventName() {
 }
 
 @end
+
+#endif

@@ -8,10 +8,12 @@
  *
  */
 
-#import <Bolts/BFAppLinkReturnToRefererView.h>
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
 
-@interface BFAppLinkReturnToRefererView (Internal)
+#import "BFURL.h"
 
-- (CGFloat)statusBarHeight;
-
+@interface BFURL (Internal)
++ (BFURL *)URLForRenderBackToReferrerBarURL:(NSURL *)url;
 @end
+
+#endif

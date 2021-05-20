@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+
 #import "BFAppLinkTarget.h"
 
 @interface BFAppLinkTarget ()
@@ -31,3 +33,5 @@
 }
 
 @end
+
+#endif
