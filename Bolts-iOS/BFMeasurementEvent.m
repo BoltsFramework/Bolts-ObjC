@@ -8,7 +8,7 @@
  *
  */
 
-#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 #import "BFMeasurementEvent_Internal.h"
 
@@ -25,7 +25,7 @@ NSString *const BFAppLinkNavigateInEventName = @"al_nav_in";
 NSString *const BFAppLinkNavigateOutEventName = @"al_nav_out";
 NSString *const BFAppLinkNavigateBackToReferrerEventName = @"al_ref_back_out";
 
-__attribute__((noinline)) void warnOnMissingEventName() {
+__attribute__((noinline)) void warnOnMissingEventName(void) {
     NSLog(@"Warning: Missing event name when logging bolts measurement event. \n"
           " Ignoring this event in logging.");
 }

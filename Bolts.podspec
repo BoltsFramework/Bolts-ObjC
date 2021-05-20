@@ -14,21 +14,21 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/ParseIt'
   s.requires_arc = true
 
-  s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.8'
+  s.ios.deployment_target = '9.0'
+  s.osx.deployment_target = '10.9'
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
 
   s.subspec 'Tasks' do |ss|
-    ss.source_files = 'Bolts/Common/*.[hm]'
-    ss.public_header_files = 'Bolts/Common/*.h'
+    ss.source_files = 'Bolts/*.[hm]', 'Bolts-iOS/*.[hm]'
+    ss.public_header_files = 'Bolts/*.h', 'Bolts-iOS/*.h'
   end
 
   s.subspec 'AppLinks' do |ss|
-    ss.ios.deployment_target = '8.0'
+    ss.ios.deployment_target = '9.0'
     ss.dependency 'Bolts/Tasks'
 
-    ss.ios.source_files = 'Bolts/iOS/**/*.[hm]'
-    ss.ios.public_header_files = 'Bolts/iOS/*.h'
+    ss.ios.source_files = 'Bolts-iOS/**/*.[hm]'
+    ss.ios.public_header_files = 'Bolts-iOS/*.h'
   end
 end

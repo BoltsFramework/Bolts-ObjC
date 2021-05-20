@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Parse Inc. All rights reserved.
 //
 
-#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 @import XCTest;
 @import UIKit;

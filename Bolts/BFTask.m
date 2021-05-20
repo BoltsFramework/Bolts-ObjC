@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-__attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
+__attribute__ ((noinline)) void warnBlockingOperationOnMainThread(void) {
     NSLog(@"Warning: A long-running operation is being executed on the main thread. \n"
           " Break on warnBlockingOperationOnMainThread() to debug.");
 }

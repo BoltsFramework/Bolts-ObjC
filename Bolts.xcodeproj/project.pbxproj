@@ -1261,6 +1261,7 @@
 			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Bolts/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1269,6 +1270,7 @@
 			baseConfigurationReference = 81D646E31D2CA0E000690609 /* Bolts-iOS-Dynamic.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Bolts/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1291,7 +1293,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios.testapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1316,7 +1318,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "BoltsTestUI/BoltsTestUI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bolts.ios.testapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1371,6 +1373,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -1378,6 +1381,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E41D2CA0E000690609 /* Bolts-iOS.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -1424,7 +1428,7 @@
 			baseConfigurationReference = 81D646FA1D2CA0E000690609 /* Debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 			};
 			name = Debug;
@@ -1434,7 +1438,7 @@
 			baseConfigurationReference = 81D646FB1D2CA0E000690609 /* Release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 			};
 			name = Release;
@@ -1443,6 +1447,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 			};
 			name = Debug;
 		};
@@ -1450,6 +1455,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81D646E51D2CA0E000690609 /* Bolts-macOS.xcconfig */;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 			};
 			name = Release;
 		};

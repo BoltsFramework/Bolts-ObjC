@@ -16,7 +16,7 @@
 #import "BFTask.h"
 #import "BFTaskCompletionSource.h"
 
-#if TARGET_OS_IOS || TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
 #if SWIFT_PACKAGE
 
