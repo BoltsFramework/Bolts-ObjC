@@ -146,13 +146,17 @@
 		8E8C8EFB17F23E5F00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
 		8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C3D1C17DE9F6500427E62 /* TaskTests.m */; };
 		8EDDA63017E17DDC00655F8A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9C3CEC17DE9DE000427E62 /* Foundation.framework */; };
-		BCBD72B42652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
-		BCBD72B52652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
-		BCBD72B62652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
-		BCBD72B72652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
-		BCBD72B82652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
-		BCBD72B92652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
-		BCBD72BA2652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; };
+		BCB644CE265698470047F5DB /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCB644CF265698470047F5DB /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCB644D0265698490047F5DB /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCB644D1265698490047F5DB /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
+		BCB644D2265699210047F5DB /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCBD72B52652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCBD72B62652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCBD72B72652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCBD72B82652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCBD72B92652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BCBD72BA2652C70200F6BFFD /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = BCBD72B32652C70200F6BFFD /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCBD72BC2652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
 		BCBD72BD2652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
 		BCBD72BE2652C70C00F6BFFD /* Bolts.m in Sources */ = {isa = PBXBuildFile; fileRef = BCBD72BB2652C70C00F6BFFD /* Bolts.m */; };
@@ -645,6 +649,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCBD72B52652C70200F6BFFD /* Bolts.h in Headers */,
 				BCBD72CF2652E57B00F6BFFD /* BFAppLink_Internal.h in Headers */,
 				1D5D7DBA1BE3CE8200FD67C7 /* BFWebViewAppLinkResolver.h in Headers */,
 				8160B82D1DE6277200C6E285 /* BFGeneric.h in Headers */,
@@ -659,7 +664,6 @@
 				1D5D7DC41BE3CE8200FD67C7 /* BFAppLinkResolving.h in Headers */,
 				1D5D7DC61BE3CE8200FD67C7 /* BFURL.h in Headers */,
 				BCBD72CD2652E57B00F6BFFD /* BFAppLinkReturnToRefererView_Internal.h in Headers */,
-				BCBD72B52652C70200F6BFFD /* Bolts.h in Headers */,
 				1D5D7DC71BE3CE8200FD67C7 /* BFTaskCompletionSource.h in Headers */,
 				1D5D7DCA1BE3CE8200FD67C7 /* BFMeasurementEvent.h in Headers */,
 				1D5D7DCD1BE3CE8200FD67C7 /* BFCancellationToken.h in Headers */,
@@ -673,8 +677,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8178F9901BB0F87700AD289D /* BFCancellationTokenRegistration.h in Headers */,
 				BCBD72B92652C70200F6BFFD /* Bolts.h in Headers */,
+				8178F9901BB0F87700AD289D /* BFCancellationTokenRegistration.h in Headers */,
 				8178F9911BB0F87700AD289D /* BFTask.h in Headers */,
 				8178F9921BB0F87700AD289D /* BFCancellationTokenSource.h in Headers */,
 				8178F9931BB0F87700AD289D /* BFExecutor.h in Headers */,
@@ -688,8 +692,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				819573E51C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.h in Headers */,
 				BCBD72BA2652C70200F6BFFD /* Bolts.h in Headers */,
+				819573E51C2B8ECB00BFCA39 /* BFCancellationTokenRegistration.h in Headers */,
 				819573E61C2B8ECB00BFCA39 /* BFTask.h in Headers */,
 				819573E71C2B8ECB00BFCA39 /* BFCancellationTokenSource.h in Headers */,
 				819573E81C2B8ECB00BFCA39 /* BFExecutor.h in Headers */,
@@ -703,8 +707,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CA39C931ADE715400DD78CC /* BFCancellationTokenRegistration.h in Headers */,
 				BCBD72B62652C70200F6BFFD /* Bolts.h in Headers */,
+				7CA39C931ADE715400DD78CC /* BFCancellationTokenRegistration.h in Headers */,
 				81D0EE8519AFAA190000AE75 /* BFTask.h in Headers */,
 				7C60AECA1ACF1A0B00747DD7 /* BFCancellationTokenSource.h in Headers */,
 				81D0EE8819AFAA240000AE75 /* BFExecutor.h in Headers */,
@@ -718,8 +722,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81E94D5E1C2B8BF200A6291E /* BFCancellationTokenRegistration.h in Headers */,
 				BCBD72B82652C70200F6BFFD /* Bolts.h in Headers */,
+				81E94D5E1C2B8BF200A6291E /* BFCancellationTokenRegistration.h in Headers */,
 				81E94D5F1C2B8BF200A6291E /* BFTask.h in Headers */,
 				81E94D601C2B8BF200A6291E /* BFCancellationTokenSource.h in Headers */,
 				81E94D611C2B8BF200A6291E /* BFExecutor.h in Headers */,
@@ -733,6 +737,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB644D2265699210047F5DB /* Bolts.h in Headers */,
 				81ED94311BE1481900795F05 /* BFWebViewAppLinkResolver.h in Headers */,
 				8160B82C1DE6277200C6E285 /* BFGeneric.h in Headers */,
 				81ED941D1BE147CF00795F05 /* BFCancellationTokenRegistration.h in Headers */,
@@ -749,7 +754,6 @@
 				BCBD72C82652E50D00F6BFFD /* BFURL_Internal.h in Headers */,
 				81ED943E1BE1481900795F05 /* BFURL.h in Headers */,
 				81ED94221BE147CF00795F05 /* BFTaskCompletionSource.h in Headers */,
-				BCBD72B42652C70200F6BFFD /* Bolts.h in Headers */,
 				81ED943B1BE1481900795F05 /* BFMeasurementEvent.h in Headers */,
 				81ED94251BE147CF00795F05 /* BFCancellationToken.h in Headers */,
 				81ED942C1BE1481900795F05 /* BFAppLink.h in Headers */,
@@ -761,8 +765,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5AFC9F61BA752750076E927 /* BFCancellationTokenRegistration.h in Headers */,
 				BCBD72B72652C70200F6BFFD /* Bolts.h in Headers */,
+				F5AFC9F61BA752750076E927 /* BFCancellationTokenRegistration.h in Headers */,
 				F5AFC9F71BA752750076E927 /* BFTask.h in Headers */,
 				F5AFC9F81BA752750076E927 /* BFCancellationTokenSource.h in Headers */,
 				F5AFC9F91BA752750076E927 /* BFExecutor.h in Headers */,
@@ -1070,6 +1074,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB644D1265698490047F5DB /* Bolts.m in Sources */,
 				1EC3017118CDAA8400D06D07 /* AppDelegate.m in Sources */,
 				1EC3016D18CDAA8400D06D07 /* main.m in Sources */,
 			);
@@ -1143,6 +1148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB644CF265698470047F5DB /* Bolts.m in Sources */,
 				81DC1A621B7A7F4000F491DC /* ExecutorTests.m in Sources */,
 				7C60AEC61ACF19F900747DD7 /* CancellationTests.m in Sources */,
 				8E8C8EFB17F23E5F00E3F1C7 /* TaskTests.m in Sources */,
@@ -1155,6 +1161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB644CE265698470047F5DB /* Bolts.m in Sources */,
 				81DC1A631B7A7F4000F491DC /* ExecutorTests.m in Sources */,
 				8E8C8F2917F241FF00E3F1C7 /* TaskTests.m in Sources */,
 				7C60AEC71ACF19FD00747DD7 /* CancellationTests.m in Sources */,
@@ -1195,6 +1202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCB644D0265698490047F5DB /* Bolts.m in Sources */,
 				F5AFCA081BA752770076E927 /* ExecutorTests.m in Sources */,
 				F5AFCA0A1BA752770076E927 /* TaskTests.m in Sources */,
 				F5AFCA0B1BA752770076E927 /* CancellationTests.m in Sources */,
