@@ -8,9 +8,11 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFAppLinkResolving.h>
+#import "BFAppLinkResolving.h"
 
 /*!
  A reference implementation for an App Link resolver that uses a hidden WKWebView
@@ -25,3 +27,4 @@
 
 @end
 
+#endif

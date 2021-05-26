@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import "BFAppLinkReturnToRefererView.h"
 
 #import "BFAppLink.h"
@@ -244,7 +246,7 @@ static const CGFloat BFCloseButtonHeight = 12.0;
         return nil;
     }
 
-    NSString *format = NSLocalizedString(@"Touch to return to %1$@", @"Format for the string to return to a calling app.");
+    NSString *format = @"Touch to return to %1$@";
 
     return [NSString stringWithFormat:format, refererName];
 }
@@ -266,3 +268,5 @@ static const CGFloat BFCloseButtonHeight = 12.0;
 }
 
 @end
+
+#endif

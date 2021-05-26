@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
 @class BFTask;
@@ -28,3 +30,5 @@
 - (BFTask *)appLinkFromURLInBackground:(NSURL *)url NS_EXTENSION_UNAVAILABLE_IOS("Not available in app extension");
 
 @end
+
+#endif

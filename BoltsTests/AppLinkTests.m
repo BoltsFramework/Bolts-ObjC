@@ -6,11 +6,17 @@
 //  Copyright (c) 2014 Parse Inc. All rights reserved.
 //
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 @import XCTest;
 @import UIKit;
 @import ObjectiveC.runtime;
 
+#if SWIFT_PACKAGE
+#import "../Bolts/Bolts.h"
+#else
 #import <Bolts/Bolts.h>
+#endif
 
 static NSMutableArray *openedUrls;
 
@@ -1086,3 +1092,5 @@ static NSMutableArray *openedUrls;
 }
 
 @end
+
+#endif

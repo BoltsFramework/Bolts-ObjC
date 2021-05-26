@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import "BFAppLinkReturnToRefererController.h"
 
 #import "BFAppLink.h"
@@ -228,3 +230,5 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 }
 
 @end
+
+#endif

@@ -10,8 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFCancellationToken.h>
-#import <Bolts/BFGeneric.h>
+#import "BFCancellationToken.h"
+#import "BFGeneric.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

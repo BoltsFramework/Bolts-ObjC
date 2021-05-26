@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import "BFURL_Internal.h"
 #import "BFAppLink_Internal.h"
 #import "BFAppLinkTarget.h"
@@ -140,3 +142,5 @@
 }
 
 @end
+
+#endif

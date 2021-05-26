@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
 /*! The version of the App Link protocol that this library supports */
@@ -47,3 +49,5 @@ FOUNDATION_EXPORT NSString *const BFAppLinkVersion;
 @property (nonatomic, strong, readonly) NSURL *webURL;
 
 @end
+
+#endif

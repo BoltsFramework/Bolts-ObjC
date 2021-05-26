@@ -8,10 +8,12 @@
  *
  */
 
-#import <Bolts/BFAppLinkReturnToRefererView.h>
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
-@interface BFAppLinkReturnToRefererView (Internal)
+#import "BFURL.h"
 
-- (CGFloat)statusBarHeight;
-
+@interface BFURL (Internal)
++ (BFURL *)URLForRenderBackToReferrerBarURL:(NSURL *)url;
 @end
+
+#endif

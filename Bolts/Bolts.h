@@ -8,15 +8,30 @@
  *
  */
 
-#import <Bolts/BFCancellationToken.h>
-#import <Bolts/BFCancellationTokenRegistration.h>
-#import <Bolts/BFCancellationTokenSource.h>
-#import <Bolts/BFExecutor.h>
-#import <Bolts/BFGeneric.h>
-#import <Bolts/BFTask.h>
-#import <Bolts/BFTaskCompletionSource.h>
+#import "BFCancellationToken.h"
+#import "BFCancellationTokenRegistration.h"
+#import "BFCancellationTokenSource.h"
+#import "BFExecutor.h"
+#import "BFGeneric.h"
+#import "BFTask.h"
+#import "BFTaskCompletionSource.h"
 
-#if __has_include(<Bolts/BFAppLink.h>) && TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
+#if SWIFT_PACKAGE
+
+#import "../Bolts-iOS/BFAppLink.h"
+#import "../Bolts-iOS/BFAppLinkNavigation.h"
+#import "../Bolts-iOS/BFAppLinkResolving.h"
+#import "../Bolts-iOS/BFAppLinkReturnToRefererController.h"
+#import "../Bolts-iOS/BFAppLinkReturnToRefererView.h"
+#import "../Bolts-iOS/BFAppLinkTarget.h"
+#import "../Bolts-iOS/BFMeasurementEvent.h"
+#import "../Bolts-iOS/BFURL.h"
+#import "../Bolts-iOS/BFWebViewAppLinkResolver.h"
+
+#else
+
 #import <Bolts/BFAppLink.h>
 #import <Bolts/BFAppLinkNavigation.h>
 #import <Bolts/BFAppLinkResolving.h>
@@ -26,6 +41,9 @@
 #import <Bolts/BFMeasurementEvent.h>
 #import <Bolts/BFURL.h>
 #import <Bolts/BFWebViewAppLinkResolver.h>
+
+#endif
+
 #endif
 
 

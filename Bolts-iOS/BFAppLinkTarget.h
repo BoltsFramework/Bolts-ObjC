@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
 /*!
@@ -31,3 +33,5 @@
 @property (nonatomic, copy, readonly) NSString *appName;
 
 @end
+
+#endif

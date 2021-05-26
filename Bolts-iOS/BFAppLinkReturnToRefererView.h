@@ -8,10 +8,13 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
+
 #import <UIKit/UIKit.h>
 
-#import <Bolts/BFAppLinkNavigation.h>
+#import "BFAppLinkNavigation.h"
 
 @class BFAppLinkReturnToRefererView;
 @class BFURL;
@@ -76,3 +79,5 @@ NS_EXTENSION_UNAVAILABLE_IOS("Not available in app extension")
 @property (nonatomic, assign) BOOL closed;
 
 @end
+
+#endif

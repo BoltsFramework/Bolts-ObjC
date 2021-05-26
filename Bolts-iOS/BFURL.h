@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
 @class BFAppLink;
@@ -73,3 +75,5 @@
 @property (nonatomic, strong, readonly) NSDictionary *inputQueryParameters;
 
 @end
+
+#endif

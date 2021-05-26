@@ -8,7 +8,9 @@
  *
  */
 
-#import <Bolts/BFMeasurementEvent.h>
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
+#import "BFMeasurementEvent.h"
 /*!
  Provides methods for posting notifications from the Bolts framework
  */
@@ -17,3 +19,5 @@
 + (void)postNotificationForEventName:(NSString *)name args:(NSDictionary *)args;
 
 @end
+
+#endif

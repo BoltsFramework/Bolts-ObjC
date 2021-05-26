@@ -8,10 +8,13 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-#import <Bolts/BFAppLinkReturnToRefererView.h>
+
+#import "BFAppLinkReturnToRefererView.h"
 
 @class BFAppLink;
 @class BFAppLinkReturnToRefererController;
@@ -86,3 +89,5 @@ NS_EXTENSION_UNAVAILABLE_IOS("Not available in app extension")
 - (void)closeViewAnimated:(BOOL)animated;
 
 @end
+
+#endif

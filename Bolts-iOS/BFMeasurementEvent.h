@@ -8,6 +8,8 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
 /*! The name of the notification posted by BFMeasurementEvent */
@@ -43,3 +45,5 @@ FOUNDATION_EXPORT NSString *const BFAppLinkNavigateBackToReferrerEventName;
 @interface BFMeasurementEvent : NSObject
 
 @end
+
+#endif

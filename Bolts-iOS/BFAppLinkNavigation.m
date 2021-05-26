@@ -8,12 +8,21 @@
  *
  */
 
-#import "BFAppLinkNavigation.h"
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
+#import <UIKit/UIKit.h>
+
+#if SWIFT_PACKAGE
+#import "../Bolts/Bolts.h"
+#else
 #import <Bolts/Bolts.h>
+#endif
 
+#import "BFAppLinkNavigation.h"
+#import "BFAppLinkTarget.h"
 #import "BFMeasurementEvent_Internal.h"
 #import "BFAppLink_Internal.h"
+#import "BFWebViewAppLinkResolver.h"
 
 FOUNDATION_EXPORT NSString *const BFAppLinkDataParameterName;
 FOUNDATION_EXPORT NSString *const BFAppLinkTargetKeyName;
@@ -282,3 +291,5 @@ static id<BFAppLinkResolving> defaultResolver;
 }
 
 @end
+
+#endif

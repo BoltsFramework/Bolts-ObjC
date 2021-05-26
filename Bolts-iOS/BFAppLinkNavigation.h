@@ -8,9 +8,11 @@
  *
  */
 
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+
 #import <Foundation/Foundation.h>
 
-#import <Bolts/BFAppLink.h>
+#import "BFAppLink.h"
 
 /*!
  The result of calling navigate on a BFAppLinkNavigation
@@ -112,3 +114,5 @@ NS_EXTENSION_UNAVAILABLE_IOS("Not available in app extension")
 + (void)setDefaultResolver:(id<BFAppLinkResolving>)resolver;
 
 @end
+
+#endif

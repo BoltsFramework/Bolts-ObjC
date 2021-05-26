@@ -8,14 +8,24 @@
  *
  */
 
-#import <WebKit/WebKit.h>
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 
+#import <WebKit/WebKit.h>
 #import "BFWebViewAppLinkResolver.h"
 #import "BFAppLink.h"
 #import "BFAppLinkTarget.h"
+
+#if SWIFT_PACKAGE
+#import "../Bolts/BFTask.h"
+#import "../Bolts/BFTaskCompletionSource.h"
+#import "../Bolts/BFExecutor.h"
+#else
 #import "BFTask.h"
 #import "BFTaskCompletionSource.h"
 #import "BFExecutor.h"
+#endif
+
+
 
 // Defines JavaScript to extract app link tags from HTML content
 static NSString *const BFWebViewAppLinkResolverTagExtractionJavaScript = @""
@@ -308,3 +318,5 @@ static NSString *const BFWebViewAppLinkResolverShouldFallbackKey = @"should_fall
 }
 
 @end
+
+#endif
