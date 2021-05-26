@@ -17,7 +17,8 @@ let package = Package(
             name: "Bolts",
             dependencies: [.target(name: "Bolts-iOS")],
             path: "Bolts",
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist"],
+            publicHeadersPath: ""
         ),
         .target(
             name: "Bolts-iOS",
